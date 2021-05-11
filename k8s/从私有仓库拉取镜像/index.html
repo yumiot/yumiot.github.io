@@ -17,21 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>https错误 | Hexo</title>
-  <meta name="description" content="http: server gave HTTP response to HTTPS client解决方案： 修改docker配置编辑daemon.json文件，添加以下内容： 1sudo vim &#x2F;etc&#x2F;docker&#x2F;daemon.json  123&amp;#123;  &quot;insecure-registries&quot;: [&quot;ip:port&quot;]&amp;#125;   ip：">
+  <title>从私有仓库拉取镜像 | Hexo</title>
+  <meta name="description" content="从私有仓库拉取镜像登录 Docker 镜像仓库在个人电脑上，要想拉取私有镜像必须在镜像仓库上进行身份验证。 1docker login  当提示时，输入 Docker 用户名和密码。 登录过程会创建或更新保存有授权令牌的 config.json 文件。 查看 config.json 文件： 1cat ~&#x2F;.docker&#x2F;config.json  输出结果包含类似于以下内容的部分： 1234567&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="https错误">
-<meta property="og:url" content="http://example.com/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/index.html">
+<meta property="og:title" content="从私有仓库拉取镜像">
+<meta property="og:url" content="http://example.com/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/index.html">
 <meta property="og:site_name" content="yumiot">
-<meta property="og:description" content="http: server gave HTTP response to HTTPS client解决方案： 修改docker配置编辑daemon.json文件，添加以下内容： 1sudo vim &#x2F;etc&#x2F;docker&#x2F;daemon.json  123&amp;#123;  &quot;insecure-registries&quot;: [&quot;ip:port&quot;]&amp;#125;   ip：">
+<meta property="og:description" content="从私有仓库拉取镜像登录 Docker 镜像仓库在个人电脑上，要想拉取私有镜像必须在镜像仓库上进行身份验证。 1docker login  当提示时，输入 Docker 用户名和密码。 登录过程会创建或更新保存有授权令牌的 config.json 文件。 查看 config.json 文件： 1cat ~&#x2F;.docker&#x2F;config.json  输出结果包含类似于以下内容的部分： 1234567&amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T08:18:49.000Z">
-<meta property="article:modified_time" content="2021-05-11T08:31:49.416Z">
+<meta property="og:image" content="https://d33wubrfki0l68.cloudfront.net/0901162ab78eb4ff2e9e5dc8b17c3824befc91a6/44ccd/images/copycode.svg">
+<meta property="article:published_time" content="2021-05-11T09:18:00.000Z">
+<meta property="article:modified_time" content="2021-05-11T09:15:53.644Z">
 <meta property="article:author" content="Jack">
-<meta property="article:tag" content="docker">
+<meta property="article:tag" content="k8s">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://d33wubrfki0l68.cloudfront.net/0901162ab78eb4ff2e9e5dc8b17c3824befc91a6/44ccd/images/copycode.svg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/index.html">
+  <link rel="canonical" href="http://example.com/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/index.html">
   
     <link rel="alternate" href="/atom.xml" title="yumiot" type="application/atom+xml">
   
@@ -350,21 +352,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#http-server-gave-HTTP-response-to-HTTPS-client%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">http: server gave HTTP response to HTTPS client解决方案：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9docker%E9%85%8D%E7%BD%AE"><span class="toc-number">1.0.1.</span> <span class="toc-text">修改docker配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8minikube%E7%9A%84%E6%97%B6%EF%BC%8C%E4%BD%BF%E7%94%A8%E2%80%93insecure-registry%E5%90%AF%E5%8A%A8"><span class="toc-number">1.0.2.</span> <span class="toc-text">启动minikube的时，使用–insecure-registry启动</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">从私有仓库拉取镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95-Docker-%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">登录 Docker 镜像仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BF%9D%E5%AD%98%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%E7%9A%84-Secret"><span class="toc-number">1.2.</span> <span class="toc-text">在集群中创建保存授权令牌的 Secret</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5-Secret-regcred"><span class="toc-number">1.3.</span> <span class="toc-text">检查 Secret regcred</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E6%82%A8%E7%9A%84-Secret-%E7%9A%84-Pod"><span class="toc-number">1.4.</span> <span class="toc-text">创建一个使用您的 Secret 的 Pod</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-docker/http server gave HTTP response to HTTPS client" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-k8s/从私有仓库拉取镜像" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      https错误
+      从私有仓库拉取镜像
     </h1>
   
 
@@ -372,48 +374,92 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/" class="article-date">
-	  <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
+	<a href="/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/" class="article-date">
+	  <time datetime="2021-05-11T09:18:00.000Z" itemprop="datePublished">2021-05-11</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/docker/">docker</a>
+    <a class="article-category-link" href="/categories/k8s/">k8s</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/docker/" rel="tag">docker</a>
+	<a class="article-tag-link-link" href="/tags/k8s/" rel="tag">k8s</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="http-server-gave-HTTP-response-to-HTTPS-client解决方案："><a href="#http-server-gave-HTTP-response-to-HTTPS-client解决方案：" class="headerlink" title="http: server gave HTTP response to HTTPS client解决方案："></a>http: server gave HTTP response to HTTPS client解决方案：</h2><ol>
-<li><h4 id="修改docker配置"><a href="#修改docker配置" class="headerlink" title="修改docker配置"></a>修改docker配置</h4><p>编辑daemon.json文件，添加以下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+        <h1 id="从私有仓库拉取镜像"><a href="#从私有仓库拉取镜像" class="headerlink" title="从私有仓库拉取镜像"></a>从私有仓库拉取镜像</h1><h2 id="登录-Docker-镜像仓库"><a href="#登录-Docker-镜像仓库" class="headerlink" title="登录 Docker 镜像仓库"></a>登录 Docker 镜像仓库</h2><p>在个人电脑上，要想拉取私有镜像必须在镜像仓库上进行身份验证。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;insecure-registries&quot;: [&quot;ip:port&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当提示时，输入 Docker 用户名和密码。</p>
+<p>登录过程会创建或更新保存有授权令牌的 <code>config.json</code> 文件。</p>
+<p>查看 <code>config.json</code> 文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.docker/config.json</span><br></pre></td></tr></table></figure>
+
+<p>输出结果包含类似于以下内容的部分：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;auths&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;https://index.docker.io/v1/&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;auth&quot;</span>: <span class="string">&quot;c3R...zE2&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>ip： docker私有参考ip地址</p>
-<p>port：端口号</p>
+<p><strong>说明：</strong></p>
+<p>如果使用 Docker 凭证仓库，则不会看到 <code>auth</code> 条目，看到的将是以仓库名称作为值的 <code>credsStore</code> 条目。</p>
 </blockquote>
-<p>使配置生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<h2 id="在集群中创建保存授权令牌的-Secret"><a href="#在集群中创建保存授权令牌的-Secret" class="headerlink" title="在集群中创建保存授权令牌的 Secret"></a>在集群中创建保存授权令牌的 Secret</h2><p>Kubernetes 集群使用 <code>docker-registry</code> 类型的 Secret 来通过容器仓库的身份验证，进而提取私有映像。</p>
+<p>创建 Secret，命名为 <code>regcred</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create secret docker-registry regcred --docker-server=&lt;your-registry-server&gt; --docker-username=&lt;your-name&gt; --docker-password=&lt;your-pword&gt; --docker-email=&lt;your-email&gt;</span><br></pre></td></tr></table></figure>
 
-<p>重启docker：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure></li>
-<li><h4 id="启动minikube的时，使用–insecure-registry启动"><a href="#启动minikube的时，使用–insecure-registry启动" class="headerlink" title="启动minikube的时，使用–insecure-registry启动"></a>启动minikube的时，使用–insecure-registry启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start --insecure-registry <span class="string">&#x27;ip:port&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
+<p>在这里：</p>
+<ul>
+<li><code>&lt;your-registry-server&gt;</code> 是你的私有 Docker 仓库全限定域名（FQDN）。(参考 <a target="_blank" rel="noopener" href="https://index.docker.io/v1/">https://index.docker.io/v1/</a> 中关于 DockerHub 的部分)</li>
+<li><code>&lt;your-name&gt;</code> 是你的 Docker 用户名。</li>
+<li><code>&lt;your-pword&gt;</code> 是你的 Docker 密码。</li>
+<li><code>&lt;your-email&gt;</code> 是你的 Docker 邮箱。</li>
+</ul>
+<p>这样您就成功地将集群中的 Docker 凭据设置为名为 <code>regcred</code> 的 Secret。</p>
+<h2 id="检查-Secret-regcred"><a href="#检查-Secret-regcred" class="headerlink" title="检查 Secret regcred"></a>检查 Secret <code>regcred</code></h2><p>要了解你创建的 <code>regcred</code> Secret 的内容，可以用 YAML 格式进行查看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get secret regcred --output=yaml</span><br></pre></td></tr></table></figure>
+
+<p>输出和下面类似：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="string">.dockerconfigjson:</span> <span class="string">eyJodHRwczovL2luZGV4L</span> <span class="string">...</span> <span class="string">J0QUl6RTIifX0=</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">regcred</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">kubernetes.io/dockerconfigjson</span></span><br></pre></td></tr></table></figure>
+
+<p><code>.dockerconfigjson</code> 字段的值是 Docker 凭据的 base64 表示。</p>
+<p>要了解 <code>dockerconfigjson</code> 字段中的内容，请将 Secret 数据转换为可读格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get secret regcred --output=&quot;jsonpath=&#123;.data.\.dockerconfigjson&#125;&quot; | base64 --decode</span><br></pre></td></tr></table></figure>
+
+<p>输出和下面类似：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;auths&quot;</span>:&#123;<span class="attr">&quot;yourprivateregistry.com&quot;</span>:&#123;<span class="attr">&quot;username&quot;</span>:<span class="string">&quot;janedoe&quot;</span>,<span class="attr">&quot;password&quot;</span>:<span class="string">&quot;xxxxxxxxxxx&quot;</span>,<span class="attr">&quot;email&quot;</span>:<span class="string">&quot;jdoe@example.com&quot;</span>,<span class="attr">&quot;auth&quot;</span>:<span class="string">&quot;c3R...zE2&quot;</span>&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要了解 <code>auth</code> 字段中的内容，请将 base64 编码过的数据转换为可读格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;c3R...zE2&quot; | base64 --decode</span><br></pre></td></tr></table></figure>
+
+<p>输出结果中，用户名和密码用 <code>:</code> 链接，类似下面这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">janedoe:xxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>注意，Secret 数据包含与本地 <code>~/.docker/config.json</code> 文件类似的授权令牌。</p>
+<p>这样您就已经成功地将 Docker 凭据设置为集群中的名为 <code>regcred</code> 的 Secret。</p>
+<h2 id="创建一个使用您的-Secret-的-Pod"><a href="#创建一个使用您的-Secret-的-Pod" class="headerlink" title="创建一个使用您的 Secret 的 Pod"></a>创建一个使用您的 Secret 的 Pod</h2><p>下面是一个 Pod 配置文件，它需要访问 <code>regcred</code> 中的 Docker 凭据：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kubernetes/website/master/content/zh/examples/pods/private-reg-pod.yaml"><code>pods/private-reg-pod.yaml</code> </a><img src="https://d33wubrfki0l68.cloudfront.net/0901162ab78eb4ff2e9e5dc8b17c3824befc91a6/44ccd/images/copycode.svg" alt="Copy pods/private-reg-pod.yaml to clipboard"></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">private-reg</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">private-reg-container</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&lt;your-private-image&gt;</span></span><br><span class="line">  <span class="attr">imagePullSecrets:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">regcred</span></span><br></pre></td></tr></table></figure>
+
+<p>下载上述文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O my-private-reg-pod.yaml https://k8s.io/examples/pods/private-reg-pod.yaml</span><br></pre></td></tr></table></figure>
+
+<p>在<code>my-private-reg-pod.yaml</code> 文件中，使用私有仓库的镜像路径替换 <code>&lt;your-private-image&gt;</code>，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">janedoe/jdoe-private:v1</span><br></pre></td></tr></table></figure>
+
+<p>要从私有仓库拉取镜像，Kubernetes 需要凭证。 配置文件中的 <code>imagePullSecrets</code> 字段表明 Kubernetes 应该通过名为 <code>regcred</code> 的 Secret 获取凭证。</p>
+<p>创建使用了你的 Secret 的 Pod，并检查它是否正常运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f my-private-reg-pod.yaml</span><br><span class="line">kubectl get pod private-reg</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -423,7 +469,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/" title="https错误" target="_blank" rel="external">http://example.com/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/</a>
+      <a href="http://example.com/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/" title="从私有仓库拉取镜像" target="_blank" rel="external">http://example.com/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -470,12 +516,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/docker/docker%E5%AE%89%E8%A3%85MySQL/" title="Docker安装MySQL"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/k8s/kubectl%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/" title="kubectl命令自动补全"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim/" title="修改源并安装vim"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/docker/Docker%E5%AE%89%E8%A3%85NGINX/" title="Docker安装NGINX"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
