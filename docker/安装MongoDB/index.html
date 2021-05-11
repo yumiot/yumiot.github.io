@@ -17,20 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>常见错误排除 | Hexo</title>
-  <meta name="description" content="错误：Job for docker.service failed because the control process exited with error code.See “systemctl status docker.service” and “journalctl -xe” for details.这个一般是由于&#x2F;etc&#x2F;docker&#x2F;daemon.json里面配置有误 正确配置例子：">
-<meta property="og:type" content="website">
-<meta property="og:title" content="常见错误排除">
-<meta property="og:url" content="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html">
+  <title>安装MongoDB | Hexo</title>
+  <meta name="description" content="拉取镜像1docker pull mongo:latest  运行容器1docker run --name mongo -p 27017:27017 -d mongo --auth    -p 27017:27017 ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。 –auth：需要密码才能访问容器服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装MongoDB">
+<meta property="og:url" content="http://example.com/docker/%E5%AE%89%E8%A3%85MongoDB/index.html">
 <meta property="og:site_name" content="yumiot">
-<meta property="og:description" content="错误：Job for docker.service failed because the control process exited with error code.See “systemctl status docker.service” and “journalctl -xe” for details.这个一般是由于&#x2F;etc&#x2F;docker&#x2F;daemon.json里面配置有误 正确配置例子：">
+<meta property="og:description" content="拉取镜像1docker pull mongo:latest  运行容器1docker run --name mongo -p 27017:27017 -d mongo --auth    -p 27017:27017 ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。 –auth：需要密码才能访问容器服务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T07:36:30.000Z">
-<meta property="article:modified_time" content="2021-05-11T07:43:28.961Z">
+<meta property="article:published_time" content="2021-05-11T08:18:49.000Z">
+<meta property="article:modified_time" content="2021-05-11T08:31:03.843Z">
 <meta property="article:author" content="Jack">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html">
+  <link rel="canonical" href="http://example.com/docker/%E5%AE%89%E8%A3%85MongoDB/index.html">
   
     <link rel="alternate" href="/atom.xml" title="yumiot" type="application/atom+xml">
   
@@ -47,14 +48,14 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 
-<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
-        <a id="avatar" href="https://github.com/cofess" target="_blank">
+        <a id="avatar" href="https://github.com/yumiot" target="_blank">
           <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
         <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
@@ -95,7 +96,7 @@
       </button>
     </div>
     <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
-      <ul class="nav navbar-nav main-nav ">
+      <ul class="nav navbar-nav main-nav menu-highlight">
         
         
         <li class="menu-item menu-item-home">
@@ -182,13 +183,13 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        <li><a href="https://github.com/yumiot" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        <li><a href="http://weibo.com/yumiot" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
         
         <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        <li><a href="https://www.behance.net/yumiot" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
         
         <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
@@ -215,18 +216,39 @@
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/k8s/">k8s</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/docker/" style="font-size: 14px;">docker</a> <a href="/tags/k8s/" style="font-size: 13px;">k8s</a>
+    </div>
+  </div>
+
     
       
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">20</span></li></ul>
     </div>
   </div>
 
@@ -242,13 +264,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                
+                <a class="category-link" href="/categories/docker/">docker</a>
               </p>
               <p class="item-title">
-                <a href="/K8S%EF%BC%882%EF%BC%89-%E5%B8%B8%E7%94%A8%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%EF%BC%88Ubuntu%E7%89%88%EF%BC%89/" class="title">K8S（2）-常用集群搭建（Ubuntu版）</a>
+                <a href="/docker/Docker%E5%AE%89%E8%A3%85NGINX/" class="title">Docker安装NGINX</a>
               </p>
               <p class="item-date">
-                <time datetime="2021-05-11T07:36:30.000Z" itemprop="datePublished">2021-05-11</time>
+                <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
               </p>
             </div>
           </li>
@@ -257,13 +279,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                
+                <a class="category-link" href="/categories/docker/">docker</a>
               </p>
               <p class="item-title">
-                <a href="/docker%E5%AE%89%E8%A3%85MySQL/" class="title">Docker安装MySQL</a>
+                <a href="/docker/Docker%E5%AE%89%E8%A3%85Redis/" class="title">Docker安装Redis</a>
               </p>
               <p class="item-date">
-                <time datetime="2021-05-11T07:36:30.000Z" itemprop="datePublished">2021-05-11</time>
+                <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
               </p>
             </div>
           </li>
@@ -272,13 +294,43 @@
             
             <div class="item-inner">
               <p class="item-category">
-                
+                <a class="category-link" href="/categories/docker/">docker</a>
               </p>
               <p class="item-title">
-                <a href="/docker/" class="title">docker</a>
+                <a href="/docker/Docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" class="title">Docker搭建私有仓库</a>
               </p>
               <p class="item-date">
-                <time datetime="2021-05-11T07:36:09.000Z" itemprop="datePublished">2021-05-11</time>
+                <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/docker/">docker</a>
+              </p>
+              <p class="item-title">
+                <a href="/docker/Nginx/" class="title">Nginx</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/docker/">docker</a>
+              </p>
+              <p class="item-title">
+                <a href="/docker/docker%E5%AE%89%E8%A3%85MySQL/" class="title">Docker安装MySQL</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
               </p>
             </div>
           </li>
@@ -294,16 +346,25 @@
 
   
   
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">运行容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">创建用户密码</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-docker/安装MongoDB" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      常见错误排除
+      安装MongoDB
     </h1>
   
 
@@ -311,34 +372,42 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html" class="article-date">
-	  <time datetime="2021-05-11T07:36:30.000Z" itemprop="datePublished">2021-05-11</time>
+	<a href="/docker/%E5%AE%89%E8%A3%85MongoDB/" class="article-date">
+	  <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/docker/" rel="tag">docker</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/%E5%AE%89%E8%A3%85MongoDB/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code"><a href="#错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code" class="headerlink" title="错误：Job for docker.service failed because the control process exited with error code."></a>错误：Job for docker.service failed because the control process exited with error code.</h4><h4 id="See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details"><a href="#See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details" class="headerlink" title="See “systemctl status docker.service” and “journalctl -xe” for details."></a>See “systemctl status docker.service” and “journalctl -xe” for details.</h4><p>这个一般是由于/etc/docker/daemon.json里面配置有误</p>
-<p>正确配置例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+        <h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn&quot;],</span><br><span class="line">  &quot;insecure-registries&quot;:[&quot;127.0.0.1&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
 
-
-
-<h4 id="错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running"><a href="#错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running" class="headerlink" title="错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"></a>错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</h4><p>使配置文件生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-
-<p>重启docker：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
+<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
+</ul>
+</blockquote>
+<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 
       
@@ -349,7 +418,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html" title="常见错误排除" target="_blank" rel="external">http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html</a>
+      <a href="http://example.com/docker/%E5%AE%89%E8%A3%85MongoDB/" title="安装MongoDB" target="_blank" rel="external">http://example.com/docker/%E5%AE%89%E8%A3%85MongoDB/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -363,12 +432,12 @@
   <div class="panel-body">
     <figure class="media">
       <div class="media-left">
-        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+        <a href="https://github.com/yumiot" target="_blank" class="img-burn thumb-sm visible-lg">
           <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <h3 class="media-heading"><a href="https://github.com/yumiot" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
         <div>个人简介。</div>
       </div>
     </figure>
@@ -392,6 +461,29 @@
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim/" title="修改源并安装vim"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/docker/%E5%AE%89%E8%A3%85gitea/" title="安装gitea"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
   
   
   <!-- Button trigger modal -->
@@ -460,13 +552,13 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        <li><a href="https://github.com/yumiot" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        <li><a href="http://weibo.com/yumiot" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
         
         <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
         
-        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        <li><a href="https://www.behance.net/yumiot" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
         
         <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
@@ -511,6 +603,10 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+
+   
 
 
 

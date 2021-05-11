@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>docker安装MySQL | Hexo</title>
-  <meta name="description" content="Docker安装MySQL正式环境中数据库不建议安装在docker中！！！ 拉取MySQL镜像1docker pull mysql:latest  运行本地容器1docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;123456 -d mysql  1docker run --name mysql -v &#x2F;home&#x2F;apilab&#x2F;m">
+  <title>使用docker部署springboot项目 | Hexo</title>
+  <meta name="description" content="使用docker部署springboot项目打包jar使用idea一键打包 编写Dockerfile文件12345678910111213141516171819202122232425# 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。FROM openjdk:11# 指明镜像维护着及其联系方式(一般是邮箱地址)MAINTAINER">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker安装MySQL">
-<meta property="og:url" content="http://example.com/docker%E5%AE%89%E8%A3%85MySQL/index.html">
+<meta property="og:title" content="使用docker部署springboot项目">
+<meta property="og:url" content="http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="yumiot">
-<meta property="og:description" content="Docker安装MySQL正式环境中数据库不建议安装在docker中！！！ 拉取MySQL镜像1docker pull mysql:latest  运行本地容器1docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;123456 -d mysql  1docker run --name mysql -v &#x2F;home&#x2F;apilab&#x2F;m">
+<meta property="og:description" content="使用docker部署springboot项目打包jar使用idea一键打包 编写Dockerfile文件12345678910111213141516171819202122232425# 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。FROM openjdk:11# 指明镜像维护着及其联系方式(一般是邮箱地址)MAINTAINER">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T07:48:00.000Z">
-<meta property="article:modified_time" content="2021-05-11T08:23:17.514Z">
+<meta property="article:published_time" content="2021-05-11T08:18:49.000Z">
+<meta property="article:modified_time" content="2021-05-11T08:31:03.864Z">
 <meta property="article:author" content="Jack">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/docker%E5%AE%89%E8%A3%85MySQL/index.html">
+  <link rel="canonical" href="http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/index.html">
   
     <link rel="alternate" href="/atom.xml" title="yumiot" type="application/atom+xml">
   
@@ -350,21 +350,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E5%AE%89%E8%A3%85MySQL"><span class="toc-number">1.</span> <span class="toc-text">Docker安装MySQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%89%E5%8F%96MySQL%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">拉取MySQL镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%AC%E5%9C%B0%E5%AE%B9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">运行本地容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-number">4.</span> <span class="toc-text">安装成功</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">进入容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%99%BB%E5%BD%95MySQL"><span class="toc-number">6.</span> <span class="toc-text">登录MySQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">修改密码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E7%94%A8%E6%88%B7"><span class="toc-number">8.</span> <span class="toc-text">添加远程登录用户</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E7%94%A8%E6%88%B7%EF%BC%88%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8root%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%EF%BC%8C%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">8.0.0.0.1.</span> <span class="toc-text">创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E7%94%A8%E6%88%B7-1"><span class="toc-number">8.0.0.0.2.</span> <span class="toc-text">添加远程登录用户</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8docker%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">使用docker部署springboot项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85jar"><span class="toc-number">2.</span> <span class="toc-text">打包jar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Dockerfile%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">编写Dockerfile文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">制作镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">启动容器</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-docker安装MySQL" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-docker/部署springboot项目" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      docker安装MySQL
+      使用docker部署springboot项目
     </h1>
   
 
@@ -372,8 +372,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/docker%E5%AE%89%E8%A3%85MySQL/" class="article-date">
-	  <time datetime="2021-05-11T07:48:00.000Z" itemprop="datePublished">2021-05-11</time>
+	<a href="/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/" class="article-date">
+	  <time datetime="2021-05-11T08:18:49.000Z" itemprop="datePublished">2021-05-11</time>
 	</a>
 </span>
         
@@ -391,49 +391,23 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker%E5%AE%89%E8%A3%85MySQL/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="Docker安装MySQL"><a href="#Docker安装MySQL" class="headerlink" title="Docker安装MySQL"></a>Docker安装MySQL</h1><p>正式环境中数据库不建议安装在docker中！！！</p>
-<h1 id="拉取MySQL镜像"><a href="#拉取MySQL镜像" class="headerlink" title="拉取MySQL镜像"></a>拉取MySQL镜像</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure>
+        <h3 id="使用docker部署springboot项目"><a href="#使用docker部署springboot项目" class="headerlink" title="使用docker部署springboot项目"></a>使用docker部署springboot项目</h3><h3 id="打包jar"><a href="#打包jar" class="headerlink" title="打包jar"></a>打包jar</h3><p>使用idea一键打包</p>
+<h3 id="编写Dockerfile文件"><a href="#编写Dockerfile文件" class="headerlink" title="编写Dockerfile文件"></a>编写Dockerfile文件</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。</span></span><br><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指明镜像维护着及其联系方式(一般是邮箱地址)</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> jack &lt;<span class="number">171756268</span>@qq.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置上海时间</span></span><br><span class="line"><span class="keyword">ENV</span> TZ=Asia/Shanghai</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> ln -sf /usr/share/zoneinfo/<span class="variable">$TZ</span> /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="variable">$TZ</span> &gt; /etc/timezone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个文件，作为工作目录使用</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为RUN、CMD、ENTRYPOINT以及COPY和AND设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明容器运行暴露的服务端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拷贝文件或目录到镜像中，并重命名为demo.jar</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> demo-test-0.0.2-SNAPSHOT.jar demo.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器时执行的Shell命令，同CMD类似，只是由ENTRYPOINT启动的程序不会被docker run命令行指定的参数所覆盖，</span></span><br><span class="line"><span class="comment"># 而且，这些命令行参数会被当作参数传递给ENTRYPOINT指定指定的程序</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">&quot;java&quot;</span>,<span class="string">&quot;-Djava.security.egd=file:/dev/./urandom&quot;</span>,<span class="string">&quot;-jar&quot;</span>,<span class="string">&quot;demo.jar&quot;</span>]</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
+<h3 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t demo-java . </span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -v /home/apilab/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=api@lab.cn -d mysql</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li><p>-name mysql：为容器指定名称</p>
-</li>
-<li><p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p>
-</li>
-<li><p>-e MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码</p>
-</li>
-<li><p>-d 后台运行容器，并返回容器ID；</p>
-</li>
-<li><p>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></p>
-</li>
-</ul>
-<h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-
-<h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li>-i：即使没有附加也保持STDIN 打开</li>
-<li>-t：分配一个伪终端</li>
-</ul>
-<h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>-t  指定此镜像的tag名</p>
+<p>注意tag名后面有一个点.，指的是 build context 为当前目录</p>
+<p>也可以通过 -f 参数指定 Dockerfile 的位置</p>
+</blockquote>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name demo-jave -p 8080:8080 -d demo-java</span><br></pre></td></tr></table></figure>
 
 
       
@@ -444,7 +418,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/docker%E5%AE%89%E8%A3%85MySQL/" title="docker安装MySQL" target="_blank" rel="external">http://example.com/docker%E5%AE%89%E8%A3%85MySQL/</a>
+      <a href="http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/" title="使用docker部署springboot项目" target="_blank" rel="external">http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -491,9 +465,13 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/%E5%AE%89%E8%A3%85gitlab/" title="docker安装gitlab"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/" title="常见错误排除"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
+    
+    <li class="next">
+      <a href="/k8s/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/" title="部署springboot项目"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
     <li class="toggle-toc">
