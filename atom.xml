@@ -114,30 +114,6 @@
   </entry>
   
   <entry>
-    <title>Docker安装MySQL</title>
-    <link href="http://example.com/docker/docker%E5%AE%89%E8%A3%85MySQL/"/>
-    <id>http://example.com/docker/docker%E5%AE%89%E8%A3%85MySQL/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:03.907Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker安装MySQL"><a href="#Docker安装MySQL" class="headerlink" title="Docker安装MySQL"></a>Docker安装MySQL</h1><p>正式环境中数据库不建议安装在docker中！！！</p><h1 id="拉取MySQL镜像"><a href="#拉取MySQL镜像" class="headerlink" title="拉取MySQL镜像"></a>拉取MySQL镜像</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure><h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -v /home/apilab/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=api@lab.cn -d mysql</span><br></pre></td></tr></table></figure><p>命令说明：</p><ul><li><p>-name mysql：为容器指定名称</p></li><li><p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p></li><li><p>-e MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码</p></li><li><p>-d 后台运行容器，并返回容器ID；</p></li><li><p>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></p></li></ul><h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure><h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure><p>命令说明：</p><ul><li>-i：即使没有附加也保持STDIN 打开</li><li>-t：分配一个伪终端</li></ul><h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure><h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Docker安装MySQL&quot;&gt;&lt;a href=&quot;#Docker安装MySQL&quot; class=&quot;headerlink&quot; title=&quot;Docker安装MySQL&quot;&gt;&lt;/a&gt;Docker安装MySQL&lt;/h1&gt;&lt;p&gt;正式环境中数据库不建议安装在docker中！！！&lt;/</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>docker修改国内镜像源</title>
     <link href="http://example.com/docker/docker%20%E4%BF%AE%E6%94%B9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/"/>
     <id>http://example.com/docker/docker%20%E4%BF%AE%E6%94%B9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/</id>
@@ -155,6 +131,30 @@
 &lt;th&gt;国内Docker镜像仓库名称&lt;/th&gt;
 &lt;th&gt;链接&lt;/th&gt;
 </summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker安装MySQL</title>
+    <link href="http://example.com/docker/docker%E5%AE%89%E8%A3%85MySQL/"/>
+    <id>http://example.com/docker/docker%E5%AE%89%E8%A3%85MySQL/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:03.907Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker安装MySQL"><a href="#Docker安装MySQL" class="headerlink" title="Docker安装MySQL"></a>Docker安装MySQL</h1><p>正式环境中数据库不建议安装在docker中！！！</p><h1 id="拉取MySQL镜像"><a href="#拉取MySQL镜像" class="headerlink" title="拉取MySQL镜像"></a>拉取MySQL镜像</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure><h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -v /home/apilab/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=api@lab.cn -d mysql</span><br></pre></td></tr></table></figure><p>命令说明：</p><ul><li><p>-name mysql：为容器指定名称</p></li><li><p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p></li><li><p>-e MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码</p></li><li><p>-d 后台运行容器，并返回容器ID；</p></li><li><p>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></p></li></ul><h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure><h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure><p>命令说明：</p><ul><li>-i：即使没有附加也保持STDIN 打开</li><li>-t：分配一个伪终端</li></ul><h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure><h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Docker安装MySQL&quot;&gt;&lt;a href=&quot;#Docker安装MySQL&quot; class=&quot;headerlink&quot; title=&quot;Docker安装MySQL&quot;&gt;&lt;/a&gt;Docker安装MySQL&lt;/h1&gt;&lt;p&gt;正式环境中数据库不建议安装在docker中！！！&lt;/</summary>
       
     
     
