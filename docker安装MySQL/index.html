@@ -17,18 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>docker | Hexo</title>
-  <meta property="og:type" content="article">
-<meta property="og:title" content="docker">
-<meta property="og:url" content="http://example.com/docker/index.html">
+  <title>Hexo</title>
+  <meta name="description" content="Docker安装MySQL正式环境中数据库不建议安装在docker中！！！ 拉取MySQL镜像1docker pull mysql:latest  运行本地容器1docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;123456 -d mysql  1docker run --name mysql -v &#x2F;home&#x2F;apilab&#x2F;m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yumiot">
+<meta property="og:url" content="http://example.com/docker%E5%AE%89%E8%A3%85MySQL/index.html">
 <meta property="og:site_name" content="yumiot">
+<meta property="og:description" content="Docker安装MySQL正式环境中数据库不建议安装在docker中！！！ 拉取MySQL镜像1docker pull mysql:latest  运行本地容器1docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;123456 -d mysql  1docker run --name mysql -v &#x2F;home&#x2F;apilab&#x2F;m">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T07:36:09.000Z">
-<meta property="article:modified_time" content="2021-05-11T07:36:09.767Z">
+<meta property="article:published_time" content="2021-05-11T07:39:44.685Z">
+<meta property="article:modified_time" content="2021-05-11T07:40:06.674Z">
 <meta property="article:author" content="Jack">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/docker/index.html">
+  <link rel="canonical" href="http://example.com/docker%E5%AE%89%E8%A3%85MySQL/index.html">
   
     <link rel="alternate" href="/atom.xml" title="yumiot" type="application/atom+xml">
   
@@ -294,23 +296,15 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-docker" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-docker安装MySQL" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      docker
-    </h1>
-  
-
       
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/docker/" class="article-date">
-	  <time datetime="2021-05-11T07:36:09.000Z" itemprop="datePublished">2021-05-11</time>
+	<a href="/docker%E5%AE%89%E8%A3%85MySQL/" class="article-date">
+	  <time datetime="2021-05-11T07:39:44.685Z" itemprop="datePublished">2021-05-11</time>
 	</a>
 </span>
         
@@ -318,13 +312,51 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker%E5%AE%89%E8%A3%85MySQL/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <h1 id="Docker安装MySQL"><a href="#Docker安装MySQL" class="headerlink" title="Docker安装MySQL"></a>Docker安装MySQL</h1><p>正式环境中数据库不建议安装在docker中！！！</p>
+<h1 id="拉取MySQL镜像"><a href="#拉取MySQL镜像" class="headerlink" title="拉取MySQL镜像"></a>拉取MySQL镜像</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -v /home/apilab/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=api@lab.cn -d mysql</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<ul>
+<li><p>-name mysql：为容器指定名称</p>
+</li>
+<li><p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p>
+</li>
+<li><p>-e MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码</p>
+</li>
+<li><p>-d 后台运行容器，并返回容器ID；</p>
+</li>
+<li><p>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></p>
+</li>
+</ul>
+<h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<ul>
+<li>-i：即使没有附加也保持STDIN 打开</li>
+<li>-t：分配一个伪终端</li>
+</ul>
+<h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <div class="article-footer">
@@ -333,7 +365,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/docker/" title="docker" target="_blank" rel="external">http://example.com/docker/</a>
+      <a href="http://example.com/docker%E5%AE%89%E8%A3%85MySQL/" title="" target="_blank" rel="external">http://example.com/docker%E5%AE%89%E8%A3%85MySQL/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -379,13 +411,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/docker%E5%AE%89%E8%A3%85MySQL/" title="(no title)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/K8S%EF%BC%882%EF%BC%89-%E5%B8%B8%E7%94%A8%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%EF%BC%88Ubuntu%E7%89%88%EF%BC%89/" title="(no title)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/docker/" title="docker"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

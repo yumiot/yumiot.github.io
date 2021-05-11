@@ -17,18 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>docker | Hexo</title>
-  <meta property="og:type" content="article">
-<meta property="og:title" content="docker">
-<meta property="og:url" content="http://example.com/docker/index.html">
+  <title>Hexo</title>
+  <meta name="description" content="使用docker部署springboot项目打包jar使用idea一键打包 编写Dockerfile文件12345678910111213141516171819202122232425# 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。FROM openjdk:11# 指明镜像维护着及其联系方式(一般是邮箱地址)MAINTAINER">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yumiot">
+<meta property="og:url" content="http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE.html">
 <meta property="og:site_name" content="yumiot">
+<meta property="og:description" content="使用docker部署springboot项目打包jar使用idea一键打包 编写Dockerfile文件12345678910111213141516171819202122232425# 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。FROM openjdk:11# 指明镜像维护着及其联系方式(一般是邮箱地址)MAINTAINER">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T07:36:09.000Z">
-<meta property="article:modified_time" content="2021-05-11T07:36:09.767Z">
+<meta property="article:published_time" content="2021-05-11T07:40:24.922Z">
+<meta property="article:modified_time" content="2020-08-06T03:50:11.064Z">
 <meta property="article:author" content="Jack">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/docker/index.html">
+  <link rel="canonical" href="http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE.html">
   
     <link rel="alternate" href="/atom.xml" title="yumiot" type="application/atom+xml">
   
@@ -294,23 +296,15 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-docker" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      docker
-    </h1>
-  
-
       
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/docker/" class="article-date">
-	  <time datetime="2021-05-11T07:36:09.000Z" itemprop="datePublished">2021-05-11</time>
+	<a href="/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE.html" class="article-date">
+	  <time datetime="2021-05-11T07:40:24.922Z" itemprop="datePublished">2021-05-11</time>
 	</a>
 </span>
         
@@ -318,13 +312,25 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE.html#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <h3 id="使用docker部署springboot项目"><a href="#使用docker部署springboot项目" class="headerlink" title="使用docker部署springboot项目"></a>使用docker部署springboot项目</h3><h3 id="打包jar"><a href="#打包jar" class="headerlink" title="打包jar"></a>打包jar</h3><p>使用idea一键打包</p>
+<h3 id="编写Dockerfile文件"><a href="#编写Dockerfile文件" class="headerlink" title="编写Dockerfile文件"></a>编写Dockerfile文件</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。</span></span><br><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指明镜像维护着及其联系方式(一般是邮箱地址)</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> jack &lt;<span class="number">171756268</span>@qq.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置上海时间</span></span><br><span class="line"><span class="keyword">ENV</span> TZ=Asia/Shanghai</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> ln -sf /usr/share/zoneinfo/<span class="variable">$TZ</span> /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="variable">$TZ</span> &gt; /etc/timezone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个文件，作为工作目录使用</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为RUN、CMD、ENTRYPOINT以及COPY和AND设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明容器运行暴露的服务端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拷贝文件或目录到镜像中，并重命名为demo.jar</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> demo-test-0.0.2-SNAPSHOT.jar demo.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器时执行的Shell命令，同CMD类似，只是由ENTRYPOINT启动的程序不会被docker run命令行指定的参数所覆盖，</span></span><br><span class="line"><span class="comment"># 而且，这些命令行参数会被当作参数传递给ENTRYPOINT指定指定的程序</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">&quot;java&quot;</span>,<span class="string">&quot;-Djava.security.egd=file:/dev/./urandom&quot;</span>,<span class="string">&quot;-jar&quot;</span>,<span class="string">&quot;demo.jar&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t demo-java . </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-t  指定此镜像的tag名</p>
+<p>注意tag名后面有一个点.，指的是 build context 为当前目录</p>
+<p>也可以通过 -f 参数指定 Dockerfile 的位置</p>
+</blockquote>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name demo-jave -p 8080:8080 -d demo-java</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <div class="article-footer">
@@ -333,7 +339,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/docker/" title="docker" target="_blank" rel="external">http://example.com/docker/</a>
+      <a href="http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE.html" title="" target="_blank" rel="external">http://example.com/docker/%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE.html</a>
     </li>
     
     <li class="post-copyright-license">
@@ -376,20 +382,6 @@
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
-  
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/docker%E5%AE%89%E8%A3%85MySQL/" title="(no title)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/K8S%EF%BC%882%EF%BC%89-%E5%B8%B8%E7%94%A8%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%EF%BC%88Ubuntu%E7%89%88%EF%BC%89/" title="(no title)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
   
   
   <!-- Button trigger modal -->
@@ -509,10 +501,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-
-
-
-   
 
 
 
