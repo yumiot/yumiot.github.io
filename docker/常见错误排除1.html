@@ -17,20 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Hexo</title>
-  <meta name="description" content="1、登录容器 1docker exec -it gitlab bash   2、修改镜像源 123456cat &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list &lt;&lt; EOFdeb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; focal main restricted universe multiversedeb https:&#x2F;&#x2F;mir">
+  <title>常见错误排除 | Hexo</title>
+  <meta name="description" content="错误：Job for docker.service failed because the control process exited with error code.See “systemctl status docker.service” and “journalctl -xe” for details.这个一般是由于&#x2F;etc&#x2F;docker&#x2F;daemon.json里面配置有误 正确配置例子：">
 <meta property="og:type" content="website">
-<meta property="og:title" content="yumiot">
-<meta property="og:url" content="http://example.com/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim.html">
+<meta property="og:title" content="常见错误排除">
+<meta property="og:url" content="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html">
 <meta property="og:site_name" content="yumiot">
-<meta property="og:description" content="1、登录容器 1docker exec -it gitlab bash   2、修改镜像源 123456cat &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list &lt;&lt; EOFdeb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F; focal main restricted universe multiversedeb https:&#x2F;&#x2F;mir">
+<meta property="og:description" content="错误：Job for docker.service failed because the control process exited with error code.See “systemctl status docker.service” and “journalctl -xe” for details.这个一般是由于&#x2F;etc&#x2F;docker&#x2F;daemon.json里面配置有误 正确配置例子：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T07:40:25.032Z">
-<meta property="article:modified_time" content="2021-04-29T07:40:46.532Z">
+<meta property="article:published_time" content="2021-05-11T07:36:30.000Z">
+<meta property="article:modified_time" content="2021-05-11T07:43:28.961Z">
 <meta property="article:author" content="Jack">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://example.com/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim.html">
+  <link rel="canonical" href="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html">
   
     <link rel="alternate" href="/atom.xml" title="yumiot" type="application/atom+xml">
   
@@ -300,11 +300,19 @@
     
     <div class="article-header">
       
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常见错误排除
+    </h1>
+  
+
+      
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim.html" class="article-date">
-	  <time datetime="2021-05-11T07:40:25.032Z" itemprop="datePublished">2021-05-11</time>
+	<a href="/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html" class="article-date">
+	  <time datetime="2021-05-11T07:36:30.000Z" itemprop="datePublished">2021-05-11</time>
 	</a>
 </span>
         
@@ -312,26 +320,25 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>1、登录容器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it gitlab bash </span><br></pre></td></tr></table></figure>
+        <h4 id="错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code"><a href="#错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code" class="headerlink" title="错误：Job for docker.service failed because the control process exited with error code."></a>错误：Job for docker.service failed because the control process exited with error code.</h4><h4 id="See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details"><a href="#See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details" class="headerlink" title="See “systemctl status docker.service” and “journalctl -xe” for details."></a>See “systemctl status docker.service” and “journalctl -xe” for details.</h4><p>这个一般是由于/etc/docker/daemon.json里面配置有误</p>
+<p>正确配置例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
 
-<p>2、修改镜像源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/apt/sources.list &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse</span></span><br><span class="line"><span class="string">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span></span><br><span class="line"><span class="string">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span></span><br><span class="line"><span class="string">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn&quot;],</span><br><span class="line">  &quot;insecure-registries&quot;:[&quot;127.0.0.1&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>3、更新</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br></pre></td></tr></table></figure>
 
-<p>4、安装软件</p>
-<p>5、tab自动补全</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install bash-completion</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/bash_completion</span><br></pre></td></tr></table></figure>
+<h4 id="错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running"><a href="#错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running" class="headerlink" title="错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"></a>错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</h4><p>使配置文件生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+
+<p>重启docker：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
 
 
       
@@ -342,7 +349,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://example.com/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim.html" title="" target="_blank" rel="external">http://example.com/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim.html</a>
+      <a href="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html" title="常见错误排除" target="_blank" rel="external">http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A41.html</a>
     </li>
     
     <li class="post-copyright-license">
