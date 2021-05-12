@@ -3,11 +3,11 @@
   <title>yumiot</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://yumiot.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="http://yumiot.github.io/"/>
   <updated>2021-05-11T09:15:17.962Z</updated>
-  <id>http://example.com/</id>
+  <id>http://yumiot.github.io/</id>
   
   <author>
     <name>Jack</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>配置中心ConfigMap</title>
-    <link href="http://example.com/k8s/ConfigMap%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/"/>
-    <id>http://example.com/k8s/ConfigMap%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/</id>
+    <link href="http://yumiot.github.io/2021/05/11/k8s/ConfigMap%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/"/>
+    <id>http://yumiot.github.io/2021/05/11/k8s/ConfigMap%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/</id>
     <published>2021-05-11T09:18:00.000Z</published>
     <updated>2021-05-11T09:15:17.962Z</updated>
     
@@ -33,17 +33,17 @@
     
     
     
-    <category term="k8s" scheme="http://example.com/categories/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/categories/k8s/"/>
     
     
-    <category term="k8s" scheme="http://example.com/tags/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/tags/k8s/"/>
     
   </entry>
   
   <entry>
     <title>kubectl命令大全</title>
-    <link href="http://example.com/k8s/kubectl%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/"/>
-    <id>http://example.com/k8s/kubectl%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</id>
+    <link href="http://yumiot.github.io/2021/05/11/k8s/kubectl%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/"/>
+    <id>http://yumiot.github.io/2021/05/11/k8s/kubectl%20%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</id>
     <published>2021-05-11T09:18:00.000Z</published>
     <updated>2021-05-11T09:15:53.650Z</updated>
     
@@ -57,17 +57,17 @@
     
     
     
-    <category term="k8s" scheme="http://example.com/categories/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/categories/k8s/"/>
     
     
-    <category term="k8s" scheme="http://example.com/tags/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/tags/k8s/"/>
     
   </entry>
   
   <entry>
     <title>kubectl命令自动补全</title>
-    <link href="http://example.com/k8s/kubectl%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/"/>
-    <id>http://example.com/k8s/kubectl%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</id>
+    <link href="http://yumiot.github.io/2021/05/11/k8s/kubectl%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/"/>
+    <id>http://yumiot.github.io/2021/05/11/k8s/kubectl%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</id>
     <published>2021-05-11T09:18:00.000Z</published>
     <updated>2021-05-11T09:15:53.631Z</updated>
     
@@ -81,17 +81,17 @@
     
     
     
-    <category term="k8s" scheme="http://example.com/categories/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/categories/k8s/"/>
     
     
-    <category term="k8s" scheme="http://example.com/tags/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/tags/k8s/"/>
     
   </entry>
   
   <entry>
     <title>从私有仓库拉取镜像</title>
-    <link href="http://example.com/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/"/>
-    <id>http://example.com/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/</id>
+    <link href="http://yumiot.github.io/2021/05/11/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/"/>
+    <id>http://yumiot.github.io/2021/05/11/k8s/%E4%BB%8E%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F/</id>
     <published>2021-05-11T09:18:00.000Z</published>
     <updated>2021-05-11T09:15:53.644Z</updated>
     
@@ -105,17 +105,17 @@
     
     
     
-    <category term="k8s" scheme="http://example.com/categories/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/categories/k8s/"/>
     
     
-    <category term="k8s" scheme="http://example.com/tags/k8s/"/>
+    <category term="k8s" scheme="http://yumiot.github.io/tags/k8s/"/>
     
   </entry>
   
   <entry>
     <title>Docker安装NGINX</title>
-    <link href="http://example.com/docker/Docker%E5%AE%89%E8%A3%85NGINX/"/>
-    <id>http://example.com/docker/Docker%E5%AE%89%E8%A3%85NGINX/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85NGINX/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85NGINX/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:22.532Z</updated>
     
@@ -129,17 +129,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>Docker安装Redis</title>
-    <link href="http://example.com/docker/Docker%E5%AE%89%E8%A3%85Redis/"/>
-    <id>http://example.com/docker/Docker%E5%AE%89%E8%A3%85Redis/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85Redis/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85Redis/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:22.566Z</updated>
     
@@ -153,17 +153,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>Docker搭建私有仓库</title>
-    <link href="http://example.com/docker/Docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
-    <id>http://example.com/docker/Docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/Docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/Docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:22.571Z</updated>
     
@@ -177,17 +177,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>Nginx</title>
-    <link href="http://example.com/docker/Nginx/"/>
-    <id>http://example.com/docker/Nginx/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/Nginx/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/Nginx/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.804Z</updated>
     
@@ -202,17 +202,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>docker修改国内镜像源</title>
-    <link href="http://example.com/docker/docker%20%E4%BF%AE%E6%94%B9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/"/>
-    <id>http://example.com/docker/docker%20%E4%BF%AE%E6%94%B9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/docker%20%E4%BF%AE%E6%94%B9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/docker%20%E4%BF%AE%E6%94%B9%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.901Z</updated>
     
@@ -231,17 +231,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>Docker安装MySQL</title>
-    <link href="http://example.com/docker/docker%E5%AE%89%E8%A3%85MySQL/"/>
-    <id>http://example.com/docker/docker%E5%AE%89%E8%A3%85MySQL/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/docker%E5%AE%89%E8%A3%85MySQL/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/docker%E5%AE%89%E8%A3%85MySQL/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.907Z</updated>
     
@@ -255,17 +255,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>https错误</title>
-    <link href="http://example.com/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/"/>
-    <id>http://example.com/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:49.416Z</updated>
     
@@ -279,17 +279,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>修改源并安装vim</title>
-    <link href="http://example.com/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim/"/>
-    <id>http://example.com/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E4%BF%AE%E6%94%B9%E6%BA%90%E5%B9%B6%E5%AE%89%E8%A3%85vim/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.809Z</updated>
     
@@ -304,17 +304,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>安装MongoDB</title>
-    <link href="http://example.com/docker/%E5%AE%89%E8%A3%85MongoDB/"/>
-    <id>http://example.com/docker/%E5%AE%89%E8%A3%85MongoDB/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85MongoDB/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85MongoDB/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.843Z</updated>
     
@@ -328,17 +328,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>安装gitea</title>
-    <link href="http://example.com/docker/%E5%AE%89%E8%A3%85gitea/"/>
-    <id>http://example.com/docker/%E5%AE%89%E8%A3%85gitea/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitea/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitea/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.709Z</updated>
     
@@ -352,17 +352,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>安装gitlab</title>
-    <link href="http://example.com/docker/%E5%AE%89%E8%A3%85gitlab/"/>
-    <id>http://example.com/docker/%E5%AE%89%E8%A3%85gitlab/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitlab/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitlab/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.855Z</updated>
     
@@ -376,17 +376,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>安装harbor</title>
-    <link href="http://example.com/docker/%E5%AE%89%E8%A3%85harbor/"/>
-    <id>http://example.com/docker/%E5%AE%89%E8%A3%85harbor/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85harbor/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85harbor/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.874Z</updated>
     
@@ -401,17 +401,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>安装kafka</title>
-    <link href="http://example.com/docker/%E5%AE%89%E8%A3%85kafka/"/>
-    <id>http://example.com/docker/%E5%AE%89%E8%A3%85kafka/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85kafka/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85kafka/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.889Z</updated>
     
@@ -425,41 +425,17 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>安装rabbitmq</title>
-    <link href="http://example.com/docker/%E5%AE%89%E8%A3%85rabbitmq/"/>
-    <id>http://example.com/docker/%E5%AE%89%E8%A3%85rabbitmq/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:03.881Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure><blockquote><p>默认账号密码：guest</p></blockquote><h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -it rabbit bash</span><br></pre></td></tr></table></figure><p>开启mqtt</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure><p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像&quot;&gt;&lt;/a&gt;拉取镜像&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>常用命令</title>
-    <link href="http://example.com/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://example.com/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.837Z</updated>
     
@@ -473,17 +449,41 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安装rabbitmq</title>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85rabbitmq/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85rabbitmq/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:03.881Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure><blockquote><p>默认账号密码：guest</p></blockquote><h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -it rabbit bash</span><br></pre></td></tr></table></figure><p>开启mqtt</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure><p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像&quot;&gt;&lt;/a&gt;拉取镜像&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre</summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
   <entry>
     <title>常见错误排除</title>
-    <link href="http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/"/>
-    <id>http://example.com/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/</id>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/</id>
     <published>2021-05-11T08:18:49.000Z</published>
     <updated>2021-05-11T08:31:03.714Z</updated>
     
@@ -497,10 +497,10 @@
     
     
     
-    <category term="docker" scheme="http://example.com/categories/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
     
   </entry>
   
