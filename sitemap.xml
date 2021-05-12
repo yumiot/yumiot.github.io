@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yumiot.github.io/tags/index.html</loc>
+    <loc>http://yumiot.github.io/about/index.html</loc>
     
     <lastmod>2021-05-12</lastmod>
     
@@ -10,6 +10,13 @@
   
   <url>
     <loc>http://yumiot.github.io/categories/index.html</loc>
+    
+    <lastmod>2021-05-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yumiot.github.io/tags/index.html</loc>
     
     <lastmod>2021-05-12</lastmod>
     

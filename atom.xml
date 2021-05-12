@@ -113,30 +113,6 @@
   </entry>
   
   <entry>
-    <title>Docker安装NGINX</title>
-    <link href="http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85NGINX/"/>
-    <id>http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85NGINX/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:22.532Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Docker安装NGINX"><a href="#Docker安装NGINX" class="headerlink" title="Docker安装NGINX"></a>Docker安装NGINX</h2><h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure><h3 id="使用默认配置启动NGINX"><a href="#使用默认配置启动NGINX" class="headerlink" title="使用默认配置启动NGINX"></a>使用默认配置启动NGINX</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -d nginx</span><br></pre></td></tr></table></figure><p>如果需要开机启动：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -d nginx --restart always</span><br></pre></td></tr></table></figure><blockquote><p>在浏览器中打开  127.0.0.1 测试是否安装成功。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl 127.0.0.1</span><br></pre></td></tr></table></figure></blockquote><h2 id="NGINX使用主机目录配置"><a href="#NGINX使用主机目录配置" class="headerlink" title="NGINX使用主机目录配置"></a>NGINX使用主机目录配置</h2><h3 id="新建配置目录"><a href="#新建配置目录" class="headerlink" title="新建配置目录"></a>新建配置目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /home/nginx/www /home/nginx/logs /home/nginx/conf</span><br></pre></td></tr></table></figure><blockquote><p>   www: 目录将映射为 nginx 容器配置的虚拟目录。</p><p>   logs: 目录将映射为 nginx 容器的日志目录。</p><p>   conf: 目录里的配置文件将映射为 nginx 容器的配置文件。</p></blockquote><h3 id="复制默认配置"><a href="#复制默认配置" class="headerlink" title="复制默认配置"></a>复制默认配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp nginx:/etc/nginx/nginx.conf /home/jack/nginx/conf/</span><br><span class="line">docker cp nginx:/etc/nginx/conf.d /home/jack/nginx/</span><br></pre></td></tr></table></figure><blockquote><p>nginx：运行容器时的名称</p></blockquote><h3 id="部署新的NGINX容器"><a href="#部署新的NGINX容器" class="headerlink" title="部署新的NGINX容器"></a>部署新的NGINX容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:80 --name nginx-test-web \</span><br><span class="line">  -v /home/nginx/www:/usr/share/nginx/html \</span><br><span class="line">  -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \</span><br><span class="line">  -v /home/nginx/logs:/var/<span class="built_in">log</span>/nginx \</span><br><span class="line">  -d nginx</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --name nginx-gateway \</span><br><span class="line">  -v /home/jack/nginx/www:/usr/share/nginx/html \</span><br><span class="line">  -v /home/jack/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \</span><br><span class="line">  -v /home/jack/nginx/conf.d:/etc/nginx/conf.d \</span><br><span class="line">  -v /home/jack/nginx/logs:/var/<span class="built_in">log</span>/nginx \</span><br><span class="line">  -d nginx</span><br></pre></td></tr></table></figure><h2 id="使用本地目录"><a href="#使用本地目录" class="headerlink" title="使用本地目录"></a>使用本地目录</h2><h5 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -v /usr/share/www/html:/usr/share/nginx/html:ro -d nginx</span><br></pre></td></tr></table></figure><blockquote><p>-v 本地目录：docker容器目录:ro</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name apilab-web-nginx -p 8000:80 -v /home/apilab/www/html:/usr/share/nginx/html:ro -d nginx</span><br></pre></td></tr></table></figure><h5 id="配置NGINX"><a href="#配置NGINX" class="headerlink" title="配置NGINX"></a>配置NGINX</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it nginx-name /bin/bash</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim etc/nginx/conf.d/default.conf</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;Docker安装NGINX&quot;&gt;&lt;a href=&quot;#Docker安装NGINX&quot; class=&quot;headerlink&quot; title=&quot;Docker安装NGINX&quot;&gt;&lt;/a&gt;Docker安装NGINX&lt;/h2&gt;&lt;h3 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot;</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Docker安装Redis</title>
     <link href="http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85Redis/"/>
     <id>http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85Redis/</id>
@@ -263,6 +239,30 @@
   </entry>
   
   <entry>
+    <title>Docker安装NGINX</title>
+    <link href="http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85NGINX/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/Docker%E5%AE%89%E8%A3%85NGINX/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:22.532Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Docker安装NGINX"><a href="#Docker安装NGINX" class="headerlink" title="Docker安装NGINX"></a>Docker安装NGINX</h2><h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure><h3 id="使用默认配置启动NGINX"><a href="#使用默认配置启动NGINX" class="headerlink" title="使用默认配置启动NGINX"></a>使用默认配置启动NGINX</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -d nginx</span><br></pre></td></tr></table></figure><p>如果需要开机启动：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -d nginx --restart always</span><br></pre></td></tr></table></figure><blockquote><p>在浏览器中打开  127.0.0.1 测试是否安装成功。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl 127.0.0.1</span><br></pre></td></tr></table></figure></blockquote><h2 id="NGINX使用主机目录配置"><a href="#NGINX使用主机目录配置" class="headerlink" title="NGINX使用主机目录配置"></a>NGINX使用主机目录配置</h2><h3 id="新建配置目录"><a href="#新建配置目录" class="headerlink" title="新建配置目录"></a>新建配置目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /home/nginx/www /home/nginx/logs /home/nginx/conf</span><br></pre></td></tr></table></figure><blockquote><p>   www: 目录将映射为 nginx 容器配置的虚拟目录。</p><p>   logs: 目录将映射为 nginx 容器的日志目录。</p><p>   conf: 目录里的配置文件将映射为 nginx 容器的配置文件。</p></blockquote><h3 id="复制默认配置"><a href="#复制默认配置" class="headerlink" title="复制默认配置"></a>复制默认配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp nginx:/etc/nginx/nginx.conf /home/jack/nginx/conf/</span><br><span class="line">docker cp nginx:/etc/nginx/conf.d /home/jack/nginx/</span><br></pre></td></tr></table></figure><blockquote><p>nginx：运行容器时的名称</p></blockquote><h3 id="部署新的NGINX容器"><a href="#部署新的NGINX容器" class="headerlink" title="部署新的NGINX容器"></a>部署新的NGINX容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:80 --name nginx-test-web \</span><br><span class="line">  -v /home/nginx/www:/usr/share/nginx/html \</span><br><span class="line">  -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \</span><br><span class="line">  -v /home/nginx/logs:/var/<span class="built_in">log</span>/nginx \</span><br><span class="line">  -d nginx</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80 --name nginx-gateway \</span><br><span class="line">  -v /home/jack/nginx/www:/usr/share/nginx/html \</span><br><span class="line">  -v /home/jack/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \</span><br><span class="line">  -v /home/jack/nginx/conf.d:/etc/nginx/conf.d \</span><br><span class="line">  -v /home/jack/nginx/logs:/var/<span class="built_in">log</span>/nginx \</span><br><span class="line">  -d nginx</span><br></pre></td></tr></table></figure><h2 id="使用本地目录"><a href="#使用本地目录" class="headerlink" title="使用本地目录"></a>使用本地目录</h2><h5 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -v /usr/share/www/html:/usr/share/nginx/html:ro -d nginx</span><br></pre></td></tr></table></figure><blockquote><p>-v 本地目录：docker容器目录:ro</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name apilab-web-nginx -p 8000:80 -v /home/apilab/www/html:/usr/share/nginx/html:ro -d nginx</span><br></pre></td></tr></table></figure><h5 id="配置NGINX"><a href="#配置NGINX" class="headerlink" title="配置NGINX"></a>配置NGINX</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it nginx-name /bin/bash</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim etc/nginx/conf.d/default.conf</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Docker安装NGINX&quot;&gt;&lt;a href=&quot;#Docker安装NGINX&quot; class=&quot;headerlink&quot; title=&quot;Docker安装NGINX&quot;&gt;&lt;/a&gt;Docker安装NGINX&lt;/h2&gt;&lt;h3 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot;</summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>https错误</title>
     <link href="http://yumiot.github.io/2021/05/11/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/"/>
     <id>http://yumiot.github.io/2021/05/11/docker/http%20server%20gave%20HTTP%20response%20to%20HTTPS%20client/</id>
@@ -275,6 +275,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;http-server-gave-HTTP-response-to-HTTPS-client解决方案：&quot;&gt;&lt;a href=&quot;#http-server-gave-HTTP-response-to-HTTPS-client解决方案：&quot; class=&quot;headerlin</summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安装gitea</title>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitea/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitea/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:03.709Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitea/gitea:latest</span><br></pre></td></tr></table></figure><h4 id="安装MySQL（有的可以省略）"><a href="#安装MySQL（有的可以省略）" class="headerlink" title="安装MySQL（有的可以省略）"></a>安装MySQL（有的可以省略）</h4><h4 id="设置存储路径"><a href="#设置存储路径" class="headerlink" title="设置存储路径"></a>设置存储路径</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /var/lib/gitea</span><br></pre></td></tr></table></figure><h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=gitea -p 10022:22 -p 10080:3000 -v /var/lib/gitea:/data gitea/gitea:latest</span><br></pre></td></tr></table></figure><h4 id="配置gitea"><a href="#配置gitea" class="headerlink" title="配置gitea"></a>配置gitea</h4><p>使用浏览器访问：<a href="http://localhost:10080/%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%EF%BC%9B">http://localhost:10080/，配置数据库连接；</a></p><p>完成配置之后，创建第一个用户（默认为管理员），登录即可。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像&quot;&gt;&lt;/a&gt;拉取镜像&lt;/h4&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;</summary>
       
     
     
@@ -336,30 +360,6 @@
   </entry>
   
   <entry>
-    <title>安装gitea</title>
-    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitea/"/>
-    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitea/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:03.709Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitea/gitea:latest</span><br></pre></td></tr></table></figure><h4 id="安装MySQL（有的可以省略）"><a href="#安装MySQL（有的可以省略）" class="headerlink" title="安装MySQL（有的可以省略）"></a>安装MySQL（有的可以省略）</h4><h4 id="设置存储路径"><a href="#设置存储路径" class="headerlink" title="设置存储路径"></a>设置存储路径</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /var/lib/gitea</span><br></pre></td></tr></table></figure><h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=gitea -p 10022:22 -p 10080:3000 -v /var/lib/gitea:/data gitea/gitea:latest</span><br></pre></td></tr></table></figure><h4 id="配置gitea"><a href="#配置gitea" class="headerlink" title="配置gitea"></a>配置gitea</h4><p>使用浏览器访问：<a href="http://localhost:10080/%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%EF%BC%9B">http://localhost:10080/，配置数据库连接；</a></p><p>完成配置之后，创建第一个用户（默认为管理员），登录即可。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像&quot;&gt;&lt;/a&gt;拉取镜像&lt;/h4&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>安装gitlab</title>
     <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitlab/"/>
     <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85gitlab/</id>
@@ -372,6 +372,78 @@
       
       
     <summary type="html">&lt;h1 id=&quot;Docker-安装Gitlab&quot;&gt;&lt;a href=&quot;#Docker-安装Gitlab&quot; class=&quot;headerlink&quot; title=&quot;Docker 安装Gitlab&quot;&gt;&lt;/a&gt;Docker 安装Gitlab&lt;/h1&gt;&lt;h3 id=&quot;一、设置本地卷位置&quot;&gt;&lt;a</summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安装rabbitmq</title>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85rabbitmq/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85rabbitmq/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:03.881Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure><blockquote><p>默认账号密码：guest</p></blockquote><h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -it rabbit bash</span><br></pre></td></tr></table></figure><p>开启mqtt</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure><p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像&quot;&gt;&lt;/a&gt;拉取镜像&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre</summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用命令</title>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:03.837Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="列出所有容器ID"><a href="#列出所有容器ID" class="headerlink" title="列出所有容器ID"></a>列出所有容器ID</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -aq</span><br></pre></td></tr></table></figure><h4 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure><h4 id="删除所有的容器"><a href="#删除所有的容器" class="headerlink" title="删除所有的容器"></a>删除所有的容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docekr rm $(docker ps -aq)</span><br></pre></td></tr></table></figure><h4 id="删除所有镜像"><a href="#删除所有镜像" class="headerlink" title="删除所有镜像"></a>删除所有镜像</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;列出所有容器ID&quot;&gt;&lt;a href=&quot;#列出所有容器ID&quot; class=&quot;headerlink&quot; title=&quot;列出所有容器ID&quot;&gt;&lt;/a&gt;列出所有容器ID&lt;/h4&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;t</summary>
+      
+    
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常见错误排除</title>
+    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/"/>
+    <id>http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/</id>
+    <published>2021-05-11T08:18:49.000Z</published>
+    <updated>2021-05-11T08:31:03.714Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code"><a href="#错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code" class="headerlink" title="错误：Job for docker.service failed because the control process exited with error code."></a>错误：Job for docker.service failed because the control process exited with error code.</h4><h4 id="See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details"><a href="#See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details" class="headerlink" title="See “systemctl status docker.service” and “journalctl -xe” for details."></a>See “systemctl status docker.service” and “journalctl -xe” for details.</h4><p>这个一般是由于/etc/docker/daemon.json里面配置有误</p><p>正确配置例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/docker/daemon.json</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn&quot;],</span><br><span class="line">  &quot;insecure-registries&quot;:[&quot;127.0.0.1&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running"><a href="#错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running" class="headerlink" title="错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"></a>错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</h4><p>使配置文件生效：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure><p>重启docker：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code&quot;&gt;&lt;a href=&quot;#错误：Job-for-docker-service-failed-beca</summary>
       
     
     
@@ -421,78 +493,6 @@
       
       
     <summary type="html">&lt;h1 id=&quot;docker安装kafka&quot;&gt;&lt;a href=&quot;#docker安装kafka&quot; class=&quot;headerlink&quot; title=&quot;docker安装kafka&quot;&gt;&lt;/a&gt;docker安装kafka&lt;/h1&gt;&lt;h3 id=&quot;一、拉取镜像&quot;&gt;&lt;a href=&quot;#一、拉</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用命令</title>
-    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:03.837Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="列出所有容器ID"><a href="#列出所有容器ID" class="headerlink" title="列出所有容器ID"></a>列出所有容器ID</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -aq</span><br></pre></td></tr></table></figure><h4 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure><h4 id="删除所有的容器"><a href="#删除所有的容器" class="headerlink" title="删除所有的容器"></a>删除所有的容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docekr rm $(docker ps -aq)</span><br></pre></td></tr></table></figure><h4 id="删除所有镜像"><a href="#删除所有镜像" class="headerlink" title="删除所有镜像"></a>删除所有镜像</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;列出所有容器ID&quot;&gt;&lt;a href=&quot;#列出所有容器ID&quot; class=&quot;headerlink&quot; title=&quot;列出所有容器ID&quot;&gt;&lt;/a&gt;列出所有容器ID&lt;/h4&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;t</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>安装rabbitmq</title>
-    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85rabbitmq/"/>
-    <id>http://yumiot.github.io/2021/05/11/docker/%E5%AE%89%E8%A3%85rabbitmq/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:03.881Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure><blockquote><p>默认账号密码：guest</p></blockquote><h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -it rabbit bash</span><br></pre></td></tr></table></figure><p>开启mqtt</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure><p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#拉取镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像&quot;&gt;&lt;/a&gt;拉取镜像&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre</summary>
-      
-    
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://yumiot.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常见错误排除</title>
-    <link href="http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/"/>
-    <id>http://yumiot.github.io/2021/05/11/docker/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%8E%92%E9%99%A4/</id>
-    <published>2021-05-11T08:18:49.000Z</published>
-    <updated>2021-05-11T08:31:03.714Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code"><a href="#错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code" class="headerlink" title="错误：Job for docker.service failed because the control process exited with error code."></a>错误：Job for docker.service failed because the control process exited with error code.</h4><h4 id="See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details"><a href="#See-“systemctl-status-docker-service”-and-“journalctl-xe”-for-details" class="headerlink" title="See “systemctl status docker.service” and “journalctl -xe” for details."></a>See “systemctl status docker.service” and “journalctl -xe” for details.</h4><p>这个一般是由于/etc/docker/daemon.json里面配置有误</p><p>正确配置例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/docker/daemon.json</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn&quot;],</span><br><span class="line">  &quot;insecure-registries&quot;:[&quot;127.0.0.1&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running"><a href="#错误：Cannot-connect-to-the-Docker-daemon-at-unix-var-run-docker-sock-Is-the-docker-daemon-running" class="headerlink" title="错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"></a>错误：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</h4><p>使配置文件生效：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure><p>重启docker：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;错误：Job-for-docker-service-failed-because-the-control-process-exited-with-error-code&quot;&gt;&lt;a href=&quot;#错误：Job-for-docker-service-failed-beca</summary>
       
     
     
