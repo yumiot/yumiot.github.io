@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="配置项目工程 在使用STM32CubeIDE的时候，首先要选择正在使用的芯片型号，再配置芯片的时钟，然后才去配置所需要用到的功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32之UART串口通信">
+<meta property="og:url" content="http://example.com/63f0bb0c.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="配置项目工程 在使用STM32CubeIDE的时候，首先要选择正在使用的芯片型号，再配置芯片的时钟，然后才去配置所需要用到的功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/stm/uart/uart1.png">
+<meta property="og:image" content="http://example.com/images/stm/uart/%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7.png">
+<meta property="article:published_time" content="2021-11-20T08:38:38.000Z">
+<meta property="article:modified_time" content="2022-06-07T00:21:54.466Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/stm/uart/uart1.png">
+
+
+<link rel="canonical" href="http://example.com/63f0bb0c.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/63f0bb0c.html","path":"63f0bb0c.html","title":"STM32之UART串口通信"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>STM32之UART串口通信 | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">配置项目工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">功能配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">函数说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UART%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E5%9C%A8usart-c%E4%B8%AD%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">UART初始化（在usart.c中）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UART%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%88%E5%9C%A8stm32f1xx-it-c%E4%B8%AD%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">UART中断处理函数（在stm32f1xx_it.c中）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HAL%E5%BA%93%E5%87%BD%E6%95%B0HAL-UART-Transmit%EF%BC%88%E5%9C%A8stm32f1xx-hal-uart-c%E4%B8%AD%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">HAL库函数HAL_UART_Transmit（在stm32f1xx_hal_uart.c中）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HAL%E5%BA%93%E5%87%BD%E6%95%B0HAL-UART-Receive%EF%BC%88%E5%9C%A8stm32f1xx-hal-uart-c%E4%B8%AD%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">HAL库函数HAL_UART_Receive（在stm32f1xx_hal_uart.c中）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="nav-number">1.3.</span> <span class="nav-text">代码编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8HAL-UART-MspInit%E4%B8%AD%E4%BD%BF%E8%83%BD%E4%B8%AD%E6%96%AD%E6%8E%A5%E6%94%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">在HAL_UART_MspInit中使能中断接收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8USARTX-IRQHandler%E4%B8%AD%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.2.</span> <span class="nav-text">在USARTX_IRQHandler中接收数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.3.</span> <span class="nav-text">发送数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8printf%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.4.</span> <span class="nav-text">使用printf发送数据</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/63f0bb0c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="STM32之UART串口通信 | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          STM32之UART串口通信
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-20 16:38:38" itemprop="dateCreated datePublished" datetime="2021-11-20T16:38:38+08:00">2021-11-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/stm32/" itemprop="url" rel="index"><span itemprop="name">stm32</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h1><blockquote>
+<p>在使用STM32CubeIDE的时候，首先要选择正在使用的芯片型号，再配置芯片的时钟，然后才去配置所需要用到的功能。</p>
+</blockquote>
+<h2 id="功能配置"><a href="#功能配置" class="headerlink" title="功能配置"></a>功能配置</h2><p><strong>1. 配置UART并使能中断：</strong></p>
+<p><img src="/../../images/stm/uart/uart1.png" alt="配置UART并使能中断"></p>
+<p><strong>2. 设置中断优先级</strong>（如果没开启其他中断，那就默认即可，直接跳过）</p>
+<p><img src="/../../images/stm/uart/%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7.png" alt="设置中断优先级"></p>
+<p><strong>3. 保存并生产代码</strong></p>
+<h2 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h2><h3 id="UART初始化（在usart-c中）"><a href="#UART初始化（在usart-c中）" class="headerlink" title="UART初始化（在usart.c中）"></a>UART初始化（在usart.c中）</h3><h3 id="UART中断处理函数（在stm32f1xx-it-c中）"><a href="#UART中断处理函数（在stm32f1xx-it-c中）" class="headerlink" title="UART中断处理函数（在stm32f1xx_it.c中）"></a>UART中断处理函数（在stm32f1xx_it.c中）</h3><blockquote>
+<p>当USART1发生中断事件时，程序会进行该函数，所以我们会在这个函数编写好程序，来处理我们的中断事件。</p>
+</blockquote>
+<h3 id="HAL库函数HAL-UART-Transmit（在stm32f1xx-hal-uart-c中）"><a href="#HAL库函数HAL-UART-Transmit（在stm32f1xx-hal-uart-c中）" class="headerlink" title="HAL库函数HAL_UART_Transmit（在stm32f1xx_hal_uart.c中）"></a>HAL库函数HAL_UART_Transmit（在stm32f1xx_hal_uart.c中）</h3><blockquote>
+<p>该函数能够通过huart串口发送Size位pData数据。</p>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li>huart  ：选择用来发送的UART串口</li>
+<li>pData  ：指向将要发送的数据的指针</li>
+<li>Size   ：发送数据的大小</li>
+<li>Timeout：超时时间</li>
+</ul>
+</blockquote>
+<h3 id="HAL库函数HAL-UART-Receive（在stm32f1xx-hal-uart-c中）"><a href="#HAL库函数HAL-UART-Receive（在stm32f1xx-hal-uart-c中）" class="headerlink" title="HAL库函数HAL_UART_Receive（在stm32f1xx_hal_uart.c中）"></a>HAL库函数HAL_UART_Receive（在stm32f1xx_hal_uart.c中）</h3><blockquote>
+<p>该函数能够通过huart串口接收Size位pData数据。</p>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li><p>huart  ：选择用来接收的UART串口</p>
+</li>
+<li><p>pData  ：指向将要存放数据的指针</p>
+</li>
+<li><p>Size   ：接收数据的大小</p>
+</li>
+<li><p>Timeout：超时时间</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h2><h3 id="在HAL-UART-MspInit中使能中断接收"><a href="#在HAL-UART-MspInit中使能中断接收" class="headerlink" title="在HAL_UART_MspInit中使能中断接收"></a>在HAL_UART_MspInit中使能中断接收</h3><blockquote>
+<p>代码位置：usart.c文件中的HAL_UART_MspInit函数</p>
+</blockquote>
+<p><strong>添加代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* USER CODE BEGIN USART1_MspInit 1 */</span></span><br><span class="line"><span class="comment">// 使能接收中断</span></span><br><span class="line">__HAL_UART_ENABLE_IT(uartHandle, UART_IT_RXNE);</span><br><span class="line"><span class="comment">/* USER CODE END USART1_MspInit 1 */</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>HAL_UART_MspInit函数完整代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">HAL_UART_MspInit</span><span class="params">(UART_HandleTypeDef *uartHandle)</span> &#123;</span><br><span class="line"></span><br><span class="line">	GPIO_InitTypeDef GPIO_InitStruct = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">if</span> (uartHandle-&gt;Instance == USART1) &#123;</span><br><span class="line">		<span class="comment">/* USER CODE BEGIN USART1_MspInit 0 */</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/* USER CODE END USART1_MspInit 0 */</span></span><br><span class="line">		<span class="comment">/* USART1 clock enable */</span></span><br><span class="line">		__HAL_RCC_USART1_CLK_ENABLE();</span><br><span class="line"></span><br><span class="line">		__HAL_RCC_GPIOA_CLK_ENABLE();</span><br><span class="line">		<span class="comment">/**USART1 GPIO Configuration</span></span><br><span class="line"><span class="comment">		 PA9     ------&gt; USART1_TX</span></span><br><span class="line"><span class="comment">		 PA10     ------&gt; USART1_RX</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		GPIO_InitStruct.Pin = GPIO_PIN_9;</span><br><span class="line">		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;</span><br><span class="line">		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;</span><br><span class="line">		HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);</span><br><span class="line"></span><br><span class="line">		GPIO_InitStruct.Pin = GPIO_PIN_10;</span><br><span class="line">		GPIO_InitStruct.Mode = GPIO_MODE_INPUT;</span><br><span class="line">		GPIO_InitStruct.Pull = GPIO_NOPULL;</span><br><span class="line">		HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* USART1 interrupt Init */</span></span><br><span class="line">		HAL_NVIC_SetPriority(USART1_IRQn, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">		HAL_NVIC_EnableIRQ(USART1_IRQn);</span><br><span class="line">		<span class="comment">/* USER CODE BEGIN USART1_MspInit 1 */</span></span><br><span class="line">		<span class="comment">// 使能接收中断</span></span><br><span class="line">		__HAL_UART_ENABLE_IT(uartHandle, UART_IT_RXNE);</span><br><span class="line">		<span class="comment">/* USER CODE END USART1_MspInit 1 */</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在USARTX-IRQHandler中接收数据"><a href="#在USARTX-IRQHandler中接收数据" class="headerlink" title="在USARTX_IRQHandler中接收数据"></a>在USARTX_IRQHandler中接收数据</h3><blockquote>
+<p>代码位置：stm32f1xx_it.c文件中的USART1_IRQHandler函数</p>
+</blockquote>
+<p><strong>定义静态变量：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> uRx_Data[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;    <span class="comment">//存储数组</span></span><br><span class="line"><span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> *pRx_Data = uRx_Data;    <span class="comment">//指向存储数组将要存储数据的位</span></span><br><span class="line"><span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> uLength = <span class="number">0</span>;    <span class="comment">//接收数据长度</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>接收数据：</strong></p>
+<blockquote>
+<ul>
+<li>判断接收结束条件，这个可以根据自己想要接收何种类型的数据而定。</li>
+<li>数据处理，大家可以在这一步执行自己想要对数据做的一些操作，这里只是将接收到的数据重新发送出去而已。</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* -1- 接收数据 */</span></span><br><span class="line">HAL_UART_Receive(&amp;huart1, pRx_Data, <span class="number">1</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* -2- 判断数据结尾 */</span></span><br><span class="line"><span class="keyword">if</span> (*pRx_Data == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">/* -3- 将接收成功的数据通过串口发出去 */</span></span><br><span class="line">    HAL_UART_Transmit(&amp;huart1, uRx_Data, uLength, <span class="number">0xffff</span>);</span><br><span class="line">    <span class="comment">/* -4- 初始化指针和数据长度 */</span></span><br><span class="line">    pRx_Data = uRx_Data;   <span class="comment">//重新指向数组起始位置</span></span><br><span class="line">    uLength = <span class="number">0</span>;          <span class="comment">//长度清零</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* -5- 若未结束，指针往下一位移动，长度自增一 */</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    pRx_Data++;</span><br><span class="line">    uLength++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>USART1_IRQHandler函数完整代码</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">USART1_IRQHandler</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	<span class="comment">/* USER CODE BEGIN USART1_IRQn 0 */</span></span><br><span class="line">    </span><br><span class="line">	<span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> uRx_Data[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;    <span class="comment">//存储数组</span></span><br><span class="line">	<span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> *pRx_Data = uRx_Data;    <span class="comment">//指向存储数组将要存储数据的位</span></span><br><span class="line">	<span class="type">static</span> <span class="type">unsigned</span> <span class="type">char</span> uLength = <span class="number">0</span>;    <span class="comment">//接收数据长度</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* -1- 接收数据 */</span></span><br><span class="line">	HAL_UART_Receive(&amp;huart1, pRx_Data, <span class="number">1</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* -2- 判断数据结尾 */</span></span><br><span class="line">	<span class="keyword">if</span> (*pRx_Data == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">		<span class="comment">/* -3- 将接收成功的数据通过串口发出去 */</span></span><br><span class="line">		HAL_UART_Transmit(&amp;huart1, uRx_Data, uLength, <span class="number">0xffff</span>);</span><br><span class="line">		<span class="comment">/* -4- 初始化指针和数据长度 */</span></span><br><span class="line">		pRx_Data = uRx_Data;   <span class="comment">//重新指向数组起始位置</span></span><br><span class="line">		uLength = <span class="number">0</span>;          <span class="comment">//长度清零</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* -5- 若未结束，指针往下一位移动，长度自增一 */</span></span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		pRx_Data++;</span><br><span class="line">		uLength++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* USER CODE END USART1_IRQn 0 */</span></span><br><span class="line">	HAL_UART_IRQHandler(&amp;huart1);</span><br><span class="line">	<span class="comment">/* USER CODE BEGIN USART1_IRQn 1 */</span></span><br><span class="line">    </span><br><span class="line">	<span class="comment">/* USER CODE END USART1_IRQn 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送数据"><a href="#发送数据" class="headerlink" title="发送数据"></a>发送数据</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> uTx_Data[] = <span class="string">&quot;init hohu\r\n&quot;</span>;</span><br><span class="line">HAL_UART_Transmit(&amp;huart1, uTx_Data, <span class="keyword">sizeof</span>(uTx_Data), <span class="number">0xffff</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用printf发送数据"><a href="#使用printf发送数据" class="headerlink" title="使用printf发送数据"></a>使用<code>printf</code>发送数据</h3><blockquote>
+<p>代码位置：usart.c文件中的最后添加；</p>
+<ul>
+<li>使用printf函数需要#include &lt;stdio.h&gt;</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* USER CODE BEGIN 1 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现printf函数发送数据</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __GNUC__</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PUTCHAR_PROTOTYPE int __io_putchar(int ch)</span></span><br><span class="line">PUTCHAR_PROTOTYPE &#123;</span><br><span class="line">	HAL_UART_Transmit(&amp;huart1, (<span class="type">uint8_t</span>*) &amp;ch, <span class="number">1</span>, HAL_MAX_DELAY);</span><br><span class="line">	<span class="keyword">return</span> ch;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="comment">/* USER CODE END 1 */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ChurF-Lin/p/10809000.html">https://www.cnblogs.com/ChurF-Lin/p/10809000.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/stm32/" rel="tag"># stm32</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/d0cca158.html" rel="prev" title="STM32新建项目工程">
+                  <i class="fa fa-chevron-left"></i> STM32新建项目工程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/1fd38c68.html" rel="next" title="测试指令">
+                  测试指令 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">85k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:17</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

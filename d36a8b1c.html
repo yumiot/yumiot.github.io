@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Metrics从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（四）安装使用MetricsServer">
+<meta property="og:url" content="http://example.com/d36a8b1c.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="Metrics从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-26T02:50:02.000Z">
+<meta property="article:modified_time" content="2022-06-07T00:21:54.460Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="k8s">
+<meta property="article:tag" content="k8s专题">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/d36a8b1c.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/d36a8b1c.html","path":"d36a8b1c.html","title":"（四）安装使用MetricsServer"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>（四）安装使用MetricsServer | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metrics"><span class="nav-number">1.</span> <span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-metrics-server"><span class="nav-number">1.2.</span> <span class="nav-text">部署 metrics-server</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/d36a8b1c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="（四）安装使用MetricsServer | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          （四）安装使用MetricsServer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-26 10:50:02" itemprop="dateCreated datePublished" datetime="2021-06-26T10:50:02+08:00">2021-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/k8s%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">k8s专题</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
+<ul>
+<li>Kubernetes Metrics Server 是 Cluster 的核心监控数据的聚合器，kubeadm 默认是不部署的。</li>
+<li>Metrics Server 供 Dashboard 等其他组件使用，是一个扩展的 APIServer，依赖于 API Aggregator。所以，在安装 Metrics Server 之前需要先在 kube-apiserver 中开启 API Aggregator。</li>
+<li>Metrics API 只可以查询当前的度量数据，并不保存历史数据</li>
+<li>Metrics API URI 为 <code>/apis/metrics.k8s.io/</code>，在 <a target="_blank" rel="noopener" href="https://github.com/kubernetes/metrics">k8s.io&#x2F;metrics</a> 维护</li>
+<li>必须部署 <code>metrics-server</code> 才能使用该 API，metrics-server 通过调用 Kubelet Summary API 获取数据</li>
+</ul>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>1、检查 API Server 是否开启了 Aggregator Routing：查看 API Server 是否具有 –enable-aggregator-routing&#x3D;true 选项</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep apiserver</span><br></pre></td></tr></table></figure>
+
+<p>2、修改每个 API Server 的 kube-apiserver.yaml 配置开启 Aggregator Routing：修改 manifests 配置后 API Server 会自动重启生效。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/kubernetes/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span><span class="string">:6443</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">component:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--advertise-address=192.168.200.3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--allow-privileged=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--authorization-mode=Node,RBAC</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--client-ca-file=/etc/kubernetes/pki/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-admission-plugins=NodeRestriction</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-bootstrap-token-auth=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-aggregator-routing=true</span>            <span class="comment"># 添加本行</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-servers=https://127.0.0.1:2379</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--insecure-port=0</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-allowed-names=front-proxy-client</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-extra-headers-prefix=X-Remote-Extra-</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-group-headers=X-Remote-Group</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-username-headers=X-Remote-User</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--secure-port=6443</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-key-file=/etc/kubernetes/pki/sa.pub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-cluster-ip-range=10.96.0.0/12</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-cert-file=/etc/kubernetes/pki/apiserver.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-private-key-file=/etc/kubernetes/pki/apiserver.key</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">k8s.gcr.io/kube-apiserver:v1.18.2</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">8</span></span><br><span class="line">      <span class="attr">httpGet:</span></span><br><span class="line">        <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">/healthz</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">6443</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">HTTPS</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">15</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">15</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">requests:</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">250m</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">system-cluster-critical</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="部署-metrics-server"><a href="#部署-metrics-server" class="headerlink" title="部署 metrics-server"></a>部署 metrics-server</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>1、下载部署文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>附件中提供了修改好的components.yaml文件，文件名：metrics-server-components.yaml</p>
+</blockquote>
+<p>2、修改配置（主要修改镜像地址）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP</span>  <span class="comment"># 删掉 ExternalIP,Hostname</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-insecure-tls</span> <span class="comment"># 添加该启动参数</span></span><br><span class="line"><span class="attr">image:</span> <span class="string">rancher/metrics-server:v0.4.1</span>   <span class="string">--根据自己的需要修改</span></span><br></pre></td></tr></table></figure>
+
+<p>3、部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f components.yaml</span><br></pre></td></tr></table></figure>
+
+<p>4、查看运行情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system get pods -l k8s-app=metrics-server</span><br></pre></td></tr></table></figure>
+
+<p>5、检查 API Server 是否可以连通 Metrics Server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl describe svc metrics-server -n kube-system</span></span><br><span class="line">Name:              metrics-server</span><br><span class="line">Namespace:         kube-system</span><br><span class="line">Labels:            kubernetes.io/cluster-service=<span class="literal">true</span></span><br><span class="line">                   kubernetes.io/name=Metrics-server</span><br><span class="line">Annotations:       Selector:  k8s-app=metrics-server</span><br><span class="line">Type:              ClusterIP</span><br><span class="line">IP:                10.107.86.150</span><br><span class="line">Port:              &lt;<span class="built_in">unset</span>&gt;  443/TCP</span><br><span class="line">TargetPort:        main-port/TCP</span><br><span class="line">Endpoints:         10.244.2.20:4443</span><br><span class="line">Session Affinity:  None</span><br><span class="line">Events:            &lt;none&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他几个节点ping一下Endpoints的地址</span></span><br><span class="line">[root@master3 ~]<span class="comment"># ping 10.244.2.20</span></span><br><span class="line">PING 10.244.2.20 (10.244.2.20) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=1 ttl=64 time=0.122 ms</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=2 ttl=64 time=0.032 ms</span><br></pre></td></tr></table></figure>
+
+<p>6、执行以下命令，检查节点占用性能情况。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl top nodes</span></span><br><span class="line">NAME      CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   </span><br><span class="line">master1   223m         5%     1433Mi          52%       </span><br><span class="line">master2   148m         3%     972Mi           35%       </span><br><span class="line">master3   183m         4%     1123Mi          41%       </span><br><span class="line">node1     225m         5%     1389Mi          50%      </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@master1 ~]<span class="comment"># kubectl top pods</span></span><br><span class="line">NAME                                      CPU(cores)   MEMORY(bytes)   </span><br><span class="line">details-v1-6fc55d65c9-l97cs               4m           36Mi            </span><br><span class="line">nfs-client-provisioner-6d4469b5b5-ndg5x   4m           20Mi            </span><br><span class="line">productpage-v1-9cf6c76b5-hc2nr            10m          71Mi            </span><br><span class="line">ratings-v1-6f855c5fff-v9ht2               3m           28Mi            </span><br><span class="line">reviews-v1-697f45b7dd-w9fgc               7m           117Mi           </span><br><span class="line">reviews-v2-8c85b467b-jgx6w                6m           113Mi           </span><br><span class="line">reviews-v3-76ccf79776-74vz6               5m           117Mi    </span><br></pre></td></tr></table></figure>
+
+<p>参考文档：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lfl17718347843/p/14283796.html">https://www.cnblogs.com/lfl17718347843/p/14283796.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/k8s/" rel="tag"># k8s</a>
+              <a href="/tags/k8s%E4%B8%93%E9%A2%98/" rel="tag"># k8s专题</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/e315f158.html" rel="prev" title="springboot使用minio存储">
+                  <i class="fa fa-chevron-left"></i> springboot使用minio存储
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/876fb885.html" rel="next" title="Deployment配置文件详解">
+                  Deployment配置文件详解 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">85k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:17</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
