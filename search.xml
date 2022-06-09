@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C调用另一个.c文件的函数</title>
+    <url>/e9a0e41a.html</url>
+    <content><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>c语音的模块开发，首先定义一个c代码的头文件，如function.h,在里面声明将要实现的函数，如int add（int a，int b）; ，然后新建一个源文件为function.c,在function.c的开头#include “function.h”,然后下面写头文件中已声明的函数的实现。这样写完了之后，main函数如果要调用这个源文件中的函数，只需要在main函数的开头部分加入#include&lt;function.h&gt;，如此这般，main函数调用相应函数的时候就会自动找到程序的实现部分代码了。</p>
+<h2 id="function-h"><a href="#function-h" class="headerlink" title="function.h"></a>function.h</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="function-c"><a href="#function-c" class="headerlink" title="function.c"></a>function.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> a = <span class="number">1</span>,b =<span class="number">2</span>;</span><br><span class="line">   <span class="type">int</span> c = add(a,b);   <span class="comment">//这里是对function.c中的add函数的调用</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;c=%d&quot;</span>,c);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>c</category>
+      </categories>
+      <tags>
+        <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>clickhouse常用命令</title>
     <url>/49b8a20.html</url>
     <content><![CDATA[<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>语法：CREATE DATABASE [IF NOT EXISTS] db_name [ON CLUSTER cluster] [ENGINE &#x3D; engine(…)] </p>
@@ -17,24 +35,6 @@
       </categories>
       <tags>
         <tag>clickhouse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C调用另一个.c文件的函数</title>
-    <url>/e9a0e41a.html</url>
-    <content><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>c语音的模块开发，首先定义一个c代码的头文件，如function.h,在里面声明将要实现的函数，如int add（int a，int b）; ，然后新建一个源文件为function.c,在function.c的开头#include “function.h”,然后下面写头文件中已声明的函数的实现。这样写完了之后，main函数如果要调用这个源文件中的函数，只需要在main函数的开头部分加入#include&lt;function.h&gt;，如此这般，main函数调用相应函数的时候就会自动找到程序的实现部分代码了。</p>
-<h2 id="function-h"><a href="#function-h" class="headerlink" title="function.h"></a>function.h</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="function-c"><a href="#function-c" class="headerlink" title="function.c"></a>function.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> a = <span class="number">1</span>,b =<span class="number">2</span>;</span><br><span class="line">   <span class="type">int</span> c = add(a,b);   <span class="comment">//这里是对function.c中的add函数的调用</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;c=%d&quot;</span>,c);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>c</category>
-      </categories>
-      <tags>
-        <tag>c</tag>
       </tags>
   </entry>
   <entry>
@@ -136,6 +136,27 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装MongoDB</title>
+    <url>/895ab3f9.html</url>
+    <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
+<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
+</ul>
+</blockquote>
+<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker安装Gitlab</title>
     <url>/d7564f52.html</url>
     <content><![CDATA[<h1 id="Docker-安装Gitlab"><a href="#Docker-安装Gitlab" class="headerlink" title="Docker 安装Gitlab"></a>Docker 安装Gitlab</h1><h3 id="一、设置本地卷位置"><a href="#一、设置本地卷位置" class="headerlink" title="一、设置本地卷位置"></a>一、设置本地卷位置</h3><p>在设置其他所有内容之前，请配置一个新的环境变量<code>$GITLAB_HOME</code> ，该变量指向配置，日志和数据文件将驻留的目录。确保目录存在并且已授予适当的权限。</p>
@@ -214,27 +235,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker安装MongoDB</title>
-    <url>/895ab3f9.html</url>
-    <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
-<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
-</ul>
-</blockquote>
-<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker安装NGINX</title>
     <url>/cd0ece32.html</url>
     <content><![CDATA[<h2 id="Docker安装NGINX"><a href="#Docker安装NGINX" class="headerlink" title="Docker安装NGINX"></a>Docker安装NGINX</h2><h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
@@ -305,41 +305,59 @@
   <entry>
     <title>Docker安装SQLServer</title>
     <url>/ff50eba7.html</url>
-    <content><![CDATA[<h1 id="Docker安装SQL-Server"><a href="#Docker安装SQL-Server" class="headerlink" title="Docker安装SQL Server"></a>Docker安装SQL Server</h1><p>正式环境中数据库不建议安装在docker中！！！</p>
-<h1 id="拉取SQL-Server镜像"><a href="#拉取SQL-Server镜像" class="headerlink" title="拉取SQL Server镜像"></a>拉取SQL Server镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mcr.microsoft.com/mssql/server:2019-latest</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h1 id="Docker安装SQL-Server"><a href="#Docker安装SQL-Server" class="headerlink" title="Docker安装SQL Server"></a>Docker安装SQL Server</h1><p>官方文档：<a href="https://docs.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&preserve-view=true&pivots=cs1-bash">Docker：为 Linux 上的 SQL Server 安装容器 - SQL Server | Microsoft Docs</a></p>
+<h2 id="拉取SQL-Server镜像"><a href="#拉取SQL-Server镜像" class="headerlink" title="拉取SQL Server镜像"></a>拉取SQL Server镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mcr.microsoft.com/mssql/server:2019-latest</span><br></pre></td></tr></table></figure>
 
-<h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run --name sqlserver2019 -e &quot;ACCEPT_EULA=Y&quot; -e &quot;SA_PASSWORD=foryou@123&quot; -p 1433:1433 -v sqlserver2019_data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -e &quot;ACCEPT_EULA=Y&quot; -e &quot;SA_PASSWORD=foryou@123&quot; \</span><br><span class="line">   -p 1433:1433 --name sql1 --hostname sql1 \</span><br><span class="line">   -d mcr.microsoft.com/mssql/server:2019-latest</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mysql -v /home/jack/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
 
-<p>命令说明：</p>
-<ul>
-<li>-name mysql：为容器指定名称</li>
-<li>-p 3306:3306：将容器的3306端口映射到主机的3306端口</li>
-<li>-e MYSQL_ROOT_PASSWORD&#x3D;123456：初始化root用户的密码</li>
-<li>-d 后台运行容器，并返回容器ID；</li>
-<li>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></li>
-</ul>
+<h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker run -e <span class="string">&quot;ACCEPT_EULA=Y&quot;</span> -e <span class="string">&quot;SA_PASSWORD=&lt;YourStrong@Passw0rd&gt;&quot;</span> \</span><br><span class="line">   -p 1433:1433 --name sql1 --hostname sql1 \</span><br><span class="line">   -d mcr.microsoft.com/mssql/server:2019-latest</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>不用使用&#x2F;根目录</p>
+<p>密码应符合 SQL Server 默认密码策略，否则容器无法设置 SQL Server，将停止工作。 默认情况下，密码的长度必须至少为 8 个字符，并且必须包含以下四种字符中的三种：大写字母、小写字母、十进制数字和符号。</p>
 </blockquote>
-<h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>登录用户名：SA </p>
+<p>登录密码：&lt;YourStrong@Password&gt;</p>
+</blockquote>
+<p>下表对前一个 <code>docker run</code> 示例中的参数进行了说明：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>-e “ACCEPT_EULA&#x3D;Y”</strong></td>
+<td align="left">将 ACCEPT_EULA 变量设置为任意值，以确认接受最终用户许可协议。 SQL Server 映像的必需设置。</td>
+</tr>
+<tr>
+<td align="left">-e “SA_PASSWORD&#x3D;&lt;YourStrong@Passw0rd&gt;”</td>
+<td align="left">指定至少包含 8 个字符且符合 <a href="https://docs.microsoft.com/zh-cn/sql/relational-databases/security/password-policy?view=sql-server-ver15">SQL Server 密码要求</a>的强密码。 SQL Server 映像的必需设置。</td>
+</tr>
+<tr>
+<td align="left"><strong>-p 1433:1433</strong></td>
+<td align="left">将主机环境中的 TCP 端口（第一个值）映射到容器中的 TCP 端口（第二个值）。 在此示例中，SQL Server 侦听容器中的 TCP 1433，并对主机上的端口 1433 公开。</td>
+</tr>
+<tr>
+<td align="left"><strong>–name sql1</strong></td>
+<td align="left">为容器指定一个自定义名称，而不是使用随机生成的名称。 如果运行多个容器，则无法重复使用相同的名称。</td>
+</tr>
+<tr>
+<td align="left">–hostname sql1</td>
+<td align="left">用于显式设置容器主机名。 如果未指定主机名，则主机名默认为容器 ID，这是随机生成的系统 GUID。</td>
+</tr>
+<tr>
+<td align="left"><strong>mcr.microsoft.com&#x2F;mssql&#x2F;server:2019-latest</strong></td>
+<td align="left">SQL Server 2019 Ubuntu Linux 容器映像。</td>
+</tr>
+</tbody></table>
+<h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run --name sql1 -e &quot;ACCEPT_EULA=Y&quot; -e &quot;SA_PASSWORD=&lt;YourStrong@Password&gt;&quot; -p 1433:1433 -v sqlserver2019_data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest</span><br></pre></td></tr></table></figure>
 
-<h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li>-i：即使没有附加也保持STDIN 打开</li>
-<li>-t：分配一个伪终端</li>
-</ul>
-<h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意不能使用&#x2F;根目录</p>
+</blockquote>
+<h2 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker stop sql1</span><br><span class="line">sudo docker <span class="built_in">rm</span> sql1</span><br></pre></td></tr></table></figure>
 
 ]]></content>
   </entry>
@@ -348,23 +366,6 @@
     <url>/869ce7f.html</url>
     <content><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name emqx -p 1883:1883 -p 8081:8081 -p 8083:8083 -p 8883:8883 -p 8084:8084 -p 18083:18083 emqx/emqx:v4.0.0</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装kafka</title>
-    <url>/c591c796.html</url>
-    <content><![CDATA[<h1 id="docker安装kafka"><a href="#docker安装kafka" class="headerlink" title="docker安装kafka"></a>docker安装kafka</h1><h3 id="一、拉取镜像"><a href="#一、拉取镜像" class="headerlink" title="一、拉取镜像"></a>一、拉取镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull wurstmeister/zookeeper</span><br><span class="line">docker pull wurstmeister/kafka</span><br></pre></td></tr></table></figure>
-
-<p>二、编写 docker-compose.yml</p>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  zookeeper:</span><br><span class="line">    image: wurstmeister/zookeeper</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;2181:2181&quot;</span></span><br><span class="line">  kafka:</span><br><span class="line">    image: wurstmeister/kafka</span><br><span class="line">    depends_on: [ zookeeper ]</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;9092:9092&quot;</span></span><br><span class="line">    environment:</span><br><span class="line">      KAFKA_ADVERTISED_HOST_NAME: <span class="number">192.168</span>.<span class="number">220.150</span></span><br><span class="line">      KAFKA_CREATE_TOPICS: <span class="string">&quot;test:1:1&quot;</span></span><br><span class="line">      KAFKA_ZOOKEEPER_CONNECT: zookeeper:<span class="number">2181</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /data/product/zj_bigdata/data/kafka/docker.sock:/var/<span class="keyword">run</span><span class="language-bash">/docker.sock</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.jianshu.com/p/0edcc3addf3f">https://www.jianshu.com/p/0edcc3addf3f</a></p>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -489,6 +490,23 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装kafka</title>
+    <url>/c591c796.html</url>
+    <content><![CDATA[<h1 id="docker安装kafka"><a href="#docker安装kafka" class="headerlink" title="docker安装kafka"></a>docker安装kafka</h1><h3 id="一、拉取镜像"><a href="#一、拉取镜像" class="headerlink" title="一、拉取镜像"></a>一、拉取镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull wurstmeister/zookeeper</span><br><span class="line">docker pull wurstmeister/kafka</span><br></pre></td></tr></table></figure>
+
+<p>二、编写 docker-compose.yml</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  zookeeper:</span><br><span class="line">    image: wurstmeister/zookeeper</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;2181:2181&quot;</span></span><br><span class="line">  kafka:</span><br><span class="line">    image: wurstmeister/kafka</span><br><span class="line">    depends_on: [ zookeeper ]</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;9092:9092&quot;</span></span><br><span class="line">    environment:</span><br><span class="line">      KAFKA_ADVERTISED_HOST_NAME: <span class="number">192.168</span>.<span class="number">220.150</span></span><br><span class="line">      KAFKA_CREATE_TOPICS: <span class="string">&quot;test:1:1&quot;</span></span><br><span class="line">      KAFKA_ZOOKEEPER_CONNECT: zookeeper:<span class="number">2181</span></span><br><span class="line">    volumes:</span><br><span class="line">      - /data/product/zj_bigdata/data/kafka/docker.sock:/var/<span class="keyword">run</span><span class="language-bash">/docker.sock</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.jianshu.com/p/0edcc3addf3f">https://www.jianshu.com/p/0edcc3addf3f</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker安装minio</title>
     <url>/54f804e4.html</url>
     <content><![CDATA[<h3 id="创建数据存储于配置文件"><a href="#创建数据存储于配置文件" class="headerlink" title="创建数据存储于配置文件"></a>创建数据存储于配置文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/minio/data</span><br><span class="line"><span class="built_in">mkdir</span> -p /data/minio/config</span><br></pre></td></tr></table></figure>
@@ -508,6 +526,52 @@
 </blockquote>
 <h3 id="常用设置"><a href="#常用设置" class="headerlink" title="常用设置"></a>常用设置</h3><h4 id="设置公开访问"><a href="#设置公开访问" class="headerlink" title="设置公开访问"></a>设置公开访问</h4><p>将<code>mybucket/myphotos/2020/</code>子目录及其对象的匿名存储桶策略设置为<code>download</code>only。现在，子目录下的对象可以公开访问。例如<code>mybucket/myphotos/2020/yourobjectname</code>可在<a href="https://play.min.io:9000/mybucket/myphotos/2020/yourobjectname">https://play.min.io:9000/mybucket/myphotos/2020/yourobjectname 获得</a></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 注意需要带minio</span></span><br><span class="line">mc policy <span class="built_in">set</span> download minio/mybucket/myphotos/2020/</span><br><span class="line"></span><br><span class="line">Access permission <span class="keyword">for</span> ‘play/mybucket/myphotos/2020/’ is <span class="built_in">set</span> to <span class="string">&#x27;download&#x27;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker常用命令</title>
+    <url>/29dc6fe8.html</url>
+    <content><![CDATA[<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><h4 id="列出所有容器ID"><a href="#列出所有容器ID" class="headerlink" title="列出所有容器ID"></a>列出所有容器ID</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker ps -aq</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用tail命令查看日志"><a href="#使用tail命令查看日志" class="headerlink" title="使用tail命令查看日志"></a>使用tail命令查看日志</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --<span class="built_in">tail</span> -f 容器名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看所有容器ip地址"><a href="#查看所有容器ip地址" class="headerlink" title="查看所有容器ip地址"></a>查看所有容器ip地址</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format=<span class="string">&#x27;&#123;&#123;.Name&#125;&#125; - &#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;end&#125;&#125;&#x27;</span> $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看容器所有状态信息"><a href="#查看容器所有状态信息" class="headerlink" title="查看容器所有状态信息"></a>查看容器所有状态信息</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect 容器名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看-容器ip-地址"><a href="#查看-容器ip-地址" class="headerlink" title="查看 容器ip 地址"></a>查看 容器ip 地址</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format=<span class="string">&#x27;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&#x27;</span> 容器名称/容器ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="容器运行状态"><a href="#容器运行状态" class="headerlink" title="容器运行状态"></a>容器运行状态</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format <span class="string">&#x27;&#123;&#123;.Name&#125;&#125; &#123;&#123;.State.Running&#125;&#125;&#x27;</span> 容器名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看进程信息"><a href="#查看进程信息" class="headerlink" title="查看进程信息"></a>查看进程信息</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker top NAMES</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看端口；-使用容器ID-或者-容器名称"><a href="#查看端口；-使用容器ID-或者-容器名称" class="headerlink" title="查看端口；(使用容器ID 或者 容器名称)"></a>查看端口；(使用容器ID 或者 容器名称)</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker port 容器名称/容器ID</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3><h4 id="删除所有的容器"><a href="#删除所有的容器" class="headerlink" title="删除所有的容器"></a>删除所有的容器</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docekr <span class="built_in">rm</span> $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有镜像"><a href="#删除所有镜像" class="headerlink" title="删除所有镜像"></a>删除所有镜像</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有未在容器绑定的镜像，慎用！！！"><a href="#删除所有未在容器绑定的镜像，慎用！！！" class="headerlink" title="删除所有未在容器绑定的镜像，慎用！！！"></a>删除所有未在容器绑定的镜像，慎用！！！</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image prune -a</span><br></pre></td></tr></table></figure>
+
+<p>强制删除：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker image prune -a -f</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有-容器"><a href="#删除所有-容器" class="headerlink" title="删除所有****容器"></a>删除所有**<none>**容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images | grep <span class="string">&quot;none&quot;</span> | awk <span class="string">&#x27;&#123;print $3&#125;&#x27;</span>) </span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有有关镜像名称的镜像"><a href="#删除所有有关镜像名称的镜像" class="headerlink" title="删除所有有关镜像名称的镜像"></a>删除所有有关镜像名称的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q --filter reference=容器名称)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="停止命令"><a href="#停止命令" class="headerlink" title="停止命令"></a>停止命令</h3><h4 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -596,52 +660,6 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get secret</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://img-blog.csdnimg.cn/20191113195758125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdtaWFveWFu,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker常用命令</title>
-    <url>/29dc6fe8.html</url>
-    <content><![CDATA[<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><h4 id="列出所有容器ID"><a href="#列出所有容器ID" class="headerlink" title="列出所有容器ID"></a>列出所有容器ID</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker ps -aq</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用tail命令查看日志"><a href="#使用tail命令查看日志" class="headerlink" title="使用tail命令查看日志"></a>使用tail命令查看日志</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker logs -f -t --<span class="built_in">tail</span> -f 容器名称</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看所有容器ip地址"><a href="#查看所有容器ip地址" class="headerlink" title="查看所有容器ip地址"></a>查看所有容器ip地址</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format=<span class="string">&#x27;&#123;&#123;.Name&#125;&#125; - &#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;end&#125;&#125;&#x27;</span> $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看容器所有状态信息"><a href="#查看容器所有状态信息" class="headerlink" title="查看容器所有状态信息"></a>查看容器所有状态信息</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect 容器名称</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看-容器ip-地址"><a href="#查看-容器ip-地址" class="headerlink" title="查看 容器ip 地址"></a>查看 容器ip 地址</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format=<span class="string">&#x27;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&#x27;</span> 容器名称/容器ID</span><br></pre></td></tr></table></figure>
-
-<h4 id="容器运行状态"><a href="#容器运行状态" class="headerlink" title="容器运行状态"></a>容器运行状态</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format <span class="string">&#x27;&#123;&#123;.Name&#125;&#125; &#123;&#123;.State.Running&#125;&#125;&#x27;</span> 容器名称</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看进程信息"><a href="#查看进程信息" class="headerlink" title="查看进程信息"></a>查看进程信息</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker top NAMES</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看端口；-使用容器ID-或者-容器名称"><a href="#查看端口；-使用容器ID-或者-容器名称" class="headerlink" title="查看端口；(使用容器ID 或者 容器名称)"></a>查看端口；(使用容器ID 或者 容器名称)</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker port 容器名称/容器ID</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3><h4 id="删除所有的容器"><a href="#删除所有的容器" class="headerlink" title="删除所有的容器"></a>删除所有的容器</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docekr <span class="built_in">rm</span> $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除所有镜像"><a href="#删除所有镜像" class="headerlink" title="删除所有镜像"></a>删除所有镜像</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除所有未在容器绑定的镜像，慎用！！！"><a href="#删除所有未在容器绑定的镜像，慎用！！！" class="headerlink" title="删除所有未在容器绑定的镜像，慎用！！！"></a>删除所有未在容器绑定的镜像，慎用！！！</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker image prune -a</span><br></pre></td></tr></table></figure>
-
-<p>强制删除：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker image prune -a -f</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除所有-容器"><a href="#删除所有-容器" class="headerlink" title="删除所有****容器"></a>删除所有**<none>**容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images | grep <span class="string">&quot;none&quot;</span> | awk <span class="string">&#x27;&#123;print $3&#125;&#x27;</span>) </span><br></pre></td></tr></table></figure>
-
-<h4 id="删除所有有关镜像名称的镜像"><a href="#删除所有有关镜像名称的镜像" class="headerlink" title="删除所有有关镜像名称的镜像"></a>删除所有有关镜像名称的镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q --filter reference=容器名称)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="停止命令"><a href="#停止命令" class="headerlink" title="停止命令"></a>停止命令</h3><h4 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>docker</category>
@@ -776,6 +794,120 @@
       </tags>
   </entry>
   <entry>
+    <title>docker安装Grafana/loki</title>
+    <url>/acaa68a3.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/loki</span><br></pre></td></tr></table></figure>
+
+<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=loki -p 3100:3100 grafana/loki</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1:3100/ready</span><br></pre></td></tr></table></figure>
+
+<p>看到 <code>ready</code> 就是正常启动了。</p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>Grafana</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker安装Grafana</title>
+    <url>/4998eb02.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/grafana</span><br></pre></td></tr></table></figure>
+
+<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>Grafana</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker安装MySQL</title>
+    <url>/5c6bc735.html</url>
+    <content><![CDATA[<h1 id="Docker安装MySQL"><a href="#Docker安装MySQL" class="headerlink" title="Docker安装MySQL"></a>Docker安装MySQL</h1><p>正式环境中数据库不建议安装在docker中！！！</p>
+<h1 id="拉取MySQL镜像"><a href="#拉取MySQL镜像" class="headerlink" title="拉取MySQL镜像"></a>拉取MySQL镜像</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mysql -v /home/jack/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<ul>
+<li><p>-name mysql：为容器指定名称</p>
+</li>
+<li><p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p>
+</li>
+<li><p>-e MYSQL_ROOT_PASSWORD&#x3D;123456：初始化root用户的密码</p>
+</li>
+<li><p>-d 后台运行容器，并返回容器ID；</p>
+</li>
+<li><p>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></p>
+</li>
+</ul>
+<h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<ul>
+<li>-i：即使没有附加也保持STDIN 打开</li>
+<li>-t：分配一个伪终端</li>
+</ul>
+<h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker安装Prometheus</title>
+    <url>/74f5c67c.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull prom/prometheus</span><br></pre></td></tr></table></figure>
+
+<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=prometheus -p 9090:9090 prom/prometheus</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
+</blockquote>
+<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><p>通过运行以下命令从主机绑定装载您的：<code>prometheus.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v /path/to/prometheus.yml:/etc/prometheus/prometheus.yml \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或者通过运行以下命令将包含的目录绑定挂载到：<code>prometheus.yml  /etc/prometheus</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v /path/to/config:/etc/prometheus \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>Prometheus</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker安装禅道</title>
     <url>/b5a90049.html</url>
     <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
@@ -842,46 +974,6 @@
       </tags>
   </entry>
   <entry>
-    <title>docker搭建maven私服(nexus)</title>
-    <url>/f81dce24.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull sonatype/nexus3:latest</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus sonatype/nexus3</span><br></pre></td></tr></table></figure>
-
-<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><p>停止时，请确保有足够的时间让数据库完全关闭。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stop --time=120 &lt;CONTAINER_NAME&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><h2 id="使用-docker-卷"><a href="#使用-docker-卷" class="headerlink" title="使用 docker 卷"></a><em>使用 docker 卷</em></h2><p>由于 docker 卷是持久的，因此可以专门为此目的创建一个卷。这是推荐的方法。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker volume create --name nexus-data</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
-
-<h2 id="挂载一个主机目录作为卷"><a href="#挂载一个主机目录作为卷" class="headerlink" title="挂载一个主机目录作为卷"></a><em>挂载一个主机目录作为卷</em></h2><p>这不是可移植的，因为它依赖于在主机上具有正确权限的现有目录。但是，在需要将此卷分配给某些特定底层存储的某些情况下，它可能很有用。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /some/dir/nexus-data &amp;&amp; <span class="built_in">chown</span> -R 200 /some/dir/nexus-data</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v /some/dir/nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
-
-<h1 id="访问nexus"><a href="#访问nexus" class="headerlink" title="访问nexus"></a>访问nexus</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://localhost:8081/</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>默认用户是<code>admin</code>，唯一生成的密码可以<code>admin.password</code>在卷内的文件中找到。</li>
-<li>服务在新容器中启动可能需要一些时间（2-3 分钟）。您可以跟踪日志以确定 Nexus 是否准备就绪：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker logs -f nexus</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>更多使用方法请参考：</p>
-<p><a href="https://hub.docker.com/r/sonatype/nexus3">https://hub.docker.com/r/sonatype/nexus3</a></p>
-<p><a href="https://www.sonatype.com/">https://www.sonatype.com/</a></p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker配置HTTP/HTTPS代理</title>
     <url>/fe3539f6.html</url>
     <content><![CDATA[<p>docker使用<code>HTTP_PROXY</code>，<code>HTTPS_PROXY</code>以及<code>NO_PROXY</code>在其启动环境环境变量来配置HTTP或HTTPS代理的行为。不能使用该<code>daemon.json</code>文件配置这些环境变量。</p>
@@ -930,55 +1022,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker安装MySQL</title>
-    <url>/5c6bc735.html</url>
-    <content><![CDATA[<h1 id="Docker安装MySQL"><a href="#Docker安装MySQL" class="headerlink" title="Docker安装MySQL"></a>Docker安装MySQL</h1><p>正式环境中数据库不建议安装在docker中！！！</p>
-<h1 id="拉取MySQL镜像"><a href="#拉取MySQL镜像" class="headerlink" title="拉取MySQL镜像"></a>拉取MySQL镜像</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行本地容器"><a href="#运行本地容器" class="headerlink" title="运行本地容器"></a>运行本地容器</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mysql -v /home/jack/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li><p>-name mysql：为容器指定名称</p>
-</li>
-<li><p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p>
-</li>
-<li><p>-e MYSQL_ROOT_PASSWORD&#x3D;123456：初始化root用户的密码</p>
-</li>
-<li><p>-d 后台运行容器，并返回容器ID；</p>
-</li>
-<li><p>-v 在主机系统上的适当卷上创建数据目录，例如<code>/my/own/datadir</code></p>
-</li>
-</ul>
-<h1 id="安装成功"><a href="#安装成功" class="headerlink" title="安装成功"></a>安装成功</h1><p>通过 docker ps 查看是否安装成功</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-
-<h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
-
-<p>命令说明：</p>
-<ul>
-<li>-i：即使没有附加也保持STDIN 打开</li>
-<li>-t：分配一个伪终端</li>
-</ul>
-<h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<h1 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h1><h5 id="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"><a href="#创建一个新的用户（也可以使用root用户登录，正式环境不推荐）" class="headerlink" title="创建一个新的用户（也可以使用root用户登录，正式环境不推荐）"></a>创建一个新的用户（也可以使用root用户登录，正式环境不推荐）</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">CREATE USER &#x27;jack&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h5 id="添加远程登录用户-1"><a href="#添加远程登录用户-1" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>阿里云docker镜像仓库</title>
     <url>/194825ff.html</url>
     <content><![CDATA[<p>镜像仓库申请地址：<br><a href="https://cr.console.aliyun.com/cn-shanghai/instances/repositories">https://cr.console.aliyun.com/cn-shanghai/instances/repositories</a></p>
@@ -989,21 +1032,6 @@
       </categories>
       <tags>
         <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git跳过代码检查</title>
-    <url>/5c1803c3.html</url>
-    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../images/git/git--no-verify.png"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1029,6 +1057,21 @@
       </tags>
   </entry>
   <entry>
+    <title>git跳过代码检查</title>
+    <url>/5c1803c3.html</url>
+    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../images/git/git--no-verify.png"></p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>eclipse快捷键</title>
     <url>/168fd7a4.html</url>
     <content><![CDATA[<p> 转为大写 </p>
@@ -1045,18 +1088,6 @@
       </categories>
       <tags>
         <tag>eclipse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo关闭Next主题加载效果</title>
-    <url>/a52b693e.html</url>
-    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -1130,19 +1161,6 @@
       </tags>
   </entry>
   <entry>
-    <title>正则密码</title>
-    <url>/ca0ded35.html</url>
-    <content><![CDATA[<h1 id="密码正则表达式"><a href="#密码正则表达式" class="headerlink" title="密码正则表达式"></a>密码正则表达式</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//密码至少包含 数字和英文，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 密码包含 数字,英文,字符中的两种以上，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 至少包含数字跟字母，可以有字符</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&amp;*()]&#123;6,20&#125;$&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>idea</category>
-      </categories>
-      <tags>
-        <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>解决webstrom无法识别@（别名路径）的问题</title>
     <url>/ffcc343e.html</url>
     <content><![CDATA[<p>设置 -&gt; 语言和框架  -&gt;  JavaScript -&gt; Webpack 设置为自动</p>
@@ -1156,14 +1174,28 @@
       </tags>
   </entry>
   <entry>
-    <title>influx_cli的使用</title>
-    <url>/ec24f755.html</url>
-    <content><![CDATA[]]></content>
+    <title>hexo关闭Next主题加载效果</title>
+    <url>/a52b693e.html</url>
+    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
+]]></content>
       <categories>
-        <category>influxDB</category>
+        <category>hexo</category>
       </categories>
       <tags>
-        <tag>influxDB</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正则密码</title>
+    <url>/ca0ded35.html</url>
+    <content><![CDATA[<h1 id="密码正则表达式"><a href="#密码正则表达式" class="headerlink" title="密码正则表达式"></a>密码正则表达式</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//密码至少包含 数字和英文，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 密码包含 数字,英文,字符中的两种以上，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 至少包含数字跟字母，可以有字符</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&amp;*()]&#123;6,20&#125;$&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>idea</category>
+      </categories>
+      <tags>
+        <tag>idea</tag>
       </tags>
   </entry>
   <entry>
@@ -1220,6 +1252,34 @@
       <tags>
         <tag>docker</tag>
         <tag>influxDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用pkg打包nodejs</title>
+    <url>/9b5f2bcc.html</url>
+    <content><![CDATA[<h1 id="安装pkg"><a href="#安装pkg" class="headerlink" title="安装pkg"></a>安装pkg</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g pkg</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pkg</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置入口启动文件"><a href="#配置入口启动文件" class="headerlink" title="配置入口启动文件"></a>配置入口启动文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;bin&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg . -t node14-linux-x64 --out-path=dist/</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>.  打包的文件 这里指当前目录下的所有</p>
+<p>-t  用于制定平台和node版本，不指定时默认为3个平台，以及package.json中的node版本配置为准</p>
+<p>–out-path   打包文件输出目录</p>
+</blockquote>
+<h1 id="常见文件及解决方法"><a href="#常见文件及解决方法" class="headerlink" title="常见文件及解决方法"></a>常见文件及解决方法</h1><h2 id="require引入外部文件"><a href="#require引入外部文件" class="headerlink" title="require引入外部文件"></a>require引入外部文件</h2><p>使用require时需要使用动态地址，比如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> add = <span class="built_in">require</span>(process.<span class="title function_">cwd</span>() + <span class="string">&#x27;/add.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1380,9 +1440,63 @@
       </tags>
   </entry>
   <entry>
+    <title>influx_cli的使用</title>
+    <url>/ec24f755.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>influxDB</category>
+      </categories>
+      <tags>
+        <tag>influxDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Deployment配置文件详解</title>
     <url>/876fb885.html</url>
     <content><![CDATA[<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span>       <span class="comment">#必选，版本号，例如v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span>       <span class="comment">#必选，Pod</span></span><br><span class="line"><span class="string">metadata:</span>       <span class="comment">#必选，元数据</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">string</span>       <span class="comment">#必选，Pod名称</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">string</span>    <span class="comment">#必选，Pod所属的命名空间</span></span><br><span class="line">  <span class="string">labels:</span>      <span class="comment">#自定义标签</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#自定义标签名字</span></span><br><span class="line">  <span class="string">annotations:</span>       <span class="comment">#自定义注释列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line"><span class="string">spec:</span>         <span class="comment">#必选，Pod中容器的详细定义</span></span><br><span class="line">  <span class="string">containers:</span>      <span class="comment">#必选，Pod中容器列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#必选，容器名称</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">string</span>    <span class="comment">#必选，容器的镜像名称</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> [<span class="string">Always</span> <span class="string">|</span> <span class="string">Never</span> <span class="string">|</span> <span class="string">IfNotPresent</span>] <span class="comment">#获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">string</span>]    <span class="comment">#容器的启动命令列表，如不指定，使用打包时使用的启动命令</span></span><br><span class="line">    <span class="attr">args:</span> [<span class="string">string</span>]     <span class="comment">#容器的启动命令参数列表</span></span><br><span class="line">    <span class="attr">workingDir:</span> <span class="string">string</span>     <span class="comment">#容器的工作目录</span></span><br><span class="line">    <span class="string">volumeMounts:</span>    <span class="comment">#挂载到容器内部的存储卷配置</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span></span><br><span class="line">      <span class="attr">mountPath:</span> <span class="string">string</span>    <span class="comment">#存储卷在容器内mount的绝对路径，应少于512字符</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="string">boolean</span>    <span class="comment">#是否为只读模式</span></span><br><span class="line">    <span class="string">ports:</span>       <span class="comment">#需要暴露的端口库号列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#端口号名称</span></span><br><span class="line">      <span class="attr">containerPort:</span> <span class="string">int</span>   <span class="comment">#容器需要监听的端口号</span></span><br><span class="line">      <span class="attr">hostPort:</span> <span class="string">int</span>    <span class="comment">#容器所在主机需要监听的端口号，默认与Container相同</span></span><br><span class="line">      <span class="attr">protocol:</span> <span class="string">string</span>     <span class="comment">#端口协议，支持TCP和UDP，默认TCP</span></span><br><span class="line">    <span class="string">env:</span>       <span class="comment">#容器运行前需设置的环境变量列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#环境变量名称</span></span><br><span class="line">      <span class="attr">value:</span> <span class="string">string</span>    <span class="comment">#环境变量的值</span></span><br><span class="line">    <span class="string">resources:</span>       <span class="comment">#资源限制和请求的设置</span></span><br><span class="line">      <span class="string">limits:</span>      <span class="comment">#资源限制的设置</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">string</span>    <span class="comment">#Cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span></span><br><span class="line">        <span class="attr">memory:</span> <span class="string">string</span>     <span class="comment">#内存限制，单位可以为Mib/Gib，将用于docker run --memory参数</span></span><br><span class="line">      <span class="string">requests:</span>      <span class="comment">#资源请求的设置</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">string</span>    <span class="comment">#Cpu请求，容器启动的初始可用数量</span></span><br><span class="line">        <span class="attr">memory:</span> <span class="string">string</span>     <span class="comment">#内存清楚，容器启动的初始可用数量</span></span><br><span class="line">    <span class="string">livenessProbe:</span>     <span class="comment">#对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可</span></span><br><span class="line">      <span class="string">exec:</span>      <span class="comment">#对Pod容器内检查方式设置为exec方式</span></span><br><span class="line">        <span class="attr">command:</span> [<span class="string">string</span>]  <span class="comment">#exec方式需要制定的命令或脚本</span></span><br><span class="line">      <span class="string">httpGet:</span>       <span class="comment">#对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">port:</span> <span class="string">number</span></span><br><span class="line">        <span class="attr">host:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">HttpHeaders:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">string</span></span><br><span class="line">      <span class="string">tcpSocket:</span>     <span class="comment">#对Pod内个容器健康检查方式设置为tcpSocket方式</span></span><br><span class="line">         <span class="attr">port:</span> <span class="string">number</span></span><br><span class="line">       <span class="attr">initialDelaySeconds:</span> <span class="number">0</span>  <span class="comment">#容器启动完成后首次探测的时间，单位为秒</span></span><br><span class="line">       <span class="attr">timeoutSeconds:</span> <span class="number">0</span>   <span class="comment">#对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span></span><br><span class="line">       <span class="attr">periodSeconds:</span> <span class="number">0</span>    <span class="comment">#对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span></span><br><span class="line">       <span class="attr">successThreshold:</span> <span class="number">0</span></span><br><span class="line">       <span class="attr">failureThreshold:</span> <span class="number">0</span></span><br><span class="line">       <span class="attr">securityContext:</span></span><br><span class="line">         <span class="string">privileged:false</span></span><br><span class="line">    <span class="attr">restartPolicy:</span> [<span class="string">Always</span> <span class="string">|</span> <span class="string">Never</span> <span class="string">|</span> <span class="string">OnFailure</span>]<span class="comment">#Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod</span></span><br><span class="line">    <span class="attr">nodeSelector:</span> <span class="string">obeject</span>  <span class="comment">#设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定</span></span><br><span class="line">    <span class="string">imagePullSecrets:</span>    <span class="comment">#Pull镜像时使用的secret名称，以key：secretkey格式指定</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line">    <span class="string">hostNetwork:false</span>      <span class="comment">#是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span></span><br><span class="line">    <span class="string">volumes:</span>       <span class="comment">#在该pod上定义共享存储卷列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#共享存储卷名称 （volumes类型有很多种）</span></span><br><span class="line">      <span class="attr">emptyDir:</span> &#123;&#125;     <span class="comment">#类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span></span><br><span class="line">      <span class="attr">hostPath:</span> <span class="string">string</span>     <span class="comment">#类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">string</span>     <span class="comment">#Pod所在宿主机的目录，将被用于同期中mount的目录</span></span><br><span class="line">      <span class="string">secret:</span>      <span class="comment">#类型为secret的存储卷，挂载集群与定义的secre对象到容器内部</span></span><br><span class="line">        <span class="attr">scretname:</span> <span class="string">string</span>  </span><br><span class="line">        <span class="string">items:</span>     </span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">string</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">string</span></span><br><span class="line">      <span class="string">configMap:</span>     <span class="comment">#类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">items:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">string</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">string</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>k8s部署MySQL</title>
+    <url>/89179d5e.html</url>
+    <content><![CDATA[<h2 id="准备pv"><a href="#准备pv" class="headerlink" title="准备pv"></a>准备pv</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mysql-pv</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">10Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/srv/mysql</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm repo add bitnami https://charts.bitnami.com/bitnami</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm install my-release bitnami/mysql</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>NAME: my-release<br>LAST DEPLOYED: Wed Jun  9 23:24:12 2021<br>NAMESPACE: default<br>STATUS: deployed<br>REVISION: 1<br>TEST SUITE: None<br>NOTES:<br>** Please be patient while the chart is being deployed **</p>
+<p>Tip:</p>
+<p>  Watch the deployment status using the command: kubectl get pods -w –namespace default</p>
+<p>Services:</p>
+<p>  echo Primary: my-release-mysql.default.svc.cluster.local:3306</p>
+<p>Administrator credentials:</p>
+<p>  echo Username: root<br>  echo Password : $(kubectl get secret –namespace default my-release-mysql -o jsonpath&#x3D;”{.data.mysql-root-password}” | base64 –decode)</p>
+<p>To connect to your database:</p>
+<ol>
+<li><p>Run a pod that you can use as a client:</p>
+<p> kubectl run my-release-mysql-client –rm –tty -i –restart&#x3D;’Never’ –image  docker.io&#x2F;bitnami&#x2F;mysql:8.0.25-debian-10-r16 –namespace default –command – bash</p>
+</li>
+<li><p>To connect to primary service (read&#x2F;write):</p>
+<p> mysql -h my-release-mysql.default.svc.cluster.local -uroot -p my_database</p>
+</li>
+</ol>
+<p>To upgrade this helm chart:</p>
+<ol>
+<li><p>Obtain the password as described on the ‘Administrator credentials’ section and set the ‘root.password’ parameter as shown below:</p>
+<p> ROOT_PASSWORD&#x3D;$(kubectl get secret –namespace default my-release-mysql -o jsonpath&#x3D;”{.data.mysql-root-password}” | base64 –decode)<br> helm upgrade –namespace default my-release bitnami&#x2F;mysql –set auth.rootPassword&#x3D;$ROOT_PASSWORD</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm delete my-release</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1452,49 +1566,6 @@
 <li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
 </ul>
 <h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>k8s部署MySQL</title>
-    <url>/89179d5e.html</url>
-    <content><![CDATA[<h2 id="准备pv"><a href="#准备pv" class="headerlink" title="准备pv"></a>准备pv</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mysql-pv</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">10Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/srv/mysql</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm repo add bitnami https://charts.bitnami.com/bitnami</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm install my-release bitnami/mysql</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>NAME: my-release<br>LAST DEPLOYED: Wed Jun  9 23:24:12 2021<br>NAMESPACE: default<br>STATUS: deployed<br>REVISION: 1<br>TEST SUITE: None<br>NOTES:<br>** Please be patient while the chart is being deployed **</p>
-<p>Tip:</p>
-<p>  Watch the deployment status using the command: kubectl get pods -w –namespace default</p>
-<p>Services:</p>
-<p>  echo Primary: my-release-mysql.default.svc.cluster.local:3306</p>
-<p>Administrator credentials:</p>
-<p>  echo Username: root<br>  echo Password : $(kubectl get secret –namespace default my-release-mysql -o jsonpath&#x3D;”{.data.mysql-root-password}” | base64 –decode)</p>
-<p>To connect to your database:</p>
-<ol>
-<li><p>Run a pod that you can use as a client:</p>
-<p> kubectl run my-release-mysql-client –rm –tty -i –restart&#x3D;’Never’ –image  docker.io&#x2F;bitnami&#x2F;mysql:8.0.25-debian-10-r16 –namespace default –command – bash</p>
-</li>
-<li><p>To connect to primary service (read&#x2F;write):</p>
-<p> mysql -h my-release-mysql.default.svc.cluster.local -uroot -p my_database</p>
-</li>
-</ol>
-<p>To upgrade this helm chart:</p>
-<ol>
-<li><p>Obtain the password as described on the ‘Administrator credentials’ section and set the ‘root.password’ parameter as shown below:</p>
-<p> ROOT_PASSWORD&#x3D;$(kubectl get secret –namespace default my-release-mysql -o jsonpath&#x3D;”{.data.mysql-root-password}” | base64 –decode)<br> helm upgrade –namespace default my-release bitnami&#x2F;mysql –set auth.rootPassword&#x3D;$ROOT_PASSWORD</p>
-</li>
-</ol>
-</blockquote>
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">helm delete my-release</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1627,31 +1698,43 @@
       </tags>
   </entry>
   <entry>
-    <title>使用pkg打包nodejs</title>
-    <url>/9b5f2bcc.html</url>
-    <content><![CDATA[<h1 id="安装pkg"><a href="#安装pkg" class="headerlink" title="安装pkg"></a>安装pkg</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g pkg</span><br></pre></td></tr></table></figure>
+    <title>docker搭建maven私服(nexus)</title>
+    <url>/f81dce24.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull sonatype/nexus3:latest</span><br></pre></td></tr></table></figure>
 
-<p>或</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pkg</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus sonatype/nexus3</span><br></pre></td></tr></table></figure>
 
-<h1 id="配置入口启动文件"><a href="#配置入口启动文件" class="headerlink" title="配置入口启动文件"></a>配置入口启动文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;bin&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><p>停止时，请确保有足够的时间让数据库完全关闭。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stop --time=120 &lt;CONTAINER_NAME&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg . -t node14-linux-x64 --out-path=dist/</span><br></pre></td></tr></table></figure>
+<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><h2 id="使用-docker-卷"><a href="#使用-docker-卷" class="headerlink" title="使用 docker 卷"></a><em>使用 docker 卷</em></h2><p>由于 docker 卷是持久的，因此可以专门为此目的创建一个卷。这是推荐的方法。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker volume create --name nexus-data</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
+
+<h2 id="挂载一个主机目录作为卷"><a href="#挂载一个主机目录作为卷" class="headerlink" title="挂载一个主机目录作为卷"></a><em>挂载一个主机目录作为卷</em></h2><p>这不是可移植的，因为它依赖于在主机上具有正确权限的现有目录。但是，在需要将此卷分配给某些特定底层存储的某些情况下，它可能很有用。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /some/dir/nexus-data &amp;&amp; <span class="built_in">chown</span> -R 200 /some/dir/nexus-data</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v /some/dir/nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
+
+<h1 id="访问nexus"><a href="#访问nexus" class="headerlink" title="访问nexus"></a>访问nexus</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://localhost:8081/</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>.  打包的文件 这里指当前目录下的所有</p>
-<p>-t  用于制定平台和node版本，不指定时默认为3个平台，以及package.json中的node版本配置为准</p>
-<p>–out-path   打包文件输出目录</p>
+<ul>
+<li>默认用户是<code>admin</code>，唯一生成的密码可以<code>admin.password</code>在卷内的文件中找到。</li>
+<li>服务在新容器中启动可能需要一些时间（2-3 分钟）。您可以跟踪日志以确定 Nexus 是否准备就绪：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker logs -f nexus</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h1 id="常见文件及解决方法"><a href="#常见文件及解决方法" class="headerlink" title="常见文件及解决方法"></a>常见文件及解决方法</h1><h2 id="require引入外部文件"><a href="#require引入外部文件" class="headerlink" title="require引入外部文件"></a>require引入外部文件</h2><p>使用require时需要使用动态地址，比如：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> add = <span class="built_in">require</span>(process.<span class="title function_">cwd</span>() + <span class="string">&#x27;/add.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>更多使用方法请参考：</p>
+<p><a href="https://hub.docker.com/r/sonatype/nexus3">https://hub.docker.com/r/sonatype/nexus3</a></p>
+<p><a href="https://www.sonatype.com/">https://www.sonatype.com/</a></p>
 ]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>docker</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -1892,59 +1975,6 @@
       </tags>
   </entry>
   <entry>
-    <title>（四）安装使用MetricsServer</title>
-    <url>/d36a8b1c.html</url>
-    <content><![CDATA[<h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
-<ul>
-<li>Kubernetes Metrics Server 是 Cluster 的核心监控数据的聚合器，kubeadm 默认是不部署的。</li>
-<li>Metrics Server 供 Dashboard 等其他组件使用，是一个扩展的 APIServer，依赖于 API Aggregator。所以，在安装 Metrics Server 之前需要先在 kube-apiserver 中开启 API Aggregator。</li>
-<li>Metrics API 只可以查询当前的度量数据，并不保存历史数据</li>
-<li>Metrics API URI 为 <code>/apis/metrics.k8s.io/</code>，在 <a href="https://github.com/kubernetes/metrics">k8s.io&#x2F;metrics</a> 维护</li>
-<li>必须部署 <code>metrics-server</code> 才能使用该 API，metrics-server 通过调用 Kubelet Summary API 获取数据</li>
-</ul>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>1、检查 API Server 是否开启了 Aggregator Routing：查看 API Server 是否具有 –enable-aggregator-routing&#x3D;true 选项</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep apiserver</span><br></pre></td></tr></table></figure>
-
-<p>2、修改每个 API Server 的 kube-apiserver.yaml 配置开启 Aggregator Routing：修改 manifests 配置后 API Server 会自动重启生效。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/kubernetes/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span><span class="string">:6443</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">component:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--advertise-address=192.168.200.3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--allow-privileged=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--authorization-mode=Node,RBAC</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--client-ca-file=/etc/kubernetes/pki/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-admission-plugins=NodeRestriction</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-bootstrap-token-auth=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-aggregator-routing=true</span>            <span class="comment"># 添加本行</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-servers=https://127.0.0.1:2379</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--insecure-port=0</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-allowed-names=front-proxy-client</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-extra-headers-prefix=X-Remote-Extra-</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-group-headers=X-Remote-Group</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-username-headers=X-Remote-User</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--secure-port=6443</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-key-file=/etc/kubernetes/pki/sa.pub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-cluster-ip-range=10.96.0.0/12</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-cert-file=/etc/kubernetes/pki/apiserver.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-private-key-file=/etc/kubernetes/pki/apiserver.key</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">k8s.gcr.io/kube-apiserver:v1.18.2</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">8</span></span><br><span class="line">      <span class="attr">httpGet:</span></span><br><span class="line">        <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">/healthz</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">6443</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">HTTPS</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">15</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">15</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">requests:</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">250m</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">system-cluster-critical</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="部署-metrics-server"><a href="#部署-metrics-server" class="headerlink" title="部署 metrics-server"></a>部署 metrics-server</h2><blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>1、下载部署文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>附件中提供了修改好的components.yaml文件，文件名：metrics-server-components.yaml</p>
-</blockquote>
-<p>2、修改配置（主要修改镜像地址）</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP</span>  <span class="comment"># 删掉 ExternalIP,Hostname</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-insecure-tls</span> <span class="comment"># 添加该启动参数</span></span><br><span class="line"><span class="attr">image:</span> <span class="string">rancher/metrics-server:v0.4.1</span>   <span class="string">--根据自己的需要修改</span></span><br></pre></td></tr></table></figure>
-
-<p>3、部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f components.yaml</span><br></pre></td></tr></table></figure>
-
-<p>4、查看运行情况</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl -n kube-system get pods -l k8s-app=metrics-server</span><br></pre></td></tr></table></figure>
-
-<p>5、检查 API Server 是否可以连通 Metrics Server</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl describe svc metrics-server -n kube-system</span></span><br><span class="line">Name:              metrics-server</span><br><span class="line">Namespace:         kube-system</span><br><span class="line">Labels:            kubernetes.io/cluster-service=<span class="literal">true</span></span><br><span class="line">                   kubernetes.io/name=Metrics-server</span><br><span class="line">Annotations:       Selector:  k8s-app=metrics-server</span><br><span class="line">Type:              ClusterIP</span><br><span class="line">IP:                10.107.86.150</span><br><span class="line">Port:              &lt;<span class="built_in">unset</span>&gt;  443/TCP</span><br><span class="line">TargetPort:        main-port/TCP</span><br><span class="line">Endpoints:         10.244.2.20:4443</span><br><span class="line">Session Affinity:  None</span><br><span class="line">Events:            &lt;none&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他几个节点ping一下Endpoints的地址</span></span><br><span class="line">[root@master3 ~]<span class="comment"># ping 10.244.2.20</span></span><br><span class="line">PING 10.244.2.20 (10.244.2.20) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=1 ttl=64 time=0.122 ms</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=2 ttl=64 time=0.032 ms</span><br></pre></td></tr></table></figure>
-
-<p>6、执行以下命令，检查节点占用性能情况。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl top nodes</span></span><br><span class="line">NAME      CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   </span><br><span class="line">master1   223m         5%     1433Mi          52%       </span><br><span class="line">master2   148m         3%     972Mi           35%       </span><br><span class="line">master3   183m         4%     1123Mi          41%       </span><br><span class="line">node1     225m         5%     1389Mi          50%      </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@master1 ~]<span class="comment"># kubectl top pods</span></span><br><span class="line">NAME                                      CPU(cores)   MEMORY(bytes)   </span><br><span class="line">details-v1-6fc55d65c9-l97cs               4m           36Mi            </span><br><span class="line">nfs-client-provisioner-6d4469b5b5-ndg5x   4m           20Mi            </span><br><span class="line">productpage-v1-9cf6c76b5-hc2nr            10m          71Mi            </span><br><span class="line">ratings-v1-6f855c5fff-v9ht2               3m           28Mi            </span><br><span class="line">reviews-v1-697f45b7dd-w9fgc               7m           117Mi           </span><br><span class="line">reviews-v2-8c85b467b-jgx6w                6m           113Mi           </span><br><span class="line">reviews-v3-76ccf79776-74vz6               5m           117Mi    </span><br></pre></td></tr></table></figure>
-
-<p>参考文档：<a href="https://www.cnblogs.com/lfl17718347843/p/14283796.html">https://www.cnblogs.com/lfl17718347843/p/14283796.html</a></p>
-]]></content>
-      <categories>
-        <category>k8s专题</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-        <tag>k8s专题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>（二）安装Istio</title>
     <url>/3e2a19d2.html</url>
     <content><![CDATA[<h1 id="安装istio"><a href="#安装istio" class="headerlink" title="安装istio"></a>安装istio</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Istio 解决了开发人员和运维人员所面临的从单体应用向分布式微服务架构转变的挑战。了解它是如何做到这一点的可以让我们更详细地理解 Istio 的服务网格。</p>
@@ -2044,6 +2074,59 @@
 </ol>
 <h2 id="开启kiali外部直接访问"><a href="#开启kiali外部直接访问" class="headerlink" title="开启kiali外部直接访问"></a>开启kiali外部直接访问</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl patch svc -n istio-system kiali -p <span class="string">&#x27;&#123;&quot;spec&quot;: &#123;&quot;type&quot;: &quot;NodePort&quot;&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>k8s专题</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+        <tag>k8s专题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（四）安装使用MetricsServer</title>
+    <url>/d36a8b1c.html</url>
+    <content><![CDATA[<h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
+<ul>
+<li>Kubernetes Metrics Server 是 Cluster 的核心监控数据的聚合器，kubeadm 默认是不部署的。</li>
+<li>Metrics Server 供 Dashboard 等其他组件使用，是一个扩展的 APIServer，依赖于 API Aggregator。所以，在安装 Metrics Server 之前需要先在 kube-apiserver 中开启 API Aggregator。</li>
+<li>Metrics API 只可以查询当前的度量数据，并不保存历史数据</li>
+<li>Metrics API URI 为 <code>/apis/metrics.k8s.io/</code>，在 <a href="https://github.com/kubernetes/metrics">k8s.io&#x2F;metrics</a> 维护</li>
+<li>必须部署 <code>metrics-server</code> 才能使用该 API，metrics-server 通过调用 Kubelet Summary API 获取数据</li>
+</ul>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>1、检查 API Server 是否开启了 Aggregator Routing：查看 API Server 是否具有 –enable-aggregator-routing&#x3D;true 选项</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep apiserver</span><br></pre></td></tr></table></figure>
+
+<p>2、修改每个 API Server 的 kube-apiserver.yaml 配置开启 Aggregator Routing：修改 manifests 配置后 API Server 会自动重启生效。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/kubernetes/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span><span class="string">:6443</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">component:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--advertise-address=192.168.200.3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--allow-privileged=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--authorization-mode=Node,RBAC</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--client-ca-file=/etc/kubernetes/pki/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-admission-plugins=NodeRestriction</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-bootstrap-token-auth=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-aggregator-routing=true</span>            <span class="comment"># 添加本行</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-servers=https://127.0.0.1:2379</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--insecure-port=0</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-allowed-names=front-proxy-client</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-extra-headers-prefix=X-Remote-Extra-</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-group-headers=X-Remote-Group</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-username-headers=X-Remote-User</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--secure-port=6443</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-key-file=/etc/kubernetes/pki/sa.pub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-cluster-ip-range=10.96.0.0/12</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-cert-file=/etc/kubernetes/pki/apiserver.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-private-key-file=/etc/kubernetes/pki/apiserver.key</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">k8s.gcr.io/kube-apiserver:v1.18.2</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">8</span></span><br><span class="line">      <span class="attr">httpGet:</span></span><br><span class="line">        <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">/healthz</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">6443</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">HTTPS</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">15</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">15</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">requests:</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">250m</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">system-cluster-critical</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="部署-metrics-server"><a href="#部署-metrics-server" class="headerlink" title="部署 metrics-server"></a>部署 metrics-server</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>1、下载部署文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>附件中提供了修改好的components.yaml文件，文件名：metrics-server-components.yaml</p>
+</blockquote>
+<p>2、修改配置（主要修改镜像地址）</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP</span>  <span class="comment"># 删掉 ExternalIP,Hostname</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-insecure-tls</span> <span class="comment"># 添加该启动参数</span></span><br><span class="line"><span class="attr">image:</span> <span class="string">rancher/metrics-server:v0.4.1</span>   <span class="string">--根据自己的需要修改</span></span><br></pre></td></tr></table></figure>
+
+<p>3、部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f components.yaml</span><br></pre></td></tr></table></figure>
+
+<p>4、查看运行情况</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl -n kube-system get pods -l k8s-app=metrics-server</span><br></pre></td></tr></table></figure>
+
+<p>5、检查 API Server 是否可以连通 Metrics Server</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl describe svc metrics-server -n kube-system</span></span><br><span class="line">Name:              metrics-server</span><br><span class="line">Namespace:         kube-system</span><br><span class="line">Labels:            kubernetes.io/cluster-service=<span class="literal">true</span></span><br><span class="line">                   kubernetes.io/name=Metrics-server</span><br><span class="line">Annotations:       Selector:  k8s-app=metrics-server</span><br><span class="line">Type:              ClusterIP</span><br><span class="line">IP:                10.107.86.150</span><br><span class="line">Port:              &lt;<span class="built_in">unset</span>&gt;  443/TCP</span><br><span class="line">TargetPort:        main-port/TCP</span><br><span class="line">Endpoints:         10.244.2.20:4443</span><br><span class="line">Session Affinity:  None</span><br><span class="line">Events:            &lt;none&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他几个节点ping一下Endpoints的地址</span></span><br><span class="line">[root@master3 ~]<span class="comment"># ping 10.244.2.20</span></span><br><span class="line">PING 10.244.2.20 (10.244.2.20) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=1 ttl=64 time=0.122 ms</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=2 ttl=64 time=0.032 ms</span><br></pre></td></tr></table></figure>
+
+<p>6、执行以下命令，检查节点占用性能情况。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl top nodes</span></span><br><span class="line">NAME      CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   </span><br><span class="line">master1   223m         5%     1433Mi          52%       </span><br><span class="line">master2   148m         3%     972Mi           35%       </span><br><span class="line">master3   183m         4%     1123Mi          41%       </span><br><span class="line">node1     225m         5%     1389Mi          50%      </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@master1 ~]<span class="comment"># kubectl top pods</span></span><br><span class="line">NAME                                      CPU(cores)   MEMORY(bytes)   </span><br><span class="line">details-v1-6fc55d65c9-l97cs               4m           36Mi            </span><br><span class="line">nfs-client-provisioner-6d4469b5b5-ndg5x   4m           20Mi            </span><br><span class="line">productpage-v1-9cf6c76b5-hc2nr            10m          71Mi            </span><br><span class="line">ratings-v1-6f855c5fff-v9ht2               3m           28Mi            </span><br><span class="line">reviews-v1-697f45b7dd-w9fgc               7m           117Mi           </span><br><span class="line">reviews-v2-8c85b467b-jgx6w                6m           113Mi           </span><br><span class="line">reviews-v3-76ccf79776-74vz6               5m           117Mi    </span><br></pre></td></tr></table></figure>
+
+<p>参考文档：<a href="https://www.cnblogs.com/lfl17718347843/p/14283796.html">https://www.cnblogs.com/lfl17718347843/p/14283796.html</a></p>
 ]]></content>
       <categories>
         <category>k8s专题</category>
@@ -2178,53 +2261,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu安装helm</title>
-    <url>/bc01c4d5.html</url>
-    <content><![CDATA[<ol>
-<li><p>官方文档</p>
-<blockquote>
-<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
-</blockquote>
-</li>
-<li><p>Ubuntu安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ubuntu安装FTP服务器</title>
-    <url>/8d8c340b.html</url>
-    <content><![CDATA[<h4 id="安装FTP服务器"><a href="#安装FTP服务器" class="headerlink" title="安装FTP服务器"></a>安装FTP服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vsftpd</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="解决文件不能上传问题"><a href="#解决文件不能上传问题" class="headerlink" title="解决文件不能上传问题"></a>解决文件不能上传问题</h4><ol>
-<li>打开配置文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>根据需要启用下面配置</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 允许用户上传数据</span></span><br><span class="line">write_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有上传数据的功能</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有建立目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>保存并退出，然后重启服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service vsftpd restart</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ubuntu使用国内源</title>
     <url>/dfbf49be.html</url>
     <content><![CDATA[<p>参考：<a href="http://mirrors.ustc.edu.cn/help/ubuntu.html">http://mirrors.ustc.edu.cn/help/ubuntu.html</a></p>
@@ -2246,41 +2282,17 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu搭建vue开发环境</title>
-    <url>/a18baf77.html</url>
-    <content><![CDATA[<h2 id="1-更新软件源"><a href="#1-更新软件源" class="headerlink" title="1. 更新软件源"></a>1. 更新软件源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2. 安装nodejs"></a>2. 安装nodejs</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install nodejs</span><br></pre></td></tr></table></figure>
-
-<p>查看版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nodejs -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-安装npm"><a href="#3-安装npm" class="headerlink" title="3. 安装npm"></a>3. 安装npm</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
-
-<p>查看版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-安装cnpm（淘宝npm镜像）"><a href="#4-安装cnpm（淘宝npm镜像）" class="headerlink" title="4. 安装cnpm（淘宝npm镜像）"></a>4. 安装cnpm（淘宝npm镜像）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-
-<p>查看版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-vue脚手架安装"><a href="#5-vue脚手架安装" class="headerlink" title="5. vue脚手架安装"></a>5. vue脚手架安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo cnpm install -g vue-cli</span><br></pre></td></tr></table></figure>
-
-<p>查看版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue -V</span><br></pre></td></tr></table></figure>
-
+    <title>ubuntu安装helm</title>
+    <url>/bc01c4d5.html</url>
+    <content><![CDATA[<ol>
+<li><p>官方文档</p>
 <blockquote>
-<p>备选安装</p>
+<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
 </blockquote>
-<h2 id="安装yarn"><a href="#安装yarn" class="headerlink" title="安装yarn"></a>安装yarn</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/yarn.list</span><br></pre></td></tr></table></figure>
-
-<p>安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt install yarn</span><br></pre></td></tr></table></figure>
-
-<p>查看版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn --version</span><br></pre></td></tr></table></figure>
-
+</li>
+<li><p>Ubuntu安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -2355,6 +2367,33 @@
       </tags>
   </entry>
   <entry>
+    <title>ubuntu安装FTP服务器</title>
+    <url>/8d8c340b.html</url>
+    <content><![CDATA[<h4 id="安装FTP服务器"><a href="#安装FTP服务器" class="headerlink" title="安装FTP服务器"></a>安装FTP服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vsftpd</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="解决文件不能上传问题"><a href="#解决文件不能上传问题" class="headerlink" title="解决文件不能上传问题"></a>解决文件不能上传问题</h4><ol>
+<li>打开配置文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>根据需要启用下面配置</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 允许用户上传数据</span></span><br><span class="line">write_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有上传数据的功能</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有建立目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>保存并退出，然后重启服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service vsftpd restart</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ubuntu设置开启自启</title>
     <url>/f8f6cca9.html</url>
     <content><![CDATA[<p><strong>注意：</strong></p>
@@ -2388,6 +2427,50 @@
 <p>看到这行字，说明添加自启动脚本成功</p>
 </blockquote>
 <p>如果看到如上的内容，就说明已经配置成功了，然后你可以进一步修改你的 <code>rc.local</code> 中的自启动脚本改成你所想要的启动脚本。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu搭建vue开发环境</title>
+    <url>/a18baf77.html</url>
+    <content><![CDATA[<h2 id="1-更新软件源"><a href="#1-更新软件源" class="headerlink" title="1. 更新软件源"></a>1. 更新软件源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2. 安装nodejs"></a>2. 安装nodejs</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install nodejs</span><br></pre></td></tr></table></figure>
+
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nodejs -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-安装npm"><a href="#3-安装npm" class="headerlink" title="3. 安装npm"></a>3. 安装npm</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install npm</span><br></pre></td></tr></table></figure>
+
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-安装cnpm（淘宝npm镜像）"><a href="#4-安装cnpm（淘宝npm镜像）" class="headerlink" title="4. 安装cnpm（淘宝npm镜像）"></a>4. 安装cnpm（淘宝npm镜像）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-vue脚手架安装"><a href="#5-vue脚手架安装" class="headerlink" title="5. vue脚手架安装"></a>5. vue脚手架安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo cnpm install -g vue-cli</span><br></pre></td></tr></table></figure>
+
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue -V</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>备选安装</p>
+</blockquote>
+<h2 id="安装yarn"><a href="#安装yarn" class="headerlink" title="安装yarn"></a>安装yarn</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/yarn.list</span><br></pre></td></tr></table></figure>
+
+<p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt install yarn</span><br></pre></td></tr></table></figure>
+
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn --version</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>linux</category>
@@ -2685,6 +2768,19 @@
       </tags>
   </entry>
   <entry>
+    <title>mysql统计数据库所有数据量</title>
+    <url>/18a68ee.html</url>
+    <content><![CDATA[<h2 id="mysql统计一个数据库所有数据量"><a href="#mysql统计一个数据库所有数据量" class="headerlink" title="mysql统计一个数据库所有数据量"></a>mysql统计一个数据库所有数据量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	table_schema AS &#x27;数据库&#x27;,</span><br><span class="line">	table_name AS &#x27;表名&#x27;,</span><br><span class="line">	table_rows AS &#x27;记录数&#x27;,</span><br><span class="line">	TRUNCATE ( data_length / 1024 / 1024, 2 ) AS &#x27;数据容量(mb)&#x27;,</span><br><span class="line">	TRUNCATE ( index_length / 1024 / 1024, 2 ) AS &#x27;索引容量(mb)&#x27;,</span><br><span class="line">	SUM(table_rows) AS &#x27;总记录数&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( data_length / 1024 / 1024, 2 )) AS &#x27;总数据容量(mb)&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( index_length / 1024 / 1024, 2 )) AS &#x27;总索引容量(mb)&#x27; </span><br><span class="line">FROM</span><br><span class="line">	information_schema.TABLES </span><br><span class="line">WHERE</span><br><span class="line">	table_schema = &#x27;数据库名称&#x27; </span><br><span class="line">ORDER BY</span><br><span class="line">	table_rows DESC,</span><br><span class="line">	index_length DESC;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql常见文件解决方法</title>
     <url>/69d0e62c.html</url>
     <content><![CDATA[<h1 id="解决MySQL8-0不能使用GROUP-BY的问题"><a href="#解决MySQL8-0不能使用GROUP-BY的问题" class="headerlink" title="解决MySQL8.0不能使用GROUP BY的问题"></a>解决MySQL8.0不能使用GROUP BY的问题</h1><p>问题描述：</p>
@@ -2744,19 +2840,6 @@
 </li>
 <li></li>
 </ol>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql统计数据库所有数据量</title>
-    <url>/18a68ee.html</url>
-    <content><![CDATA[<h2 id="mysql统计一个数据库所有数据量"><a href="#mysql统计一个数据库所有数据量" class="headerlink" title="mysql统计一个数据库所有数据量"></a>mysql统计一个数据库所有数据量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	table_schema AS &#x27;数据库&#x27;,</span><br><span class="line">	table_name AS &#x27;表名&#x27;,</span><br><span class="line">	table_rows AS &#x27;记录数&#x27;,</span><br><span class="line">	TRUNCATE ( data_length / 1024 / 1024, 2 ) AS &#x27;数据容量(mb)&#x27;,</span><br><span class="line">	TRUNCATE ( index_length / 1024 / 1024, 2 ) AS &#x27;索引容量(mb)&#x27;,</span><br><span class="line">	SUM(table_rows) AS &#x27;总记录数&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( data_length / 1024 / 1024, 2 )) AS &#x27;总数据容量(mb)&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( index_length / 1024 / 1024, 2 )) AS &#x27;总索引容量(mb)&#x27; </span><br><span class="line">FROM</span><br><span class="line">	information_schema.TABLES </span><br><span class="line">WHERE</span><br><span class="line">	table_schema = &#x27;数据库名称&#x27; </span><br><span class="line">ORDER BY</span><br><span class="line">	table_rows DESC,</span><br><span class="line">	index_length DESC;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>mysql</category>
@@ -3077,18 +3160,6 @@
       </tags>
   </entry>
   <entry>
-    <title>postman汉化</title>
-    <url>/4158faf6.html</url>
-    <content><![CDATA[<p><a href="https://github.com/hlmd/Postman-cn">https://github.com/hlmd/Postman-cn</a></p>
-]]></content>
-      <categories>
-        <category>工具箱</category>
-      </categories>
-      <tags>
-        <tag>工具箱</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>开启网站代码复制脚本</title>
     <url>/b97d5e96.html</url>
     <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">javascript</span>:<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">contentEditable</span>=<span class="string">&#x27;true&#x27;</span>;<span class="variable language_">document</span>.<span class="property">designMode</span>=<span class="string">&#x27;on&#x27;</span>; <span class="keyword">void</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
@@ -3120,6 +3191,18 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+        <tag>工具箱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>postman汉化</title>
+    <url>/4158faf6.html</url>
+    <content><![CDATA[<p><a href="https://github.com/hlmd/Postman-cn">https://github.com/hlmd/Postman-cn</a></p>
+]]></content>
+      <categories>
+        <category>工具箱</category>
+      </categories>
+      <tags>
         <tag>工具箱</tag>
       </tags>
   </entry>
