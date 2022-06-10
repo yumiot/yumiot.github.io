@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C调用另一个.c文件的函数</title>
-    <url>/e9a0e41a.html</url>
-    <content><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>c语音的模块开发，首先定义一个c代码的头文件，如function.h,在里面声明将要实现的函数，如int add（int a，int b）; ，然后新建一个源文件为function.c,在function.c的开头#include “function.h”,然后下面写头文件中已声明的函数的实现。这样写完了之后，main函数如果要调用这个源文件中的函数，只需要在main函数的开头部分加入#include&lt;function.h&gt;，如此这般，main函数调用相应函数的时候就会自动找到程序的实现部分代码了。</p>
-<h2 id="function-h"><a href="#function-h" class="headerlink" title="function.h"></a>function.h</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="function-c"><a href="#function-c" class="headerlink" title="function.c"></a>function.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> a = <span class="number">1</span>,b =<span class="number">2</span>;</span><br><span class="line">   <span class="type">int</span> c = add(a,b);   <span class="comment">//这里是对function.c中的add函数的调用</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;c=%d&quot;</span>,c);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>c</category>
-      </categories>
-      <tags>
-        <tag>c</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>clickhouse常用命令</title>
     <url>/49b8a20.html</url>
     <content><![CDATA[<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>语法：CREATE DATABASE [IF NOT EXISTS] db_name [ON CLUSTER cluster] [ENGINE &#x3D; engine(…)] </p>
@@ -38,75 +20,40 @@
       </tags>
   </entry>
   <entry>
-    <title>gitlab更改clone地址</title>
-    <url>/6faff625.html</url>
-    <content><![CDATA[<p>解决方案：修改gitlab配置文件gitlab.yml</p>
-<h1 id="修改gitlab配置文件gitlab-yml"><a href="#修改gitlab配置文件gitlab-yml" class="headerlink" title="修改gitlab配置文件gitlab.yml"></a>修改gitlab配置文件gitlab.yml</h1><h2 id="进入docker容器"><a href="#进入docker容器" class="headerlink" title="进入docker容器"></a>进入docker容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it gitlab bash</span><br></pre></td></tr></table></figure>
+    <title>git跳过代码检查</title>
+    <url>/5c1803c3.html</url>
+    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
 
-<h2 id="修改gitlab-yml"><a href="#修改gitlab-yml" class="headerlink" title="修改gitlab.yml"></a>修改gitlab.yml</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">production:</span> <span class="meta">&amp;base</span></span><br><span class="line">  <span class="comment">#</span></span><br><span class="line">  <span class="comment"># 1. GitLab app settings</span></span><br><span class="line">  <span class="comment"># ==========================</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">## GitLab settings</span></span><br><span class="line">  <span class="attr">gitlab:</span></span><br><span class="line">    <span class="comment">## Web server settings (<span class="doctag">note:</span> host is the FQDN, do not include http://)</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.66</span>  <span class="comment"># 修改为新的ip</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">8000</span>  <span class="comment"># 修改为 gitlab 访问的端口号</span></span><br><span class="line">    <span class="attr">https:</span> <span class="literal">false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="重启gitlab服务"><a href="#重启gitlab服务" class="headerlink" title="重启gitlab服务"></a>重启gitlab服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure>
-
-<p>或者，退出容器后，重启容器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker restart gitlab</span><br></pre></td></tr></table></figure>
-
+<p><img src="/../../images/git/git--no-verify.png"></p>
 ]]></content>
       <categories>
-        <category>gitlab</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>gitlab</tag>
         <tag>git</tag>
       </tags>
   </entry>
   <entry>
-    <title>ubuntu安装gitlab-Runner</title>
-    <url>/6c7e127d.html</url>
-    <content><![CDATA[<h2 id="1、下载"><a href="#1、下载" class="headerlink" title="1、下载"></a>1、下载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -LJO <span class="string">&quot;https://gitlab-runner-downloads.s3.amazonaws.com/latest/deb/gitlab-runner_amd64.deb&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg -i gitlab-runner_amd64.deb</span><br></pre></td></tr></table></figure>
-
-<h2 id="3、更新"><a href="#3、更新" class="headerlink" title="3、更新"></a>3、更新</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg -i gitlab-runner_amd64.deb</span><br></pre></td></tr></table></figure>
-
-<h2 id="4、注册"><a href="#4、注册" class="headerlink" title="4、注册"></a>4、注册</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo gitlab-runner register</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ol>
-<li>url</li>
-<li>token</li>
-<li>描述</li>
-<li>标签，不设置全局可用</li>
-<li>执行方式：shell</li>
-</ol>
-</blockquote>
-<h2 id="错误解决方法"><a href="#错误解决方法" class="headerlink" title="错误解决方法"></a>错误解决方法</h2><ol>
-<li><h5 id="ERROR-Job-failed-system-failure-prepare-environment-exit-status-1-Check-https-docs-gitlab-com-runner-shells-index-html-shell-profile-loading-for-more-information"><a href="#ERROR-Job-failed-system-failure-prepare-environment-exit-status-1-Check-https-docs-gitlab-com-runner-shells-index-html-shell-profile-loading-for-more-information" class="headerlink" title="ERROR: Job failed (system failure): prepare environment: exit status 1. Check https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading for more information"></a>ERROR: Job failed (system failure): prepare environment: exit status 1. Check <a href="https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading">https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading</a> for more information</h5><p>原因：<strong>Ubuntu 20.04</strong>版本在执行<strong>ci</strong>时会出现此错误，解决方法是删除工作目录下的**.bash_logout**文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看gitlab-runner配置</span></span><br><span class="line">jack@k8smaster:~$ ps aux | grep gitlab-runner</span><br><span class="line"></span><br><span class="line">root      314163  0.2  0.3 143980 30740 ?        Ssl  08:06   0:01 /usr/bin/gitlab-runner run --working-directory /home/gitlab-runner --config /etc/gitlab-runner/config.toml --service gitlab-runner --user gitlab-runner</span><br><span class="line">jack      320030  0.0  0.0   6432  2624 pts/0    S+   08:14   0:00 grep --color=auto gitlab-runner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除.bash_logout</span></span><br><span class="line">jack@k8smaster:~$ sudo <span class="built_in">rm</span> -r /home/gitlab-runner/.bash_logout</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><h5 id="Got-permission-denied-while-trying-to-connect-to-the-Docker-daemon-socket-at-unix-x2F-x2F-x2F-var-x2F-run-x2F-docker-sock-Post-http-x2F-x2F-2Fvar-2Frun-2Fdocker-sock-x2F-v1-24-x2F-auth-dial-unix-x2F-var-x2F-run-x2F-docker-sock-connect-permission-denied"><a href="#Got-permission-denied-while-trying-to-connect-to-the-Docker-daemon-socket-at-unix-x2F-x2F-x2F-var-x2F-run-x2F-docker-sock-Post-http-x2F-x2F-2Fvar-2Frun-2Fdocker-sock-x2F-v1-24-x2F-auth-dial-unix-x2F-var-x2F-run-x2F-docker-sock-connect-permission-denied" class="headerlink" title="Got permission denied while trying to connect to the Docker daemon socket at unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock: Post http:&#x2F;&#x2F;%2Fvar%2Frun%2Fdocker.sock&#x2F;v1.24&#x2F;auth: dial unix &#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied"></a>Got permission denied while trying to connect to the Docker daemon socket at unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock: Post http:&#x2F;&#x2F;%2Fvar%2Frun%2Fdocker.sock&#x2F;v1.24&#x2F;auth: dial unix &#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied</h5><p>原因：gitlab-runner账号权限不足，不能访问&#x2F;var&#x2F;run&#x2F;docker.sock。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将gitlab-runner用户加入docker组</span></span><br><span class="line">[root@gitlab-runner ~]<span class="comment"># usermod -aG docker gitlab-runner</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">[root@gitlab-runner ~]<span class="comment"># groups gitlab-runner </span></span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><h4 id="执行kubectl命令报错：The-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port"><a href="#执行kubectl命令报错：The-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port" class="headerlink" title="执行kubectl命令报错：The connection to the server localhost:8080 was refused - did you specify the right host or port?"></a>执行kubectl命令报错：The connection to the server localhost:8080 was refused - did you specify the right host or port?</h4><p>原因：gitlab-runner账号没有kubeadm配置文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /home/gitlab-runner/.kube</span><br><span class="line">sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf /home/gitlab-runner/.kube/config</span><br><span class="line">sudo <span class="built_in">chown</span> 755 /home/gitlab-runner/.kube/config</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><h4 id="启用多分支报错：Error-Cannot-perform-an-interactive-login-from-a-non-TTY-device"><a href="#启用多分支报错：Error-Cannot-perform-an-interactive-login-from-a-non-TTY-device" class="headerlink" title="启用多分支报错：Error: Cannot perform an interactive login from a non TTY device"></a>启用多分支报错：Error: Cannot perform an interactive login from a non TTY device</h4><p>原因：变量受到保护，而除master分支默认被保护之外，其他分支未设置保护，无法读取被保护的变量</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将分支添加到受保护的分支下面；</span><br><span class="line">设置-&gt;仓库-&gt;Protected branches,选择要保护的分支。</span><br></pre></td></tr></table></figure></li>
-</ol>
+    <title>git分支开发工作流</title>
+    <url>/5b072233.html</url>
+    <content><![CDATA[<h1 id="Git分支开发工作流"><a href="#Git分支开发工作流" class="headerlink" title="Git分支开发工作流"></a>Git分支开发工作流</h1><h2 id="Git分支明细"><a href="#Git分支明细" class="headerlink" title="Git分支明细"></a>Git分支明细</h2><p><img src="/../../images/git/git%E5%88%86%E6%94%AF.png"></p>
+<h4 id="主分支：master"><a href="#主分支：master" class="headerlink" title="主分支：master"></a>主分支：master</h4><p>一般master或main为主分支，主分支为所有提供给用户使用的正式版本，一般由release或fix分支合并，任何时间都不能修改代码。</p>
+<h4 id="新功能分支：feature-x2F"><a href="#新功能分支：feature-x2F" class="headerlink" title="新功能分支：feature&#x2F;*"></a>新功能分支：feature&#x2F;*</h4><p>在整个项目开发周期的不同阶段，我们有许多不同的新功能要开发，每开发一个新功能，最好新建一个feature分支，完成功能开发后合并分支，最后删除feature分支。</p>
+<p>分支命名：feature&#x2F;分支功能</p>
+<h4 id="开发分支：develop"><a href="#开发分支：develop" class="headerlink" title="开发分支：develop"></a>开发分支：develop</h4><p>主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。开发分支应始终保持最新完成状态已经bug修复完成的代码。如果想正式对外发布，就在Master分支上，对Develop分支进行”合并”。</p>
+<h4 id="预发布分支：release-x2F"><a href="#预发布分支：release-x2F" class="headerlink" title="预发布分支：release&#x2F;*"></a>预发布分支：release&#x2F;*</h4><p>预发布分支是上线前的测试阶段，预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并到develop和master分⽀上，完成后删除改分支。</p>
+<p>分支命名：release&#x2F;分支功能</p>
+<h4 id="BUG修复分支：fix-x2F"><a href="#BUG修复分支：fix-x2F" class="headerlink" title="BUG修复分支：fix&#x2F;*"></a>BUG修复分支：fix&#x2F;*</h4><p>用于修复紧急故障，从主分支上面拉去，最后合并到主分支或者开发分支develop。</p>
+<p>分支命名：fix&#x2F;分支功能</p>
+<h2 id="分支开发工作流"><a href="#分支开发工作流" class="headerlink" title="分支开发工作流"></a>分支开发工作流</h2><p>在整个项目开发周期的不同阶段，可以同时拥有多个开放的分支；定期地把某些主题分支合并入其他分支中。</p>
+<p><img src="/../../images/git/%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81.png"></p>
 ]]></content>
       <categories>
-        <category>devOps</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>gitlab</tag>
-        <tag>devOps</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -536,6 +483,33 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装rabbitmq</title>
+    <url>/9104498a.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认账号密码：guest</p>
+</blockquote>
+<h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it rabbit /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>开启mqtt</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure>
+
+<p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker常用命令</title>
     <url>/29dc6fe8.html</url>
     <content><![CDATA[<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><h4 id="列出所有容器ID"><a href="#列出所有容器ID" class="headerlink" title="列出所有容器ID"></a>列出所有容器ID</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker ps -aq</span><br></pre></td></tr></table></figure>
@@ -573,33 +547,6 @@
 
 <h3 id="停止命令"><a href="#停止命令" class="headerlink" title="停止命令"></a>停止命令</h3><h4 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装rabbitmq</title>
-    <url>/9104498a.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>默认账号密码：guest</p>
-</blockquote>
-<h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it rabbit /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>开启mqtt</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure>
-
-<p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -746,6 +693,25 @@
       </tags>
   </entry>
   <entry>
+    <title>docker安装Grafana</title>
+    <url>/4998eb02.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/grafana</span><br></pre></td></tr></table></figure>
+
+<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>Grafana</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker修改国内镜像源</title>
     <url>/5cc914c3.html</url>
     <content><![CDATA[<h1 id="国内镜像仓库"><a href="#国内镜像仓库" class="headerlink" title="国内镜像仓库"></a>国内镜像仓库</h1><table>
@@ -803,25 +769,6 @@
 <h2 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1:3100/ready</span><br></pre></td></tr></table></figure>
 
 <p>看到 <code>ready</code> 就是正常启动了。</p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>Grafana</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker安装Grafana</title>
-    <url>/4998eb02.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/grafana</span><br></pre></td></tr></table></figure>
-
-<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
-</blockquote>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -974,6 +921,59 @@
       </tags>
   </entry>
   <entry>
+    <title>docker搭建maven私服(nexus)</title>
+    <url>/f81dce24.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull sonatype/nexus3:latest</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus sonatype/nexus3</span><br></pre></td></tr></table></figure>
+
+<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><p>停止时，请确保有足够的时间让数据库完全关闭。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stop --time=120 &lt;CONTAINER_NAME&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><h2 id="使用-docker-卷"><a href="#使用-docker-卷" class="headerlink" title="使用 docker 卷"></a><em>使用 docker 卷</em></h2><p>由于 docker 卷是持久的，因此可以专门为此目的创建一个卷。这是推荐的方法。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker volume create --name nexus-data</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
+
+<h2 id="挂载一个主机目录作为卷"><a href="#挂载一个主机目录作为卷" class="headerlink" title="挂载一个主机目录作为卷"></a><em>挂载一个主机目录作为卷</em></h2><p>这不是可移植的，因为它依赖于在主机上具有正确权限的现有目录。但是，在需要将此卷分配给某些特定底层存储的某些情况下，它可能很有用。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /some/dir/nexus-data &amp;&amp; <span class="built_in">chown</span> -R 200 /some/dir/nexus-data</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v /some/dir/nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
+
+<h1 id="访问nexus"><a href="#访问nexus" class="headerlink" title="访问nexus"></a>访问nexus</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://localhost:8081/</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>默认用户是<code>admin</code>，唯一生成的密码可以<code>admin.password</code>在卷内的文件中找到。</li>
+<li>服务在新容器中启动可能需要一些时间（2-3 分钟）。您可以跟踪日志以确定 Nexus 是否准备就绪：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker logs -f nexus</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>更多使用方法请参考：</p>
+<p><a href="https://hub.docker.com/r/sonatype/nexus3">https://hub.docker.com/r/sonatype/nexus3</a></p>
+<p><a href="https://www.sonatype.com/">https://www.sonatype.com/</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>阿里云docker镜像仓库</title>
+    <url>/194825ff.html</url>
+    <content><![CDATA[<p>镜像仓库申请地址：<br><a href="https://cr.console.aliyun.com/cn-shanghai/instances/repositories">https://cr.console.aliyun.com/cn-shanghai/instances/repositories</a></p>
+<p>参考地址：<a href="https://www.cnblogs.com/danielyoung/p/10608677.html">https://www.cnblogs.com/danielyoung/p/10608677.html</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker配置HTTP/HTTPS代理</title>
     <url>/fe3539f6.html</url>
     <content><![CDATA[<p>docker使用<code>HTTP_PROXY</code>，<code>HTTPS_PROXY</code>以及<code>NO_PROXY</code>在其启动环境环境变量来配置HTTP或HTTPS代理的行为。不能使用该<code>daemon.json</code>文件配置这些环境变量。</p>
@@ -1022,56 +1022,6 @@
       </tags>
   </entry>
   <entry>
-    <title>阿里云docker镜像仓库</title>
-    <url>/194825ff.html</url>
-    <content><![CDATA[<p>镜像仓库申请地址：<br><a href="https://cr.console.aliyun.com/cn-shanghai/instances/repositories">https://cr.console.aliyun.com/cn-shanghai/instances/repositories</a></p>
-<p>参考地址：<a href="https://www.cnblogs.com/danielyoung/p/10608677.html">https://www.cnblogs.com/danielyoung/p/10608677.html</a></p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git分支开发工作流</title>
-    <url>/5b072233.html</url>
-    <content><![CDATA[<h1 id="Git分支开发工作流"><a href="#Git分支开发工作流" class="headerlink" title="Git分支开发工作流"></a>Git分支开发工作流</h1><h2 id="Git分支明细"><a href="#Git分支明细" class="headerlink" title="Git分支明细"></a>Git分支明细</h2><p><img src="/../../images/git/git%E5%88%86%E6%94%AF.png"></p>
-<h4 id="主分支：master"><a href="#主分支：master" class="headerlink" title="主分支：master"></a>主分支：master</h4><p>一般master或main为主分支，主分支为所有提供给用户使用的正式版本，一般由release或fix分支合并，任何时间都不能修改代码。</p>
-<h4 id="新功能分支：feature-x2F"><a href="#新功能分支：feature-x2F" class="headerlink" title="新功能分支：feature&#x2F;*"></a>新功能分支：feature&#x2F;*</h4><p>在整个项目开发周期的不同阶段，我们有许多不同的新功能要开发，每开发一个新功能，最好新建一个feature分支，完成功能开发后合并分支，最后删除feature分支。</p>
-<p>分支命名：feature&#x2F;分支功能</p>
-<h4 id="开发分支：develop"><a href="#开发分支：develop" class="headerlink" title="开发分支：develop"></a>开发分支：develop</h4><p>主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。开发分支应始终保持最新完成状态已经bug修复完成的代码。如果想正式对外发布，就在Master分支上，对Develop分支进行”合并”。</p>
-<h4 id="预发布分支：release-x2F"><a href="#预发布分支：release-x2F" class="headerlink" title="预发布分支：release&#x2F;*"></a>预发布分支：release&#x2F;*</h4><p>预发布分支是上线前的测试阶段，预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并到develop和master分⽀上，完成后删除改分支。</p>
-<p>分支命名：release&#x2F;分支功能</p>
-<h4 id="BUG修复分支：fix-x2F"><a href="#BUG修复分支：fix-x2F" class="headerlink" title="BUG修复分支：fix&#x2F;*"></a>BUG修复分支：fix&#x2F;*</h4><p>用于修复紧急故障，从主分支上面拉去，最后合并到主分支或者开发分支develop。</p>
-<p>分支命名：fix&#x2F;分支功能</p>
-<h2 id="分支开发工作流"><a href="#分支开发工作流" class="headerlink" title="分支开发工作流"></a>分支开发工作流</h2><p>在整个项目开发周期的不同阶段，可以同时拥有多个开放的分支；定期地把某些主题分支合并入其他分支中。</p>
-<p><img src="/../../images/git/%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81.png"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git跳过代码检查</title>
-    <url>/5c1803c3.html</url>
-    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../images/git/git--no-verify.png"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>eclipse快捷键</title>
     <url>/168fd7a4.html</url>
     <content><![CDATA[<p> 转为大写 </p>
@@ -1088,6 +1038,31 @@
       </categories>
       <tags>
         <tag>eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo关闭Next主题加载效果</title>
+    <url>/a52b693e.html</url>
+    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决webstrom无法识别@（别名路径）的问题</title>
+    <url>/ffcc343e.html</url>
+    <content><![CDATA[<p>设置 -&gt; 语言和框架  -&gt;  JavaScript -&gt; Webpack 设置为自动</p>
+<p><img src="/../../images/idea/webstrom%E8%AE%BE%E7%BD%AE@.png" alt="配置工程"></p>
+]]></content>
+      <categories>
+        <category>idea</category>
+      </categories>
+      <tags>
+        <tag>idea</tag>
       </tags>
   </entry>
   <entry>
@@ -1161,28 +1136,14 @@
       </tags>
   </entry>
   <entry>
-    <title>解决webstrom无法识别@（别名路径）的问题</title>
-    <url>/ffcc343e.html</url>
-    <content><![CDATA[<p>设置 -&gt; 语言和框架  -&gt;  JavaScript -&gt; Webpack 设置为自动</p>
-<p><img src="/../../images/idea/webstrom%E8%AE%BE%E7%BD%AE@.png" alt="配置工程"></p>
-]]></content>
+    <title>influx_cli的使用</title>
+    <url>/ec24f755.html</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>idea</category>
+        <category>influxDB</category>
       </categories>
       <tags>
-        <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo关闭Next主题加载效果</title>
-    <url>/a52b693e.html</url>
-    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
+        <tag>influxDB</tag>
       </tags>
   </entry>
   <entry>
@@ -1252,34 +1213,6 @@
       <tags>
         <tag>docker</tag>
         <tag>influxDB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用pkg打包nodejs</title>
-    <url>/9b5f2bcc.html</url>
-    <content><![CDATA[<h1 id="安装pkg"><a href="#安装pkg" class="headerlink" title="安装pkg"></a>安装pkg</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g pkg</span><br></pre></td></tr></table></figure>
-
-<p>或</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pkg</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置入口启动文件"><a href="#配置入口启动文件" class="headerlink" title="配置入口启动文件"></a>配置入口启动文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;bin&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-
-<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg . -t node14-linux-x64 --out-path=dist/</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>.  打包的文件 这里指当前目录下的所有</p>
-<p>-t  用于制定平台和node版本，不指定时默认为3个平台，以及package.json中的node版本配置为准</p>
-<p>–out-path   打包文件输出目录</p>
-</blockquote>
-<h1 id="常见文件及解决方法"><a href="#常见文件及解决方法" class="headerlink" title="常见文件及解决方法"></a>常见文件及解决方法</h1><h2 id="require引入外部文件"><a href="#require引入外部文件" class="headerlink" title="require引入外部文件"></a>require引入外部文件</h2><p>使用require时需要使用动态地址，比如：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> add = <span class="built_in">require</span>(process.<span class="title function_">cwd</span>() + <span class="string">&#x27;/add.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1392,6 +1325,25 @@
       </tags>
   </entry>
   <entry>
+    <title>修改jar包配置文件</title>
+    <url>/ed246d7c.html</url>
+    <content><![CDATA[<h1 id="解压jar包"><a href="#解压jar包" class="headerlink" title="解压jar包"></a>解压jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -xvf test.jar</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改文件"><a href="#修改文件" class="headerlink" title="修改文件"></a>修改文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim xxx</span><br></pre></td></tr></table></figure>
+
+<h1 id="重新打jar包"><a href="#重新打jar包" class="headerlink" title="重新打jar包"></a>重新打jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -cvfm0 jar_test.jar META-INF/MANIFEST.MF .</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行jar包"><a href="#运行jar包" class="headerlink" title="运行jar包"></a>运行jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -jar jar_test.jar</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用jlink定制生成JRE</title>
     <url>/90e68bc9.html</url>
     <content><![CDATA[<p>在</p>
@@ -1421,33 +1373,31 @@
       </tags>
   </entry>
   <entry>
-    <title>修改jar包配置文件</title>
-    <url>/ed246d7c.html</url>
-    <content><![CDATA[<h1 id="解压jar包"><a href="#解压jar包" class="headerlink" title="解压jar包"></a>解压jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -xvf test.jar</span><br></pre></td></tr></table></figure>
+    <title>使用pkg打包nodejs</title>
+    <url>/9b5f2bcc.html</url>
+    <content><![CDATA[<h1 id="安装pkg"><a href="#安装pkg" class="headerlink" title="安装pkg"></a>安装pkg</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g pkg</span><br></pre></td></tr></table></figure>
 
-<h1 id="修改文件"><a href="#修改文件" class="headerlink" title="修改文件"></a>修改文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim xxx</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pkg</span><br></pre></td></tr></table></figure>
 
-<h1 id="重新打jar包"><a href="#重新打jar包" class="headerlink" title="重新打jar包"></a>重新打jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -cvfm0 jar_test.jar META-INF/MANIFEST.MF .</span><br></pre></td></tr></table></figure>
+<h1 id="配置入口启动文件"><a href="#配置入口启动文件" class="headerlink" title="配置入口启动文件"></a>配置入口启动文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;bin&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
 
-<h1 id="运行jar包"><a href="#运行jar包" class="headerlink" title="运行jar包"></a>运行jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -jar jar_test.jar</span><br></pre></td></tr></table></figure>
+<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg . -t node14-linux-x64 --out-path=dist/</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>.  打包的文件 这里指当前目录下的所有</p>
+<p>-t  用于制定平台和node版本，不指定时默认为3个平台，以及package.json中的node版本配置为准</p>
+<p>–out-path   打包文件输出目录</p>
+</blockquote>
+<h1 id="常见文件及解决方法"><a href="#常见文件及解决方法" class="headerlink" title="常见文件及解决方法"></a>常见文件及解决方法</h1><h2 id="require引入外部文件"><a href="#require引入外部文件" class="headerlink" title="require引入外部文件"></a>require引入外部文件</h2><p>使用require时需要使用动态地址，比如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> add = <span class="built_in">require</span>(process.<span class="title function_">cwd</span>() + <span class="string">&#x27;/add.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>java</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>influx_cli的使用</title>
-    <url>/ec24f755.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>influxDB</category>
-      </categories>
-      <tags>
-        <tag>influxDB</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1547,35 +1497,6 @@
       </tags>
   </entry>
   <entry>
-    <title>k8s配置pv</title>
-    <url>/7eb43148.html</url>
-    <content><![CDATA[<p>参考：<a href="https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html">https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html</a></p>
-<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="comment"># NFS目录，需要该目录在NFS上存在</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/tmp</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.17</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
-
-<p>PV 的访问模式（accessModes）有三种：</p>
-<ul>
-<li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。</li>
-<li>ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。</li>
-<li>ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</li>
-</ul>
-<p>PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</p>
-<ul>
-<li>Retain，不清理, 保留 Volume（需要手动清理）</li>
-<li>Recycle，删除数据，即 <code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）</li>
-<li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
-</ul>
-<h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>kubectl 命令大全</title>
     <url>/760b67b4.html</url>
     <content><![CDATA[<h1 id="kubectl-命令"><a href="#kubectl-命令" class="headerlink" title="kubectl 命令"></a>kubectl 命令</h1><p>参考网址：<a href="https://jimmysong.io/kubernetes-handbook/guide/kubectl-cheatsheet.html">https://jimmysong.io/kubernetes-handbook/guide/kubectl-cheatsheet.html</a></p>
@@ -1629,13 +1550,26 @@
       </tags>
   </entry>
   <entry>
-    <title>kubectl 命令自动补全</title>
-    <url>/cdcc2a3b.html</url>
-    <content><![CDATA[<h1 id="kubectl-命令自动补全"><a href="#kubectl-命令自动补全" class="headerlink" title="kubectl 命令自动补全"></a>kubectl 命令自动补全</h1><h4 id="安装bash-completion（如果已经安装忽略即可）："><a href="#安装bash-completion（如果已经安装忽略即可）：" class="headerlink" title="安装bash-completion（如果已经安装忽略即可）："></a>安装bash-completion（如果已经安装忽略即可）：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install bash-completion</span><br></pre></td></tr></table></figure>
+    <title>k8s配置pv</title>
+    <url>/7eb43148.html</url>
+    <content><![CDATA[<p>参考：<a href="https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html">https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html</a></p>
+<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="comment"># NFS目录，需要该目录在NFS上存在</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/tmp</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.17</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="测试一下："><a href="#测试一下：" class="headerlink" title="测试一下："></a>测试一下：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
+<p>PV 的访问模式（accessModes）有三种：</p>
+<ul>
+<li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。</li>
+<li>ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。</li>
+<li>ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</li>
+</ul>
+<p>PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</p>
+<ul>
+<li>Retain，不清理, 保留 Volume（需要手动清理）</li>
+<li>Recycle，删除数据，即 <code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）</li>
+<li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
+</ul>
+<h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
 
-<h4 id="测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效："><a href="#测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效：" class="headerlink" title="测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效："></a>测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>k8s</category>
@@ -1698,43 +1632,19 @@
       </tags>
   </entry>
   <entry>
-    <title>docker搭建maven私服(nexus)</title>
-    <url>/f81dce24.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull sonatype/nexus3:latest</span><br></pre></td></tr></table></figure>
+    <title>kubectl 命令自动补全</title>
+    <url>/cdcc2a3b.html</url>
+    <content><![CDATA[<h1 id="kubectl-命令自动补全"><a href="#kubectl-命令自动补全" class="headerlink" title="kubectl 命令自动补全"></a>kubectl 命令自动补全</h1><h4 id="安装bash-completion（如果已经安装忽略即可）："><a href="#安装bash-completion（如果已经安装忽略即可）：" class="headerlink" title="安装bash-completion（如果已经安装忽略即可）："></a>安装bash-completion（如果已经安装忽略即可）：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install bash-completion</span><br></pre></td></tr></table></figure>
 
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus sonatype/nexus3</span><br></pre></td></tr></table></figure>
+<h4 id="测试一下："><a href="#测试一下：" class="headerlink" title="测试一下："></a>测试一下：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
 
-<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><p>停止时，请确保有足够的时间让数据库完全关闭。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker stop --time=120 &lt;CONTAINER_NAME&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><h2 id="使用-docker-卷"><a href="#使用-docker-卷" class="headerlink" title="使用 docker 卷"></a><em>使用 docker 卷</em></h2><p>由于 docker 卷是持久的，因此可以专门为此目的创建一个卷。这是推荐的方法。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker volume create --name nexus-data</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
-
-<h2 id="挂载一个主机目录作为卷"><a href="#挂载一个主机目录作为卷" class="headerlink" title="挂载一个主机目录作为卷"></a><em>挂载一个主机目录作为卷</em></h2><p>这不是可移植的，因为它依赖于在主机上具有正确权限的现有目录。但是，在需要将此卷分配给某些特定底层存储的某些情况下，它可能很有用。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /some/dir/nexus-data &amp;&amp; <span class="built_in">chown</span> -R 200 /some/dir/nexus-data</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 8081:8081 --name nexus -v /some/dir/nexus-data:/nexus-data sonatype/nexus3</span><br></pre></td></tr></table></figure>
-
-<h1 id="访问nexus"><a href="#访问nexus" class="headerlink" title="访问nexus"></a>访问nexus</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://localhost:8081/</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>默认用户是<code>admin</code>，唯一生成的密码可以<code>admin.password</code>在卷内的文件中找到。</li>
-<li>服务在新容器中启动可能需要一些时间（2-3 分钟）。您可以跟踪日志以确定 Nexus 是否准备就绪：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker logs -f nexus</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>更多使用方法请参考：</p>
-<p><a href="https://hub.docker.com/r/sonatype/nexus3">https://hub.docker.com/r/sonatype/nexus3</a></p>
-<p><a href="https://www.sonatype.com/">https://www.sonatype.com/</a></p>
+<h4 id="测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效："><a href="#测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效：" class="headerlink" title="测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效："></a>测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>docker</category>
+        <category>k8s</category>
       </categories>
       <tags>
-        <tag>docker</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -2261,6 +2171,26 @@
       </tags>
   </entry>
   <entry>
+    <title>ubuntu安装helm</title>
+    <url>/bc01c4d5.html</url>
+    <content><![CDATA[<ol>
+<li><p>官方文档</p>
+<blockquote>
+<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
+</blockquote>
+</li>
+<li><p>Ubuntu安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ubuntu使用国内源</title>
     <url>/dfbf49be.html</url>
     <content><![CDATA[<p>参考：<a href="http://mirrors.ustc.edu.cn/help/ubuntu.html">http://mirrors.ustc.edu.cn/help/ubuntu.html</a></p>
@@ -2273,26 +2203,6 @@
 <p>更新索引以生效：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ubuntu安装helm</title>
-    <url>/bc01c4d5.html</url>
-    <content><![CDATA[<ol>
-<li><p>官方文档</p>
-<blockquote>
-<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
-</blockquote>
-</li>
-<li><p>Ubuntu安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
-</ol>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -2394,48 +2304,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu设置开启自启</title>
-    <url>/f8f6cca9.html</url>
-    <content><![CDATA[<p><strong>注意：</strong></p>
-<blockquote>
-<p>ubuntu18 不能像 ubuntu16 一样通过编辑 rc.local 来设置开机启动脚本，需要通过下列简单设置后，以使 rc.local 重新发挥作用。</p>
-<p>Ubuntu 16.10开始不再使用 <code>initd</code> 管理系统，改用 <code>systemd</code>，包括用 <code>systemctl</code> 命令来替换了 <code>service</code> 和 <code>chkconfig</code> 的功能。比如以前启动 <code>mysql</code> 服务用<code>sudo service mysql start</code>，现在用 <code>sudo systemctl start mysqld.service</code>。<code>systemd</code> 默认读取 <code>/etc/systemd/system</code> 下的配置文件，该目录下的文件会链接 <code>/lib/systemd/system/</code> 下的文件。</p>
-</blockquote>
-<h2 id="修改rc-local-service"><a href="#修改rc-local-service" class="headerlink" title="修改rc-local.service"></a>修改rc-local.service</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>一般启动文件需要三个组成部分：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">[Unit]段: 启动顺序与依赖关系</span><br><span class="line">[Service] 段: 启动行为,如何启动，启动类型</span><br><span class="line">[Install] 段: 定义如何安装这个配置文件，即怎样做到开机启动</span><br></pre></td></tr></table></figure>
-
-<p>上面少了 <code>[Install]</code> 段，把下面 <code>Install</code> 段添上去，加入到 <code>rc-local.service</code> 的最后：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=rc-local.service</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建-x2F-etc-x2F-rc-local"><a href="#创建-x2F-etc-x2F-rc-local" class="headerlink" title="创建&#x2F;etc&#x2F;rc.local"></a>创建&#x2F;etc&#x2F;rc.local</h2><p>ubuntu-18.04以后 默认是没有 &#x2F;etc&#x2F;rc.local 这个文件的，需要自己创建 ：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh -e</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will &quot;exit 0&quot; on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;看到这行字，说明添加自启动脚本成功&quot;</span> &gt; /usr/local/test.log</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
-
-<p>然后给 <code>rc.local</code> 文件赋予可执行权限：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<p>启动服务并检查服务状态：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> rc-local</span><br><span class="line">sudo systemctl start rc-local.service</span><br><span class="line">sudo systemctl status rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>重启后查看是否有 <code>test.log</code> 生成：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/test.log</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>看到这行字，说明添加自启动脚本成功</p>
-</blockquote>
-<p>如果看到如上的内容，就说明已经配置成功了，然后你可以进一步修改你的 <code>rc.local</code> 中的自启动脚本改成你所想要的启动脚本。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ubuntu搭建vue开发环境</title>
     <url>/a18baf77.html</url>
     <content><![CDATA[<h2 id="1-更新软件源"><a href="#1-更新软件源" class="headerlink" title="1. 更新软件源"></a>1. 更新软件源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
@@ -2471,6 +2339,48 @@
 <p>查看版本：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn --version</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu设置开启自启</title>
+    <url>/f8f6cca9.html</url>
+    <content><![CDATA[<p><strong>注意：</strong></p>
+<blockquote>
+<p>ubuntu18 不能像 ubuntu16 一样通过编辑 rc.local 来设置开机启动脚本，需要通过下列简单设置后，以使 rc.local 重新发挥作用。</p>
+<p>Ubuntu 16.10开始不再使用 <code>initd</code> 管理系统，改用 <code>systemd</code>，包括用 <code>systemctl</code> 命令来替换了 <code>service</code> 和 <code>chkconfig</code> 的功能。比如以前启动 <code>mysql</code> 服务用<code>sudo service mysql start</code>，现在用 <code>sudo systemctl start mysqld.service</code>。<code>systemd</code> 默认读取 <code>/etc/systemd/system</code> 下的配置文件，该目录下的文件会链接 <code>/lib/systemd/system/</code> 下的文件。</p>
+</blockquote>
+<h2 id="修改rc-local-service"><a href="#修改rc-local-service" class="headerlink" title="修改rc-local.service"></a>修改rc-local.service</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>一般启动文件需要三个组成部分：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">[Unit]段: 启动顺序与依赖关系</span><br><span class="line">[Service] 段: 启动行为,如何启动，启动类型</span><br><span class="line">[Install] 段: 定义如何安装这个配置文件，即怎样做到开机启动</span><br></pre></td></tr></table></figure>
+
+<p>上面少了 <code>[Install]</code> 段，把下面 <code>Install</code> 段添上去，加入到 <code>rc-local.service</code> 的最后：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=rc-local.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-x2F-etc-x2F-rc-local"><a href="#创建-x2F-etc-x2F-rc-local" class="headerlink" title="创建&#x2F;etc&#x2F;rc.local"></a>创建&#x2F;etc&#x2F;rc.local</h2><p>ubuntu-18.04以后 默认是没有 &#x2F;etc&#x2F;rc.local 这个文件的，需要自己创建 ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh -e</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will &quot;exit 0&quot; on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;看到这行字，说明添加自启动脚本成功&quot;</span> &gt; /usr/local/test.log</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<p>然后给 <code>rc.local</code> 文件赋予可执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>启动服务并检查服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> rc-local</span><br><span class="line">sudo systemctl start rc-local.service</span><br><span class="line">sudo systemctl status rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>重启后查看是否有 <code>test.log</code> 生成：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/test.log</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>看到这行字，说明添加自启动脚本成功</p>
+</blockquote>
+<p>如果看到如上的内容，就说明已经配置成功了，然后你可以进一步修改你的 <code>rc.local</code> 中的自启动脚本改成你所想要的启动脚本。</p>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -2747,6 +2657,41 @@
       </tags>
   </entry>
   <entry>
+    <title>Navicat安装使用</title>
+    <url>/43b3483d.html</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>进入官网<a href="https://www.navicat.com.cn/download/navicat-premium">Navicat | 下载 Navicat Premium 14 天免费 Windows、macOS 和 Linux 的试用版</a>下载安装包，并安装。</p>
+<h1 id="试用"><a href="#试用" class="headerlink" title="试用"></a>试用</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>新建文件<strong>restart.bat</strong>，保存下面内容：</p>
+<figure class="highlight basic"><table><tr><td class="code"><pre><span class="line">@echo <span class="keyword">off</span></span><br><span class="line"></span><br><span class="line">echo <span class="keyword">Delete</span> HKEY_CURRENT_USER\Software\P<span class="comment">remiumSoft\NavicatPremium\Registration[version and language]</span></span><br><span class="line"><span class="keyword">for</span> /f %%i in (<span class="comment">&#x27;&quot;REG QUERY &quot;HKEY_CURRENT_USER\Software\PremiumSoft\NavicatPremium&quot; /s | findstr /L Registration&quot;&#x27;) do (</span></span><br><span class="line">    reg <span class="keyword">delete</span> %%i /va /f</span><br><span class="line">)</span><br><span class="line">echo.</span><br><span class="line"></span><br><span class="line">echo <span class="keyword">Delete</span> Info folder under HKEY_CURRENT_USER\Software\Classes\CLSID</span><br><span class="line"><span class="keyword">for</span> /f %%i in (<span class="comment">&#x27;&quot;REG QUERY &quot;HKEY_CURRENT_USER\Software\Classes\CLSID&quot; /s | findstr /E Info&quot;&#x27;) do (</span></span><br><span class="line">    reg <span class="keyword">delete</span> %%i /va /f</span><br><span class="line">)</span><br><span class="line">echo.</span><br><span class="line"></span><br><span class="line">echo Finish</span><br><span class="line"></span><br><span class="line">pause</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在每次试用到期时，执行清理，或者添加至定时程序中，每日自动清理，相当于无限试用。</p>
+</blockquote>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><ol>
+<li><p>关闭Navicat。</p>
+</li>
+<li><p>清理文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf ~/.config/navicat    </span><br><span class="line"><span class="built_in">rm</span> -rf ~/.config/dconf/user</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lsof | grep navicat | grep ~/.config</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>重新打开即可继续试用。</p>
+</li>
+</ol>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><blockquote>
+<p>以上均为技术探索，请勿牟利！！！</p>
+<p>请支持正版！！！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>canal监听MySQL同步数据</title>
     <url>/b7f79665.html</url>
     <content><![CDATA[<h3 id="binlog文件"><a href="#binlog文件" class="headerlink" title="binlog文件"></a>binlog文件</h3><h4 id="binlog文件的两种类型"><a href="#binlog文件的两种类型" class="headerlink" title="binlog文件的两种类型"></a>binlog文件的两种类型</h4><ul>
@@ -2765,19 +2710,6 @@
       <tags>
         <tag>mysql</tag>
         <tag>springboot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql统计数据库所有数据量</title>
-    <url>/18a68ee.html</url>
-    <content><![CDATA[<h2 id="mysql统计一个数据库所有数据量"><a href="#mysql统计一个数据库所有数据量" class="headerlink" title="mysql统计一个数据库所有数据量"></a>mysql统计一个数据库所有数据量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	table_schema AS &#x27;数据库&#x27;,</span><br><span class="line">	table_name AS &#x27;表名&#x27;,</span><br><span class="line">	table_rows AS &#x27;记录数&#x27;,</span><br><span class="line">	TRUNCATE ( data_length / 1024 / 1024, 2 ) AS &#x27;数据容量(mb)&#x27;,</span><br><span class="line">	TRUNCATE ( index_length / 1024 / 1024, 2 ) AS &#x27;索引容量(mb)&#x27;,</span><br><span class="line">	SUM(table_rows) AS &#x27;总记录数&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( data_length / 1024 / 1024, 2 )) AS &#x27;总数据容量(mb)&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( index_length / 1024 / 1024, 2 )) AS &#x27;总索引容量(mb)&#x27; </span><br><span class="line">FROM</span><br><span class="line">	information_schema.TABLES </span><br><span class="line">WHERE</span><br><span class="line">	table_schema = &#x27;数据库名称&#x27; </span><br><span class="line">ORDER BY</span><br><span class="line">	table_rows DESC,</span><br><span class="line">	index_length DESC;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2870,6 +2802,19 @@
       </categories>
       <tags>
         <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql统计数据库所有数据量</title>
+    <url>/18a68ee.html</url>
+    <content><![CDATA[<h2 id="mysql统计一个数据库所有数据量"><a href="#mysql统计一个数据库所有数据量" class="headerlink" title="mysql统计一个数据库所有数据量"></a>mysql统计一个数据库所有数据量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	table_schema AS &#x27;数据库&#x27;,</span><br><span class="line">	table_name AS &#x27;表名&#x27;,</span><br><span class="line">	table_rows AS &#x27;记录数&#x27;,</span><br><span class="line">	TRUNCATE ( data_length / 1024 / 1024, 2 ) AS &#x27;数据容量(mb)&#x27;,</span><br><span class="line">	TRUNCATE ( index_length / 1024 / 1024, 2 ) AS &#x27;索引容量(mb)&#x27;,</span><br><span class="line">	SUM(table_rows) AS &#x27;总记录数&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( data_length / 1024 / 1024, 2 )) AS &#x27;总数据容量(mb)&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( index_length / 1024 / 1024, 2 )) AS &#x27;总索引容量(mb)&#x27; </span><br><span class="line">FROM</span><br><span class="line">	information_schema.TABLES </span><br><span class="line">WHERE</span><br><span class="line">	table_schema = &#x27;数据库名称&#x27; </span><br><span class="line">ORDER BY</span><br><span class="line">	table_rows DESC,</span><br><span class="line">	index_length DESC;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2986,10 +2931,42 @@
       </tags>
   </entry>
   <entry>
+    <title>springboot使用minio存储</title>
+    <url>/e315f158.html</url>
+    <content><![CDATA[<h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.minio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>minio<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">minio:</span></span><br><span class="line">  <span class="attr">endpoint:</span> <span class="string">http://47.93.37.128:6800</span></span><br><span class="line">  <span class="attr">accessKey:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">secretKey:</span> <span class="number">12345678</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> io.minio.MinioClient;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * MinIO配置类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: wj</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2021-06-24 14:01</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinIoClientConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;minio.endpoint&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String endpoint;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;minio.accessKey&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String accessKey;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;minio.secretKey&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String secretKey;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注入minio 客户端</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MinioClient <span class="title function_">minioClient</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;minio client start&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> MinioClient.builder()</span><br><span class="line">                .endpoint(endpoint)</span><br><span class="line">                .credentials(accessKey, secretKey)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MinIoUtil"><a href="#MinIoUtil" class="headerlink" title="MinIoUtil"></a>MinIoUtil</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.minio.*;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.DeleteError;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.DeleteObject;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.Item;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.FastByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: wj</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2021-06-24 14:03</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinIoUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MinioClient minioClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看存储bucket是否存在</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">bucketExists</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        Boolean found;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> found;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建存储bucket</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">makeBucket</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.makeBucket(MakeBucketArgs.builder()</span><br><span class="line">                    .bucket(bucketName)</span><br><span class="line">                    .build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除存储bucket</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">removeBucket</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.removeBucket(RemoveBucketArgs.builder()</span><br><span class="line">                    .bucket(bucketName)</span><br><span class="line">                    .build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件上传</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file       文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">upload</span><span class="params">(MultipartFile file, String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">PutObjectArgs</span> <span class="variable">objectArgs</span> <span class="operator">=</span> PutObjectArgs.builder().bucket(bucketName).object(file.getOriginalFilename())</span><br><span class="line">                    .stream(file.getInputStream(), file.getSize(), -<span class="number">1</span>).contentType(file.getContentType()).build();</span><br><span class="line">            <span class="comment">//文件名称相同会覆盖</span></span><br><span class="line">            minioClient.putObject(objectArgs);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件下载</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName   文件名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> res        response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">download</span><span class="params">(String bucketName, String fileName, HttpServletResponse res)</span> &#123;</span><br><span class="line">        <span class="type">GetObjectArgs</span> <span class="variable">objectArgs</span> <span class="operator">=</span> GetObjectArgs.builder().bucket(bucketName)</span><br><span class="line">                .object(fileName).build();</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">GetObjectResponse</span> <span class="variable">response</span> <span class="operator">=</span> minioClient.getObject(objectArgs)) &#123;</span><br><span class="line">            <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> len;</span><br><span class="line">            <span class="keyword">try</span> (<span class="type">FastByteArrayOutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FastByteArrayOutputStream</span>()) &#123;</span><br><span class="line">                <span class="keyword">while</span> ((len = response.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                    os.write(buf, <span class="number">0</span>, len);</span><br><span class="line">                &#125;</span><br><span class="line">                os.flush();</span><br><span class="line">                <span class="type">byte</span>[] bytes = os.toByteArray();</span><br><span class="line">                res.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">                <span class="comment">//设置强制下载不打开</span></span><br><span class="line">                res.setContentType(<span class="string">&quot;application/force-download&quot;</span>);</span><br><span class="line">                res.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;fileName=&quot;</span> + fileName);</span><br><span class="line">                <span class="keyword">try</span> (<span class="type">ServletOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> res.getOutputStream()) &#123;</span><br><span class="line">                    stream.write(bytes);</span><br><span class="line">                    stream.flush();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看文件对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 存储bucket内文件对象信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listObjects</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        Iterable&lt;Result&lt;Item&gt;&gt; results = minioClient.listObjects(</span><br><span class="line">                ListObjectsArgs.builder().bucket(bucketName).build());</span><br><span class="line"><span class="comment">//        List&lt;ObjectItem&gt; objectItems = new ArrayList&lt;&gt;();</span></span><br><span class="line"><span class="comment">//        try &#123;</span></span><br><span class="line"><span class="comment">//            for (Result&lt;Item&gt; result : results) &#123;</span></span><br><span class="line"><span class="comment">//                Item item = result.get();</span></span><br><span class="line"><span class="comment">//                ObjectItem objectItem = new ObjectItem();</span></span><br><span class="line"><span class="comment">//                objectItem.setObjectName(item.objectName());</span></span><br><span class="line"><span class="comment">//                objectItem.setSize(item.size());</span></span><br><span class="line"><span class="comment">//                objectItems.add(objectItem);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125; catch (Exception e) &#123;</span></span><br><span class="line"><span class="comment">//            e.printStackTrace();</span></span><br><span class="line"><span class="comment">//            return null;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//        return objectItems;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 批量删除文件对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> objects    对象名称集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Iterable&lt;Result&lt;DeleteError&gt;&gt; <span class="title function_">removeObjects</span><span class="params">(String bucketName, List&lt;String&gt; objects)</span> &#123;</span><br><span class="line">        List&lt;DeleteObject&gt; dos = objects.stream().map(e -&gt; <span class="keyword">new</span> <span class="title class_">DeleteObject</span>(e)).collect(Collectors.toList());</span><br><span class="line">        Iterable&lt;Result&lt;DeleteError&gt;&gt; results = minioClient.removeObjects(RemoveObjectsArgs.builder().bucket(bucketName).objects(dos).build());</span><br><span class="line">        <span class="keyword">return</span> results;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MinioController"><a href="#MinioController" class="headerlink" title="MinioController"></a>MinioController</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinioController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MinIoUtil minIoUtil;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/bucketExists/&#123;name&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">bucketExists</span><span class="params">(<span class="meta">@PathVariable</span> String name)</span> &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> minIoUtil.bucketExists(name);</span><br><span class="line">        System.out.println(aBoolean);</span><br><span class="line">        <span class="keyword">return</span> aBoolean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件上传</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/upload&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">upload</span><span class="params">(MultipartFile file, <span class="meta">@RequestParam(value = &quot;bucketName&quot;)</span> String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(bucketName)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;存储bucket名称为空，无法上传&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;存储bucket名称为空，无法上传&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!minIoUtil.upload(file, bucketName)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件上传异常&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;文件上传异常&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;文件上传成功&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>STM32之GPIO</title>
     <url>/e2fc6371.html</url>
     <content><![CDATA[<h1 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h1><p><img src="/../../images/stm/gpio/img.png" alt="配置工程"></p>
 ]]></content>
+      <categories>
+        <category>stm32</category>
+      </categories>
+      <tags>
+        <tag>stm32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32新建项目工程</title>
+    <url>/d0cca158.html</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>stm32</category>
       </categories>
@@ -3086,17 +3063,6 @@
       </tags>
   </entry>
   <entry>
-    <title>STM32新建项目工程</title>
-    <url>/d0cca158.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>stm32</category>
-      </categories>
-      <tags>
-        <tag>stm32</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>测试指令</title>
     <url>/1fd38c68.html</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&quot;io2&quot;:37,&quot;let&quot;:23,&quot;dem&quot;:23,&quot;open&quot;:03&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -3112,24 +3078,75 @@
       </tags>
   </entry>
   <entry>
-    <title>springboot使用minio存储</title>
-    <url>/e315f158.html</url>
-    <content><![CDATA[<h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.minio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>minio<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>gitlab更改clone地址</title>
+    <url>/6faff625.html</url>
+    <content><![CDATA[<p>解决方案：修改gitlab配置文件gitlab.yml</p>
+<h1 id="修改gitlab配置文件gitlab-yml"><a href="#修改gitlab配置文件gitlab-yml" class="headerlink" title="修改gitlab配置文件gitlab.yml"></a>修改gitlab配置文件gitlab.yml</h1><h2 id="进入docker容器"><a href="#进入docker容器" class="headerlink" title="进入docker容器"></a>进入docker容器</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it gitlab bash</span><br></pre></td></tr></table></figure>
 
-<h3 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">minio:</span></span><br><span class="line">  <span class="attr">endpoint:</span> <span class="string">http://47.93.37.128:6800</span></span><br><span class="line">  <span class="attr">accessKey:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">secretKey:</span> <span class="number">12345678</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改gitlab-yml"><a href="#修改gitlab-yml" class="headerlink" title="修改gitlab.yml"></a>修改gitlab.yml</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml</span><br></pre></td></tr></table></figure>
 
-<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> io.minio.MinioClient;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * MinIO配置类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: wj</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2021-06-24 14:01</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinIoClientConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;minio.endpoint&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String endpoint;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;minio.accessKey&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String accessKey;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;minio.secretKey&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String secretKey;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注入minio 客户端</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MinioClient <span class="title function_">minioClient</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;minio client start&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> MinioClient.builder()</span><br><span class="line">                .endpoint(endpoint)</span><br><span class="line">                .credentials(accessKey, secretKey)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">production:</span> <span class="meta">&amp;base</span></span><br><span class="line">  <span class="comment">#</span></span><br><span class="line">  <span class="comment"># 1. GitLab app settings</span></span><br><span class="line">  <span class="comment"># ==========================</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">## GitLab settings</span></span><br><span class="line">  <span class="attr">gitlab:</span></span><br><span class="line">    <span class="comment">## Web server settings (<span class="doctag">note:</span> host is the FQDN, do not include http://)</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.66</span>  <span class="comment"># 修改为新的ip</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">8000</span>  <span class="comment"># 修改为 gitlab 访问的端口号</span></span><br><span class="line">    <span class="attr">https:</span> <span class="literal">false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="MinIoUtil"><a href="#MinIoUtil" class="headerlink" title="MinIoUtil"></a>MinIoUtil</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.minio.*;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.DeleteError;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.DeleteObject;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.Item;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.FastByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: wj</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2021-06-24 14:03</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinIoUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MinioClient minioClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看存储bucket是否存在</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">bucketExists</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        Boolean found;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> found;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建存储bucket</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">makeBucket</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.makeBucket(MakeBucketArgs.builder()</span><br><span class="line">                    .bucket(bucketName)</span><br><span class="line">                    .build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除存储bucket</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">removeBucket</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.removeBucket(RemoveBucketArgs.builder()</span><br><span class="line">                    .bucket(bucketName)</span><br><span class="line">                    .build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件上传</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file       文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">upload</span><span class="params">(MultipartFile file, String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">PutObjectArgs</span> <span class="variable">objectArgs</span> <span class="operator">=</span> PutObjectArgs.builder().bucket(bucketName).object(file.getOriginalFilename())</span><br><span class="line">                    .stream(file.getInputStream(), file.getSize(), -<span class="number">1</span>).contentType(file.getContentType()).build();</span><br><span class="line">            <span class="comment">//文件名称相同会覆盖</span></span><br><span class="line">            minioClient.putObject(objectArgs);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件下载</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName   文件名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> res        response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">download</span><span class="params">(String bucketName, String fileName, HttpServletResponse res)</span> &#123;</span><br><span class="line">        <span class="type">GetObjectArgs</span> <span class="variable">objectArgs</span> <span class="operator">=</span> GetObjectArgs.builder().bucket(bucketName)</span><br><span class="line">                .object(fileName).build();</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">GetObjectResponse</span> <span class="variable">response</span> <span class="operator">=</span> minioClient.getObject(objectArgs)) &#123;</span><br><span class="line">            <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> len;</span><br><span class="line">            <span class="keyword">try</span> (<span class="type">FastByteArrayOutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FastByteArrayOutputStream</span>()) &#123;</span><br><span class="line">                <span class="keyword">while</span> ((len = response.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                    os.write(buf, <span class="number">0</span>, len);</span><br><span class="line">                &#125;</span><br><span class="line">                os.flush();</span><br><span class="line">                <span class="type">byte</span>[] bytes = os.toByteArray();</span><br><span class="line">                res.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">                <span class="comment">//设置强制下载不打开</span></span><br><span class="line">                res.setContentType(<span class="string">&quot;application/force-download&quot;</span>);</span><br><span class="line">                res.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;fileName=&quot;</span> + fileName);</span><br><span class="line">                <span class="keyword">try</span> (<span class="type">ServletOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> res.getOutputStream()) &#123;</span><br><span class="line">                    stream.write(bytes);</span><br><span class="line">                    stream.flush();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看文件对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 存储bucket内文件对象信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">listObjects</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        Iterable&lt;Result&lt;Item&gt;&gt; results = minioClient.listObjects(</span><br><span class="line">                ListObjectsArgs.builder().bucket(bucketName).build());</span><br><span class="line"><span class="comment">//        List&lt;ObjectItem&gt; objectItems = new ArrayList&lt;&gt;();</span></span><br><span class="line"><span class="comment">//        try &#123;</span></span><br><span class="line"><span class="comment">//            for (Result&lt;Item&gt; result : results) &#123;</span></span><br><span class="line"><span class="comment">//                Item item = result.get();</span></span><br><span class="line"><span class="comment">//                ObjectItem objectItem = new ObjectItem();</span></span><br><span class="line"><span class="comment">//                objectItem.setObjectName(item.objectName());</span></span><br><span class="line"><span class="comment">//                objectItem.setSize(item.size());</span></span><br><span class="line"><span class="comment">//                objectItems.add(objectItem);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125; catch (Exception e) &#123;</span></span><br><span class="line"><span class="comment">//            e.printStackTrace();</span></span><br><span class="line"><span class="comment">//            return null;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//        return objectItems;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 批量删除文件对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName 存储bucket名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> objects    对象名称集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Iterable&lt;Result&lt;DeleteError&gt;&gt; <span class="title function_">removeObjects</span><span class="params">(String bucketName, List&lt;String&gt; objects)</span> &#123;</span><br><span class="line">        List&lt;DeleteObject&gt; dos = objects.stream().map(e -&gt; <span class="keyword">new</span> <span class="title class_">DeleteObject</span>(e)).collect(Collectors.toList());</span><br><span class="line">        Iterable&lt;Result&lt;DeleteError&gt;&gt; results = minioClient.removeObjects(RemoveObjectsArgs.builder().bucket(bucketName).objects(dos).build());</span><br><span class="line">        <span class="keyword">return</span> results;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重启gitlab服务"><a href="#重启gitlab服务" class="headerlink" title="重启gitlab服务"></a>重启gitlab服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure>
 
-<h3 id="MinioController"><a href="#MinioController" class="headerlink" title="MinioController"></a>MinioController</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinioController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MinIoUtil minIoUtil;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/bucketExists/&#123;name&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">bucketExists</span><span class="params">(<span class="meta">@PathVariable</span> String name)</span> &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> minIoUtil.bucketExists(name);</span><br><span class="line">        System.out.println(aBoolean);</span><br><span class="line">        <span class="keyword">return</span> aBoolean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件上传</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bucketName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/upload&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">upload</span><span class="params">(MultipartFile file, <span class="meta">@RequestParam(value = &quot;bucketName&quot;)</span> String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(bucketName)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;存储bucket名称为空，无法上传&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;存储bucket名称为空，无法上传&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!minIoUtil.upload(file, bucketName)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;文件上传异常&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;文件上传异常&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;文件上传成功&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者，退出容器后，重启容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker restart gitlab</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>springboot</category>
+        <category>gitlab</category>
       </categories>
       <tags>
-        <tag>springboot</tag>
+        <tag>git</tag>
+        <tag>gitlab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu安装gitlab-Runner</title>
+    <url>/6c7e127d.html</url>
+    <content><![CDATA[<h2 id="1、下载"><a href="#1、下载" class="headerlink" title="1、下载"></a>1、下载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -LJO <span class="string">&quot;https://gitlab-runner-downloads.s3.amazonaws.com/latest/deb/gitlab-runner_amd64.deb&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg -i gitlab-runner_amd64.deb</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、更新"><a href="#3、更新" class="headerlink" title="3、更新"></a>3、更新</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg -i gitlab-runner_amd64.deb</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、注册"><a href="#4、注册" class="headerlink" title="4、注册"></a>4、注册</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo gitlab-runner register</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li>url</li>
+<li>token</li>
+<li>描述</li>
+<li>标签，不设置全局可用</li>
+<li>执行方式：shell</li>
+</ol>
+</blockquote>
+<h2 id="错误解决方法"><a href="#错误解决方法" class="headerlink" title="错误解决方法"></a>错误解决方法</h2><ol>
+<li><h5 id="ERROR-Job-failed-system-failure-prepare-environment-exit-status-1-Check-https-docs-gitlab-com-runner-shells-index-html-shell-profile-loading-for-more-information"><a href="#ERROR-Job-failed-system-failure-prepare-environment-exit-status-1-Check-https-docs-gitlab-com-runner-shells-index-html-shell-profile-loading-for-more-information" class="headerlink" title="ERROR: Job failed (system failure): prepare environment: exit status 1. Check https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading for more information"></a>ERROR: Job failed (system failure): prepare environment: exit status 1. Check <a href="https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading">https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading</a> for more information</h5><p>原因：<strong>Ubuntu 20.04</strong>版本在执行<strong>ci</strong>时会出现此错误，解决方法是删除工作目录下的**.bash_logout**文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看gitlab-runner配置</span></span><br><span class="line">jack@k8smaster:~$ ps aux | grep gitlab-runner</span><br><span class="line"></span><br><span class="line">root      314163  0.2  0.3 143980 30740 ?        Ssl  08:06   0:01 /usr/bin/gitlab-runner run --working-directory /home/gitlab-runner --config /etc/gitlab-runner/config.toml --service gitlab-runner --user gitlab-runner</span><br><span class="line">jack      320030  0.0  0.0   6432  2624 pts/0    S+   08:14   0:00 grep --color=auto gitlab-runner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除.bash_logout</span></span><br><span class="line">jack@k8smaster:~$ sudo <span class="built_in">rm</span> -r /home/gitlab-runner/.bash_logout</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><h5 id="Got-permission-denied-while-trying-to-connect-to-the-Docker-daemon-socket-at-unix-x2F-x2F-x2F-var-x2F-run-x2F-docker-sock-Post-http-x2F-x2F-2Fvar-2Frun-2Fdocker-sock-x2F-v1-24-x2F-auth-dial-unix-x2F-var-x2F-run-x2F-docker-sock-connect-permission-denied"><a href="#Got-permission-denied-while-trying-to-connect-to-the-Docker-daemon-socket-at-unix-x2F-x2F-x2F-var-x2F-run-x2F-docker-sock-Post-http-x2F-x2F-2Fvar-2Frun-2Fdocker-sock-x2F-v1-24-x2F-auth-dial-unix-x2F-var-x2F-run-x2F-docker-sock-connect-permission-denied" class="headerlink" title="Got permission denied while trying to connect to the Docker daemon socket at unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock: Post http:&#x2F;&#x2F;%2Fvar%2Frun%2Fdocker.sock&#x2F;v1.24&#x2F;auth: dial unix &#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied"></a>Got permission denied while trying to connect to the Docker daemon socket at unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock: Post http:&#x2F;&#x2F;%2Fvar%2Frun%2Fdocker.sock&#x2F;v1.24&#x2F;auth: dial unix &#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied</h5><p>原因：gitlab-runner账号权限不足，不能访问&#x2F;var&#x2F;run&#x2F;docker.sock。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将gitlab-runner用户加入docker组</span></span><br><span class="line">[root@gitlab-runner ~]<span class="comment"># usermod -aG docker gitlab-runner</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">[root@gitlab-runner ~]<span class="comment"># groups gitlab-runner </span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><h4 id="执行kubectl命令报错：The-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port"><a href="#执行kubectl命令报错：The-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port" class="headerlink" title="执行kubectl命令报错：The connection to the server localhost:8080 was refused - did you specify the right host or port?"></a>执行kubectl命令报错：The connection to the server localhost:8080 was refused - did you specify the right host or port?</h4><p>原因：gitlab-runner账号没有kubeadm配置文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /home/gitlab-runner/.kube</span><br><span class="line">sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf /home/gitlab-runner/.kube/config</span><br><span class="line">sudo <span class="built_in">chown</span> 755 /home/gitlab-runner/.kube/config</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><h4 id="启用多分支报错：Error-Cannot-perform-an-interactive-login-from-a-non-TTY-device"><a href="#启用多分支报错：Error-Cannot-perform-an-interactive-login-from-a-non-TTY-device" class="headerlink" title="启用多分支报错：Error: Cannot perform an interactive login from a non TTY device"></a>启用多分支报错：Error: Cannot perform an interactive login from a non TTY device</h4><p>原因：变量受到保护，而除master分支默认被保护之外，其他分支未设置保护，无法读取被保护的变量</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">将分支添加到受保护的分支下面；</span><br><span class="line">设置-&gt;仓库-&gt;Protected branches,选择要保护的分支。</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>devOps</category>
+      </categories>
+      <tags>
+        <tag>gitlab</tag>
+        <tag>devOps</tag>
       </tags>
   </entry>
   <entry>
@@ -3160,11 +3177,9 @@
       </tags>
   </entry>
   <entry>
-    <title>开启网站代码复制脚本</title>
-    <url>/b97d5e96.html</url>
-    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">javascript</span>:<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">contentEditable</span>=<span class="string">&#x27;true&#x27;</span>;<span class="variable language_">document</span>.<span class="property">designMode</span>=<span class="string">&#x27;on&#x27;</span>; <span class="keyword">void</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>直接添加书签保存即可，然后打开页面时需要编辑的页面点击一下这个书签。</p>
+    <title>postman汉化</title>
+    <url>/4158faf6.html</url>
+    <content><![CDATA[<p><a href="https://github.com/hlmd/Postman-cn">https://github.com/hlmd/Postman-cn</a></p>
 ]]></content>
       <categories>
         <category>工具箱</category>
@@ -3195,15 +3210,35 @@
       </tags>
   </entry>
   <entry>
-    <title>postman汉化</title>
-    <url>/4158faf6.html</url>
-    <content><![CDATA[<p><a href="https://github.com/hlmd/Postman-cn">https://github.com/hlmd/Postman-cn</a></p>
+    <title>开启网站代码复制脚本</title>
+    <url>/b97d5e96.html</url>
+    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">javascript</span>:<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">contentEditable</span>=<span class="string">&#x27;true&#x27;</span>;<span class="variable language_">document</span>.<span class="property">designMode</span>=<span class="string">&#x27;on&#x27;</span>; <span class="keyword">void</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>直接添加书签保存即可，然后打开页面时需要编辑的页面点击一下这个书签。</p>
 ]]></content>
       <categories>
         <category>工具箱</category>
       </categories>
       <tags>
         <tag>工具箱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C调用另一个.c文件的函数</title>
+    <url>/e9a0e41a.html</url>
+    <content><![CDATA[<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>c语音的模块开发，首先定义一个c代码的头文件，如function.h,在里面声明将要实现的函数，如int add（int a，int b）; ，然后新建一个源文件为function.c,在function.c的开头#include “function.h”,然后下面写头文件中已声明的函数的实现。这样写完了之后，main函数如果要调用这个源文件中的函数，只需要在main函数的开头部分加入#include&lt;function.h&gt;，如此这般，main函数调用相应函数的时候就会自动找到程序的实现部分代码了。</p>
+<h2 id="function-h"><a href="#function-h" class="headerlink" title="function.h"></a>function.h</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="function-c"><a href="#function-c" class="headerlink" title="function.c"></a>function.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;function.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">int</span> a = <span class="number">1</span>,b =<span class="number">2</span>;</span><br><span class="line">   <span class="type">int</span> c = add(a,b);   <span class="comment">//这里是对function.c中的add函数的调用</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;c=%d&quot;</span>,c);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>c</category>
+      </categories>
+      <tags>
+        <tag>c</tag>
       </tags>
   </entry>
   <entry>
