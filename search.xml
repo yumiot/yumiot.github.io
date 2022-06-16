@@ -110,24 +110,22 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker安装MongoDB</title>
-    <url>/895ab3f9.html</url>
-    <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
+    <title>eclipse快捷键</title>
+    <url>/168fd7a4.html</url>
+    <content><![CDATA[<p> 转为大写 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + x </span><br></pre></td></tr></table></figure>
 
-<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<ul>
-<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
-<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
-</ul>
-</blockquote>
-<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+
+<p>转为小写</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + y  </span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
-        <category>docker</category>
+        <category>eclipse</category>
       </categories>
       <tags>
-        <tag>docker</tag>
+        <tag>eclipse</tag>
       </tags>
   </entry>
   <entry>
@@ -149,6 +147,27 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/bash_completion</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker安装MongoDB</title>
+    <url>/895ab3f9.html</url>
+    <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
+<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
+</ul>
+</blockquote>
+<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>docker</category>
       </categories>
@@ -721,6 +740,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker部署springboot项目</title>
+    <url>/cf4f3fa8.html</url>
+    <content><![CDATA[<h3 id="使用docker部署springboot项目"><a href="#使用docker部署springboot项目" class="headerlink" title="使用docker部署springboot项目"></a>使用docker部署springboot项目</h3><h3 id="打包jar"><a href="#打包jar" class="headerlink" title="打包jar"></a>打包jar</h3><p>使用idea一键打包</p>
+<h3 id="编写Dockerfile文件"><a href="#编写Dockerfile文件" class="headerlink" title="编写Dockerfile文件"></a>编写Dockerfile文件</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。</span></span><br><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指明镜像维护着及其联系方式(一般是邮箱地址)</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> jack &lt;<span class="number">171756268</span>@qq.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置上海时间</span></span><br><span class="line"><span class="keyword">ENV</span> TZ=Asia/Shanghai</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">ln</span> -sf /usr/share/zoneinfo/<span class="variable">$TZ</span> /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="variable">$TZ</span> &gt; /etc/timezone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个文件，作为工作目录使用</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为RUN、CMD、ENTRYPOINT以及COPY和AND设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明容器运行暴露的服务端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拷贝文件或目录到镜像中，并重命名为demo.jar</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> demo-test-0.0.2-SNAPSHOT.jar demo.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器时执行的Shell命令，同CMD类似，只是由ENTRYPOINT启动的程序不会被docker run命令行指定的参数所覆盖，</span></span><br><span class="line"><span class="comment"># 而且，这些命令行参数会被当作参数传递给ENTRYPOINT指定指定的程序</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;java&quot;</span>,<span class="string">&quot;-Djava.security.egd=file:/dev/./urandom&quot;</span>,<span class="string">&quot;-jar&quot;</span>,<span class="string">&quot;demo.jar&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker build -t demo-java . </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-t  指定此镜像的tag名</p>
+<p>注意tag名后面有一个点.，指的是 build context 为当前目录</p>
+<p>也可以通过 -f 参数指定 Dockerfile 的位置</p>
+</blockquote>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --name demo-jave -p 8080:8080 -d demo-java</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用alpine镜像时，时区问题"><a href="#使用alpine镜像时，时区问题" class="headerlink" title="使用alpine镜像时，时区问题"></a>使用alpine镜像时，时区问题</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ENV</span> TZ=Asia/Shanghai</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk --no-cache add tzdata &amp;&amp; <span class="built_in">ln</span> -sf /usr/share/zoneinfo/<span class="variable">$TZ</span> /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="variable">$TZ</span> &gt; /etc/timezone</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>apk –no-cache add tzdata</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker修改国内镜像源</title>
     <url>/5cc914c3.html</url>
     <content><![CDATA[<h1 id="国内镜像仓库"><a href="#国内镜像仓库" class="headerlink" title="国内镜像仓库"></a>国内镜像仓库</h1><table>
@@ -760,36 +809,6 @@
 
 <h1 id="测试配置是否成功"><a href="#测试配置是否成功" class="headerlink" title="测试配置是否成功"></a>测试配置是否成功</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker search nginx</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker部署springboot项目</title>
-    <url>/cf4f3fa8.html</url>
-    <content><![CDATA[<h3 id="使用docker部署springboot项目"><a href="#使用docker部署springboot项目" class="headerlink" title="使用docker部署springboot项目"></a>使用docker部署springboot项目</h3><h3 id="打包jar"><a href="#打包jar" class="headerlink" title="打包jar"></a>打包jar</h3><p>使用idea一键打包</p>
-<h3 id="编写Dockerfile文件"><a href="#编写Dockerfile文件" class="headerlink" title="编写Dockerfile文件"></a>编写Dockerfile文件</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定制的镜像都是基于 FROM 的镜像，这里的 java 就是定制需要的基础镜像。后续的操作都是基于 java。</span></span><br><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指明镜像维护着及其联系方式(一般是邮箱地址)</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> jack &lt;<span class="number">171756268</span>@qq.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置上海时间</span></span><br><span class="line"><span class="keyword">ENV</span> TZ=Asia/Shanghai</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">ln</span> -sf /usr/share/zoneinfo/<span class="variable">$TZ</span> /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="variable">$TZ</span> &gt; /etc/timezone</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个文件，作为工作目录使用</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为RUN、CMD、ENTRYPOINT以及COPY和AND设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明容器运行暴露的服务端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#拷贝文件或目录到镜像中，并重命名为demo.jar</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> demo-test-0.0.2-SNAPSHOT.jar demo.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器时执行的Shell命令，同CMD类似，只是由ENTRYPOINT启动的程序不会被docker run命令行指定的参数所覆盖，</span></span><br><span class="line"><span class="comment"># 而且，这些命令行参数会被当作参数传递给ENTRYPOINT指定指定的程序</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;java&quot;</span>,<span class="string">&quot;-Djava.security.egd=file:/dev/./urandom&quot;</span>,<span class="string">&quot;-jar&quot;</span>,<span class="string">&quot;demo.jar&quot;</span>]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker build -t demo-java . </span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>-t  指定此镜像的tag名</p>
-<p>注意tag名后面有一个点.，指的是 build context 为当前目录</p>
-<p>也可以通过 -f 参数指定 Dockerfile 的位置</p>
-</blockquote>
-<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --name demo-jave -p 8080:8080 -d demo-java</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="使用alpine镜像时，时区问题"><a href="#使用alpine镜像时，时区问题" class="headerlink" title="使用alpine镜像时，时区问题"></a>使用alpine镜像时，时区问题</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ENV</span> TZ=Asia/Shanghai</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk --no-cache add tzdata &amp;&amp; <span class="built_in">ln</span> -sf /usr/share/zoneinfo/<span class="variable">$TZ</span> /etc/localtime &amp;&amp; <span class="built_in">echo</span> <span class="variable">$TZ</span> &gt; /etc/timezone</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>apk –no-cache add tzdata</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -886,32 +905,6 @@
       </tags>
   </entry>
   <entry>
-    <title>docker安装禅道</title>
-    <url>/b5a90049.html</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> www</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> data</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="启动禅道"><a href="#启动禅道" class="headerlink" title="启动禅道"></a>启动禅道</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name zentao -p 80:80 -v /mnt/data/zentao/www:/app/zentaopms -v /mnt/data/zentao/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>访问：浏览器直接访问http:&#x2F;&#x2F;容器ip:宿主机映射端口。</p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker安装Prometheus</title>
     <url>/74f5c67c.html</url>
     <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull prom/prometheus</span><br></pre></td></tr></table></figure>
@@ -936,6 +929,32 @@
       <tags>
         <tag>docker</tag>
         <tag>Prometheus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker安装禅道</title>
+    <url>/b5a90049.html</url>
+    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> www</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> data</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动禅道"><a href="#启动禅道" class="headerlink" title="启动禅道"></a>启动禅道</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name zentao -p 80:80 -v /mnt/data/zentao/www:/app/zentaopms -v /mnt/data/zentao/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>访问：浏览器直接访问http:&#x2F;&#x2F;容器ip:宿主机映射端口。</p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -1080,40 +1099,6 @@
       </tags>
   </entry>
   <entry>
-    <title>eclipse快捷键</title>
-    <url>/168fd7a4.html</url>
-    <content><![CDATA[<p> 转为大写 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + x </span><br></pre></td></tr></table></figure>
-
-
-
-<p>转为小写</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + y  </span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>eclipse</category>
-      </categories>
-      <tags>
-        <tag>eclipse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git跳过代码检查</title>
-    <url>/5c1803c3.html</url>
-    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../images/git/git--no-verify.png"></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git分支开发工作流</title>
     <url>/5b072233.html</url>
     <content><![CDATA[<h1 id="Git分支开发工作流"><a href="#Git分支开发工作流" class="headerlink" title="Git分支开发工作流"></a>Git分支开发工作流</h1><h2 id="Git分支明细"><a href="#Git分支明细" class="headerlink" title="Git分支明细"></a>Git分支明细</h2><p><img src="/../../images/git/git%E5%88%86%E6%94%AF.png"></p>
@@ -1136,15 +1121,18 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo关闭Next主题加载效果</title>
-    <url>/a52b693e.html</url>
-    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
+    <title>git跳过代码检查</title>
+    <url>/5c1803c3.html</url>
+    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../images/git/git--no-verify.png"></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1218,6 +1206,19 @@
       </tags>
   </entry>
   <entry>
+    <title>正则密码</title>
+    <url>/ca0ded35.html</url>
+    <content><![CDATA[<h1 id="密码正则表达式"><a href="#密码正则表达式" class="headerlink" title="密码正则表达式"></a>密码正则表达式</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//密码至少包含 数字和英文，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 密码包含 数字,英文,字符中的两种以上，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 至少包含数字跟字母，可以有字符</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&amp;*()]&#123;6,20&#125;$&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>idea</category>
+      </categories>
+      <tags>
+        <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决webstrom无法识别@（别名路径）的问题</title>
     <url>/ffcc343e.html</url>
     <content><![CDATA[<p>设置 -&gt; 语言和框架  -&gt;  JavaScript -&gt; Webpack 设置为自动</p>
@@ -1231,16 +1232,15 @@
       </tags>
   </entry>
   <entry>
-    <title>正则密码</title>
-    <url>/ca0ded35.html</url>
-    <content><![CDATA[<h1 id="密码正则表达式"><a href="#密码正则表达式" class="headerlink" title="密码正则表达式"></a>密码正则表达式</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//密码至少包含 数字和英文，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 密码包含 数字,英文,字符中的两种以上，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 至少包含数字跟字母，可以有字符</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&amp;*()]&#123;6,20&#125;$&quot;</span>;</span><br></pre></td></tr></table></figure>
-
+    <title>hexo关闭Next主题加载效果</title>
+    <url>/a52b693e.html</url>
+    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
 ]]></content>
       <categories>
-        <category>idea</category>
+        <category>hexo</category>
       </categories>
       <tags>
-        <tag>idea</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -1368,6 +1368,35 @@
       </tags>
   </entry>
   <entry>
+    <title>使用jlink定制生成JRE</title>
+    <url>/90e68bc9.html</url>
+    <content><![CDATA[<p>在</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/jlink --module-path jmods --add-modules java.base --output myjre</span><br></pre></td></tr></table></figure>
+
+<p>查看 jre 中添加的模块</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">myjre/bin/java --list-modules</span><br></pre></td></tr></table></figure>
+
+<p>NoClassDefFound 错误说明，jre 中没有添加相关的模块。</p>
+<p>首先，需要确定缺少的 class 存在于那个 jdk module 中，然后在 jlink 命令中添加到 –add-modules 列表中，重新生成 jre 就可以了</p>
+<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bin/jlink \</span><br><span class="line">--module-path jmods \</span><br><span class="line">--add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management,jdk.net \</span><br><span class="line">--strip-debug \</span><br><span class="line">--output myjre</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jlink \</span><br><span class="line">    --verbose \</span><br><span class="line">    --module-path &quot;$JAVA_HOME/jmods&quot; \</span><br><span class="line">    --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management \</span><br><span class="line">    --compress 2 \</span><br><span class="line">    --no-header-files \</span><br><span class="line">    --no-man-pages \</span><br><span class="line">    --strip-debug \</span><br><span class="line">    --output /opt/jre</span><br></pre></td></tr></table></figure>
+
+<h3 id="全部jre"><a href="#全部jre" class="headerlink" title="全部jre"></a>全部jre</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/jlink --module-path jmods --add-modules java.base,java.compiler,java.datatransfer,java.desktop,java.instrument,java.logging,java.management,java.management.rmi,java.naming,java.net.http,java.prefs,java.rmi,java.scripting,java.se,java.security.jgss,java.security.sasl,java.smartcardio,java.sql,java.sql.rowset,java.transaction.xa,java.xml,java.xml.crypto,jdk.accessibility,jdk.aot,jdk.attach,jdk.charsets,jdk.compiler,jdk.crypto.cryptoki,jdk.crypto.ec,jdk.dynalink,jdk.editpad,jdk.hotspot.agent,jdk.httpserver,jdk.internal.ed,jdk.internal.jvmstat,jdk.internal.le,jdk.internal.opt,jdk.internal.vm.ci,jdk.internal.vm.compiler,jdk.internal.vm.compiler.management,jdk.jartool,jdk.javadoc,jdk.jcmd,jdk.jconsole,jdk.jdeps,jdk.jdi,jdk.jdwp.agent,jdk.jfr,jdk.jlink,jdk.jshell,jdk.jsobject,jdk.jstatd,jdk.localedata,jdk.management,jdk.management.agent,jdk.management.jfr,jdk.naming.dns,jdk.naming.ldap,jdk.naming.rmi,jdk.net,jdk.pack,jdk.rmic,jdk.scripting.nashorn,jdk.scripting.nashorn.shell,jdk.sctp,jdk.security.auth,jdk.security.jgss,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,jdk.zipfs --strip-debug --output myjre</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="全部模块："><a href="#全部模块：" class="headerlink" title="全部模块："></a>全部模块：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.base</span><br><span class="line">java.compiler</span><br><span class="line">java.datatransfer</span><br><span class="line">java.desktop</span><br><span class="line">java.instrument</span><br><span class="line">java.logging</span><br><span class="line">java.management</span><br><span class="line">java.management.rmi</span><br><span class="line">java.naming</span><br><span class="line">java.net.http</span><br><span class="line">java.prefs</span><br><span class="line">java.rmi</span><br><span class="line">java.scripting</span><br><span class="line">java.se</span><br><span class="line">java.security.jgss</span><br><span class="line">java.security.sasl</span><br><span class="line">java.smartcardio</span><br><span class="line">java.sql</span><br><span class="line">java.sql.rowset</span><br><span class="line">java.transaction.xa</span><br><span class="line">java.xml</span><br><span class="line">java.xml.crypto</span><br><span class="line">jdk.accessibility</span><br><span class="line">jdk.aot</span><br><span class="line">jdk.attach</span><br><span class="line">jdk.charsets</span><br><span class="line">jdk.compiler</span><br><span class="line">jdk.crypto.cryptoki</span><br><span class="line">jdk.crypto.ec</span><br><span class="line">jdk.dynalink</span><br><span class="line">jdk.editpad</span><br><span class="line">jdk.hotspot.agent</span><br><span class="line">jdk.httpserver</span><br><span class="line">jdk.internal.ed</span><br><span class="line">jdk.internal.jvmstat</span><br><span class="line">jdk.internal.le</span><br><span class="line">jdk.internal.opt</span><br><span class="line">jdk.internal.vm.ci</span><br><span class="line">jdk.internal.vm.compiler</span><br><span class="line">jdk.internal.vm.compiler.management</span><br><span class="line">jdk.jartool</span><br><span class="line">jdk.javadoc</span><br><span class="line">jdk.jcmd</span><br><span class="line">jdk.jconsole</span><br><span class="line">jdk.jdeps</span><br><span class="line">jdk.jdi</span><br><span class="line">jdk.jdwp.agent</span><br><span class="line">jdk.jfr</span><br><span class="line">jdk.jlink</span><br><span class="line">jdk.jshell</span><br><span class="line">jdk.jsobject</span><br><span class="line">jdk.jstatd</span><br><span class="line">jdk.localedata</span><br><span class="line">jdk.management</span><br><span class="line">jdk.management.agent</span><br><span class="line">jdk.management.jfr</span><br><span class="line">jdk.naming.dns</span><br><span class="line">jdk.naming.ldap</span><br><span class="line">jdk.naming.rmi</span><br><span class="line">jdk.net</span><br><span class="line">jdk.pack</span><br><span class="line">jdk.rmic</span><br><span class="line">jdk.scripting.nashorn</span><br><span class="line">jdk.scripting.nashorn.shell</span><br><span class="line">jdk.sctp</span><br><span class="line">jdk.security.auth</span><br><span class="line">jdk.security.jgss</span><br><span class="line">jdk.unsupported</span><br><span class="line">jdk.unsupported.desktop</span><br><span class="line">jdk.xml.dom</span><br><span class="line">jdk.zipfs</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>jpackage打包Java应用</title>
     <url>/9642e6ad.html</url>
     <content><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="安装JDK，这里使用的是JDK17"><a href="#安装JDK，这里使用的是JDK17" class="headerlink" title="安装JDK，这里使用的是JDK17"></a>安装JDK，这里使用的是JDK17</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-17-jdk</span><br></pre></td></tr></table></figure>
@@ -1420,35 +1449,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用jlink定制生成JRE</title>
-    <url>/90e68bc9.html</url>
-    <content><![CDATA[<p>在</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/jlink --module-path jmods --add-modules java.base --output myjre</span><br></pre></td></tr></table></figure>
-
-<p>查看 jre 中添加的模块</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">myjre/bin/java --list-modules</span><br></pre></td></tr></table></figure>
-
-<p>NoClassDefFound 错误说明，jre 中没有添加相关的模块。</p>
-<p>首先，需要确定缺少的 class 存在于那个 jdk module 中，然后在 jlink 命令中添加到 –add-modules 列表中，重新生成 jre 就可以了</p>
-<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bin/jlink \</span><br><span class="line">--module-path jmods \</span><br><span class="line">--add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management,jdk.net \</span><br><span class="line">--strip-debug \</span><br><span class="line">--output myjre</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jlink \</span><br><span class="line">    --verbose \</span><br><span class="line">    --module-path &quot;$JAVA_HOME/jmods&quot; \</span><br><span class="line">    --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management \</span><br><span class="line">    --compress 2 \</span><br><span class="line">    --no-header-files \</span><br><span class="line">    --no-man-pages \</span><br><span class="line">    --strip-debug \</span><br><span class="line">    --output /opt/jre</span><br></pre></td></tr></table></figure>
-
-<h3 id="全部jre"><a href="#全部jre" class="headerlink" title="全部jre"></a>全部jre</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/jlink --module-path jmods --add-modules java.base,java.compiler,java.datatransfer,java.desktop,java.instrument,java.logging,java.management,java.management.rmi,java.naming,java.net.http,java.prefs,java.rmi,java.scripting,java.se,java.security.jgss,java.security.sasl,java.smartcardio,java.sql,java.sql.rowset,java.transaction.xa,java.xml,java.xml.crypto,jdk.accessibility,jdk.aot,jdk.attach,jdk.charsets,jdk.compiler,jdk.crypto.cryptoki,jdk.crypto.ec,jdk.dynalink,jdk.editpad,jdk.hotspot.agent,jdk.httpserver,jdk.internal.ed,jdk.internal.jvmstat,jdk.internal.le,jdk.internal.opt,jdk.internal.vm.ci,jdk.internal.vm.compiler,jdk.internal.vm.compiler.management,jdk.jartool,jdk.javadoc,jdk.jcmd,jdk.jconsole,jdk.jdeps,jdk.jdi,jdk.jdwp.agent,jdk.jfr,jdk.jlink,jdk.jshell,jdk.jsobject,jdk.jstatd,jdk.localedata,jdk.management,jdk.management.agent,jdk.management.jfr,jdk.naming.dns,jdk.naming.ldap,jdk.naming.rmi,jdk.net,jdk.pack,jdk.rmic,jdk.scripting.nashorn,jdk.scripting.nashorn.shell,jdk.sctp,jdk.security.auth,jdk.security.jgss,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,jdk.zipfs --strip-debug --output myjre</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="全部模块："><a href="#全部模块：" class="headerlink" title="全部模块："></a>全部模块：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.base</span><br><span class="line">java.compiler</span><br><span class="line">java.datatransfer</span><br><span class="line">java.desktop</span><br><span class="line">java.instrument</span><br><span class="line">java.logging</span><br><span class="line">java.management</span><br><span class="line">java.management.rmi</span><br><span class="line">java.naming</span><br><span class="line">java.net.http</span><br><span class="line">java.prefs</span><br><span class="line">java.rmi</span><br><span class="line">java.scripting</span><br><span class="line">java.se</span><br><span class="line">java.security.jgss</span><br><span class="line">java.security.sasl</span><br><span class="line">java.smartcardio</span><br><span class="line">java.sql</span><br><span class="line">java.sql.rowset</span><br><span class="line">java.transaction.xa</span><br><span class="line">java.xml</span><br><span class="line">java.xml.crypto</span><br><span class="line">jdk.accessibility</span><br><span class="line">jdk.aot</span><br><span class="line">jdk.attach</span><br><span class="line">jdk.charsets</span><br><span class="line">jdk.compiler</span><br><span class="line">jdk.crypto.cryptoki</span><br><span class="line">jdk.crypto.ec</span><br><span class="line">jdk.dynalink</span><br><span class="line">jdk.editpad</span><br><span class="line">jdk.hotspot.agent</span><br><span class="line">jdk.httpserver</span><br><span class="line">jdk.internal.ed</span><br><span class="line">jdk.internal.jvmstat</span><br><span class="line">jdk.internal.le</span><br><span class="line">jdk.internal.opt</span><br><span class="line">jdk.internal.vm.ci</span><br><span class="line">jdk.internal.vm.compiler</span><br><span class="line">jdk.internal.vm.compiler.management</span><br><span class="line">jdk.jartool</span><br><span class="line">jdk.javadoc</span><br><span class="line">jdk.jcmd</span><br><span class="line">jdk.jconsole</span><br><span class="line">jdk.jdeps</span><br><span class="line">jdk.jdi</span><br><span class="line">jdk.jdwp.agent</span><br><span class="line">jdk.jfr</span><br><span class="line">jdk.jlink</span><br><span class="line">jdk.jshell</span><br><span class="line">jdk.jsobject</span><br><span class="line">jdk.jstatd</span><br><span class="line">jdk.localedata</span><br><span class="line">jdk.management</span><br><span class="line">jdk.management.agent</span><br><span class="line">jdk.management.jfr</span><br><span class="line">jdk.naming.dns</span><br><span class="line">jdk.naming.ldap</span><br><span class="line">jdk.naming.rmi</span><br><span class="line">jdk.net</span><br><span class="line">jdk.pack</span><br><span class="line">jdk.rmic</span><br><span class="line">jdk.scripting.nashorn</span><br><span class="line">jdk.scripting.nashorn.shell</span><br><span class="line">jdk.sctp</span><br><span class="line">jdk.security.auth</span><br><span class="line">jdk.security.jgss</span><br><span class="line">jdk.unsupported</span><br><span class="line">jdk.unsupported.desktop</span><br><span class="line">jdk.xml.dom</span><br><span class="line">jdk.zipfs</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>修改jar包配置文件</title>
     <url>/ed246d7c.html</url>
     <content><![CDATA[<h1 id="解压jar包"><a href="#解压jar包" class="headerlink" title="解压jar包"></a>解压jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -xvf test.jar</span><br></pre></td></tr></table></figure>
@@ -1465,34 +1465,6 @@
       </categories>
       <tags>
         <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用pkg打包nodejs</title>
-    <url>/9b5f2bcc.html</url>
-    <content><![CDATA[<h1 id="安装pkg"><a href="#安装pkg" class="headerlink" title="安装pkg"></a>安装pkg</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g pkg</span><br></pre></td></tr></table></figure>
-
-<p>或</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pkg</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置入口启动文件"><a href="#配置入口启动文件" class="headerlink" title="配置入口启动文件"></a>配置入口启动文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;bin&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
-
-<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg . -t node14-linux-x64 --out-path=dist/</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>.  打包的文件 这里指当前目录下的所有</p>
-<p>-t  用于制定平台和node版本，不指定时默认为3个平台，以及package.json中的node版本配置为准</p>
-<p>–out-path   打包文件输出目录</p>
-</blockquote>
-<h1 id="常见文件及解决方法"><a href="#常见文件及解决方法" class="headerlink" title="常见文件及解决方法"></a>常见文件及解决方法</h1><h2 id="require引入外部文件"><a href="#require引入外部文件" class="headerlink" title="require引入外部文件"></a>require引入外部文件</h2><p>使用require时需要使用动态地址，比如：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> add = <span class="built_in">require</span>(process.<span class="title function_">cwd</span>() + <span class="string">&#x27;/add.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1592,6 +1564,35 @@
       </tags>
   </entry>
   <entry>
+    <title>k8s配置pv</title>
+    <url>/7eb43148.html</url>
+    <content><![CDATA[<p>参考：<a href="https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html">https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html</a></p>
+<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="comment"># NFS目录，需要该目录在NFS上存在</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/tmp</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.17</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
+
+<p>PV 的访问模式（accessModes）有三种：</p>
+<ul>
+<li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。</li>
+<li>ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。</li>
+<li>ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</li>
+</ul>
+<p>PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</p>
+<ul>
+<li>Retain，不清理, 保留 Volume（需要手动清理）</li>
+<li>Recycle，删除数据，即 <code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）</li>
+<li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
+</ul>
+<h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>kubectl 命令大全</title>
     <url>/760b67b4.html</url>
     <content><![CDATA[<h1 id="kubectl-命令"><a href="#kubectl-命令" class="headerlink" title="kubectl 命令"></a>kubectl 命令</h1><p>参考网址：<a href="https://jimmysong.io/kubernetes-handbook/guide/kubectl-cheatsheet.html">https://jimmysong.io/kubernetes-handbook/guide/kubectl-cheatsheet.html</a></p>
@@ -1635,35 +1636,6 @@
 
 
 <h4 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get cm</span><br><span class="line"></span><br><span class="line">kubectl get configmap</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>k8s配置pv</title>
-    <url>/7eb43148.html</url>
-    <content><![CDATA[<p>参考：<a href="https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html">https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html</a></p>
-<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="comment"># NFS目录，需要该目录在NFS上存在</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/tmp</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.17</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
-
-<p>PV 的访问模式（accessModes）有三种：</p>
-<ul>
-<li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。</li>
-<li>ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。</li>
-<li>ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</li>
-</ul>
-<p>PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</p>
-<ul>
-<li>Retain，不清理, 保留 Volume（需要手动清理）</li>
-<li>Recycle，删除数据，即 <code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）</li>
-<li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
-</ul>
-<h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1980,6 +1952,168 @@
       </tags>
   </entry>
   <entry>
+    <title>（二）安装Istio</title>
+    <url>/3e2a19d2.html</url>
+    <content><![CDATA[<h1 id="安装istio"><a href="#安装istio" class="headerlink" title="安装istio"></a>安装istio</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Istio 解决了开发人员和运维人员所面临的从单体应用向分布式微服务架构转变的挑战。了解它是如何做到这一点的可以让我们更详细地理解 Istio 的服务网格。</p>
+<p>术语<strong>服务网格</strong>用来描述组成这些应用程序的微服务网络以及它们之间的交互。随着服务网格的规模和复杂性不断的增长，它将会变得越来越难以理解和管理。它的需求包括服务发现、负载均衡、故障恢复、度量和监控等。服务网格通常还有更复杂的运维需求，比如 A&#x2F;B 测试、金丝雀发布、速率限制、访问控制和端到端认证。</p>
+<p>Istio 提供了对整个服务网格的行为洞察和操作控制的能力，以及一个完整的满足微服务应用各种需求的解决方案。</p>
+<p>参考：<a href="https://istio.io/latest/zh/docs/setup/getting-started">https://istio.io/latest/zh/docs/setup/getting-started</a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ol>
+<li><p>访问 <a href="https://github.com/istio/istio/releases/tag/1.8.0">Istio release</a> 页面下载与您操作系统对应的安装文件。在 macOS 或 Linux 系统中，也可以通过以下命令下载最新版本的 Istio：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L https://istio.io/downloadIstio | sh -</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>切换到 Istio 包所在目录下。例如：Istio 包名为 <code>istio-1.8.0</code>，则：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> istio-1.8.0</span><br></pre></td></tr></table></figure>
+
+
+
+<p>安装目录包含如下内容：</p>
+<ul>
+<li><code>install/kubernetes</code> 目录下，有 Kubernetes 相关的 YAML 安装文件</li>
+<li><code>samples/</code> 目录下，有示例应用程序</li>
+<li><code>bin/</code> 目录下，包含 <a href="https://istio.io/latest/zh/docs/reference/commands/istioctl"><code>istioctl</code></a> 的客户端文件。<code>istioctl</code> 工具用于手动注入 Envoy sidecar 代理。</li>
+</ul>
+</li>
+<li><p>将 <code>istioctl</code> 客户端路径增加到 path 环境变量中，macOS 或 Linux 系统的增加方式如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PWD</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="安装-Istio-使用默认配置文件"><a href="#安装-Istio-使用默认配置文件" class="headerlink" title="安装 Istio-使用默认配置文件"></a>安装 Istio-使用默认配置文件</h2><p>最简单的选择是安装 <code>default</code> Istio <a href="https://istio.io/latest/zh/docs/setup/additional-setup/config-profiles/">配置文件</a>使用以下命令：</p>
+<p><strong>1.8以下版本执行：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl manifest apply</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.8版本执行</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl install</span><br></pre></td></tr></table></figure>
+
+<p>包含demo的版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl install --<span class="built_in">set</span> profile=demo -y</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>遇到的坑：</p>
+<ol>
+<li><p>Error: Get “<a href="http://localhost:8080/api?timeout=32s&quot;">http://localhost:8080/api?timeout=32s&quot;</a>: dial tcp 127.0.0.1:8080: connect: connection refused</p>
+<p>解决方法（原因是在安装k8s的时候用户不同，存在普通用户和root用户的区别）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo <span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure></li>
+</ol>
+</blockquote>
+<h3 id="检查安装"><a href="#检查安装" class="headerlink" title="检查安装"></a>检查安装</h3><p>该<code>istioctl</code>命令将<code>IstioOperator</code>用于安装Istio的CR保存在名为的CR的副本中<code>installed-state</code>。例如，无需检查Istio安装的部署，pod，服务和其他资源，例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl -n istio-system get deploy</span><br><span class="line"></span><br><span class="line">NAME                   READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">istio-ingressgateway   1/1     1            1           49m</span><br><span class="line">istiod                 1/1     1            1           49m</span><br></pre></td></tr></table></figure>
+
+<h3 id="给命名空间添加标签，指示-Istio-在部署应用的时候，自动的注入-Envoy-边车代理："><a href="#给命名空间添加标签，指示-Istio-在部署应用的时候，自动的注入-Envoy-边车代理：" class="headerlink" title="给命名空间添加标签，指示 Istio 在部署应用的时候，自动的注入 Envoy 边车代理："></a>给命名空间添加标签，指示 Istio 在部署应用的时候，自动的注入 Envoy 边车代理：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl label namespace default istio-injection=enabled</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="部署示例应用"><a href="#部署示例应用" class="headerlink" title="部署示例应用"></a>部署示例应用</h1><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get pods</span><br><span class="line">kubectl get services</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> <span class="string">&quot;<span class="subst">$(kubectl get pod -l app=ratings -o jsonpath=&#x27;&#123;.items[0].metadata.name&#125;&#x27;)</span>&quot;</span> -c ratings -- curl -s productpage:9080/productpage | grep -o <span class="string">&quot;&lt;title&gt;.*&lt;/title&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输出：<code>&lt;title&gt;Simple Bookstore App&lt;/title&gt;</code></p>
+</blockquote>
+<h1 id="对外开发应用访问"><a href="#对外开发应用访问" class="headerlink" title="对外开发应用访问"></a>对外开发应用访问</h1><ol>
+<li><p>把应用关联到 Istio 网关：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>gateway.networking.istio.io&#x2F;bookinfo-gateway created<br>virtualservice.networking.istio.io&#x2F;bookinfo created</p>
+</blockquote>
+</li>
+<li><p>确保配置文件没有问题：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl analyze</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>✔ No validation issues found when analyzing namespace: default.</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="查看仪表盘"><a href="#查看仪表盘" class="headerlink" title="查看仪表盘"></a>查看仪表盘</h1><p>Istio 和<a href="https://istio.io/latest/zh/docs/ops/integrations">几个</a>遥测应用做了集成。 遥测能帮你了解服务网格的结构、展示网络的拓扑结构、分析网格的健康状态。</p>
+<p>使用下面说明部署 <a href="https://istio.io/latest/zh/docs/ops/integrations/kiali/">Kiali</a> 仪表板、 以及 <a href="https://istio.io/latest/zh/docs/ops/integrations/prometheus/">Prometheus</a>、 <a href="https://istio.io/latest/zh/docs/ops/integrations/grafana">Grafana</a>、 还有 <a href="https://istio.io/latest/zh/docs/ops/integrations/jaeger/">Jaeger</a></p>
+<ol>
+<li><p>安装 <a href="https://github.com/istio/istio/tree/release-1.10/samples/addons">Kiali 和其他插件</a>，等待部署完成。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">kubectl apply -f samples/addons</span><br><span class="line">kubectl rollout status deployment/kiali -n istio-system</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Waiting for deployment “kiali” rollout to finish: 0 of 1 updated replicas are available…<br>deployment “kiali” successfully rolled out</p>
+</blockquote>
+<p><strong>如果在安装插件时出错，再运行一次命令。 有一些和时间相关的问题，再运行就能解决。</strong></p>
+</li>
+<li><p>访问 Kiali 仪表板。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">istioctl dashboard kiali</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>在左侧的导航菜单，选择 <em>Graph</em> ，然后在 <em>Namespace</em> 下拉列表中，选择 <em>default</em> 。</p>
+<p>Kiali 仪表板展示了网格的概览、以及 <code>Bookinfo</code> 示例应用的各个服务之间的关系。 它还提供过滤器来可视化流量的流动。</p>
+</li>
+</ol>
+<h2 id="开启kiali外部直接访问"><a href="#开启kiali外部直接访问" class="headerlink" title="开启kiali外部直接访问"></a>开启kiali外部直接访问</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl patch svc -n istio-system kiali -p <span class="string">&#x27;&#123;&quot;spec&quot;: &#123;&quot;type&quot;: &quot;NodePort&quot;&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>k8s专题</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+        <tag>k8s专题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（四）安装使用MetricsServer</title>
+    <url>/d36a8b1c.html</url>
+    <content><![CDATA[<h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
+<ul>
+<li>Kubernetes Metrics Server 是 Cluster 的核心监控数据的聚合器，kubeadm 默认是不部署的。</li>
+<li>Metrics Server 供 Dashboard 等其他组件使用，是一个扩展的 APIServer，依赖于 API Aggregator。所以，在安装 Metrics Server 之前需要先在 kube-apiserver 中开启 API Aggregator。</li>
+<li>Metrics API 只可以查询当前的度量数据，并不保存历史数据</li>
+<li>Metrics API URI 为 <code>/apis/metrics.k8s.io/</code>，在 <a href="https://github.com/kubernetes/metrics">k8s.io&#x2F;metrics</a> 维护</li>
+<li>必须部署 <code>metrics-server</code> 才能使用该 API，metrics-server 通过调用 Kubelet Summary API 获取数据</li>
+</ul>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>1、检查 API Server 是否开启了 Aggregator Routing：查看 API Server 是否具有 –enable-aggregator-routing&#x3D;true 选项</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep apiserver</span><br></pre></td></tr></table></figure>
+
+<p>2、修改每个 API Server 的 kube-apiserver.yaml 配置开启 Aggregator Routing：修改 manifests 配置后 API Server 会自动重启生效。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/kubernetes/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span><span class="string">:6443</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">component:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--advertise-address=192.168.200.3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--allow-privileged=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--authorization-mode=Node,RBAC</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--client-ca-file=/etc/kubernetes/pki/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-admission-plugins=NodeRestriction</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-bootstrap-token-auth=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-aggregator-routing=true</span>            <span class="comment"># 添加本行</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-servers=https://127.0.0.1:2379</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--insecure-port=0</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-allowed-names=front-proxy-client</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-extra-headers-prefix=X-Remote-Extra-</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-group-headers=X-Remote-Group</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-username-headers=X-Remote-User</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--secure-port=6443</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-key-file=/etc/kubernetes/pki/sa.pub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-cluster-ip-range=10.96.0.0/12</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-cert-file=/etc/kubernetes/pki/apiserver.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-private-key-file=/etc/kubernetes/pki/apiserver.key</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">k8s.gcr.io/kube-apiserver:v1.18.2</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">8</span></span><br><span class="line">      <span class="attr">httpGet:</span></span><br><span class="line">        <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">/healthz</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">6443</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">HTTPS</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">15</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">15</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">requests:</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">250m</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">system-cluster-critical</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="部署-metrics-server"><a href="#部署-metrics-server" class="headerlink" title="部署 metrics-server"></a>部署 metrics-server</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>1、下载部署文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>附件中提供了修改好的components.yaml文件，文件名：metrics-server-components.yaml</p>
+</blockquote>
+<p>2、修改配置（主要修改镜像地址）</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP</span>  <span class="comment"># 删掉 ExternalIP,Hostname</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-insecure-tls</span> <span class="comment"># 添加该启动参数</span></span><br><span class="line"><span class="attr">image:</span> <span class="string">rancher/metrics-server:v0.4.1</span>   <span class="string">--根据自己的需要修改</span></span><br></pre></td></tr></table></figure>
+
+<p>3、部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f components.yaml</span><br></pre></td></tr></table></figure>
+
+<p>4、查看运行情况</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl -n kube-system get pods -l k8s-app=metrics-server</span><br></pre></td></tr></table></figure>
+
+<p>5、检查 API Server 是否可以连通 Metrics Server</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl describe svc metrics-server -n kube-system</span></span><br><span class="line">Name:              metrics-server</span><br><span class="line">Namespace:         kube-system</span><br><span class="line">Labels:            kubernetes.io/cluster-service=<span class="literal">true</span></span><br><span class="line">                   kubernetes.io/name=Metrics-server</span><br><span class="line">Annotations:       Selector:  k8s-app=metrics-server</span><br><span class="line">Type:              ClusterIP</span><br><span class="line">IP:                10.107.86.150</span><br><span class="line">Port:              &lt;<span class="built_in">unset</span>&gt;  443/TCP</span><br><span class="line">TargetPort:        main-port/TCP</span><br><span class="line">Endpoints:         10.244.2.20:4443</span><br><span class="line">Session Affinity:  None</span><br><span class="line">Events:            &lt;none&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他几个节点ping一下Endpoints的地址</span></span><br><span class="line">[root@master3 ~]<span class="comment"># ping 10.244.2.20</span></span><br><span class="line">PING 10.244.2.20 (10.244.2.20) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=1 ttl=64 time=0.122 ms</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=2 ttl=64 time=0.032 ms</span><br></pre></td></tr></table></figure>
+
+<p>6、执行以下命令，检查节点占用性能情况。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl top nodes</span></span><br><span class="line">NAME      CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   </span><br><span class="line">master1   223m         5%     1433Mi          52%       </span><br><span class="line">master2   148m         3%     972Mi           35%       </span><br><span class="line">master3   183m         4%     1123Mi          41%       </span><br><span class="line">node1     225m         5%     1389Mi          50%      </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@master1 ~]<span class="comment"># kubectl top pods</span></span><br><span class="line">NAME                                      CPU(cores)   MEMORY(bytes)   </span><br><span class="line">details-v1-6fc55d65c9-l97cs               4m           36Mi            </span><br><span class="line">nfs-client-provisioner-6d4469b5b5-ndg5x   4m           20Mi            </span><br><span class="line">productpage-v1-9cf6c76b5-hc2nr            10m          71Mi            </span><br><span class="line">ratings-v1-6f855c5fff-v9ht2               3m           28Mi            </span><br><span class="line">reviews-v1-697f45b7dd-w9fgc               7m           117Mi           </span><br><span class="line">reviews-v2-8c85b467b-jgx6w                6m           113Mi           </span><br><span class="line">reviews-v3-76ccf79776-74vz6               5m           117Mi    </span><br></pre></td></tr></table></figure>
+
+<p>参考文档：<a href="https://www.cnblogs.com/lfl17718347843/p/14283796.html">https://www.cnblogs.com/lfl17718347843/p/14283796.html</a></p>
+]]></content>
+      <categories>
+        <category>k8s专题</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+        <tag>k8s专题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker安装kong</title>
     <url>/ef67b3d6.html</url>
     <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull kong</span><br></pre></td></tr></table></figure>
@@ -2104,56 +2238,23 @@
       </tags>
   </entry>
   <entry>
-    <title>（四）安装使用MetricsServer</title>
-    <url>/d36a8b1c.html</url>
-    <content><![CDATA[<h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
-<ul>
-<li>Kubernetes Metrics Server 是 Cluster 的核心监控数据的聚合器，kubeadm 默认是不部署的。</li>
-<li>Metrics Server 供 Dashboard 等其他组件使用，是一个扩展的 APIServer，依赖于 API Aggregator。所以，在安装 Metrics Server 之前需要先在 kube-apiserver 中开启 API Aggregator。</li>
-<li>Metrics API 只可以查询当前的度量数据，并不保存历史数据</li>
-<li>Metrics API URI 为 <code>/apis/metrics.k8s.io/</code>，在 <a href="https://github.com/kubernetes/metrics">k8s.io&#x2F;metrics</a> 维护</li>
-<li>必须部署 <code>metrics-server</code> 才能使用该 API，metrics-server 通过调用 Kubelet Summary API 获取数据</li>
-</ul>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>1、检查 API Server 是否开启了 Aggregator Routing：查看 API Server 是否具有 –enable-aggregator-routing&#x3D;true 选项</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ps -ef | grep apiserver</span><br></pre></td></tr></table></figure>
-
-<p>2、修改每个 API Server 的 kube-apiserver.yaml 配置开启 Aggregator Routing：修改 manifests 配置后 API Server 会自动重启生效。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/kubernetes/manifests/kube-apiserver.yaml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span><span class="string">:6443</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">component:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">tier:</span> <span class="string">control-plane</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">command:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--advertise-address=192.168.200.3</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--allow-privileged=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--authorization-mode=Node,RBAC</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--client-ca-file=/etc/kubernetes/pki/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-admission-plugins=NodeRestriction</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-bootstrap-token-auth=true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--enable-aggregator-routing=true</span>            <span class="comment"># 添加本行</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--etcd-servers=https://127.0.0.1:2379</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--insecure-port=0</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-allowed-names=front-proxy-client</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-extra-headers-prefix=X-Remote-Extra-</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-group-headers=X-Remote-Group</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--requestheader-username-headers=X-Remote-User</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--secure-port=6443</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-account-key-file=/etc/kubernetes/pki/sa.pub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--service-cluster-ip-range=10.96.0.0/12</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-cert-file=/etc/kubernetes/pki/apiserver.crt</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--tls-private-key-file=/etc/kubernetes/pki/apiserver.key</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">k8s.gcr.io/kube-apiserver:v1.18.2</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">failureThreshold:</span> <span class="number">8</span></span><br><span class="line">      <span class="attr">httpGet:</span></span><br><span class="line">        <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.200</span><span class="number">.3</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">/healthz</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">6443</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">HTTPS</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">15</span></span><br><span class="line">      <span class="attr">timeoutSeconds:</span> <span class="number">15</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">kube-apiserver</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">requests:</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">250m</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hostNetwork:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">priorityClassName:</span> <span class="string">system-cluster-critical</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/ssl/certs</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">ca-certs</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">etc-pki</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/etc/kubernetes/pki</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">DirectoryOrCreate</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">k8s-certs</span></span><br><span class="line"><span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="部署-metrics-server"><a href="#部署-metrics-server" class="headerlink" title="部署 metrics-server"></a>部署 metrics-server</h2><blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>1、下载部署文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml</span><br></pre></td></tr></table></figure>
-
+    <title>ubuntu安装helm</title>
+    <url>/bc01c4d5.html</url>
+    <content><![CDATA[<ol>
+<li><p>官方文档</p>
 <blockquote>
-<p>附件中提供了修改好的components.yaml文件，文件名：metrics-server-components.yaml</p>
+<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
 </blockquote>
-<p>2、修改配置（主要修改镜像地址）</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-preferred-address-types=InternalIP</span>  <span class="comment"># 删掉 ExternalIP,Hostname</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">--kubelet-insecure-tls</span> <span class="comment"># 添加该启动参数</span></span><br><span class="line"><span class="attr">image:</span> <span class="string">rancher/metrics-server:v0.4.1</span>   <span class="string">--根据自己的需要修改</span></span><br></pre></td></tr></table></figure>
-
-<p>3、部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f components.yaml</span><br></pre></td></tr></table></figure>
-
-<p>4、查看运行情况</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl -n kube-system get pods -l k8s-app=metrics-server</span><br></pre></td></tr></table></figure>
-
-<p>5、检查 API Server 是否可以连通 Metrics Server</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl describe svc metrics-server -n kube-system</span></span><br><span class="line">Name:              metrics-server</span><br><span class="line">Namespace:         kube-system</span><br><span class="line">Labels:            kubernetes.io/cluster-service=<span class="literal">true</span></span><br><span class="line">                   kubernetes.io/name=Metrics-server</span><br><span class="line">Annotations:       Selector:  k8s-app=metrics-server</span><br><span class="line">Type:              ClusterIP</span><br><span class="line">IP:                10.107.86.150</span><br><span class="line">Port:              &lt;<span class="built_in">unset</span>&gt;  443/TCP</span><br><span class="line">TargetPort:        main-port/TCP</span><br><span class="line">Endpoints:         10.244.2.20:4443</span><br><span class="line">Session Affinity:  None</span><br><span class="line">Events:            &lt;none&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他几个节点ping一下Endpoints的地址</span></span><br><span class="line">[root@master3 ~]<span class="comment"># ping 10.244.2.20</span></span><br><span class="line">PING 10.244.2.20 (10.244.2.20) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=1 ttl=64 time=0.122 ms</span><br><span class="line">64 bytes from 10.244.2.20: icmp_seq=2 ttl=64 time=0.032 ms</span><br></pre></td></tr></table></figure>
-
-<p>6、执行以下命令，检查节点占用性能情况。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@master1 ~]<span class="comment"># kubectl top nodes</span></span><br><span class="line">NAME      CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   </span><br><span class="line">master1   223m         5%     1433Mi          52%       </span><br><span class="line">master2   148m         3%     972Mi           35%       </span><br><span class="line">master3   183m         4%     1123Mi          41%       </span><br><span class="line">node1     225m         5%     1389Mi          50%      </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@master1 ~]<span class="comment"># kubectl top pods</span></span><br><span class="line">NAME                                      CPU(cores)   MEMORY(bytes)   </span><br><span class="line">details-v1-6fc55d65c9-l97cs               4m           36Mi            </span><br><span class="line">nfs-client-provisioner-6d4469b5b5-ndg5x   4m           20Mi            </span><br><span class="line">productpage-v1-9cf6c76b5-hc2nr            10m          71Mi            </span><br><span class="line">ratings-v1-6f855c5fff-v9ht2               3m           28Mi            </span><br><span class="line">reviews-v1-697f45b7dd-w9fgc               7m           117Mi           </span><br><span class="line">reviews-v2-8c85b467b-jgx6w                6m           113Mi           </span><br><span class="line">reviews-v3-76ccf79776-74vz6               5m           117Mi    </span><br></pre></td></tr></table></figure>
-
-<p>参考文档：<a href="https://www.cnblogs.com/lfl17718347843/p/14283796.html">https://www.cnblogs.com/lfl17718347843/p/14283796.html</a></p>
+</li>
+<li><p>Ubuntu安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
-        <category>k8s专题</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
-        <tag>k8s专题</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2175,115 +2276,6 @@
       </categories>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>（二）安装Istio</title>
-    <url>/3e2a19d2.html</url>
-    <content><![CDATA[<h1 id="安装istio"><a href="#安装istio" class="headerlink" title="安装istio"></a>安装istio</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Istio 解决了开发人员和运维人员所面临的从单体应用向分布式微服务架构转变的挑战。了解它是如何做到这一点的可以让我们更详细地理解 Istio 的服务网格。</p>
-<p>术语<strong>服务网格</strong>用来描述组成这些应用程序的微服务网络以及它们之间的交互。随着服务网格的规模和复杂性不断的增长，它将会变得越来越难以理解和管理。它的需求包括服务发现、负载均衡、故障恢复、度量和监控等。服务网格通常还有更复杂的运维需求，比如 A&#x2F;B 测试、金丝雀发布、速率限制、访问控制和端到端认证。</p>
-<p>Istio 提供了对整个服务网格的行为洞察和操作控制的能力，以及一个完整的满足微服务应用各种需求的解决方案。</p>
-<p>参考：<a href="https://istio.io/latest/zh/docs/setup/getting-started">https://istio.io/latest/zh/docs/setup/getting-started</a></p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ol>
-<li><p>访问 <a href="https://github.com/istio/istio/releases/tag/1.8.0">Istio release</a> 页面下载与您操作系统对应的安装文件。在 macOS 或 Linux 系统中，也可以通过以下命令下载最新版本的 Istio：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L https://istio.io/downloadIstio | sh -</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>切换到 Istio 包所在目录下。例如：Istio 包名为 <code>istio-1.8.0</code>，则：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> istio-1.8.0</span><br></pre></td></tr></table></figure>
-
-
-
-<p>安装目录包含如下内容：</p>
-<ul>
-<li><code>install/kubernetes</code> 目录下，有 Kubernetes 相关的 YAML 安装文件</li>
-<li><code>samples/</code> 目录下，有示例应用程序</li>
-<li><code>bin/</code> 目录下，包含 <a href="https://istio.io/latest/zh/docs/reference/commands/istioctl"><code>istioctl</code></a> 的客户端文件。<code>istioctl</code> 工具用于手动注入 Envoy sidecar 代理。</li>
-</ul>
-</li>
-<li><p>将 <code>istioctl</code> 客户端路径增加到 path 环境变量中，macOS 或 Linux 系统的增加方式如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PWD</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="安装-Istio-使用默认配置文件"><a href="#安装-Istio-使用默认配置文件" class="headerlink" title="安装 Istio-使用默认配置文件"></a>安装 Istio-使用默认配置文件</h2><p>最简单的选择是安装 <code>default</code> Istio <a href="https://istio.io/latest/zh/docs/setup/additional-setup/config-profiles/">配置文件</a>使用以下命令：</p>
-<p><strong>1.8以下版本执行：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl manifest apply</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.8版本执行</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl install</span><br></pre></td></tr></table></figure>
-
-<p>包含demo的版本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl install --<span class="built_in">set</span> profile=demo -y</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>遇到的坑：</p>
-<ol>
-<li><p>Error: Get “<a href="http://localhost:8080/api?timeout=32s&quot;">http://localhost:8080/api?timeout=32s&quot;</a>: dial tcp 127.0.0.1:8080: connect: connection refused</p>
-<p>解决方法（原因是在安装k8s的时候用户不同，存在普通用户和root用户的区别）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo <span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure></li>
-</ol>
-</blockquote>
-<h3 id="检查安装"><a href="#检查安装" class="headerlink" title="检查安装"></a>检查安装</h3><p>该<code>istioctl</code>命令将<code>IstioOperator</code>用于安装Istio的CR保存在名为的CR的副本中<code>installed-state</code>。例如，无需检查Istio安装的部署，pod，服务和其他资源，例如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl -n istio-system get deploy</span><br><span class="line"></span><br><span class="line">NAME                   READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">istio-ingressgateway   1/1     1            1           49m</span><br><span class="line">istiod                 1/1     1            1           49m</span><br></pre></td></tr></table></figure>
-
-<h3 id="给命名空间添加标签，指示-Istio-在部署应用的时候，自动的注入-Envoy-边车代理："><a href="#给命名空间添加标签，指示-Istio-在部署应用的时候，自动的注入-Envoy-边车代理：" class="headerlink" title="给命名空间添加标签，指示 Istio 在部署应用的时候，自动的注入 Envoy 边车代理："></a>给命名空间添加标签，指示 Istio 在部署应用的时候，自动的注入 Envoy 边车代理：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl label namespace default istio-injection=enabled</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="部署示例应用"><a href="#部署示例应用" class="headerlink" title="部署示例应用"></a>部署示例应用</h1><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get pods</span><br><span class="line">kubectl get services</span><br></pre></td></tr></table></figure>
-
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> <span class="string">&quot;<span class="subst">$(kubectl get pod -l app=ratings -o jsonpath=&#x27;&#123;.items[0].metadata.name&#125;&#x27;)</span>&quot;</span> -c ratings -- curl -s productpage:9080/productpage | grep -o <span class="string">&quot;&lt;title&gt;.*&lt;/title&gt;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>输出：<code>&lt;title&gt;Simple Bookstore App&lt;/title&gt;</code></p>
-</blockquote>
-<h1 id="对外开发应用访问"><a href="#对外开发应用访问" class="headerlink" title="对外开发应用访问"></a>对外开发应用访问</h1><ol>
-<li><p>把应用关联到 Istio 网关：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>gateway.networking.istio.io&#x2F;bookinfo-gateway created<br>virtualservice.networking.istio.io&#x2F;bookinfo created</p>
-</blockquote>
-</li>
-<li><p>确保配置文件没有问题：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">istioctl analyze</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>✔ No validation issues found when analyzing namespace: default.</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="查看仪表盘"><a href="#查看仪表盘" class="headerlink" title="查看仪表盘"></a>查看仪表盘</h1><p>Istio 和<a href="https://istio.io/latest/zh/docs/ops/integrations">几个</a>遥测应用做了集成。 遥测能帮你了解服务网格的结构、展示网络的拓扑结构、分析网格的健康状态。</p>
-<p>使用下面说明部署 <a href="https://istio.io/latest/zh/docs/ops/integrations/kiali/">Kiali</a> 仪表板、 以及 <a href="https://istio.io/latest/zh/docs/ops/integrations/prometheus/">Prometheus</a>、 <a href="https://istio.io/latest/zh/docs/ops/integrations/grafana">Grafana</a>、 还有 <a href="https://istio.io/latest/zh/docs/ops/integrations/jaeger/">Jaeger</a></p>
-<ol>
-<li><p>安装 <a href="https://github.com/istio/istio/tree/release-1.10/samples/addons">Kiali 和其他插件</a>，等待部署完成。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">kubectl apply -f samples/addons</span><br><span class="line">kubectl rollout status deployment/kiali -n istio-system</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Waiting for deployment “kiali” rollout to finish: 0 of 1 updated replicas are available…<br>deployment “kiali” successfully rolled out</p>
-</blockquote>
-<p><strong>如果在安装插件时出错，再运行一次命令。 有一些和时间相关的问题，再运行就能解决。</strong></p>
-</li>
-<li><p>访问 Kiali 仪表板。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">istioctl dashboard kiali</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>在左侧的导航菜单，选择 <em>Graph</em> ，然后在 <em>Namespace</em> 下拉列表中，选择 <em>default</em> 。</p>
-<p>Kiali 仪表板展示了网格的概览、以及 <code>Bookinfo</code> 示例应用的各个服务之间的关系。 它还提供过滤器来可视化流量的流动。</p>
-</li>
-</ol>
-<h2 id="开启kiali外部直接访问"><a href="#开启kiali外部直接访问" class="headerlink" title="开启kiali外部直接访问"></a>开启kiali外部直接访问</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl patch svc -n istio-system kiali -p <span class="string">&#x27;&#123;&quot;spec&quot;: &#123;&quot;type&quot;: &quot;NodePort&quot;&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>k8s专题</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-        <tag>k8s专题</tag>
       </tags>
   </entry>
   <entry>
@@ -2693,26 +2685,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu安装helm</title>
-    <url>/bc01c4d5.html</url>
-    <content><![CDATA[<ol>
-<li><p>官方文档</p>
-<blockquote>
-<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
-</blockquote>
-</li>
-<li><p>Ubuntu安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>maven常用命令</title>
     <url>/f340b1b8.html</url>
     <content><![CDATA[<h1 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h1><p>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下，</p>
@@ -2825,6 +2797,30 @@
       </categories>
       <tags>
         <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Nginx进行TCP负载均衡</title>
+    <url>/1b102101.html</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>ngx_stream_proxy_module</code>模块 (1.9.0) 允许通过 TCP、UDP (1.9.13) 和 UNIX 域套接字代理数据流。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>stream与events、http同级。</p>
+</blockquote>
+<h1 id="通过include配置"><a href="#通过include配置" class="headerlink" title="通过include配置"></a>通过<code>include</code>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"> <span class="attribute">include</span> /etc/nginx/stream.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/etc/nginx/stream.d</code>下新建<code>tcp.conf</code>配置文件</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -2965,143 +2961,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用Nginx进行TCP负载均衡</title>
-    <url>/1b102101.html</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>ngx_stream_proxy_module</code>模块 (1.9.0) 允许通过 TCP、UDP (1.9.13) 和 UNIX 域套接字代理数据流。</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>stream与events、http同级。</p>
-</blockquote>
-<h1 id="通过include配置"><a href="#通过include配置" class="headerlink" title="通过include配置"></a>通过<code>include</code>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"> <span class="attribute">include</span> /etc/nginx/stream.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在<code>/etc/nginx/stream.d</code>下新建<code>tcp.conf</code>配置文件</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>modbus基础知识</title>
-    <url>/b39aaa82.html</url>
-    <content><![CDATA[<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><p>Modbus将采用<strong>大端字节顺序传输报文</strong>，什么意思呢？比如一个16位数据0x55AA，先传输高字节0x55，再传输低字节0xAA。</p>
-<p>Modbus将数据抽象成四张表：</p>
-<table>
-<thead>
-<tr>
-<th>基本表格</th>
-<th>对象类型</th>
-<th>读写属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>离散量输入</td>
-<td>单个bit (单个位数据)</td>
-<td>只读</td>
-<td>数据用于系统输入输出</td>
-</tr>
-<tr>
-<td>线圈</td>
-<td>单个bit (单个位数据)</td>
-<td>读写</td>
-<td>数据可以通过应用程序改写</td>
-</tr>
-<tr>
-<td>输入寄存器</td>
-<td>16-bit (16位数据)</td>
-<td>只读</td>
-<td>数据用于系统输入输入</td>
-</tr>
-<tr>
-<td>保持寄存器</td>
-<td>16-bit  (16位数据)</td>
-<td>读写</td>
-<td>数据可以通过应用程序改写</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>plc</category>
-      </categories>
-      <tags>
-        <tag>plc</tag>
-        <tag>modbus</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>软元件</title>
-    <url>/d04ce21c.html</url>
-    <content><![CDATA[<h3 id="常用软元件"><a href="#常用软元件" class="headerlink" title="常用软元件"></a>常用软元件</h3><table>
-<thead>
-<tr>
-<th>软元件</th>
-<th>名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>X</td>
-<td>输入继电器</td>
-<td></td>
-</tr>
-<tr>
-<td>Y</td>
-<td>输出继电器</td>
-<td></td>
-</tr>
-<tr>
-<td>M</td>
-<td>辅助继电器</td>
-<td></td>
-</tr>
-<tr>
-<td>T</td>
-<td>定时器</td>
-<td></td>
-</tr>
-<tr>
-<td>S</td>
-<td>状态继电器</td>
-<td></td>
-</tr>
-<tr>
-<td>C</td>
-<td>计数器</td>
-<td></td>
-</tr>
-<tr>
-<td>D</td>
-<td>数据寄存器</td>
-<td></td>
-</tr>
-<tr>
-<td>K</td>
-<td>常数，多用于计时器或者计数器。</td>
-<td></td>
-</tr>
-<tr>
-<td>H</td>
-<td>常数，多用于计时器或者计数器。</td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>plc</category>
-      </categories>
-      <tags>
-        <tag>plc</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>springboot使用minio存储</title>
     <url>/e315f158.html</url>
     <content><![CDATA[<h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.minio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>minio<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -3120,6 +2979,18 @@
       </categories>
       <tags>
         <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32之GPIO</title>
+    <url>/e2fc6371.html</url>
+    <content><![CDATA[<h1 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h1><p><img src="/../../images/stm/gpio/img.png" alt="配置工程"></p>
+]]></content>
+      <categories>
+        <category>stm32</category>
+      </categories>
+      <tags>
+        <tag>stm32</tag>
       </tags>
   </entry>
   <entry>
@@ -3237,37 +3108,116 @@
       </tags>
   </entry>
   <entry>
-    <title>vscode常用插件</title>
-    <url>/510fa095.html</url>
-    <content><![CDATA[<h1 id="shell脚本插件"><a href="#shell脚本插件" class="headerlink" title="shell脚本插件"></a>shell脚本插件</h1><ol>
-<li><p>shellman</p>
-<p>智能提示和自动补全</p>
-</li>
-<li><p>shellcheck<br>语法错误检查</p>
-</li>
-<li><p>shell-format<br>格式化<br>快捷键：Alt+Shift+F</p>
-</li>
-<li><p>Code Runner<br>调试</p>
-</li>
-</ol>
+    <title>modbus基础知识</title>
+    <url>/b39aaa82.html</url>
+    <content><![CDATA[<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><p>Modbus将采用<strong>大端字节顺序传输报文</strong>，什么意思呢？比如一个16位数据0x55AA，先传输高字节0x55，再传输低字节0xAA。</p>
+<p>Modbus将数据抽象成四张表：</p>
+<table>
+<thead>
+<tr>
+<th>基本表格</th>
+<th>对象类型</th>
+<th>读写属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>离散量输入</td>
+<td>单个bit (单个位数据)</td>
+<td>只读</td>
+<td>数据用于系统输入输出</td>
+</tr>
+<tr>
+<td>线圈</td>
+<td>单个bit (单个位数据)</td>
+<td>读写</td>
+<td>数据可以通过应用程序改写</td>
+</tr>
+<tr>
+<td>输入寄存器</td>
+<td>16-bit (16位数据)</td>
+<td>只读</td>
+<td>数据用于系统输入输入</td>
+</tr>
+<tr>
+<td>保持寄存器</td>
+<td>16-bit  (16位数据)</td>
+<td>读写</td>
+<td>数据可以通过应用程序改写</td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
-        <category>vscode</category>
+        <category>plc</category>
       </categories>
       <tags>
-        <tag>vscode</tag>
+        <tag>plc</tag>
+        <tag>modbus</tag>
       </tags>
   </entry>
   <entry>
-    <title>STM32之GPIO</title>
-    <url>/e2fc6371.html</url>
-    <content><![CDATA[<h1 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h1><p><img src="/../../images/stm/gpio/img.png" alt="配置工程"></p>
+    <title>软元件</title>
+    <url>/d04ce21c.html</url>
+    <content><![CDATA[<h3 id="常用软元件"><a href="#常用软元件" class="headerlink" title="常用软元件"></a>常用软元件</h3><table>
+<thead>
+<tr>
+<th>软元件</th>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>X</td>
+<td>输入继电器</td>
+<td></td>
+</tr>
+<tr>
+<td>Y</td>
+<td>输出继电器</td>
+<td></td>
+</tr>
+<tr>
+<td>M</td>
+<td>辅助继电器</td>
+<td></td>
+</tr>
+<tr>
+<td>T</td>
+<td>定时器</td>
+<td></td>
+</tr>
+<tr>
+<td>S</td>
+<td>状态继电器</td>
+<td></td>
+</tr>
+<tr>
+<td>C</td>
+<td>计数器</td>
+<td></td>
+</tr>
+<tr>
+<td>D</td>
+<td>数据寄存器</td>
+<td></td>
+</tr>
+<tr>
+<td>K</td>
+<td>常数，多用于计时器或者计数器。</td>
+<td></td>
+</tr>
+<tr>
+<td>H</td>
+<td>常数，多用于计时器或者计数器。</td>
+<td></td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
-        <category>stm32</category>
+        <category>plc</category>
       </categories>
       <tags>
-        <tag>stm32</tag>
+        <tag>plc</tag>
       </tags>
   </entry>
   <entry>
@@ -3342,6 +3292,82 @@
       <tags>
         <tag>hexo</tag>
         <tag>工具箱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vscode常用插件</title>
+    <url>/510fa095.html</url>
+    <content><![CDATA[<h1 id="shell脚本插件"><a href="#shell脚本插件" class="headerlink" title="shell脚本插件"></a>shell脚本插件</h1><ol>
+<li><p>shellman</p>
+<p>智能提示和自动补全</p>
+</li>
+<li><p>shellcheck<br>语法错误检查</p>
+</li>
+<li><p>shell-format<br>格式化<br>快捷键：Alt+Shift+F</p>
+</li>
+<li><p>Code Runner<br>调试</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>vscode</category>
+      </categories>
+      <tags>
+        <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue使用prerender-spa-plugin进行页面预渲染</title>
+    <url>/15f2f45b.html</url>
+    <content><![CDATA[<h1 id="为什么使用prerender-spa-plugin"><a href="#为什么使用prerender-spa-plugin" class="headerlink" title="为什么使用prerender-spa-plugin"></a>为什么使用prerender-spa-plugin</h1><p>如果你仅希望通过 SSR 来改善一些推广页面 (例如 <code>/</code>、<code>/about</code>、<code>/contact</code> 等) 的 SEO，那么<strong>预渲染</strong>也许会更合适。和使用动态编译 HTML 的 web 服务器相比，预渲染可以在构建时为指定的路由生成静态 HTML 文件。它的优势在于预渲染的设置更加简单，且允许将前端保持为一个完全静态的站点。</p>
+<p>如果你正在使用 <a href="https://webpack.js.org/">webpack</a>，你可以通过 <a href="https://github.com/chrisvfritz/prerender-spa-plugin">prerender-spa-plugin</a> 来支持预渲染。该插件已经被大量的 Vue 应用检验过。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add prerender-spa-plugin</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i prerender-spa-plugin</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a><code>webpack.config.js</code></h3><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">PrerenderSPAPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;prerender-spa-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">PrerenderSPAPlugin</span>(&#123;</span><br><span class="line">      <span class="comment">// Required - The path to the webpack-outputted app to prerender.</span></span><br><span class="line">      <span class="attr">staticDir</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">      <span class="comment">// Required - Routes to render.</span></span><br><span class="line">      <span class="attr">routes</span>: [ <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/about&#x27;</span>, <span class="string">&#x27;/some/deep/nested/route&#x27;</span> ],</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">PrerenderSPAPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;prerender-spa-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Renderer</span> = <span class="title class_">PrerenderSPAPlugin</span>.<span class="property">PuppeteerRenderer</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">PrerenderSPAPlugin</span>(&#123;</span><br><span class="line">      <span class="comment">// Required - The path to the webpack-outputted app to prerender.</span></span><br><span class="line">      <span class="attr">staticDir</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Optional - The path your rendered app should be output to.</span></span><br><span class="line">      <span class="comment">// (Defaults to staticDir.)</span></span><br><span class="line">      <span class="attr">outputDir</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;prerendered&#x27;</span>),</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Optional - The location of index.html</span></span><br><span class="line">      <span class="attr">indexPath</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>, <span class="string">&#x27;index.html&#x27;</span>),</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Required - Routes to render.</span></span><br><span class="line">      <span class="attr">routes</span>: [ <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/about&#x27;</span>, <span class="string">&#x27;/some/deep/nested/route&#x27;</span> ],</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Optional - Allows you to customize the HTML and output path before</span></span><br><span class="line">      <span class="comment">// writing the rendered contents to a file.</span></span><br><span class="line">      <span class="comment">// renderedRoute can be modified and it or an equivelant should be returned.</span></span><br><span class="line">      <span class="comment">// renderedRoute format:</span></span><br><span class="line">      <span class="comment">// &#123;</span></span><br><span class="line">      <span class="comment">//   route: String, // Where the output file will end up (relative to outputDir)</span></span><br><span class="line">      <span class="comment">//   originalRoute: String, // The route that was passed into the renderer, before redirects.</span></span><br><span class="line">      <span class="comment">//   html: String, // The rendered HTML for this route.</span></span><br><span class="line">      <span class="comment">//   outputPath: String // The path the rendered HTML will be written to.</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      postProcess (renderedRoute) &#123;</span><br><span class="line">        <span class="comment">// Ignore any redirects.</span></span><br><span class="line">        renderedRoute.<span class="property">route</span> = renderedRoute.<span class="property">originalRoute</span></span><br><span class="line">        <span class="comment">// Basic whitespace removal. (Don&#x27;t use this in production.)</span></span><br><span class="line">        renderedRoute.<span class="property">html</span> = renderedRoute.<span class="property">html</span>.<span class="title function_">split</span>(<span class="regexp">/&gt;[\s]+&lt;/gmi</span>).<span class="title function_">join</span>(<span class="string">&#x27;&gt;&lt;&#x27;</span>)</span><br><span class="line">        <span class="comment">// Remove /index.html from the output path if the dir name ends with a .html file extension.</span></span><br><span class="line">        <span class="comment">// For example: /dist/dir/special.html/index.html -&gt; /dist/dir/special.html</span></span><br><span class="line">        <span class="keyword">if</span> (renderedRoute.<span class="property">route</span>.<span class="title function_">endsWith</span>(<span class="string">&#x27;.html&#x27;</span>)) &#123;</span><br><span class="line">          renderedRoute.<span class="property">outputPath</span> = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>, renderedRoute.<span class="property">route</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> renderedRoute</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Optional - Uses html-minifier (https://github.com/kangax/html-minifier)</span></span><br><span class="line">      <span class="comment">// To minify the resulting HTML.</span></span><br><span class="line">      <span class="comment">// Option reference: https://github.com/kangax/html-minifier#options-quick-reference</span></span><br><span class="line">      <span class="attr">minify</span>: &#123;</span><br><span class="line">        <span class="attr">collapseBooleanAttributes</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">collapseWhitespace</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">decodeEntities</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">keepClosingSlash</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">sortAttributes</span>: <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Server configuration options.</span></span><br><span class="line">      <span class="attr">server</span>: &#123;</span><br><span class="line">        <span class="comment">// Normally a free port is autodetected, but feel free to set this if needed.</span></span><br><span class="line">        <span class="attr">port</span>: <span class="number">8001</span></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// The actual renderer to use. (Feel free to write your own)</span></span><br><span class="line">      <span class="comment">// Available renderers: https://github.com/Tribex/prerenderer/tree/master/renderers</span></span><br><span class="line">      <span class="attr">renderer</span>: <span class="keyword">new</span> <span class="title class_">Renderer</span>(&#123;</span><br><span class="line">        <span class="comment">// Optional - The name of the property to add to the window object with the contents of `inject`.</span></span><br><span class="line">        <span class="attr">injectProperty</span>: <span class="string">&#x27;__PRERENDER_INJECTED&#x27;</span>,</span><br><span class="line">        <span class="comment">// Optional - Any values you&#x27;d like your app to have access to via `window.injectProperty`.</span></span><br><span class="line">        <span class="attr">inject</span>: &#123;</span><br><span class="line">          <span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Optional - defaults to 0, no limit.</span></span><br><span class="line">        <span class="comment">// Routes are rendered asynchronously.</span></span><br><span class="line">        <span class="comment">// Use this to limit the number of routes rendered in parallel.</span></span><br><span class="line">        <span class="attr">maxConcurrentRoutes</span>: <span class="number">4</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Optional - Wait to render until the specified event is dispatched on the document.</span></span><br><span class="line">        <span class="comment">// eg, with `document.dispatchEvent(new Event(&#x27;custom-render-trigger&#x27;))`</span></span><br><span class="line">        <span class="attr">renderAfterDocumentEvent</span>: <span class="string">&#x27;custom-render-trigger&#x27;</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Optional - Wait to render until the specified element is detected using `document.querySelector`</span></span><br><span class="line">        <span class="attr">renderAfterElementExists</span>: <span class="string">&#x27;my-app-element&#x27;</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Optional - Wait to render until a certain amount of time has passed.</span></span><br><span class="line">        <span class="comment">// NOT RECOMMENDED</span></span><br><span class="line">        <span class="attr">renderAfterTime</span>: <span class="number">5000</span>, <span class="comment">// Wait 5 seconds.</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Other puppeteer options.</span></span><br><span class="line">        <span class="comment">// (See here: https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)</span></span><br><span class="line">        <span class="attr">headless</span>: <span class="literal">false</span> <span class="comment">// Display the browser window when rendering. Useful for debugging.</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用pkg打包nodejs</title>
+    <url>/9b5f2bcc.html</url>
+    <content><![CDATA[<h1 id="安装pkg"><a href="#安装pkg" class="headerlink" title="安装pkg"></a>安装pkg</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g pkg</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add pkg</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置入口启动文件"><a href="#配置入口启动文件" class="headerlink" title="配置入口启动文件"></a>配置入口启动文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line"><span class="string">&quot;bin&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkg . -t node14-linux-x64 --out-path=dist/</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>.  打包的文件 这里指当前目录下的所有</p>
+<p>-t  用于制定平台和node版本，不指定时默认为3个平台，以及package.json中的node版本配置为准</p>
+<p>–out-path   打包文件输出目录</p>
+</blockquote>
+<h1 id="常见文件及解决方法"><a href="#常见文件及解决方法" class="headerlink" title="常见文件及解决方法"></a>常见文件及解决方法</h1><h2 id="require引入外部文件"><a href="#require引入外部文件" class="headerlink" title="require引入外部文件"></a>require引入外部文件</h2><p>使用require时需要使用动态地址，比如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> add = <span class="built_in">require</span>(process.<span class="title function_">cwd</span>() + <span class="string">&#x27;/add.js&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
 </search>
