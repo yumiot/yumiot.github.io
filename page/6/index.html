@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -190,6 +190,321 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/876fb885.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/876fb885.html" class="post-title-link" itemprop="url">Deployment配置文件详解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-26 14:42:45" itemprop="dateCreated datePublished" datetime="2021-06-26T14:42:45+08:00">2021-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span>       <span class="comment">#必选，版本号，例如v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span>       <span class="comment">#必选，Pod</span></span><br><span class="line"><span class="string">metadata:</span>       <span class="comment">#必选，元数据</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">string</span>       <span class="comment">#必选，Pod名称</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">string</span>    <span class="comment">#必选，Pod所属的命名空间</span></span><br><span class="line">  <span class="string">labels:</span>      <span class="comment">#自定义标签</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#自定义标签名字</span></span><br><span class="line">  <span class="string">annotations:</span>       <span class="comment">#自定义注释列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line"><span class="string">spec:</span>         <span class="comment">#必选，Pod中容器的详细定义</span></span><br><span class="line">  <span class="string">containers:</span>      <span class="comment">#必选，Pod中容器列表</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#必选，容器名称</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">string</span>    <span class="comment">#必选，容器的镜像名称</span></span><br><span class="line">    <span class="attr">imagePullPolicy:</span> [<span class="string">Always</span> <span class="string">|</span> <span class="string">Never</span> <span class="string">|</span> <span class="string">IfNotPresent</span>] <span class="comment">#获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">string</span>]    <span class="comment">#容器的启动命令列表，如不指定，使用打包时使用的启动命令</span></span><br><span class="line">    <span class="attr">args:</span> [<span class="string">string</span>]     <span class="comment">#容器的启动命令参数列表</span></span><br><span class="line">    <span class="attr">workingDir:</span> <span class="string">string</span>     <span class="comment">#容器的工作目录</span></span><br><span class="line">    <span class="string">volumeMounts:</span>    <span class="comment">#挂载到容器内部的存储卷配置</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span></span><br><span class="line">      <span class="attr">mountPath:</span> <span class="string">string</span>    <span class="comment">#存储卷在容器内mount的绝对路径，应少于512字符</span></span><br><span class="line">      <span class="attr">readOnly:</span> <span class="string">boolean</span>    <span class="comment">#是否为只读模式</span></span><br><span class="line">    <span class="string">ports:</span>       <span class="comment">#需要暴露的端口库号列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#端口号名称</span></span><br><span class="line">      <span class="attr">containerPort:</span> <span class="string">int</span>   <span class="comment">#容器需要监听的端口号</span></span><br><span class="line">      <span class="attr">hostPort:</span> <span class="string">int</span>    <span class="comment">#容器所在主机需要监听的端口号，默认与Container相同</span></span><br><span class="line">      <span class="attr">protocol:</span> <span class="string">string</span>     <span class="comment">#端口协议，支持TCP和UDP，默认TCP</span></span><br><span class="line">    <span class="string">env:</span>       <span class="comment">#容器运行前需设置的环境变量列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#环境变量名称</span></span><br><span class="line">      <span class="attr">value:</span> <span class="string">string</span>    <span class="comment">#环境变量的值</span></span><br><span class="line">    <span class="string">resources:</span>       <span class="comment">#资源限制和请求的设置</span></span><br><span class="line">      <span class="string">limits:</span>      <span class="comment">#资源限制的设置</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">string</span>    <span class="comment">#Cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span></span><br><span class="line">        <span class="attr">memory:</span> <span class="string">string</span>     <span class="comment">#内存限制，单位可以为Mib/Gib，将用于docker run --memory参数</span></span><br><span class="line">      <span class="string">requests:</span>      <span class="comment">#资源请求的设置</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">string</span>    <span class="comment">#Cpu请求，容器启动的初始可用数量</span></span><br><span class="line">        <span class="attr">memory:</span> <span class="string">string</span>     <span class="comment">#内存清楚，容器启动的初始可用数量</span></span><br><span class="line">    <span class="string">livenessProbe:</span>     <span class="comment">#对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可</span></span><br><span class="line">      <span class="string">exec:</span>      <span class="comment">#对Pod容器内检查方式设置为exec方式</span></span><br><span class="line">        <span class="attr">command:</span> [<span class="string">string</span>]  <span class="comment">#exec方式需要制定的命令或脚本</span></span><br><span class="line">      <span class="string">httpGet:</span>       <span class="comment">#对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">port:</span> <span class="string">number</span></span><br><span class="line">        <span class="attr">host:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">scheme:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">HttpHeaders:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">string</span></span><br><span class="line">      <span class="string">tcpSocket:</span>     <span class="comment">#对Pod内个容器健康检查方式设置为tcpSocket方式</span></span><br><span class="line">         <span class="attr">port:</span> <span class="string">number</span></span><br><span class="line">       <span class="attr">initialDelaySeconds:</span> <span class="number">0</span>  <span class="comment">#容器启动完成后首次探测的时间，单位为秒</span></span><br><span class="line">       <span class="attr">timeoutSeconds:</span> <span class="number">0</span>   <span class="comment">#对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span></span><br><span class="line">       <span class="attr">periodSeconds:</span> <span class="number">0</span>    <span class="comment">#对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span></span><br><span class="line">       <span class="attr">successThreshold:</span> <span class="number">0</span></span><br><span class="line">       <span class="attr">failureThreshold:</span> <span class="number">0</span></span><br><span class="line">       <span class="attr">securityContext:</span></span><br><span class="line">         <span class="string">privileged:false</span></span><br><span class="line">    <span class="attr">restartPolicy:</span> [<span class="string">Always</span> <span class="string">|</span> <span class="string">Never</span> <span class="string">|</span> <span class="string">OnFailure</span>]<span class="comment">#Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod</span></span><br><span class="line">    <span class="attr">nodeSelector:</span> <span class="string">obeject</span>  <span class="comment">#设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定</span></span><br><span class="line">    <span class="string">imagePullSecrets:</span>    <span class="comment">#Pull镜像时使用的secret名称，以key：secretkey格式指定</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line">    <span class="string">hostNetwork:false</span>      <span class="comment">#是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span></span><br><span class="line">    <span class="string">volumes:</span>       <span class="comment">#在该pod上定义共享存储卷列表</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">string</span>     <span class="comment">#共享存储卷名称 （volumes类型有很多种）</span></span><br><span class="line">      <span class="attr">emptyDir:</span> &#123;&#125;     <span class="comment">#类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span></span><br><span class="line">      <span class="attr">hostPath:</span> <span class="string">string</span>     <span class="comment">#类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">string</span>     <span class="comment">#Pod所在宿主机的目录，将被用于同期中mount的目录</span></span><br><span class="line">      <span class="string">secret:</span>      <span class="comment">#类型为secret的存储卷，挂载集群与定义的secre对象到容器内部</span></span><br><span class="line">        <span class="attr">scretname:</span> <span class="string">string</span>  </span><br><span class="line">        <span class="string">items:</span>     </span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">string</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">string</span></span><br><span class="line">      <span class="string">configMap:</span>     <span class="comment">#类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">string</span></span><br><span class="line">        <span class="attr">items:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">string</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">string</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/d36a8b1c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/d36a8b1c.html" class="post-title-link" itemprop="url">（四）安装使用MetricsServer</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-26 10:50:02" itemprop="dateCreated datePublished" datetime="2021-06-26T10:50:02+08:00">2021-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/k8s%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">k8s专题</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/d36a8b1c.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/e315f158.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/e315f158.html" class="post-title-link" itemprop="url">springboot使用minio存储</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-24 15:03:49" itemprop="dateCreated datePublished" datetime="2021-06-24T15:03:49+08:00">2021-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.minio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>minio<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/e315f158.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -942,331 +1257,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/53f5d6ad.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jack">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Jack">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/53f5d6ad.html" class="post-title-link" itemprop="url">（三）k8s部署kong</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-08 23:22:57" itemprop="dateCreated datePublished" datetime="2021-06-08T23:22:57+08:00">2021-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/k8s%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">k8s专题</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>754</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="helm添加kong"><a href="#helm添加kong" class="headerlink" title="helm添加kong"></a>helm添加kong</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add kong https://charts.konghq.com</span><br><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/53f5d6ad.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/dfbf49be.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jack">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Jack">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/dfbf49be.html" class="post-title-link" itemprop="url">ubuntu使用国内源</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-08 16:17:27" itemprop="dateCreated datePublished" datetime="2021-06-08T16:17:27+08:00">2021-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>参考：<a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/help/ubuntu.html">http://mirrors.ustc.edu.cn/help/ubuntu.html</a></p>
-<p>编辑配置文件:</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/dfbf49be.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/826ffa7.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jack">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jack">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Jack">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/826ffa7.html" class="post-title-link" itemprop="url">ubuntu配置静态ip</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-08 13:43:43" itemprop="dateCreated datePublished" datetime="2021-06-08T13:43:43+08:00">2021-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-06-07 08:21:54" itemprop="dateModified" datetime="2022-06-07T08:21:54+08:00">2022-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>638</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Ubuntu从17.10开始，放弃在&#x2F;etc&#x2F;network&#x2F;interfaces里面配置IP，改为在&#x2F;etc&#x2F;netplan&#x2F;XX-installer-config.yaml的yaml文件中配置IP地址。</p>
-<h3 id="查看网络配置信息"><a href="#查看网络配置信息" class="headerlink" title="查看网络配置信息"></a>查看网络配置信息</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/826ffa7.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
