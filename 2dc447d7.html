@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="controller1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EasyCode模板">
+<meta property="og:url" content="http://example.com/2dc447d7.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="controller1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-08T02:37:30.000Z">
+<meta property="article:modified_time" content="2022-07-12T03:52:03.149Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="idea">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2dc447d7.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2dc447d7.html","path":"2dc447d7.html","title":"EasyCode模板"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>EasyCode模板 | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#controller"><span class="nav-number">1.</span> <span class="nav-text">controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service"><span class="nav-number">2.</span> <span class="nav-text">service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServiceImpl"><span class="nav-number">3.</span> <span class="nav-text">ServiceImpl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mapper"><span class="nav-number">4.</span> <span class="nav-text">Mapper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domian"><span class="nav-number">5.</span> <span class="nav-text">domian</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mapper-xml"><span class="nav-number">6.</span> <span class="nav-text">mapper.xml</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2dc447d7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="EasyCode模板 | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EasyCode模板
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-08 10:37:30" itemprop="dateCreated datePublished" datetime="2022-07-08T10:37:30+08:00">2022-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-12 11:52:03" itemprop="dateModified" datetime="2022-07-12T11:52:03+08:00">2022-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/idea/" itemprop="url" rel="index"><span itemprop="name">idea</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;Controller&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/controller&quot;</span>, <span class="string">&quot;Controller.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;controller&quot;</span>)</span><br><span class="line"></span><br><span class="line">##定义服务名</span><br><span class="line">#set($serviceName = $!tool.append($!tool.firstLowerCase($!tableInfo.name), <span class="string">&quot;Service&quot;</span>))</span><br><span class="line"></span><br><span class="line">##定义实体对象名</span><br><span class="line">#set($entityName = $!tool.firstLowerCase($!tableInfo.name))</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.plugins.pagination.Page;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!tableInfo.name;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.service.$!&#123;tableInfo.name&#125;Service;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.Operation;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.Parameter;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.enums.ParameterIn;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.tags.Tag;</span><br><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表控制层&quot;</span>)</span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Tag(name = &quot;$!tableInfo.comment&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;$!tool.firstLowerCase($!tableInfo.name)&quot;)</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableName&#125; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> $!&#123;tableInfo.name&#125;Service $!&#123;serviceName&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分页查询所有数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> page 分页对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $!entityName 查询实体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 所有数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="meta">@Operation(summary = &quot;分页查询所有数据&quot;,</span></span><br><span class="line"><span class="meta">            parameters = &#123;</span></span><br><span class="line"><span class="meta">                    @Parameter(name = &quot;page&quot;, description = &quot;分页对象&quot;, in = ParameterIn.QUERY),</span></span><br><span class="line"><span class="meta">                    @Parameter(name = &quot;$!entityName&quot;, description = &quot;查询实体&quot;, in = ParameterIn.QUERY),</span></span><br><span class="line"><span class="meta">            &#125;)</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;$!&#123;tableInfo.name&#125;&gt; selectAll(Page&lt;$!tableInfo.name&gt; page, $!tableInfo.name $!entityName) &#123;</span><br><span class="line">        <span class="keyword">return</span> $!&#123;serviceName&#125;.selectAll(page, $!entityName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过主键查询单条数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 主键</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 单条数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="meta">@Operation(summary = &quot;通过主键查询单条数据&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> $!&#123;tableInfo.name&#125; selectOne(<span class="meta">@PathVariable</span> Serializable id) &#123;</span><br><span class="line">        <span class="keyword">return</span> $!&#123;serviceName&#125;.getById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $!entityName 实体对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 新增结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="meta">@Operation(summary = &quot;新增数据&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">insert</span><span class="params">(<span class="meta">@RequestBody</span> $!tableInfo.name $!entityName)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> $!&#123;serviceName&#125;.save$!&#123;tableInfo.name&#125;($!entityName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $!entityName 实体对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 修改结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PutMapping</span></span><br><span class="line">    <span class="meta">@Operation(summary = &quot;修改数据&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> $!tableInfo.name $!entityName)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> $!&#123;serviceName&#125;.update$!&#123;tableInfo.name&#125;($!entityName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ids 主键结合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 删除结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@DeleteMapping</span></span><br><span class="line">    <span class="meta">@Operation(summary = &quot;删除数据&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">delete</span><span class="params">(<span class="meta">@RequestParam(&quot;ids&quot;)</span> List&lt;Serializable&gt; ids)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> $!&#123;serviceName&#125;.deleteByIds(ids);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="service"><a href="#service" class="headerlink" title="service"></a>service</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;Service&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/service&quot;</span>, <span class="string">&quot;Service.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;service&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.plugins.pagination.Page;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.service.IService;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!tableInfo.name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表服务接口&quot;</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">$</span>!&#123;tableName&#125; <span class="keyword">extends</span> <span class="title class_">IService</span>&lt;$!tableInfo.name&gt; &#123;</span><br><span class="line"></span><br><span class="line">    Page&lt;$!&#123;tableInfo.name&#125;&gt; selectAll(Page&lt;$!tableInfo.name&gt; page, $!tableInfo.name $tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> save$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> update$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">deleteByIds</span><span class="params">(List&lt;Serializable&gt; ids)</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ServiceImpl"><a href="#ServiceImpl" class="headerlink" title="ServiceImpl"></a>ServiceImpl</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;ServiceImpl&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/service/impl&quot;</span>, <span class="string">&quot;ServiceImpl.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;service.impl&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.plugins.pagination.Page;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.mapper.$!&#123;tableInfo.name&#125;Mapper;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!&#123;tableInfo.name&#125;;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.service.$!&#123;tableInfo.name&#125;Service;</span><br><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表服务实现类&quot;</span>)</span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableName&#125; <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;$!&#123;tableInfo.name&#125;Mapper, $!&#123;tableInfo.name&#125;&gt; <span class="keyword">implements</span> <span class="title class_">$</span>!&#123;tableInfo.name&#125;Service &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> $!&#123;tableInfo.name&#125;Mapper $tool.firstLowerCase($!&#123;tableInfo.name&#125;)Mapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;$!&#123;tableInfo.name&#125;&gt; selectAll(Page&lt;$!tableInfo.name&gt; page, $!tableInfo.name $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> $tool.firstLowerCase($!&#123;tableInfo.name&#125;)Mapper.selectPage(page, <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;($tool.firstLowerCase($!&#123;tableInfo.name&#125;)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> save$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.save($tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> update$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.updateById($tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">deleteByIds</span><span class="params">(List&lt;Serializable&gt; ids)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">this</span>.removeByIds(ids);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;Mapper&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/mapper&quot;</span>, <span class="string">&quot;Mapper.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;mapper&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.mapper.BaseMapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!tableInfo.name;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表数据库访问层&quot;</span>)</span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">$</span>!&#123;tableName&#125; <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;$!tableInfo.name&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="domian"><a href="#domian" class="headerlink" title="domian"></a>domian</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/domain&quot;</span>, <span class="string">&quot;.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;domain&quot;</span>)</span><br><span class="line"></span><br><span class="line">##自动导入包（全局变量）</span><br><span class="line">$!autoImport</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.IdType;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.TableId;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.activerecord.Model;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.media.Schema;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.EqualsAndHashCode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.validation.constraints.NotBlank;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表实体类&quot;</span>)</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode(callSuper = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableInfo.name&#125; <span class="keyword">extends</span> <span class="title class_">Model</span>&lt;$!&#123;tableInfo.name&#125;&gt; <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">#foreach($column in $tableInfo.pkColumn)</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@TableId(type = IdType.ASSIGN_ID)</span></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;主键 不能为空&quot;)</span></span><br><span class="line">    #<span class="keyword">if</span>($&#123;column.comment&#125;)<span class="meta">@Schema(description = &quot;$!&#123;column.comment&#125;&quot;)</span>#end</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> $!&#123;tool.getClsNameByFullName($column.type)&#125; $!&#123;column.name&#125;;</span><br><span class="line">    </span><br><span class="line">#end</span><br><span class="line">#foreach($column in $tableInfo.otherColumn)</span><br><span class="line">    #<span class="keyword">if</span>($&#123;column.comment&#125;)<span class="meta">@Schema(description = &quot;$!&#123;column.comment&#125;&quot;)</span>#end</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> $!&#123;tool.getClsNameByFullName($column.type)&#125; $!&#123;column.name&#125;;</span><br><span class="line">    </span><br><span class="line">#end</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="mapper-xml"><a href="#mapper-xml" class="headerlink" title="mapper.xml"></a>mapper.xml</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">##引入mybatis支持</span><br><span class="line">$!&#123;mybatisSupport.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置保存名称与保存位置</span><br><span class="line">$!callback.setFileName($tool.append($!&#123;tableInfo.name&#125;, &quot;Mapper.xml&quot;))</span><br><span class="line">$!callback.setSavePath($tool.append($modulePath, &quot;/src/main/resources/mapper&quot;))</span><br><span class="line"></span><br><span class="line">##拿到主键</span><br><span class="line">#if(!$tableInfo.pkColumn.isEmpty())</span><br><span class="line">    #set($pk = $tableInfo.pkColumn.get(0))</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;$!&#123;tableInfo.savePackageName&#125;.mapper.$!&#123;tableInfo.name&#125;Mapper&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;$!&#123;tableInfo.savePackageName&#125;.domain.$!&#123;tableInfo.name&#125;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;$!&#123;tableInfo.name&#125;Map&quot;</span>&gt;</span></span><br><span class="line">#foreach($column in $tableInfo.fullColumn)</span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;$!column.name&quot;</span> <span class="attr">column</span>=<span class="string">&quot;$!column.obj.name&quot;</span> <span class="attr">jdbcType</span>=<span class="string">&quot;$!column.ext.jdbcType&quot;</span>/&gt;</span></span><br><span class="line">#end</span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">&quot;BaseColumnList&quot;</span>&gt;</span></span><br><span class="line">        select</span><br><span class="line">            #allSqlColumn()</span><br><span class="line">            </span><br><span class="line">        from $!tableInfo.obj.name</span><br><span class="line">    <span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">&quot;BaseIfList&quot;</span>&gt;</span></span><br><span class="line">    #foreach($column in $tableInfo.fullColumn)</span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;$!column.name != null#if($column.type.equals(&quot;</span><span class="attr">java.lang.String</span>&quot;)) <span class="attr">and</span> $!<span class="attr">column.name</span> != <span class="string">&#x27;&#x27;</span>#<span class="attr">end</span>&quot;&gt;</span></span><br><span class="line">            and $!column.obj.name = #&#123;$!column.name&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    #end</span><br><span class="line">    <span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line">说明文档：</span><br><span class="line">    属性</span><br><span class="line">    $author 设置中的作者 java.lang.String</span><br><span class="line">    $modulePath 选中的module路径 java.lang.String</span><br><span class="line">    $projectPath 项目绝对路径 java.lang.String</span><br><span class="line"></span><br><span class="line">    对象</span><br><span class="line">    $tableInfo 表对象</span><br><span class="line">        obj 表原始对象 com.intellij.database.model.DasTable</span><br><span class="line">        name 表名（转换后的首字母大写）java.lang.String</span><br><span class="line">        comment 表注释 java.lang.String</span><br><span class="line">        fullColumn 所有列 java.util.List&lt;ColumnInfo&gt;</span><br><span class="line">        pkColumn 主键列 java.util.List&lt;ColumnInfo&gt;</span><br><span class="line">        otherColumn 其他列 java.util.List&lt;ColumnInfo&gt;,除主键以外的列</span><br><span class="line">        savePackageName 保存的包名 java.lang.String</span><br><span class="line">        savePath 保存路径 java.lang.String</span><br><span class="line">        saveModelName 保存的model名称 java.lang.String</span><br><span class="line">    columnInfo 列对象</span><br><span class="line">        obj 列原始对象 com.intellij.database.model.DasColumn</span><br><span class="line">        name 列名（首字母小写） java.lang.String</span><br><span class="line">        comment 列注释 java.lang.String</span><br><span class="line">        type 列类型（类型全名） java.lang.String</span><br><span class="line">        shortType 列类型（短类型） java.lang.String</span><br><span class="line">        custom 是否附加列 java.lang.Boolean</span><br><span class="line">        ext 附加字段（Map类型） java.lang.Map&lt;java.lang.String, java.lang.Object&gt;</span><br><span class="line">    $tableInfoList java.util.List&lt;TableInfo&gt;所有选中的表</span><br><span class="line">    $importList 所有需要导入的包集合 java.util.Set&lt;java.lang.String&gt;</span><br><span class="line"></span><br><span class="line">    回调</span><br><span class="line">    &amp;callback 回调对象</span><br><span class="line">        setFileName(String) 设置文件储存名字</span><br><span class="line">        setSavePath(String) 设置文件储存路径，默认使用选中路径</span><br><span class="line">        setReformat(Boolean) 设置是否重新格式化生成后的代码，默认为界面选定值</span><br><span class="line">        setWriteFile(Boolean) 设置是否生成文件，默认为true</span><br><span class="line">    工具</span><br><span class="line">    $tool</span><br><span class="line">        firstUpperCase(String name) 首字母大写方法</span><br><span class="line">        firstLowerCase(String name) 首字母小写方法</span><br><span class="line">        getClsNameByFullName(String fullName) 通过包全名获取类名</span><br><span class="line">        getJavaName(String name) 将下划线分割字符串转驼峰命名(属性名)</span><br><span class="line">        getClassName(String name) 将下划线分割字符串转驼峰命名(类名)</span><br><span class="line">        hump2Underline(String str) 将驼峰字符串转下划线字符串</span><br><span class="line">        append(Object... objs) 多个数据进行拼接</span><br><span class="line">        newHashSet(Object... objs) 创建一个HashSet对象</span><br><span class="line">        newArrayList(Object... objs) 创建一个ArrayList对象</span><br><span class="line">        newLinkedHashMap() 创建一个LinkedHashMap()对象</span><br><span class="line">        newHashMap() 创建一个HashMap()对象</span><br><span class="line">        getField(Object obj, String fieldName) 获取对象的属性值,可以访问任意修饰符修饰的属性.配合debug方法使用.</span><br><span class="line">        call(Object... objs) 空白执行方法,用于调用某些方法时消除返回值</span><br><span class="line">        debug(Object obj) 调式方法,用于查询对象结构.可查看对象所有属性与public方法</span><br><span class="line">        serial() 随机获取序列化的UID</span><br><span class="line">        service(String serviceName, Object... param)远程服务调用</span><br><span class="line">        parseJson(String) 将字符串转Map对象</span><br><span class="line">        toJson(Object, Boolean) 将对象转json对象，Boolean：是否格式化json，不填时为不格式化。</span><br><span class="line">        toUnicode(String, Boolean) 将String转换为unicode形式，Boolean：是否转换所有符号，不填时只转换中文及中文符号。</span><br><span class="line">    $time</span><br><span class="line">        currTime(String format) 获取当前时间，指定时间格式（默认：yyyy-MM-dd HH:mm:ss）</span><br><span class="line">    $generateService</span><br><span class="line">        run(String, Map&lt;String,Object&gt;) 代码生成服务，参数1：模板名称，参数2：附加参数。</span><br><span class="line">    $dasUtil Database提供的工具类，具体可方法请查看源码，适用于高端玩家</span><br><span class="line">    $dbUtil  Database提供的工具类，具体可方法请查看源码，适用于高端玩家</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/idea/" rel="tag"># idea</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/fe4ef317.html" rel="prev" title="linux常用命令">
+                  <i class="fa fa-chevron-left"></i> linux常用命令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/aa51dcec.html" rel="next" title="常用元器件">
+                  常用元器件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">122k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:51</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
