@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="简介This repository contains the reference JVM clients for the InfluxDB 2.x. Currently, Java, Reactive, Kotlin and Scala clients are implemented.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="influxdb-client-java教程">
+<meta property="og:url" content="http://example.com/77a32344.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="简介This repository contains the reference JVM clients for the InfluxDB 2.x. Currently, Java, Reactive, Kotlin and Scala clients are implemented.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-14T06:23:05.000Z">
+<meta property="article:modified_time" content="2022-07-14T09:32:34.335Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="influxDB">
+<meta property="article:tag" content="springboot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/77a32344.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/77a32344.html","path":"77a32344.html","title":"influxdb-client-java教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>influxdb-client-java教程 | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Note-Use-this-client-library-with-InfluxDB-2-x-and-InfluxDB-1-8-see-details-For-connecting-to-InfluxDB-1-7-or-earlier-instances-use-the-influxdb-java-client-library"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+ (see details). For connecting to InfluxDB 1.7 or earlier instances, use the influxdb-java client library.</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#maven"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">maven</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Gradle"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">Gradle</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">样例</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/77a32344.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="influxdb-client-java教程 | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          influxdb-client-java教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-07-14 14:23:05 / 修改时间：17:32:34" itemprop="dateCreated datePublished" datetime="2022-07-14T14:23:05+08:00">2022-07-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/influxDB/" itemprop="url" rel="index"><span itemprop="name">influxDB</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>This repository contains the reference JVM clients for the InfluxDB 2.x. Currently, Java, Reactive, Kotlin and Scala clients are implemented.</p>
+<h4 id="Note-Use-this-client-library-with-InfluxDB-2-x-and-InfluxDB-1-8-see-details-For-connecting-to-InfluxDB-1-7-or-earlier-instances-use-the-influxdb-java-client-library"><a href="#Note-Use-this-client-library-with-InfluxDB-2-x-and-InfluxDB-1-8-see-details-For-connecting-to-InfluxDB-1-7-or-earlier-instances-use-the-influxdb-java-client-library" class="headerlink" title="Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+ (see details). For connecting to InfluxDB 1.7 or earlier instances, use the influxdb-java client library."></a>Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+ (<a target="_blank" rel="noopener" href="https://github.com/influxdata/influxdb-client-java#influxdb-18-api-compatibility">see details</a>). For connecting to InfluxDB 1.7 or earlier instances, use the <a target="_blank" rel="noopener" href="https://github.com/influxdata/influxdb-java">influxdb-java</a> client library.</h4><blockquote>
+<p>官方文档：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/influxdata/influxdb-client-java">GitHub - influxdata&#x2F;influxdb-client-java: InfluxDB 2 JVM Based Clients</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.influxdata.com/influxdb/v2.3/query-data/flux/">Query data with Flux | InfluxDB OSS 2.3 Documentation (influxdata.com)</a></p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h5 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.influxdb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>influxdb-client-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies <span class="punctuation">&#123;</span></span><br><span class="line">    implementation <span class="string">&quot;com.influxdb:influxdb-client-java:6.3.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.Instant;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.influxdb.annotations.Column;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.annotations.Measurement;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.client.InfluxDBClient;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.client.InfluxDBClientFactory;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.client.QueryApi;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.client.WriteApiBlocking;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.client.domain.WritePrecision;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.client.write.Point;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.query.FluxRecord;</span><br><span class="line"><span class="keyword">import</span> com.influxdb.query.FluxTable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InfluxDB2Example</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">char</span>[] token = <span class="string">&quot;my-token&quot;</span>.toCharArray();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">org</span> <span class="operator">=</span> <span class="string">&quot;my-org&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">bucket</span> <span class="operator">=</span> <span class="string">&quot;my-bucket&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(<span class="keyword">final</span> String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">InfluxDBClient</span> <span class="variable">influxDBClient</span> <span class="operator">=</span> InfluxDBClientFactory.create(<span class="string">&quot;http://localhost:8086&quot;</span>, token, org, bucket);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// Write data</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="type">WriteApiBlocking</span> <span class="variable">writeApi</span> <span class="operator">=</span> influxDBClient.getWriteApiBlocking();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// Write by Data Point</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="type">Point</span> <span class="variable">point</span> <span class="operator">=</span> Point.measurement(<span class="string">&quot;temperature&quot;</span>)</span><br><span class="line">                .addTag(<span class="string">&quot;location&quot;</span>, <span class="string">&quot;west&quot;</span>)</span><br><span class="line">                .addField(<span class="string">&quot;value&quot;</span>, <span class="number">55D</span>)</span><br><span class="line">                .time(Instant.now().toEpochMilli(), WritePrecision.MS);</span><br><span class="line"></span><br><span class="line">        writeApi.writePoint(point);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// Write by LineProtocol</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        writeApi.writeRecord(WritePrecision.NS, <span class="string">&quot;temperature,location=north value=60.0&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// Write by POJO</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="type">Temperature</span> <span class="variable">temperature</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Temperature</span>();</span><br><span class="line">        temperature.location = <span class="string">&quot;south&quot;</span>;</span><br><span class="line">        temperature.value = <span class="number">62D</span>;</span><br><span class="line">        temperature.time = Instant.now();</span><br><span class="line"></span><br><span class="line">        writeApi.writeMeasurement( WritePrecision.NS, temperature);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// Query data</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">flux</span> <span class="operator">=</span> <span class="string">&quot;from(bucket:\&quot;my-bucket\&quot;) |&gt; range(start: 0)&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">QueryApi</span> <span class="variable">queryApi</span> <span class="operator">=</span> influxDBClient.getQueryApi();</span><br><span class="line"></span><br><span class="line">        List&lt;FluxTable&gt; tables = queryApi.query(flux);</span><br><span class="line">        <span class="keyword">for</span> (FluxTable fluxTable : tables) &#123;</span><br><span class="line">            List&lt;FluxRecord&gt; records = fluxTable.getRecords();</span><br><span class="line">            <span class="keyword">for</span> (FluxRecord fluxRecord : records) &#123;</span><br><span class="line">                System.out.println(fluxRecord.getTime() + <span class="string">&quot;: &quot;</span> + fluxRecord.getValueByKey(<span class="string">&quot;_value&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        influxDBClient.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Measurement(name = &quot;temperature&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Temperature</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Column(tag = true)</span></span><br><span class="line">        String location;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Column</span></span><br><span class="line">        Double value;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Column(timestamp = true)</span></span><br><span class="line">        Instant time;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/influxDB/" rel="tag"># influxDB</a>
+              <a href="/tags/springboot/" rel="tag"># springboot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/5c92d6d.html" rel="prev" title="esp8266(nodemcu)-基础环境搭建">
+                  <i class="fa fa-chevron-left"></i> esp8266(nodemcu)-基础环境搭建
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">126k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:55</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
