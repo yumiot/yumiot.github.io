@@ -19,6 +19,25 @@
       </tags>
   </entry>
   <entry>
+    <title>clickhouse常用命令</title>
+    <url>/49b8a20.html</url>
+    <content><![CDATA[<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>语法：CREATE DATABASE [IF NOT EXISTS] db_name [ON CLUSTER cluster] [ENGINE &#x3D; engine(…)] </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> db_name;   <span class="comment">--使用默认库引擎创建库</span></span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，<code>ClickHouse</code>使用的是原生的数据库引擎<code>Ordinary</code>(在此数据库下可以使用任意类型的<strong>表引擎</strong>，<strong>在绝大多数情况下都只需使用默认的数据库引擎</strong>)。</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> medical_village_clinic (</span><br><span class="line">  id UInt64,  <span class="comment">-- id  默认字段</span></span><br><span class="line">  area_code String,  <span class="comment">-- 地区code 默认字段</span></span><br><span class="line">    clinic <span class="type">Decimal</span>,	<span class="comment">--卫生室数量</span></span><br><span class="line">    standard_clinic <span class="type">Decimal</span>, <span class="comment">-- 标准卫生室	</span></span><br><span class="line">    floor_space <span class="type">Decimal</span>,	<span class="comment">-- 占地面积</span></span><br><span class="line">    area_structure String,	<span class="comment">-- 建筑面积</span></span><br><span class="line">   create_time <span class="type">Date</span>, <span class="comment">-- 创建时间 默认字段</span></span><br><span class="line">   dimension_date <span class="type">Date</span>, <span class="comment">-- 时间维度 默认字段</span></span><br><span class="line">  channel String   <span class="comment">-- 来源 默认字段</span></span><br><span class="line">) ENGINE <span class="operator">=</span> MergeTree()       <span class="comment">--引擎（不变）</span></span><br><span class="line">     <span class="keyword">ORDER</span> <span class="keyword">BY</span>  (id,dict_code, dimension_date) <span class="comment">-- 按id,dimension_date 排序 不能设置可以为Nullable 的字段</span></span><br><span class="line">     <span class="keyword">PRIMARY</span> KEY (id,dict_code, dimension_date) <span class="comment">-- id,dimension_date  作为唯一主键 不能设置可以为Nullable 的字段</span></span><br><span class="line">     SETTINGS index_granularity<span class="operator">=</span><span class="number">8192</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> analysis_data (</span><br><span class="line">  id UInt64,  <span class="comment">-- id  默认字段</span></span><br><span class="line">  device_id String,  <span class="comment">-- 设备id</span></span><br><span class="line">  sensor_id String,	<span class="comment">-- 传感器id</span></span><br><span class="line">  analysis_data String, <span class="comment">-- 解析数据	</span></span><br><span class="line">  receive_time <span class="type">Date</span>, <span class="comment">-- 创建时间 默认字段</span></span><br><span class="line">  dimension_date <span class="type">Date</span>, <span class="comment">-- 时间维度 默认字段</span></span><br><span class="line">  channel String   <span class="comment">-- 来源 默认字段</span></span><br><span class="line">) ENGINE <span class="operator">=</span> MergeTree()       <span class="comment">--引擎（不变）</span></span><br><span class="line">     <span class="keyword">ORDER</span> <span class="keyword">BY</span>  (id, dimension_date) <span class="comment">-- 按id,dimension_date 排序 不能设置可以为Nullable 的字段</span></span><br><span class="line">     <span class="keyword">PRIMARY</span> KEY (id, dimension_date) <span class="comment">-- id,dimension_date  作为唯一主键 不能设置可以为Nullable 的字段</span></span><br><span class="line">     SETTINGS index_granularity<span class="operator">=</span><span class="number">8192</span>;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>clickhouse</category>
+      </categories>
+      <tags>
+        <tag>clickhouse</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gitlab更改clone地址</title>
     <url>/6faff625.html</url>
     <content><![CDATA[<p>解决方案：修改gitlab配置文件gitlab.yml</p>
@@ -88,25 +107,6 @@
       <tags>
         <tag>gitlab</tag>
         <tag>devOps</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>clickhouse常用命令</title>
-    <url>/49b8a20.html</url>
-    <content><![CDATA[<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>语法：CREATE DATABASE [IF NOT EXISTS] db_name [ON CLUSTER cluster] [ENGINE &#x3D; engine(…)] </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> db_name;   <span class="comment">--使用默认库引擎创建库</span></span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，<code>ClickHouse</code>使用的是原生的数据库引擎<code>Ordinary</code>(在此数据库下可以使用任意类型的<strong>表引擎</strong>，<strong>在绝大多数情况下都只需使用默认的数据库引擎</strong>)。</p>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> medical_village_clinic (</span><br><span class="line">  id UInt64,  <span class="comment">-- id  默认字段</span></span><br><span class="line">  area_code String,  <span class="comment">-- 地区code 默认字段</span></span><br><span class="line">    clinic <span class="type">Decimal</span>,	<span class="comment">--卫生室数量</span></span><br><span class="line">    standard_clinic <span class="type">Decimal</span>, <span class="comment">-- 标准卫生室	</span></span><br><span class="line">    floor_space <span class="type">Decimal</span>,	<span class="comment">-- 占地面积</span></span><br><span class="line">    area_structure String,	<span class="comment">-- 建筑面积</span></span><br><span class="line">   create_time <span class="type">Date</span>, <span class="comment">-- 创建时间 默认字段</span></span><br><span class="line">   dimension_date <span class="type">Date</span>, <span class="comment">-- 时间维度 默认字段</span></span><br><span class="line">  channel String   <span class="comment">-- 来源 默认字段</span></span><br><span class="line">) ENGINE <span class="operator">=</span> MergeTree()       <span class="comment">--引擎（不变）</span></span><br><span class="line">     <span class="keyword">ORDER</span> <span class="keyword">BY</span>  (id,dict_code, dimension_date) <span class="comment">-- 按id,dimension_date 排序 不能设置可以为Nullable 的字段</span></span><br><span class="line">     <span class="keyword">PRIMARY</span> KEY (id,dict_code, dimension_date) <span class="comment">-- id,dimension_date  作为唯一主键 不能设置可以为Nullable 的字段</span></span><br><span class="line">     SETTINGS index_granularity<span class="operator">=</span><span class="number">8192</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> analysis_data (</span><br><span class="line">  id UInt64,  <span class="comment">-- id  默认字段</span></span><br><span class="line">  device_id String,  <span class="comment">-- 设备id</span></span><br><span class="line">  sensor_id String,	<span class="comment">-- 传感器id</span></span><br><span class="line">  analysis_data String, <span class="comment">-- 解析数据	</span></span><br><span class="line">  receive_time <span class="type">Date</span>, <span class="comment">-- 创建时间 默认字段</span></span><br><span class="line">  dimension_date <span class="type">Date</span>, <span class="comment">-- 时间维度 默认字段</span></span><br><span class="line">  channel String   <span class="comment">-- 来源 默认字段</span></span><br><span class="line">) ENGINE <span class="operator">=</span> MergeTree()       <span class="comment">--引擎（不变）</span></span><br><span class="line">     <span class="keyword">ORDER</span> <span class="keyword">BY</span>  (id, dimension_date) <span class="comment">-- 按id,dimension_date 排序 不能设置可以为Nullable 的字段</span></span><br><span class="line">     <span class="keyword">PRIMARY</span> KEY (id, dimension_date) <span class="comment">-- id,dimension_date  作为唯一主键 不能设置可以为Nullable 的字段</span></span><br><span class="line">     SETTINGS index_granularity<span class="operator">=</span><span class="number">8192</span>;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>clickhouse</category>
-      </categories>
-      <tags>
-        <tag>clickhouse</tag>
       </tags>
   </entry>
   <entry>
@@ -214,6 +214,27 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装MongoDB</title>
+    <url>/895ab3f9.html</url>
+    <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
+<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
+</ul>
+</blockquote>
+<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker安装NGINX</title>
     <url>/cd0ece32.html</url>
     <content><![CDATA[<h2 id="Docker安装NGINX"><a href="#Docker安装NGINX" class="headerlink" title="Docker安装NGINX"></a>Docker安装NGINX</h2><h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
@@ -265,27 +286,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker安装MongoDB</title>
-    <url>/895ab3f9.html</url>
-    <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mongo:latest</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name mongo -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li><strong>-p 27017:27017</strong> ：映射容器服务的 27017 端口到宿主机的 27017 端口。外部可以直接通过 宿主机 ip:27017 访问到 mongo 的服务。</li>
-<li><strong>–auth</strong>：需要密码才能访问容器服务。</li>
-</ul>
-</blockquote>
-<h4 id="创建用户密码"><a href="#创建用户密码" class="headerlink" title="创建用户密码"></a>创建用户密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># 创建一个名为 admin，密码为 123456 的用户。</span></span><br><span class="line">db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,<span class="built_in">pwd</span>:<span class="string">&#x27;123456&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"><span class="comment"># 尝试使用上面创建的用户信息进行连接。</span></span><br><span class="line">db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker安装Redis</title>
     <url>/24c94d92.html</url>
     <content><![CDATA[<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull redis:latest</span><br></pre></td></tr></table></figure>
@@ -293,19 +293,6 @@
 <h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name redis -p 6379:6379 -d redis</span><br></pre></td></tr></table></figure>
 
 <h4 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name redis -p 6379:6379 -d redis --requirepass <span class="string">&quot;redis密码&quot;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装emq</title>
-    <url>/869ce7f.html</url>
-    <content><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name emqx -p 1883:1883 -p 8081:8081 -p 8083:8083 -p 8883:8883 -p 8084:8084 -p 18083:18083 emqx/emqx:v4.0.0</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -378,6 +365,19 @@
 <p>下载地址：	<a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15">Download SQL Server Management Studio (SSMS) - SQL Server Management Studio (SSMS) | Microsoft Docs</a></p>
 <p>选择<a href="https://aka.ms/ssmsfullsetup?clcid=0x804">Chinese (Simplified)</a>版本</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Docker安装emq</title>
+    <url>/869ce7f.html</url>
+    <content><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name emqx -p 1883:1883 -p 8081:8081 -p 8083:8083 -p 8883:8883 -p 8084:8084 -p 18083:18083 emqx/emqx:v4.0.0</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
   </entry>
   <entry>
     <title>Docker安装harbor</title>
@@ -541,6 +541,33 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装rabbitmq</title>
+    <url>/9104498a.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认账号密码：guest</p>
+</blockquote>
+<h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it rabbit /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>开启mqtt</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure>
+
+<p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Docker常用命令</title>
     <url>/29dc6fe8.html</url>
     <content><![CDATA[<h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><h4 id="列出所有容器ID"><a href="#列出所有容器ID" class="headerlink" title="列出所有容器ID"></a>列出所有容器ID</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker ps -aq</span><br></pre></td></tr></table></figure>
@@ -578,33 +605,6 @@
 
 <h3 id="停止命令"><a href="#停止命令" class="headerlink" title="停止命令"></a>停止命令</h3><h4 id="停止所有容器"><a href="#停止所有容器" class="headerlink" title="停止所有容器"></a>停止所有容器</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装rabbitmq</title>
-    <url>/9104498a.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull rabbitmq</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 -p 1883:1883 -p 15675:15675 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>默认账号密码：guest</p>
-</blockquote>
-<h1 id="开启mqtt"><a href="#开启mqtt" class="headerlink" title="开启mqtt"></a>开启mqtt</h1><p>进入终端</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it rabbit /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>开启mqtt</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt</span><br></pre></td></tr></table></figure>
-
-<p>rabbitmq常用命令：<a href="https://blog.csdn.net/shaoyunzhe/article/details/96461703">https://blog.csdn.net/shaoyunzhe/article/details/96461703</a></p>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -799,25 +799,6 @@
       </tags>
   </entry>
   <entry>
-    <title>docker安装Grafana</title>
-    <url>/4998eb02.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/grafana</span><br></pre></td></tr></table></figure>
-
-<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>Grafana</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker安装Grafana/loki</title>
     <url>/acaa68a3.html</url>
     <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/loki</span><br></pre></td></tr></table></figure>
@@ -837,30 +818,22 @@
       </tags>
   </entry>
   <entry>
-    <title>docker安装Prometheus</title>
-    <url>/74f5c67c.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull prom/prometheus</span><br></pre></td></tr></table></figure>
+    <title>docker安装Grafana</title>
+    <url>/4998eb02.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull grafana/grafana</span><br></pre></td></tr></table></figure>
 
-<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=prometheus -p 9090:9090 prom/prometheus</span><br></pre></td></tr></table></figure>
+<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
 </blockquote>
-<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><p>通过运行以下命令从主机绑定装载您的：<code>prometheus.yml</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v /path/to/prometheus.yml:/etc/prometheus/prometheus.yml \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
-
-
-
-<p>或者通过运行以下命令将包含的目录绑定挂载到：<code>prometheus.yml  /etc/prometheus</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v /path/to/config:/etc/prometheus \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>docker</category>
       </categories>
       <tags>
         <tag>docker</tag>
-        <tag>Prometheus</tag>
+        <tag>Grafana</tag>
       </tags>
   </entry>
   <entry>
@@ -913,6 +886,59 @@
       </tags>
   </entry>
   <entry>
+    <title>docker安装Prometheus</title>
+    <url>/74f5c67c.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull prom/prometheus</span><br></pre></td></tr></table></figure>
+
+<h1 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=prometheus -p 9090:9090 prom/prometheus</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认账号密码：<strong>admin&#x2F;admin</strong></p>
+</blockquote>
+<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><p>通过运行以下命令从主机绑定装载您的：<code>prometheus.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v /path/to/prometheus.yml:/etc/prometheus/prometheus.yml \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或者通过运行以下命令将包含的目录绑定挂载到：<code>prometheus.yml  /etc/prometheus</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    -p 9090:9090 \</span><br><span class="line">    -v /path/to/config:/etc/prometheus \</span><br><span class="line">    prom/prometheus</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>Prometheus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker安装禅道</title>
+    <url>/b5a90049.html</url>
+    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> www</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> data</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="启动禅道"><a href="#启动禅道" class="headerlink" title="启动禅道"></a>启动禅道</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name zentao -p 80:80 -v /mnt/data/zentao/www:/app/zentaopms -v /mnt/data/zentao/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>访问：浏览器直接访问http:&#x2F;&#x2F;容器ip:宿主机映射端口。</p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker开机自启容器</title>
     <url>/c8387f92.html</url>
     <content><![CDATA[<h4 id="在使用docker-run启动容器时，使用–restart参数来设置："><a href="#在使用docker-run启动容器时，使用–restart参数来设置：" class="headerlink" title="在使用docker run启动容器时，使用–restart参数来设置："></a>在使用docker run启动容器时，使用–restart参数来设置：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name nginx -p 80:80 -d nginx --restart always</span><br></pre></td></tr></table></figure>
@@ -944,32 +970,6 @@
 </blockquote>
 <h4 id="如果创建时未指定-–restart-x3D-always-可通过update-命令"><a href="#如果创建时未指定-–restart-x3D-always-可通过update-命令" class="headerlink" title="如果创建时未指定 –restart&#x3D;always ,可通过update 命令"></a>如果创建时未指定 –restart&#x3D;always ,可通过update 命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker update --restart=always nginx</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker安装禅道</title>
-    <url>/b5a90049.html</url>
-    <content><![CDATA[<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> www</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> data</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="启动禅道"><a href="#启动禅道" class="headerlink" title="启动禅道"></a>启动禅道</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name zentao -p 80:80 -v /mnt/data/zentao/www:/app/zentaopms -v /mnt/data/zentao/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d easysoft/zentao:15.7.1</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>访问：浏览器直接访问http:&#x2F;&#x2F;容器ip:宿主机映射端口。</p>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -1080,48 +1080,6 @@
       </tags>
   </entry>
   <entry>
-    <title>eclipse快捷键</title>
-    <url>/168fd7a4.html</url>
-    <content><![CDATA[<p> 转为大写 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + x </span><br></pre></td></tr></table></figure>
-
-
-
-<p>转为小写</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + y  </span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>eclipse</category>
-      </categories>
-      <tags>
-        <tag>eclipse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用元器件</title>
-    <url>/aa51dcec.html</url>
-    <content><![CDATA[<h1 id="MCU"><a href="#MCU" class="headerlink" title="MCU"></a>MCU</h1><h2 id="51单片机"><a href="#51单片机" class="headerlink" title="51单片机"></a>51单片机</h2><p>常用型号：</p>
-<ol>
-<li>STC89C52RC</li>
-<li>STC15W408AS（SOP16封装）</li>
-</ol>
-<p>参考资料：<a href="https://www.bilibili.com/read/cv6053024/">STC单片机中，哪个，型号更，受欢迎 排名 - 哔哩哔哩 (bilibili.com)</a></p>
-<h2 id="STM32"><a href="#STM32" class="headerlink" title="STM32"></a>STM32</h2><p>常用型号：</p>
-<ol>
-<li>STM32F103ZET6、STM32F103RCT6</li>
-<li>STM32F407ZGT6</li>
-<li>STM32F767IGT6</li>
-</ol>
-]]></content>
-      <categories>
-        <category>嵌入式</category>
-      </categories>
-      <tags>
-        <tag>嵌入式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>常用传感器</title>
     <url>/f69a5309.html</url>
     <content><![CDATA[<h1 id="温度传感器"><a href="#温度传感器" class="headerlink" title="温度传感器"></a>温度传感器</h1><p>　　该设备从源头收集有关温度的信息，并转换成其他设备或人可以理解的形式。温度传感器的最佳例证是玻璃水银温度计，会随着温度的变化而膨胀和收缩。外部温度是温度测量的来源，观察者观察汞的位置以测量温度。温度传感器有两种基本类型：</p>
@@ -1174,40 +1132,60 @@
       </tags>
   </entry>
   <entry>
-    <title>git跳过代码检查</title>
-    <url>/5c1803c3.html</url>
-    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../images/git/git--no-verify.png"></p>
+    <title>常用元器件</title>
+    <url>/aa51dcec.html</url>
+    <content><![CDATA[<h1 id="MCU"><a href="#MCU" class="headerlink" title="MCU"></a>MCU</h1><h2 id="51单片机"><a href="#51单片机" class="headerlink" title="51单片机"></a>51单片机</h2><p>常用型号：</p>
+<ol>
+<li>STC89C52RC</li>
+<li>STC15W408AS（SOP16封装）</li>
+</ol>
+<p>参考资料：<a href="https://www.bilibili.com/read/cv6053024/">STC单片机中，哪个，型号更，受欢迎 排名 - 哔哩哔哩 (bilibili.com)</a></p>
+<h2 id="STM32"><a href="#STM32" class="headerlink" title="STM32"></a>STM32</h2><p>常用型号：</p>
+<ol>
+<li>STM32F103ZET6、STM32F103RCT6</li>
+<li>STM32F407ZGT6</li>
+<li>STM32F767IGT6</li>
+</ol>
 ]]></content>
       <categories>
-        <category>git</category>
+        <category>嵌入式</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>嵌入式</tag>
       </tags>
   </entry>
   <entry>
-    <title>git分支开发工作流</title>
-    <url>/5b072233.html</url>
-    <content><![CDATA[<h1 id="Git分支开发工作流"><a href="#Git分支开发工作流" class="headerlink" title="Git分支开发工作流"></a>Git分支开发工作流</h1><h2 id="Git分支明细"><a href="#Git分支明细" class="headerlink" title="Git分支明细"></a>Git分支明细</h2><p><img src="/../../images/git/git%E5%88%86%E6%94%AF.png"></p>
-<h4 id="主分支：master"><a href="#主分支：master" class="headerlink" title="主分支：master"></a>主分支：master</h4><p>一般master或main为主分支，主分支为所有提供给用户使用的正式版本，一般由release或fix分支合并，任何时间都不能修改代码。</p>
-<h4 id="新功能分支：feature-x2F"><a href="#新功能分支：feature-x2F" class="headerlink" title="新功能分支：feature&#x2F;*"></a>新功能分支：feature&#x2F;*</h4><p>在整个项目开发周期的不同阶段，我们有许多不同的新功能要开发，每开发一个新功能，最好新建一个feature分支，完成功能开发后合并分支，最后删除feature分支。</p>
-<p>分支命名：feature&#x2F;分支功能</p>
-<h4 id="开发分支：develop"><a href="#开发分支：develop" class="headerlink" title="开发分支：develop"></a>开发分支：develop</h4><p>主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。开发分支应始终保持最新完成状态已经bug修复完成的代码。如果想正式对外发布，就在Master分支上，对Develop分支进行”合并”。</p>
-<h4 id="预发布分支：release-x2F"><a href="#预发布分支：release-x2F" class="headerlink" title="预发布分支：release&#x2F;*"></a>预发布分支：release&#x2F;*</h4><p>预发布分支是上线前的测试阶段，预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并到develop和master分⽀上，完成后删除改分支。</p>
-<p>分支命名：release&#x2F;分支功能</p>
-<h4 id="BUG修复分支：fix-x2F"><a href="#BUG修复分支：fix-x2F" class="headerlink" title="BUG修复分支：fix&#x2F;*"></a>BUG修复分支：fix&#x2F;*</h4><p>用于修复紧急故障，从主分支上面拉去，最后合并到主分支或者开发分支develop。</p>
-<p>分支命名：fix&#x2F;分支功能</p>
-<h2 id="分支开发工作流"><a href="#分支开发工作流" class="headerlink" title="分支开发工作流"></a>分支开发工作流</h2><p>在整个项目开发周期的不同阶段，可以同时拥有多个开放的分支；定期地把某些主题分支合并入其他分支中。</p>
-<p><img src="/../../images/git/%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81.png"></p>
+    <title>eclipse快捷键</title>
+    <url>/168fd7a4.html</url>
+    <content><![CDATA[<p> 转为大写 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + x </span><br></pre></td></tr></table></figure>
+
+
+
+<p>转为小写</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + Shift + y  </span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>git</category>
+        <category>eclipse</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>esp8266(nodemcu)-点亮一个LED</title>
+    <url>/c03e49bc.html</url>
+    <content><![CDATA[<p>esp8266(nodemcu)世界的 <strong>hello world</strong>，敲黑板，划重点！！！</p>
+<h1 id="init-lua"><a href="#init-lua" class="headerlink" title="init.lua"></a>init.lua</h1><p>当设备在全新闪烁后启动时，您将看到“lua：无法打开 init.lua”打印到串行控制台。如果 NodeMCU 在文件系统的根目录中找到 一个，它将作为引导序列的一部分执行它（标准 Lua 功能）。因此，您的应用程序将从 初始化并触发。通常，您首先设置WiFi连接，并且仅在成功后继续。<code>init.lua``init.lua</code></p>
+<p>要非常小心，不要把自己锁在外面！如果其中存在错误，您可能会陷入无限重启循环。因此，建议您在启动序列中构建一个小的延迟，以允许您通过删除或重命名等方式中断序列（另请参阅<a href="https://nodemcu.readthedocs.io/en/release/lua-developer-faq/#how-do-i-avoid-a-panic-loop-in-initlua">常见问题解答</a>）。您很可能与下面的不同，但它是自定义的良好起点：<code>init.lua``init.lua``init.lua</code></p>
+]]></content>
+      <categories>
+        <category>esp8266</category>
+      </categories>
+      <tags>
+        <tag>esp8266</tag>
+        <tag>nodemcu</tag>
       </tags>
   </entry>
   <entry>
@@ -1358,15 +1336,40 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo关闭Next主题加载效果</title>
-    <url>/a52b693e.html</url>
-    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
+    <title>git跳过代码检查</title>
+    <url>/5c1803c3.html</url>
+    <content><![CDATA[<h1 id="–no-verify"><a href="#–no-verify" class="headerlink" title="–no-verify"></a>–no-verify</h1><p>因为某些代码检测规则，导致代码提交失败时，可以使用 <strong>–no-verify</strong>跳过</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> --no-verify</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../images/git/git--no-verify.png"></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git分支开发工作流</title>
+    <url>/5b072233.html</url>
+    <content><![CDATA[<h1 id="Git分支开发工作流"><a href="#Git分支开发工作流" class="headerlink" title="Git分支开发工作流"></a>Git分支开发工作流</h1><h2 id="Git分支明细"><a href="#Git分支明细" class="headerlink" title="Git分支明细"></a>Git分支明细</h2><p><img src="/../../images/git/git%E5%88%86%E6%94%AF.png"></p>
+<h4 id="主分支：master"><a href="#主分支：master" class="headerlink" title="主分支：master"></a>主分支：master</h4><p>一般master或main为主分支，主分支为所有提供给用户使用的正式版本，一般由release或fix分支合并，任何时间都不能修改代码。</p>
+<h4 id="新功能分支：feature-x2F"><a href="#新功能分支：feature-x2F" class="headerlink" title="新功能分支：feature&#x2F;*"></a>新功能分支：feature&#x2F;*</h4><p>在整个项目开发周期的不同阶段，我们有许多不同的新功能要开发，每开发一个新功能，最好新建一个feature分支，完成功能开发后合并分支，最后删除feature分支。</p>
+<p>分支命名：feature&#x2F;分支功能</p>
+<h4 id="开发分支：develop"><a href="#开发分支：develop" class="headerlink" title="开发分支：develop"></a>开发分支：develop</h4><p>主分支只用来分布重大版本，日常开发应该在另一条分支上完成。我们把开发用的分支，叫做Develop。开发分支应始终保持最新完成状态已经bug修复完成的代码。如果想正式对外发布，就在Master分支上，对Develop分支进行”合并”。</p>
+<h4 id="预发布分支：release-x2F"><a href="#预发布分支：release-x2F" class="headerlink" title="预发布分支：release&#x2F;*"></a>预发布分支：release&#x2F;*</h4><p>预发布分支是上线前的测试阶段，预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并到develop和master分⽀上，完成后删除改分支。</p>
+<p>分支命名：release&#x2F;分支功能</p>
+<h4 id="BUG修复分支：fix-x2F"><a href="#BUG修复分支：fix-x2F" class="headerlink" title="BUG修复分支：fix&#x2F;*"></a>BUG修复分支：fix&#x2F;*</h4><p>用于修复紧急故障，从主分支上面拉去，最后合并到主分支或者开发分支develop。</p>
+<p>分支命名：fix&#x2F;分支功能</p>
+<h2 id="分支开发工作流"><a href="#分支开发工作流" class="headerlink" title="分支开发工作流"></a>分支开发工作流</h2><p>在整个项目开发周期的不同阶段，可以同时拥有多个开放的分支；定期地把某些主题分支合并入其他分支中。</p>
+<p><img src="/../../images/git/%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81.png"></p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1385,15 +1388,13 @@
 
 
 
-<h2 id="ServiceImpl"><a href="#ServiceImpl" class="headerlink" title="ServiceImpl"></a>ServiceImpl</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;ServiceImpl&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/service/impl&quot;</span>, <span class="string">&quot;ServiceImpl.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;service.impl&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.plugins.pagination.Page;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.mapper.$!&#123;tableInfo.name&#125;Mapper;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!&#123;tableInfo.name&#125;;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.service.$!&#123;tableInfo.name&#125;Service;</span><br><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表服务实现类&quot;</span>)</span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableName&#125; <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;$!&#123;tableInfo.name&#125;Mapper, $!&#123;tableInfo.name&#125;&gt; <span class="keyword">implements</span> <span class="title class_">$</span>!&#123;tableInfo.name&#125;Service &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> $!&#123;tableInfo.name&#125;Mapper $tool.firstLowerCase($!&#123;tableInfo.name&#125;)Mapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;$!&#123;tableInfo.name&#125;&gt; selectAll(Page&lt;$!tableInfo.name&gt; page, $!tableInfo.name $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> $tool.firstLowerCase($!&#123;tableInfo.name&#125;)Mapper.selectPage(page, <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;($tool.firstLowerCase($!&#123;tableInfo.name&#125;)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> save$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.save($tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> update$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.updateById($tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">deleteByIds</span><span class="params">(List&lt;Serializable&gt; ids)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">this</span>.removeByIds(ids);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+<h2 id="ServiceImpl"><a href="#ServiceImpl" class="headerlink" title="ServiceImpl"></a>ServiceImpl</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;ServiceImpl&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/service/impl&quot;</span>, <span class="string">&quot;ServiceImpl.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;service.impl&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.plugins.pagination.Page;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.mapper.$!&#123;tableInfo.name&#125;Mapper;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!&#123;tableInfo.name&#125;;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.service.$!&#123;tableInfo.name&#125;Service;</span><br><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表服务实现类&quot;</span>)</span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableName&#125; <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;$!&#123;tableInfo.name&#125;Mapper, $!&#123;tableInfo.name&#125;&gt; <span class="keyword">implements</span> <span class="title class_">$</span>!&#123;tableInfo.name&#125;Service &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> $!&#123;tableInfo.name&#125;Mapper $tool.firstLowerCase($!&#123;tableInfo.name&#125;)Mapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;$!&#123;tableInfo.name&#125;&gt; selectAll(Page&lt;$!tableInfo.name&gt; page, $!tableInfo.name $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="built_in">this</span>.page(page, <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;($tool.firstLowerCase($!&#123;tableInfo.name&#125;)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> save$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.save($tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> update$!&#123;tableInfo.name&#125;($!tableInfo.name  $tool.firstLowerCase($!&#123;tableInfo.name&#125;))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.updateById($tool.firstLowerCase($!&#123;tableInfo.name&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">deleteByIds</span><span class="params">(List&lt;Serializable&gt; ids)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">this</span>.removeByIds(ids);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
 <h2 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##设置表后缀（宏定义）</span><br><span class="line">#setTableSuffix(<span class="string">&quot;Mapper&quot;</span>)</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/mapper&quot;</span>, <span class="string">&quot;Mapper.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;mapper&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.mapper.BaseMapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"><span class="keyword">import</span> $!&#123;tableInfo.savePackageName&#125;.domain.$!tableInfo.name;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表数据库访问层&quot;</span>)</span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">$</span>!&#123;tableName&#125; <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;$!tableInfo.name&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="domian"><a href="#domian" class="headerlink" title="domian"></a>domian</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/domain&quot;</span>, <span class="string">&quot;.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;domain&quot;</span>)</span><br><span class="line"></span><br><span class="line">##自动导入包（全局变量）</span><br><span class="line">$!autoImport</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.IdType;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.TableId;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.activerecord.Model;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.media.Schema;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.EqualsAndHashCode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.validation.constraints.NotBlank;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表实体类&quot;</span>)</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode(callSuper = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableInfo.name&#125; <span class="keyword">extends</span> <span class="title class_">Model</span>&lt;$!&#123;tableInfo.name&#125;&gt; <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">#foreach($column in $tableInfo.pkColumn)</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@TableId(type = IdType.ASSIGN_ID)</span></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;主键 不能为空&quot;)</span></span><br><span class="line">    #<span class="keyword">if</span>($&#123;column.comment&#125;)<span class="meta">@Schema(description = &quot;$!&#123;column.comment&#125;&quot;)</span>#end</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> $!&#123;tool.getClsNameByFullName($column.type)&#125; $!&#123;column.name&#125;;</span><br><span class="line">    </span><br><span class="line">#end</span><br><span class="line">#foreach($column in $tableInfo.otherColumn)</span><br><span class="line">    #<span class="keyword">if</span>($&#123;column.comment&#125;)<span class="meta">@Schema(description = &quot;$!&#123;column.comment&#125;&quot;)</span>#end</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> $!&#123;tool.getClsNameByFullName($column.type)&#125; $!&#123;column.name&#125;;</span><br><span class="line">    </span><br><span class="line">#end</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="domian"><a href="#domian" class="headerlink" title="domian"></a>domian</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">##导入宏定义</span><br><span class="line">$!&#123;define.vm&#125;</span><br><span class="line"></span><br><span class="line">##保存文件（宏定义）</span><br><span class="line">#save(<span class="string">&quot;/domain&quot;</span>, <span class="string">&quot;.java&quot;</span>)</span><br><span class="line"></span><br><span class="line">##包路径（宏定义）</span><br><span class="line">#setPackageSuffix(<span class="string">&quot;domain&quot;</span>)</span><br><span class="line"></span><br><span class="line">##自动导入包（全局变量）</span><br><span class="line">$!autoImport</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.IdType;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.TableId;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.extension.activerecord.Model;</span><br><span class="line"><span class="keyword">import</span> io.swagger.v3.oas.annotations.media.Schema;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.EqualsAndHashCode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.validation.constraints.NotBlank;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line">##表注释（宏定义）</span><br><span class="line">#tableComment(<span class="string">&quot;表实体类&quot;</span>)</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode(callSuper = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">$</span>!&#123;tableInfo.name&#125; <span class="keyword">extends</span> <span class="title class_">Model</span>&lt;$!&#123;tableInfo.name&#125;&gt; <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">#foreach($column in $tableInfo.pkColumn)</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@TableId(type = IdType.ASSIGN_ID)</span></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;主键 不能为空&quot;)</span></span><br><span class="line">    #<span class="keyword">if</span>($&#123;column.comment&#125;)<span class="meta">@Schema(description = &quot;$!&#123;column.comment&#125;&quot;)</span>#end</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> $!&#123;tool.getClsNameByFullName($column.type)&#125; $!&#123;column.name&#125;;</span><br><span class="line">    </span><br><span class="line">#end</span><br><span class="line">#foreach($column in $tableInfo.otherColumn)</span><br><span class="line">    #<span class="keyword">if</span>($&#123;column.comment&#125;)<span class="meta">@Schema(description = &quot;$!&#123;column.comment&#125;&quot;)</span>#end</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> $!&#123;tool.getClsNameByFullName($column.type)&#125; $!&#123;column.name&#125;;</span><br><span class="line">    </span><br><span class="line">#end</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1402,27 +1403,6 @@
 
 
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">   </span><br><span class="line">说明文档：</span><br><span class="line">    属性</span><br><span class="line">    $author 设置中的作者 java.lang.String</span><br><span class="line">    $modulePath 选中的module路径 java.lang.String</span><br><span class="line">    $projectPath 项目绝对路径 java.lang.String</span><br><span class="line"></span><br><span class="line">    对象</span><br><span class="line">    $tableInfo 表对象</span><br><span class="line">        obj 表原始对象 com.intellij.database.model.DasTable</span><br><span class="line">        name 表名（转换后的首字母大写）java.lang.String</span><br><span class="line">        comment 表注释 java.lang.String</span><br><span class="line">        fullColumn 所有列 java.util.List&lt;ColumnInfo&gt;</span><br><span class="line">        pkColumn 主键列 java.util.List&lt;ColumnInfo&gt;</span><br><span class="line">        otherColumn 其他列 java.util.List&lt;ColumnInfo&gt;,除主键以外的列</span><br><span class="line">        savePackageName 保存的包名 java.lang.String</span><br><span class="line">        savePath 保存路径 java.lang.String</span><br><span class="line">        saveModelName 保存的model名称 java.lang.String</span><br><span class="line">    columnInfo 列对象</span><br><span class="line">        obj 列原始对象 com.intellij.database.model.DasColumn</span><br><span class="line">        name 列名（首字母小写） java.lang.String</span><br><span class="line">        comment 列注释 java.lang.String</span><br><span class="line">        type 列类型（类型全名） java.lang.String</span><br><span class="line">        shortType 列类型（短类型） java.lang.String</span><br><span class="line">        custom 是否附加列 java.lang.Boolean</span><br><span class="line">        ext 附加字段（Map类型） java.lang.Map&lt;java.lang.String, java.lang.Object&gt;</span><br><span class="line">    $tableInfoList java.util.List&lt;TableInfo&gt;所有选中的表</span><br><span class="line">    $importList 所有需要导入的包集合 java.util.Set&lt;java.lang.String&gt;</span><br><span class="line"></span><br><span class="line">    回调</span><br><span class="line">    &amp;callback 回调对象</span><br><span class="line">        setFileName(String) 设置文件储存名字</span><br><span class="line">        setSavePath(String) 设置文件储存路径，默认使用选中路径</span><br><span class="line">        setReformat(Boolean) 设置是否重新格式化生成后的代码，默认为界面选定值</span><br><span class="line">        setWriteFile(Boolean) 设置是否生成文件，默认为true</span><br><span class="line">    工具</span><br><span class="line">    $tool</span><br><span class="line">        firstUpperCase(String name) 首字母大写方法</span><br><span class="line">        firstLowerCase(String name) 首字母小写方法</span><br><span class="line">        getClsNameByFullName(String fullName) 通过包全名获取类名</span><br><span class="line">        getJavaName(String name) 将下划线分割字符串转驼峰命名(属性名)</span><br><span class="line">        getClassName(String name) 将下划线分割字符串转驼峰命名(类名)</span><br><span class="line">        hump2Underline(String str) 将驼峰字符串转下划线字符串</span><br><span class="line">        append(Object... objs) 多个数据进行拼接</span><br><span class="line">        newHashSet(Object... objs) 创建一个HashSet对象</span><br><span class="line">        newArrayList(Object... objs) 创建一个ArrayList对象</span><br><span class="line">        newLinkedHashMap() 创建一个LinkedHashMap()对象</span><br><span class="line">        newHashMap() 创建一个HashMap()对象</span><br><span class="line">        getField(Object obj, String fieldName) 获取对象的属性值,可以访问任意修饰符修饰的属性.配合debug方法使用.</span><br><span class="line">        call(Object... objs) 空白执行方法,用于调用某些方法时消除返回值</span><br><span class="line">        debug(Object obj) 调式方法,用于查询对象结构.可查看对象所有属性与public方法</span><br><span class="line">        serial() 随机获取序列化的UID</span><br><span class="line">        service(String serviceName, Object... param)远程服务调用</span><br><span class="line">        parseJson(String) 将字符串转Map对象</span><br><span class="line">        toJson(Object, Boolean) 将对象转json对象，Boolean：是否格式化json，不填时为不格式化。</span><br><span class="line">        toUnicode(String, Boolean) 将String转换为unicode形式，Boolean：是否转换所有符号，不填时只转换中文及中文符号。</span><br><span class="line">    $time</span><br><span class="line">        currTime(String format) 获取当前时间，指定时间格式（默认：yyyy-MM-dd HH:mm:ss）</span><br><span class="line">    $generateService</span><br><span class="line">        run(String, Map&lt;String,Object&gt;) 代码生成服务，参数1：模板名称，参数2：附加参数。</span><br><span class="line">    $dasUtil Database提供的工具类，具体可方法请查看源码，适用于高端玩家</span><br><span class="line">    $dbUtil  Database提供的工具类，具体可方法请查看源码，适用于高端玩家</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>idea</category>
-      </categories>
-      <tags>
-        <tag>idea</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>idea正则替换下划线为驼峰</title>
-    <url>/3dab07f0.html</url>
-    <content><![CDATA[<h1 id="idea正则替换下划线为驼峰"><a href="#idea正则替换下划线为驼峰" class="headerlink" title="idea正则替换下划线为驼峰"></a>idea正则替换下划线为驼峰</h1><p>查找：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(\w*)_(\w*)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(\w*)_(\w*)_(\w*)</span><br></pre></td></tr></table></figure>
-
-<p>替换：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\l$1\u$2</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\l$1\u$2\u$3</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1482,6 +1462,27 @@
       </tags>
   </entry>
   <entry>
+    <title>idea正则替换下划线为驼峰</title>
+    <url>/3dab07f0.html</url>
+    <content><![CDATA[<h1 id="idea正则替换下划线为驼峰"><a href="#idea正则替换下划线为驼峰" class="headerlink" title="idea正则替换下划线为驼峰"></a>idea正则替换下划线为驼峰</h1><p>查找：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(\w*)_(\w*)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(\w*)_(\w*)_(\w*)</span><br></pre></td></tr></table></figure>
+
+<p>替换：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\l$1\u$2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\l$1\u$2\u$3</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>idea</category>
+      </categories>
+      <tags>
+        <tag>idea</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>正则密码</title>
     <url>/ca0ded35.html</url>
     <content><![CDATA[<h1 id="密码正则表达式"><a href="#密码正则表达式" class="headerlink" title="密码正则表达式"></a>密码正则表达式</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//密码至少包含 数字和英文，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 密码包含 数字,英文,字符中的两种以上，长度6-20</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 至少包含数字跟字母，可以有字符</span></span><br><span class="line"><span class="type">String</span> <span class="variable">reg</span> <span class="operator">=</span> <span class="string">&quot;(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&amp;*()]&#123;6,20&#125;$&quot;</span>;</span><br></pre></td></tr></table></figure>
@@ -1508,6 +1509,156 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo关闭Next主题加载效果</title>
+    <url>/a52b693e.html</url>
+    <content><![CDATA[<p>motion:<br>  enable: false #关闭</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BigDecimal</title>
+    <url>/5b0774c7.html</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Java在java.math包中提供的API类BigDecimal，用来对超过16位有效位的数进行精确的运算。双精度浮点型变量double可以处理16位有效数。在实际应用中，需要对更大或者更小的数进行运算和处理。<strong>float和double只能用来做科学计算或者是工程计算，在商业计算中要用java.math.BigDecimal。</strong>BigDecimal所创建的是对象，我们不能使用传统的+、-、*、&#x2F;等<a href="https://baike.baidu.com/item/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6/9324947">算术运算符</a>直接对其对象进行数学运算，而必须调用其相对应的方法。方法中的参数也必须是BigDecimal的对象。构造器是类的特殊方法，专门用来创建对象，特别是带有参数的对象。</p>
+<p><code>BigDecimal</code>可以表示一个任意大小且精度完全准确的浮点数。</p>
+<h1 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h1><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>加</td>
+<td>add</td>
+</tr>
+<tr>
+<td>减</td>
+<td>subtract</td>
+</tr>
+<tr>
+<td>乘</td>
+<td>multiply</td>
+</tr>
+<tr>
+<td>除</td>
+<td>divide</td>
+</tr>
+<tr>
+<td>绝对值</td>
+<td>abs</td>
+</tr>
+<tr>
+<td>平方</td>
+<td>pow</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;123.45&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;78.9&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;加：&quot;</span> + d1.add(d2));</span><br><span class="line">System.out.println(<span class="string">&quot;减：&quot;</span> + d1.subtract(d2));</span><br><span class="line">System.out.println(<span class="string">&quot;乘：&quot;</span> + d1.multiply(d2));</span><br><span class="line">System.out.println(<span class="string">&quot;除：&quot;</span> + d1.divide(d2, <span class="number">2</span>, RoundingMode.UP));</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对<code>BigDecimal</code>做加、减、乘时，精度不会丢失，但是做除法时，存在无法除尽的情况，这时，就必须指定精度以及如何进行截断：</p>
+</blockquote>
+<h1 id="比较大小"><a href="#比较大小" class="headerlink" title="比较大小"></a>比较大小</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//a、b不能为null</span></span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a小于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) == <span class="number">0</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a等于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) == <span class="number">1</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a大于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) &gt; -<span class="number">1</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a大于等于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) &lt; <span class="number">1</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a小于等于b&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jpackage打包Java应用</title>
+    <url>/9642e6ad.html</url>
+    <content><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="安装JDK，这里使用的是JDK17"><a href="#安装JDK，这里使用的是JDK17" class="headerlink" title="安装JDK，这里使用的是JDK17"></a>安装JDK，这里使用的是JDK17</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-17-jdk</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install binutils</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install fakeroot</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><h2 id="新建目录，并将jar拷贝到目录中"><a href="#新建目录，并将jar拷贝到目录中" class="headerlink" title="新建目录，并将jar拷贝到目录中"></a>新建目录，并将jar拷贝到目录中</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> lib</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> test.jar lib/</span><br></pre></td></tr></table></figure>
+
+<h2 id="打包应用"><a href="#打包应用" class="headerlink" title="打包应用"></a>打包应用</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jpackage --name testname --input lib --main-jar test.jar</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jpackage –input target&#x2F; \</p>
+<p>  –name JPackageDemoApp \</p>
+<p>  –main-jar JPackageDemoApp.jar \ </p>
+<p> –main-class com.baeldung.java14.jpackagedemoapp.JPackageDemoApp \</p>
+<p>  –type dmg \</p>
+<p>  –java-options ‘–enable-preview’</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>–input</em> : 输入 jar 文件的位置</li>
+<li><em>–name</em> : 为可安装包命名</li>
+<li><em>–main-jar</em> : 在应用程序启动时启动的 JAR 文件</li>
+<li><em>–main-class</em> : 在应用程序启动时启动的 JAR 中的主类名称。如果主 JAR 中的<em>MANIFEST.MF</em>文件包含主类名，则这是可选的。</li>
+<li><em>–type</em>：我们要创建什么样的安装程序？这取决于我们运行<em>jpackage</em>命令的基本操作系统。在 macOS 上，我们可以传递包类型为 DMG 或 PKG。该工具支持 Windows 上的 MSI 和 EXE 选项以及 Linux 上的 DEB 和 RPM 选项。</li>
+<li><em>–java-options</em> : 传递给 Java 运行时的选项</li>
+</ul>
+</blockquote>
+<p>安装完成后，安装目录在&#x2F;opt&#x2F;下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg -i testname.deb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/opt/testname/bin/testname</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用jlink定制生成JRE</title>
+    <url>/90e68bc9.html</url>
+    <content><![CDATA[<p>在</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/jlink --module-path jmods --add-modules java.base --output myjre</span><br></pre></td></tr></table></figure>
+
+<p>查看 jre 中添加的模块</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">myjre/bin/java --list-modules</span><br></pre></td></tr></table></figure>
+
+<p>NoClassDefFound 错误说明，jre 中没有添加相关的模块。</p>
+<p>首先，需要确定缺少的 class 存在于那个 jdk module 中，然后在 jlink 命令中添加到 –add-modules 列表中，重新生成 jre 就可以了</p>
+<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bin/jlink \</span><br><span class="line">--module-path jmods \</span><br><span class="line">--add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management,jdk.net \</span><br><span class="line">--strip-debug \</span><br><span class="line">--output myjre</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jlink \</span><br><span class="line">    --verbose \</span><br><span class="line">    --module-path &quot;$JAVA_HOME/jmods&quot; \</span><br><span class="line">    --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management \</span><br><span class="line">    --compress 2 \</span><br><span class="line">    --no-header-files \</span><br><span class="line">    --no-man-pages \</span><br><span class="line">    --strip-debug \</span><br><span class="line">    --output /opt/jre</span><br></pre></td></tr></table></figure>
+
+<h3 id="全部jre"><a href="#全部jre" class="headerlink" title="全部jre"></a>全部jre</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/jlink --module-path jmods --add-modules java.base,java.compiler,java.datatransfer,java.desktop,java.instrument,java.logging,java.management,java.management.rmi,java.naming,java.net.http,java.prefs,java.rmi,java.scripting,java.se,java.security.jgss,java.security.sasl,java.smartcardio,java.sql,java.sql.rowset,java.transaction.xa,java.xml,java.xml.crypto,jdk.accessibility,jdk.aot,jdk.attach,jdk.charsets,jdk.compiler,jdk.crypto.cryptoki,jdk.crypto.ec,jdk.dynalink,jdk.editpad,jdk.hotspot.agent,jdk.httpserver,jdk.internal.ed,jdk.internal.jvmstat,jdk.internal.le,jdk.internal.opt,jdk.internal.vm.ci,jdk.internal.vm.compiler,jdk.internal.vm.compiler.management,jdk.jartool,jdk.javadoc,jdk.jcmd,jdk.jconsole,jdk.jdeps,jdk.jdi,jdk.jdwp.agent,jdk.jfr,jdk.jlink,jdk.jshell,jdk.jsobject,jdk.jstatd,jdk.localedata,jdk.management,jdk.management.agent,jdk.management.jfr,jdk.naming.dns,jdk.naming.ldap,jdk.naming.rmi,jdk.net,jdk.pack,jdk.rmic,jdk.scripting.nashorn,jdk.scripting.nashorn.shell,jdk.sctp,jdk.security.auth,jdk.security.jgss,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,jdk.zipfs --strip-debug --output myjre</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="全部模块："><a href="#全部模块：" class="headerlink" title="全部模块："></a>全部模块：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.base</span><br><span class="line">java.compiler</span><br><span class="line">java.datatransfer</span><br><span class="line">java.desktop</span><br><span class="line">java.instrument</span><br><span class="line">java.logging</span><br><span class="line">java.management</span><br><span class="line">java.management.rmi</span><br><span class="line">java.naming</span><br><span class="line">java.net.http</span><br><span class="line">java.prefs</span><br><span class="line">java.rmi</span><br><span class="line">java.scripting</span><br><span class="line">java.se</span><br><span class="line">java.security.jgss</span><br><span class="line">java.security.sasl</span><br><span class="line">java.smartcardio</span><br><span class="line">java.sql</span><br><span class="line">java.sql.rowset</span><br><span class="line">java.transaction.xa</span><br><span class="line">java.xml</span><br><span class="line">java.xml.crypto</span><br><span class="line">jdk.accessibility</span><br><span class="line">jdk.aot</span><br><span class="line">jdk.attach</span><br><span class="line">jdk.charsets</span><br><span class="line">jdk.compiler</span><br><span class="line">jdk.crypto.cryptoki</span><br><span class="line">jdk.crypto.ec</span><br><span class="line">jdk.dynalink</span><br><span class="line">jdk.editpad</span><br><span class="line">jdk.hotspot.agent</span><br><span class="line">jdk.httpserver</span><br><span class="line">jdk.internal.ed</span><br><span class="line">jdk.internal.jvmstat</span><br><span class="line">jdk.internal.le</span><br><span class="line">jdk.internal.opt</span><br><span class="line">jdk.internal.vm.ci</span><br><span class="line">jdk.internal.vm.compiler</span><br><span class="line">jdk.internal.vm.compiler.management</span><br><span class="line">jdk.jartool</span><br><span class="line">jdk.javadoc</span><br><span class="line">jdk.jcmd</span><br><span class="line">jdk.jconsole</span><br><span class="line">jdk.jdeps</span><br><span class="line">jdk.jdi</span><br><span class="line">jdk.jdwp.agent</span><br><span class="line">jdk.jfr</span><br><span class="line">jdk.jlink</span><br><span class="line">jdk.jshell</span><br><span class="line">jdk.jsobject</span><br><span class="line">jdk.jstatd</span><br><span class="line">jdk.localedata</span><br><span class="line">jdk.management</span><br><span class="line">jdk.management.agent</span><br><span class="line">jdk.management.jfr</span><br><span class="line">jdk.naming.dns</span><br><span class="line">jdk.naming.ldap</span><br><span class="line">jdk.naming.rmi</span><br><span class="line">jdk.net</span><br><span class="line">jdk.pack</span><br><span class="line">jdk.rmic</span><br><span class="line">jdk.scripting.nashorn</span><br><span class="line">jdk.scripting.nashorn.shell</span><br><span class="line">jdk.sctp</span><br><span class="line">jdk.security.auth</span><br><span class="line">jdk.security.jgss</span><br><span class="line">jdk.unsupported</span><br><span class="line">jdk.unsupported.desktop</span><br><span class="line">jdk.xml.dom</span><br><span class="line">jdk.zipfs</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>influx_cli的使用</title>
     <url>/ec24f755.html</url>
     <content><![CDATA[]]></content>
@@ -1516,6 +1667,25 @@
       </categories>
       <tags>
         <tag>influxDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修改jar包配置文件</title>
+    <url>/ed246d7c.html</url>
+    <content><![CDATA[<h1 id="解压jar包"><a href="#解压jar包" class="headerlink" title="解压jar包"></a>解压jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -xvf test.jar</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改文件"><a href="#修改文件" class="headerlink" title="修改文件"></a>修改文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim xxx</span><br></pre></td></tr></table></figure>
+
+<h1 id="重新打jar包"><a href="#重新打jar包" class="headerlink" title="重新打jar包"></a>重新打jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -cvfm0 jar_test.jar META-INF/MANIFEST.MF .</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行jar包"><a href="#运行jar包" class="headerlink" title="运行jar包"></a>运行jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -jar jar_test.jar</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1598,163 +1768,6 @@
       <tags>
         <tag>docker</tag>
         <tag>influxDB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jpackage打包Java应用</title>
-    <url>/9642e6ad.html</url>
-    <content><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="安装JDK，这里使用的是JDK17"><a href="#安装JDK，这里使用的是JDK17" class="headerlink" title="安装JDK，这里使用的是JDK17"></a>安装JDK，这里使用的是JDK17</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-17-jdk</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install binutils</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install fakeroot</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h1><h2 id="新建目录，并将jar拷贝到目录中"><a href="#新建目录，并将jar拷贝到目录中" class="headerlink" title="新建目录，并将jar拷贝到目录中"></a>新建目录，并将jar拷贝到目录中</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> lib</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> test.jar lib/</span><br></pre></td></tr></table></figure>
-
-<h2 id="打包应用"><a href="#打包应用" class="headerlink" title="打包应用"></a>打包应用</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jpackage --name testname --input lib --main-jar test.jar</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>jpackage –input target&#x2F; \</p>
-<p>  –name JPackageDemoApp \</p>
-<p>  –main-jar JPackageDemoApp.jar \ </p>
-<p> –main-class com.baeldung.java14.jpackagedemoapp.JPackageDemoApp \</p>
-<p>  –type dmg \</p>
-<p>  –java-options ‘–enable-preview’</p>
-</blockquote>
-<blockquote>
-<ul>
-<li><em>–input</em> : 输入 jar 文件的位置</li>
-<li><em>–name</em> : 为可安装包命名</li>
-<li><em>–main-jar</em> : 在应用程序启动时启动的 JAR 文件</li>
-<li><em>–main-class</em> : 在应用程序启动时启动的 JAR 中的主类名称。如果主 JAR 中的<em>MANIFEST.MF</em>文件包含主类名，则这是可选的。</li>
-<li><em>–type</em>：我们要创建什么样的安装程序？这取决于我们运行<em>jpackage</em>命令的基本操作系统。在 macOS 上，我们可以传递包类型为 DMG 或 PKG。该工具支持 Windows 上的 MSI 和 EXE 选项以及 Linux 上的 DEB 和 RPM 选项。</li>
-<li><em>–java-options</em> : 传递给 Java 运行时的选项</li>
-</ul>
-</blockquote>
-<p>安装完成后，安装目录在&#x2F;opt&#x2F;下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dpkg -i testname.deb</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/opt/testname/bin/testname</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BigDecimal</title>
-    <url>/5b0774c7.html</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Java在java.math包中提供的API类BigDecimal，用来对超过16位有效位的数进行精确的运算。双精度浮点型变量double可以处理16位有效数。在实际应用中，需要对更大或者更小的数进行运算和处理。<strong>float和double只能用来做科学计算或者是工程计算，在商业计算中要用java.math.BigDecimal。</strong>BigDecimal所创建的是对象，我们不能使用传统的+、-、*、&#x2F;等<a href="https://baike.baidu.com/item/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6/9324947">算术运算符</a>直接对其对象进行数学运算，而必须调用其相对应的方法。方法中的参数也必须是BigDecimal的对象。构造器是类的特殊方法，专门用来创建对象，特别是带有参数的对象。</p>
-<p><code>BigDecimal</code>可以表示一个任意大小且精度完全准确的浮点数。</p>
-<h1 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h1><table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>加</td>
-<td>add</td>
-</tr>
-<tr>
-<td>减</td>
-<td>subtract</td>
-</tr>
-<tr>
-<td>乘</td>
-<td>multiply</td>
-</tr>
-<tr>
-<td>除</td>
-<td>divide</td>
-</tr>
-<tr>
-<td>绝对值</td>
-<td>abs</td>
-</tr>
-<tr>
-<td>平方</td>
-<td>pow</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>示例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BigDecimal</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;123.45&quot;</span>);</span><br><span class="line"><span class="type">BigDecimal</span> <span class="variable">d2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;78.9&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;加：&quot;</span> + d1.add(d2));</span><br><span class="line">System.out.println(<span class="string">&quot;减：&quot;</span> + d1.subtract(d2));</span><br><span class="line">System.out.println(<span class="string">&quot;乘：&quot;</span> + d1.multiply(d2));</span><br><span class="line">System.out.println(<span class="string">&quot;除：&quot;</span> + d1.divide(d2, <span class="number">2</span>, RoundingMode.UP));</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>对<code>BigDecimal</code>做加、减、乘时，精度不会丢失，但是做除法时，存在无法除尽的情况，这时，就必须指定精度以及如何进行截断：</p>
-</blockquote>
-<h1 id="比较大小"><a href="#比较大小" class="headerlink" title="比较大小"></a>比较大小</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//a、b不能为null</span></span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a小于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) == <span class="number">0</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a等于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) == <span class="number">1</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a大于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) &gt; -<span class="number">1</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a大于等于b&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span>(a.compareTo(b) &lt; <span class="number">1</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;a小于等于b&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>修改jar包配置文件</title>
-    <url>/ed246d7c.html</url>
-    <content><![CDATA[<h1 id="解压jar包"><a href="#解压jar包" class="headerlink" title="解压jar包"></a>解压jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -xvf test.jar</span><br></pre></td></tr></table></figure>
-
-<h1 id="修改文件"><a href="#修改文件" class="headerlink" title="修改文件"></a>修改文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim xxx</span><br></pre></td></tr></table></figure>
-
-<h1 id="重新打jar包"><a href="#重新打jar包" class="headerlink" title="重新打jar包"></a>重新打jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jar -cvfm0 jar_test.jar META-INF/MANIFEST.MF .</span><br></pre></td></tr></table></figure>
-
-<h1 id="运行jar包"><a href="#运行jar包" class="headerlink" title="运行jar包"></a>运行jar包</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -jar jar_test.jar</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用jlink定制生成JRE</title>
-    <url>/90e68bc9.html</url>
-    <content><![CDATA[<p>在</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/jlink --module-path jmods --add-modules java.base --output myjre</span><br></pre></td></tr></table></figure>
-
-<p>查看 jre 中添加的模块</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">myjre/bin/java --list-modules</span><br></pre></td></tr></table></figure>
-
-<p>NoClassDefFound 错误说明，jre 中没有添加相关的模块。</p>
-<p>首先，需要确定缺少的 class 存在于那个 jdk module 中，然后在 jlink 命令中添加到 –add-modules 列表中，重新生成 jre 就可以了</p>
-<h3 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bin/jlink \</span><br><span class="line">--module-path jmods \</span><br><span class="line">--add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management,jdk.net \</span><br><span class="line">--strip-debug \</span><br><span class="line">--output myjre</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jlink \</span><br><span class="line">    --verbose \</span><br><span class="line">    --module-path &quot;$JAVA_HOME/jmods&quot; \</span><br><span class="line">    --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.management \</span><br><span class="line">    --compress 2 \</span><br><span class="line">    --no-header-files \</span><br><span class="line">    --no-man-pages \</span><br><span class="line">    --strip-debug \</span><br><span class="line">    --output /opt/jre</span><br></pre></td></tr></table></figure>
-
-<h3 id="全部jre"><a href="#全部jre" class="headerlink" title="全部jre"></a>全部jre</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/jlink --module-path jmods --add-modules java.base,java.compiler,java.datatransfer,java.desktop,java.instrument,java.logging,java.management,java.management.rmi,java.naming,java.net.http,java.prefs,java.rmi,java.scripting,java.se,java.security.jgss,java.security.sasl,java.smartcardio,java.sql,java.sql.rowset,java.transaction.xa,java.xml,java.xml.crypto,jdk.accessibility,jdk.aot,jdk.attach,jdk.charsets,jdk.compiler,jdk.crypto.cryptoki,jdk.crypto.ec,jdk.dynalink,jdk.editpad,jdk.hotspot.agent,jdk.httpserver,jdk.internal.ed,jdk.internal.jvmstat,jdk.internal.le,jdk.internal.opt,jdk.internal.vm.ci,jdk.internal.vm.compiler,jdk.internal.vm.compiler.management,jdk.jartool,jdk.javadoc,jdk.jcmd,jdk.jconsole,jdk.jdeps,jdk.jdi,jdk.jdwp.agent,jdk.jfr,jdk.jlink,jdk.jshell,jdk.jsobject,jdk.jstatd,jdk.localedata,jdk.management,jdk.management.agent,jdk.management.jfr,jdk.naming.dns,jdk.naming.ldap,jdk.naming.rmi,jdk.net,jdk.pack,jdk.rmic,jdk.scripting.nashorn,jdk.scripting.nashorn.shell,jdk.sctp,jdk.security.auth,jdk.security.jgss,jdk.unsupported,jdk.unsupported.desktop,jdk.xml.dom,jdk.zipfs --strip-debug --output myjre</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="全部模块："><a href="#全部模块：" class="headerlink" title="全部模块："></a>全部模块：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.base</span><br><span class="line">java.compiler</span><br><span class="line">java.datatransfer</span><br><span class="line">java.desktop</span><br><span class="line">java.instrument</span><br><span class="line">java.logging</span><br><span class="line">java.management</span><br><span class="line">java.management.rmi</span><br><span class="line">java.naming</span><br><span class="line">java.net.http</span><br><span class="line">java.prefs</span><br><span class="line">java.rmi</span><br><span class="line">java.scripting</span><br><span class="line">java.se</span><br><span class="line">java.security.jgss</span><br><span class="line">java.security.sasl</span><br><span class="line">java.smartcardio</span><br><span class="line">java.sql</span><br><span class="line">java.sql.rowset</span><br><span class="line">java.transaction.xa</span><br><span class="line">java.xml</span><br><span class="line">java.xml.crypto</span><br><span class="line">jdk.accessibility</span><br><span class="line">jdk.aot</span><br><span class="line">jdk.attach</span><br><span class="line">jdk.charsets</span><br><span class="line">jdk.compiler</span><br><span class="line">jdk.crypto.cryptoki</span><br><span class="line">jdk.crypto.ec</span><br><span class="line">jdk.dynalink</span><br><span class="line">jdk.editpad</span><br><span class="line">jdk.hotspot.agent</span><br><span class="line">jdk.httpserver</span><br><span class="line">jdk.internal.ed</span><br><span class="line">jdk.internal.jvmstat</span><br><span class="line">jdk.internal.le</span><br><span class="line">jdk.internal.opt</span><br><span class="line">jdk.internal.vm.ci</span><br><span class="line">jdk.internal.vm.compiler</span><br><span class="line">jdk.internal.vm.compiler.management</span><br><span class="line">jdk.jartool</span><br><span class="line">jdk.javadoc</span><br><span class="line">jdk.jcmd</span><br><span class="line">jdk.jconsole</span><br><span class="line">jdk.jdeps</span><br><span class="line">jdk.jdi</span><br><span class="line">jdk.jdwp.agent</span><br><span class="line">jdk.jfr</span><br><span class="line">jdk.jlink</span><br><span class="line">jdk.jshell</span><br><span class="line">jdk.jsobject</span><br><span class="line">jdk.jstatd</span><br><span class="line">jdk.localedata</span><br><span class="line">jdk.management</span><br><span class="line">jdk.management.agent</span><br><span class="line">jdk.management.jfr</span><br><span class="line">jdk.naming.dns</span><br><span class="line">jdk.naming.ldap</span><br><span class="line">jdk.naming.rmi</span><br><span class="line">jdk.net</span><br><span class="line">jdk.pack</span><br><span class="line">jdk.rmic</span><br><span class="line">jdk.scripting.nashorn</span><br><span class="line">jdk.scripting.nashorn.shell</span><br><span class="line">jdk.sctp</span><br><span class="line">jdk.security.auth</span><br><span class="line">jdk.security.jgss</span><br><span class="line">jdk.unsupported</span><br><span class="line">jdk.unsupported.desktop</span><br><span class="line">jdk.xml.dom</span><br><span class="line">jdk.zipfs</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1854,6 +1867,35 @@
       </tags>
   </entry>
   <entry>
+    <title>k8s配置pv</title>
+    <url>/7eb43148.html</url>
+    <content><![CDATA[<p>参考：<a href="https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html">https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html</a></p>
+<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="comment"># NFS目录，需要该目录在NFS上存在</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/tmp</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.17</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
+
+<p>PV 的访问模式（accessModes）有三种：</p>
+<ul>
+<li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。</li>
+<li>ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。</li>
+<li>ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</li>
+</ul>
+<p>PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</p>
+<ul>
+<li>Retain，不清理, 保留 Volume（需要手动清理）</li>
+<li>Recycle，删除数据，即 <code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）</li>
+<li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
+</ul>
+<h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>kubectl 命令大全</title>
     <url>/760b67b4.html</url>
     <content><![CDATA[<h1 id="kubectl-命令"><a href="#kubectl-命令" class="headerlink" title="kubectl 命令"></a>kubectl 命令</h1><p>参考网址：<a href="https://jimmysong.io/kubernetes-handbook/guide/kubectl-cheatsheet.html">https://jimmysong.io/kubernetes-handbook/guide/kubectl-cheatsheet.html</a></p>
@@ -1907,26 +1949,13 @@
       </tags>
   </entry>
   <entry>
-    <title>k8s配置pv</title>
-    <url>/7eb43148.html</url>
-    <content><![CDATA[<p>参考：<a href="https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html">https://feisky.gitbooks.io/kubernetes/content/concepts/persistent-volume.html</a></p>
-<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pv0003</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">persistentVolumeReclaimPolicy:</span> <span class="string">Recycle</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="comment"># NFS目录，需要该目录在NFS上存在</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/tmp</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">172.17</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
+    <title>kubectl 命令自动补全</title>
+    <url>/cdcc2a3b.html</url>
+    <content><![CDATA[<h1 id="kubectl-命令自动补全"><a href="#kubectl-命令自动补全" class="headerlink" title="kubectl 命令自动补全"></a>kubectl 命令自动补全</h1><h4 id="安装bash-completion（如果已经安装忽略即可）："><a href="#安装bash-completion（如果已经安装忽略即可）：" class="headerlink" title="安装bash-completion（如果已经安装忽略即可）："></a>安装bash-completion（如果已经安装忽略即可）：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install bash-completion</span><br></pre></td></tr></table></figure>
 
-<p>PV 的访问模式（accessModes）有三种：</p>
-<ul>
-<li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。</li>
-<li>ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。</li>
-<li>ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。</li>
-</ul>
-<p>PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</p>
-<ul>
-<li>Retain，不清理, 保留 Volume（需要手动清理）</li>
-<li>Recycle，删除数据，即 <code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）</li>
-<li>Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
-</ul>
-<h5 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f pv.yaml</span><br></pre></td></tr></table></figure>
+<h4 id="测试一下："><a href="#测试一下：" class="headerlink" title="测试一下："></a>测试一下：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
 
+<h4 id="测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效："><a href="#测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效：" class="headerlink" title="测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效："></a>测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>k8s</category>
@@ -1980,22 +2009,6 @@
 
 <p>上传镜像：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker push registry.cn-beijing.aliyuncs.com/k8s-gcrs/csi-node-driver-registrar:v2.0.1</span><br><span class="line">docker push registry.cn-beijing.aliyuncs.com/k8s-gcrs/csi-attacher:v3.0.2</span><br><span class="line">docker push registry.cn-beijing.aliyuncs.com/k8s-gcrs/csi-provisioner:v2.0.4</span><br><span class="line">docker push registry.cn-beijing.aliyuncs.com/k8s-gcrs/csi-snapshotter:v4.0.0</span><br><span class="line">docker push registry.cn-beijing.aliyuncs.com/k8s-gcrs/csi-resizer:v1.0.1</span><br></pre></td></tr></table></figure></blockquote>
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kubectl 命令自动补全</title>
-    <url>/cdcc2a3b.html</url>
-    <content><![CDATA[<h1 id="kubectl-命令自动补全"><a href="#kubectl-命令自动补全" class="headerlink" title="kubectl 命令自动补全"></a>kubectl 命令自动补全</h1><h4 id="安装bash-completion（如果已经安装忽略即可）："><a href="#安装bash-completion（如果已经安装忽略即可）：" class="headerlink" title="安装bash-completion（如果已经安装忽略即可）："></a>安装bash-completion（如果已经安装忽略即可）：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install bash-completion</span><br></pre></td></tr></table></figure>
-
-<h4 id="测试一下："><a href="#测试一下：" class="headerlink" title="测试一下："></a>测试一下：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
-
-<h4 id="测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效："><a href="#测试没问题后，对-x2F-root-x2F-bashrc-加2行代码-，方便以后每次登录自动生效：" class="headerlink" title="测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效："></a>测试没问题后，对 &#x2F;root&#x2F;.bashrc 加2行代码 ，方便以后每次登录自动生效：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>k8s</category>
@@ -2351,26 +2364,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu安装helm</title>
-    <url>/bc01c4d5.html</url>
-    <content><![CDATA[<ol>
-<li><p>官方文档</p>
-<blockquote>
-<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
-</blockquote>
-</li>
-<li><p>Ubuntu安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>（四）安装使用MetricsServer</title>
     <url>/d36a8b1c.html</url>
     <content><![CDATA[<h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>从 v1.8 开始，资源使用情况的度量（如容器的 CPU 和内存使用）可以通过 Metrics API 获取。注意：</p>
@@ -2424,6 +2417,245 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装kong</title>
+    <url>/ef67b3d6.html</url>
+    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull kong</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull postgres:9.6</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="创建一个-Docker-网络"><a href="#创建一个-Docker-网络" class="headerlink" title="创建一个 Docker 网络"></a>创建一个 Docker 网络</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker network create kong-net</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="运行-PostGreSQL-容器"><a href="#运行-PostGreSQL-容器" class="headerlink" title="运行 PostGreSQL 容器"></a>运行 PostGreSQL 容器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name kong-database \</span><br><span class="line">  --network=kong-net \</span><br><span class="line">  -p 5432:5432 \</span><br><span class="line">  -e <span class="string">&quot;POSTGRES_USER=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;POSTGRES_DB=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;POSTGRES_PASSWORD=kong&quot;</span> \</span><br><span class="line">  postgres:9.6</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="准备数据库"><a href="#准备数据库" class="headerlink" title="准备数据库"></a>准备数据库</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --<span class="built_in">rm</span> \</span><br><span class="line">  --network=kong-net \</span><br><span class="line">  -e <span class="string">&quot;KONG_DATABASE=postgres&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_PG_HOST=kong-database&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_PG_USER=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_PG_PASSWORD=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_CASSANDRA_CONTACT_POINTS=kong-database&quot;</span> \</span><br><span class="line">  kong:latest kong migrations bootstrap</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="启动kong"><a href="#启动kong" class="headerlink" title="启动kong"></a>启动kong</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name kong \</span><br><span class="line">     --network=kong-net \</span><br><span class="line">     -e <span class="string">&quot;KONG_DATABASE=postgres&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PG_HOST=kong-database&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PG_USER=kong&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PG_PASSWORD=kong&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_CASSANDRA_CONTACT_POINTS=kong-database&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PROXY_ACCESS_LOG=/dev/stdout&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_ADMIN_ACCESS_LOG=/dev/stdout&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PROXY_ERROR_LOG=/dev/stderr&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_ADMIN_ERROR_LOG=/dev/stderr&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl&quot;</span> \</span><br><span class="line">     -p 8000:8000 \</span><br><span class="line">     -p 8443:8443 \</span><br><span class="line">     -p 127.0.0.1:8001:8001 \</span><br><span class="line">     -p 127.0.0.1:8444:8444 \</span><br><span class="line">     kong:latest</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>导航到<code>http://localhost:8001/</code></p>
+</blockquote>
+<h2 id="Kong-默认端口"><a href="#Kong-默认端口" class="headerlink" title="Kong 默认端口"></a>Kong 默认端口</h2><p>默认情况下，Kong 监听以下端口：</p>
+<ul>
+<li><code>8000</code>：侦听<code>HTTP</code>来自您的客户端的传入流量，并将其转发到您的上游服务。</li>
+<li><code>8001</code>: <a href="https://docs.konghq.com/gateway/2.8.x/admin-api">Admin API</a>监听来自命令行的调用<code>HTTP</code>。</li>
+<li><code>8443</code>：侦听传入的 HTTPS 流量。此端口具有与 类似的行为<code>8000</code>，只是它只需要<code>HTTPS</code> 流量。可以通过配置文件禁用此端口。</li>
+<li><code>8444</code>: <a href="https://docs.konghq.com/gateway/2.8.x/admin-api">Admin API</a>监听<code>HTTPS</code>流量。</li>
+</ul>
+<h2 id="生命周期命令"><a href="#生命周期命令" class="headerlink" title="生命周期命令"></a>生命周期命令</h2><blockquote>
+<p>如果您使用的是 Docker，请<a href="https://docs.docker.com/engine/reference/commandline/exec"><code>exec</code></a>进入 Docker 容器以使用这些命令。</p>
+</blockquote>
+<p><a href="https://docs.konghq.com/gateway/2.8.x/reference/cli">使用stop</a>命令停止 Kong Gateway ：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kong stop</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://docs.konghq.com/gateway/2.8.x/reference/cli">使用reload</a>命令重新加载 Kong Gateway ：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kong reload</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://docs.konghq.com/gateway/2.8.x/reference/cli">使用start</a>命令启动 Kong Gateway ：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kong start</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="安装konga"><a href="#安装konga" class="headerlink" title="安装konga"></a>安装konga</h1><h2 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull pantsel/konga</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动konga"><a href="#启动konga" class="headerlink" title="启动konga"></a>启动konga</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">-p 1337:1337 \</span><br><span class="line">--network kong-net \</span><br><span class="line">-e <span class="string">&quot;TOKEN_SECRET=kongtoken&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;DB_ADAPTER=postgres&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;DB_HOST=kong-database&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;DB_USER=kong&quot;</span>  \</span><br><span class="line">-e <span class="string">&quot;DB_PASSWORD=kong&quot;</span> \</span><br><span class="line"> --name konga \</span><br><span class="line">pantsel/konga</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><blockquote>
+<p>访问  ip:1337</p>
+</blockquote>
+<h3 id="配置kong"><a href="#配置kong" class="headerlink" title="配置kong"></a>配置kong</h3><p>查看kong的访问地址：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format=<span class="string">&#x27;&#123;&#123;.Name&#125;&#125; - &#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;end&#125;&#125;&#x27;</span> $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<p>配置：</p>
+<blockquote>
+<p>ip:8001</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>kong</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>kong</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kong插件开发</title>
+    <url>/6e80deb5.html</url>
+    <content><![CDATA[<h1 id="插件目录结构"><a href="#插件目录结构" class="headerlink" title="插件目录结构"></a>插件目录结构</h1><h2 id="基本插件模块"><a href="#基本插件模块" class="headerlink" title="基本插件模块"></a>基本插件模块</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">simple-plugin</span><br><span class="line">├── handler.lua   # 插件的核心，包括请求/连接生命周期，提供接口来实现插件的运行逻辑；</span><br><span class="line">└── schema.lua    # 配置参数定义，定义校验规则以便用户只能输入有效的配置值</span><br></pre></td></tr></table></figure>
+
+<h2 id="高级插件模块"><a href="#高级插件模块" class="headerlink" title="高级插件模块"></a>高级插件模块</h2><p>一些插件可能需要更深入地与 Kong 集成：在数据库中拥有自己的表，在 Admin API 中公开端点等。每一个都可以通过向插件添加新模块来完成。如果插件实现了所有可选模块，那么它的结构如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">complete-plugin</span><br><span class="line">├── api.lua</span><br><span class="line">├── daos.lua</span><br><span class="line">├── handler.lua</span><br><span class="line">├── migrations</span><br><span class="line">│   ├── init.lua</span><br><span class="line">│   └── 000_base_complete_plugin.lua</span><br><span class="line">└── schema.lua</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">模块名称</th>
+<th align="left">必需</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">api.lua</td>
+<td align="left">否</td>
+<td align="left">扩展Admin API，在需要对外暴露接口时候</td>
+</tr>
+<tr>
+<td align="left">daos.lua</td>
+<td align="left">否</td>
+<td align="left">数据访问层，对插件自定义实体的抽象，并存储在数据存储区中</td>
+</tr>
+<tr>
+<td align="left">handler.lua</td>
+<td align="left">是</td>
+<td align="left">对外暴露出在请求&#x2F;连接生命周期的接口，由Kong实现逻辑并运行</td>
+</tr>
+<tr>
+<td align="left">migrations&#x2F;*.lua</td>
+<td align="left">否</td>
+<td align="left">数据库迁移（例如，创建表），仅当插件应用daos.lua进行存储时才需要进行迁移</td>
+</tr>
+<tr>
+<td align="left">schema.lua</td>
+<td align="left">是</td>
+<td align="left">保留插件配置结构，以便用户只能输入有效的配置值</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>kong</category>
+      </categories>
+      <tags>
+        <tag>kong</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maven常用命令</title>
+    <url>/f340b1b8.html</url>
+    <content><![CDATA[<h1 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h1><p>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下，</p>
+<blockquote>
+<ul>
+<li><p>-D 指定参数，如 -Dmaven.test.skip&#x3D;true 跳过单元测试；</p>
+</li>
+<li><p>-P 指定 Profile 配置，可以用于区分环境；</p>
+</li>
+<li><p>-e 显示maven运行出错的信息；</p>
+</li>
+<li><p>-o 离线执行命令,即不去远程仓库更新包；</p>
+</li>
+<li><p>-X 显示maven允许的debug信息；</p>
+</li>
+<li><p>-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
+<li>清理项目：mvn clean</li>
+<li>运行测试：mvn test</li>
+<li>安装jar包到本地仓库中：mvn install</li>
+<li>打包：mvn package</li>
+<li>编译：mvn compile</li>
+<li>发布：mvn:deploy</li>
+<li>-DskipTests，不执行测试用例，但编译测试用例类生成相应的class文件至target&#x2F;test-classes下。</li>
+<li>-Dmaven.test.skip&#x3D;true，不执行测试用例，也不编译测试用例类。</li>
+</ul>
+<h3 id="常用组合命令"><a href="#常用组合命令" class="headerlink" title="常用组合命令"></a>常用组合命令</h3><p>打包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn clean package -Dmaven.test.skip=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>发布：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn clean deploy -Dmaven.test.skip=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">F:\JDK\bin\java.exe -Dmaven.multiModuleProjectDirectory=H:\code\iotcore-service -Dmaven.home=F:\software\apache-maven-3.8.4 -Dclassworlds.conf=F:\software\apache-maven-3.8.4\bin\m2.conf <span class="string">&quot;-Dmaven.ext.class.path=F:\software\IDEA\IntelliJ IDEA 2021.2.1\plugins\maven\lib\maven-event-listener.jar&quot;</span> <span class="string">&quot;-javaagent:F:\software\IDEA\IntelliJ IDEA 2021.2.1\lib\idea_rt.jar=52557:F:\software\IDEA\IntelliJ IDEA 2021.2.1\bin&quot;</span> -Dfile.encoding=UTF-8 -classpath F:\software\apache-maven-3.8.4\boot\plexus-classworlds-2.6.0.jar;F:\software\apache-maven-3.8.4\boot\plexus-classworlds.license org.codehaus.classworlds.Launcher -Didea.version=2021.2.1 -s F:\software\apache-maven-3.8.4\conf\settings.xml -Dmaven.repo.local=F:\software\apache-maven-3.8.4\response -DskipTests=<span class="literal">true</span> deploy</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>maven配置使用私服nexus</title>
+    <url>/5627283c.html</url>
+    <content><![CDATA[<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="基础说明"><a href="#基础说明" class="headerlink" title="基础说明"></a>基础说明</h2><h3 id="常用默认仓库说明"><a href="#常用默认仓库说明" class="headerlink" title="常用默认仓库说明"></a>常用默认仓库说明</h3><ol>
+<li><p>maven-central：maven中央库</p>
+<p>默认从<a href="https://link.zhihu.com/?target=https://repo1.maven.org/maven2/">https://repo1.maven.org/maven2/</a>拉取jar。</p>
+</li>
+<li><p>maven-releases：发行版本</p>
+<p>私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy。</p>
+</li>
+<li><p>maven-snapshots：快照版本</p>
+</li>
+<li><p>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用。</p>
+</li>
+</ol>
+<h3 id="仓库类型"><a href="#仓库类型" class="headerlink" title="仓库类型"></a>仓库类型</h3><ul>
+<li><p>Group：这是一个仓库聚合的概念，用户仓库地址选择Group的地址，即可访问Group中配置的，用于方便开发人员自己设定的仓库。</p>
+</li>
+<li><p>maven-public就是一个Group类型的仓库，内部设置了多个仓库，访问顺序取决于配置顺序，3.x默认Releases，Snapshots， Central，当然你也可以自己设置。 </p>
+</li>
+<li><p>Hosted：私有仓库，内部项目的发布仓库，专门用来存储我们自己生成的jar文件</p>
+</li>
+<li><p>Snapshots：本地项目的快照仓库</p>
+</li>
+<li><p>Releases： 本地项目发布的正式版本</p>
+</li>
+<li><p>Proxy：代理类型，从远程中央仓库中寻找数据的仓库（可以点击对应的仓库的Configuration页签下Remote Storage属性的值即被代理的远程仓库的路径），如可配置阿里云maven仓库 </p>
+</li>
+<li><p>Central：中央仓库</p>
+</li>
+</ul>
+<h2 id="增加新的代理源"><a href="#增加新的代理源" class="headerlink" title="增加新的代理源"></a>增加新的代理源</h2><h3 id="新增代理源"><a href="#新增代理源" class="headerlink" title="新增代理源"></a>新增代理源</h3><p><img src="/../../images/maven/nexus/1.png" alt="1"></p>
+<h3 id="选择maven2代理"><a href="#选择maven2代理" class="headerlink" title="选择maven2代理"></a>选择maven2代理</h3><p><img src="/../../images/maven/nexus/2.png" alt="1"></p>
+<h3 id="添加代理"><a href="#添加代理" class="headerlink" title="添加代理"></a>添加代理</h3><p><img src="/../../images/maven/nexus/3.png" alt="1"></p>
+<p><img src="/../../images/maven/nexus/4.png" alt="1"></p>
+<blockquote>
+<p>Cache可以设置为200天 288000</p>
+</blockquote>
+<h3 id="设置maven-public-将这些代理加入Group"><a href="#设置maven-public-将这些代理加入Group" class="headerlink" title="设置maven-public 将这些代理加入Group"></a>设置maven-public 将这些代理加入Group</h3><p><img src="/../../images/maven/nexus/5.png" alt="1"></p>
+<blockquote>
+<p>常用代理</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1. aliyun</span><br><span class="line">http://maven.aliyun.com/nexus/content/groups/public</span><br><span class="line">2. apache_snapshot</span><br><span class="line">https://repository.apache.org/content/repositories/snapshots/</span><br><span class="line">3. apache_release</span><br><span class="line">https://repository.apache.org/content/repositories/releases/</span><br><span class="line">4. atlassian</span><br><span class="line">https://maven.atlassian.com/content/repositories/atlassian-public/</span><br><span class="line">5. central.maven.org</span><br><span class="line">http://central.maven.org/maven2/</span><br><span class="line">6. datanucleus</span><br><span class="line">http://www.datanucleus.org/downloads/maven2</span><br><span class="line">7. maven-central （安装后自带，仅需设置Cache有效期即可）</span><br><span class="line">https://repo1.maven.org/maven2/</span><br><span class="line">8. nexus.axiomalaska.com</span><br><span class="line">http://nexus.axiomalaska.com/nexus/content/repositories/public</span><br><span class="line">9. oss.sonatype.org</span><br><span class="line">https://oss.sonatype.org/content/repositories/snapshots</span><br><span class="line">10.pentaho</span><br><span class="line">https://public.nexus.pentaho.org/content/groups/omni/</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="设置私用仓库可重复发布"><a href="#设置私用仓库可重复发布" class="headerlink" title="设置私用仓库可重复发布"></a>设置私用仓库可重复发布</h2><p>Nexus安装后自带maven-releases，maven-snapshots两个仓库，用于将生成的jar包发布在这两个仓库中，在实际开发中需要将maven-releases设置为可以重复发布。</p>
+<p><img src="/../../images/maven/nexus/6.png" alt="1"></p>
+<h1 id="maven配置"><a href="#maven配置" class="headerlink" title="maven配置"></a>maven配置</h1><h2 id="配置server"><a href="#配置server" class="headerlink" title="配置server"></a>配置server</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servers</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">servers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>id：这是server的id（注意不是用户登陆的id），该id与distributionManagement中repository元素的id相匹配。</p>
+<p>username：用户名</p>
+<p>password：密码</p>
+</blockquote>
+<h2 id="配置mirror"><a href="#配置mirror" class="headerlink" title="配置mirror"></a>配置mirror</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--该镜像的唯一标识符。id用来区分不同的mirror元素。 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-public<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--镜像名称 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>maven-public<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--*指的是访问任何仓库都使用我们的私服--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--该镜像的URL。构建系统会优先考虑使用该URL，而非使用默认的服务器URL。 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://ip:8081/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="pom-xml配置"><a href="#pom-xml配置" class="headerlink" title="pom.xml配置"></a>pom.xml配置</h1><p>springboot项目配置向nexus发送jar包</p>
+<h3 id="在pom-xml中添加distributionManagement"><a href="#在pom-xml中添加distributionManagement" class="headerlink" title="在pom.xml中添加distributionManagement"></a>在pom.xml中添加distributionManagement</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://ip:8081/repository/maven-releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://ip:8081/repository/maven-snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">maven clean deploy -Dmaven.test.skip=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>axel-Linux多线程下载工具</title>
     <url>/b80dc026.html</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>axel是一个多线程的下载工具，类似迅雷，支持断点下载，支持HTTP, HTTPS, FTP and FTPS协议。</p>
@@ -2442,9 +2674,56 @@
       </tags>
   </entry>
   <entry>
+    <title>ubuntu安装helm</title>
+    <url>/bc01c4d5.html</url>
+    <content><![CDATA[<ol>
+<li><p>官方文档</p>
+<blockquote>
+<p><a href="https://helm.sh/docs/intro/install/">https://helm.sh/docs/intro/install/</a></p>
+</blockquote>
+</li>
+<li><p>Ubuntu安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux小工具</title>
     <url>/af7754ce.html</url>
     <content><![CDATA[]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu安装FTP服务器</title>
+    <url>/8d8c340b.html</url>
+    <content><![CDATA[<h4 id="安装FTP服务器"><a href="#安装FTP服务器" class="headerlink" title="安装FTP服务器"></a>安装FTP服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vsftpd</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="解决文件不能上传问题"><a href="#解决文件不能上传问题" class="headerlink" title="解决文件不能上传问题"></a>解决文件不能上传问题</h4><ol>
+<li>打开配置文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>根据需要启用下面配置</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 允许用户上传数据</span></span><br><span class="line">write_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有上传数据的功能</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有建立目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>保存并退出，然后重启服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service vsftpd restart</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -3077,33 +3356,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu安装FTP服务器</title>
-    <url>/8d8c340b.html</url>
-    <content><![CDATA[<h4 id="安装FTP服务器"><a href="#安装FTP服务器" class="headerlink" title="安装FTP服务器"></a>安装FTP服务器</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vsftpd</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="解决文件不能上传问题"><a href="#解决文件不能上传问题" class="headerlink" title="解决文件不能上传问题"></a>解决文件不能上传问题</h4><ol>
-<li>打开配置文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>根据需要启用下面配置</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 允许用户上传数据</span></span><br><span class="line">write_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有上传数据的功能</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让匿名用户具有建立目录的权限</span></span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>保存并退出，然后重启服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service vsftpd restart</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ubuntu安装最新版nodejs</title>
     <url>/206568fa.html</url>
     <content><![CDATA[<h1 id="更新软件源"><a href="#更新软件源" class="headerlink" title="更新软件源"></a>更新软件源</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
@@ -3213,6 +3465,106 @@
       </tags>
   </entry>
   <entry>
+    <title>ubuntu设置开启自启</title>
+    <url>/f8f6cca9.html</url>
+    <content><![CDATA[<p><strong>注意：</strong></p>
+<blockquote>
+<p>ubuntu18 不能像 ubuntu16 一样通过编辑 rc.local 来设置开机启动脚本，需要通过下列简单设置后，以使 rc.local 重新发挥作用。</p>
+<p>Ubuntu 16.10开始不再使用 <code>initd</code> 管理系统，改用 <code>systemd</code>，包括用 <code>systemctl</code> 命令来替换了 <code>service</code> 和 <code>chkconfig</code> 的功能。比如以前启动 <code>mysql</code> 服务用<code>sudo service mysql start</code>，现在用 <code>sudo systemctl start mysqld.service</code>。<code>systemd</code> 默认读取 <code>/etc/systemd/system</code> 下的配置文件，该目录下的文件会链接 <code>/lib/systemd/system/</code> 下的文件。</p>
+</blockquote>
+<h2 id="修改rc-local-service"><a href="#修改rc-local-service" class="headerlink" title="修改rc-local.service"></a>修改rc-local.service</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>一般启动文件需要三个组成部分：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">[Unit]段: 启动顺序与依赖关系</span><br><span class="line">[Service] 段: 启动行为,如何启动，启动类型</span><br><span class="line">[Install] 段: 定义如何安装这个配置文件，即怎样做到开机启动</span><br></pre></td></tr></table></figure>
+
+<p>上面少了 <code>[Install]</code> 段，把下面 <code>Install</code> 段添上去，加入到 <code>rc-local.service</code> 的最后：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=rc-local.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-x2F-etc-x2F-rc-local"><a href="#创建-x2F-etc-x2F-rc-local" class="headerlink" title="创建&#x2F;etc&#x2F;rc.local"></a>创建&#x2F;etc&#x2F;rc.local</h2><p>ubuntu-18.04以后 默认是没有 &#x2F;etc&#x2F;rc.local 这个文件的，需要自己创建 ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh -e</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will &quot;exit 0&quot; on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;看到这行字，说明添加自启动脚本成功&quot;</span> &gt; /usr/local/test.log</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<p>然后给 <code>rc.local</code> 文件赋予可执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>启动服务并检查服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> rc-local</span><br><span class="line">sudo systemctl start rc-local.service</span><br><span class="line">sudo systemctl status rc-local.service</span><br></pre></td></tr></table></figure>
+
+<p>重启后查看是否有 <code>test.log</code> 生成：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/test.log</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>看到这行字，说明添加自启动脚本成功</p>
+</blockquote>
+<p>如果看到如上的内容，就说明已经配置成功了，然后你可以进一步修改你的 <code>rc.local</code> 中的自启动脚本改成你所想要的启动脚本。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu配置虚拟内存</title>
+    <url>/167042be.html</url>
+    <content><![CDATA[<h1 id="创建虚拟内存配置文件"><a href="#创建虚拟内存配置文件" class="headerlink" title="创建虚拟内存配置文件"></a>创建虚拟内存配置文件</h1><ol>
+<li><p>创建一个存放swap的目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> swap</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> swap</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>创建交换文件，因为要分配硬盘空间，所以有可能比较慢，等待一会。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=swapfile count=2048 bs=1M</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>count&#x3D;2048</strong> 表示创建 2G 的虚拟内存，因为这里用到的单位是 <code>M</code>，如果要创建 6G 虚拟内存，则把2048 改成 6144 即可，因为 1024 * 6 &#x3D; 6144。</p>
+<p>可以使用 <code>ls / | grep swapfile</code> 命令查看一下，确保交换文件存在，创建成功。</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="激活swap文件"><a href="#激活swap文件" class="headerlink" title="激活swap文件"></a>激活swap文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 600 swapfile</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkswap swapfile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行成功后，控制台输出：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">正在设置交换空间版本 1，大小 = 2 GiB (2147483648  个字节)</span><br><span class="line">无标签， UUID=1709a8d7-1920-4d29-9fee-cb0b0901ce5c</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="开启swap"><a href="#开启swap" class="headerlink" title="开启swap"></a>开启swap</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo swapon swapfile</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="swap开机自启"><a href="#swap开机自启" class="headerlink" title="swap开机自启"></a>swap开机自启</h1><p>使用编辑器编辑 <strong>&#x2F;etc&#x2F;fstab</strong> 文件，文件尾添加 Swap 自动开启的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">swapfilepath none swap sw 0 0</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>例如：</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<p>在 fstab 文件最后一行添加下面的内容：</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">/root/swap/swapfile none swap sw 0 0</span><br></pre></td></tr></table></figure>
+
+<p>然后保存，退出。</p>
+<h1 id="查看虚拟内存"><a href="#查看虚拟内存" class="headerlink" title="查看虚拟内存"></a>查看虚拟内存</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="卸载swap"><a href="#卸载swap" class="headerlink" title="卸载swap"></a>卸载swap</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo swapoff swapfile</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ubuntu安装配置PPTP VPN</title>
     <url>/f308267.html</url>
     <content><![CDATA[<h1 id="PPTP简介"><a href="#PPTP简介" class="headerlink" title="PPTP简介"></a>PPTP简介</h1><p>点对点隧道协议（PPTP）是VPN服务的一种最简单的实现协议，其它常见的VPN类型还有：使用IPsec的第2层隧道协议（L2TP&#x2F;IPsec）、安全套接字隧道协议（SSL VPN）。</p>
@@ -3289,48 +3641,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu设置开启自启</title>
-    <url>/f8f6cca9.html</url>
-    <content><![CDATA[<p><strong>注意：</strong></p>
-<blockquote>
-<p>ubuntu18 不能像 ubuntu16 一样通过编辑 rc.local 来设置开机启动脚本，需要通过下列简单设置后，以使 rc.local 重新发挥作用。</p>
-<p>Ubuntu 16.10开始不再使用 <code>initd</code> 管理系统，改用 <code>systemd</code>，包括用 <code>systemctl</code> 命令来替换了 <code>service</code> 和 <code>chkconfig</code> 的功能。比如以前启动 <code>mysql</code> 服务用<code>sudo service mysql start</code>，现在用 <code>sudo systemctl start mysqld.service</code>。<code>systemd</code> 默认读取 <code>/etc/systemd/system</code> 下的配置文件，该目录下的文件会链接 <code>/lib/systemd/system/</code> 下的文件。</p>
-</blockquote>
-<h2 id="修改rc-local-service"><a href="#修改rc-local-service" class="headerlink" title="修改rc-local.service"></a>修改rc-local.service</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>一般启动文件需要三个组成部分：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">[Unit]段: 启动顺序与依赖关系</span><br><span class="line">[Service] 段: 启动行为,如何启动，启动类型</span><br><span class="line">[Install] 段: 定义如何安装这个配置文件，即怎样做到开机启动</span><br></pre></td></tr></table></figure>
-
-<p>上面少了 <code>[Install]</code> 段，把下面 <code>Install</code> 段添上去，加入到 <code>rc-local.service</code> 的最后：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[Install]  </span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=rc-local.service</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建-x2F-etc-x2F-rc-local"><a href="#创建-x2F-etc-x2F-rc-local" class="headerlink" title="创建&#x2F;etc&#x2F;rc.local"></a>创建&#x2F;etc&#x2F;rc.local</h2><p>ubuntu-18.04以后 默认是没有 &#x2F;etc&#x2F;rc.local 这个文件的，需要自己创建 ：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh -e</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will &quot;exit 0&quot; on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;看到这行字，说明添加自启动脚本成功&quot;</span> &gt; /usr/local/test.log</span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
-
-<p>然后给 <code>rc.local</code> 文件赋予可执行权限：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<p>启动服务并检查服务状态：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> rc-local</span><br><span class="line">sudo systemctl start rc-local.service</span><br><span class="line">sudo systemctl status rc-local.service</span><br></pre></td></tr></table></figure>
-
-<p>重启后查看是否有 <code>test.log</code> 生成：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /usr/local/test.log</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>看到这行字，说明添加自启动脚本成功</p>
-</blockquote>
-<p>如果看到如上的内容，就说明已经配置成功了，然后你可以进一步修改你的 <code>rc.local</code> 中的自启动脚本改成你所想要的启动脚本。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ubuntu配置静态ip</title>
     <url>/826ffa7.html</url>
     <content><![CDATA[<p>Ubuntu从17.10开始，放弃在&#x2F;etc&#x2F;network&#x2F;interfaces里面配置IP，改为在&#x2F;etc&#x2F;netplan&#x2F;XX-installer-config.yaml的yaml文件中配置IP地址。</p>
@@ -3347,6 +3657,26 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">network:</span><br><span class="line">  ethernets:</span><br><span class="line">    ens33:   # 配置的网卡的名称</span><br><span class="line">      addresses: [192.168.253.133/24]   # 配置的静态ip地址和掩码</span><br><span class="line">      dhcp4: false   # 关闭dhcp4</span><br><span class="line">      optional: true</span><br><span class="line">      gateway4: 192.168.253.2 # 网关地址</span><br><span class="line">      nameservers:</span><br><span class="line">        addresses: [192.168.253.2,114.114.114.114]  # DNS服务器地址，多个DNS服务器地址需要用英文逗号分隔开，可不配置</span><br><span class="line">  version: 2</span><br></pre></td></tr></table></figure>
 <h3 id="使配置生效"><a href="#使配置生效" class="headerlink" title="使配置生效"></a>使配置生效</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo netplan apply</span><br></pre></td></tr></table></figure>
 <p>至此Ubuntu静态IP配置完成。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>远程桌面工具xrdp</title>
+    <url>/2e70d4d3.html</url>
+    <content><![CDATA[<h3 id="安装XRDP远程桌面工具"><a href="#安装XRDP远程桌面工具" class="headerlink" title="安装XRDP远程桌面工具"></a>安装XRDP远程桌面工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install xrdp</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加用户到ssl-cert组"><a href="#添加用户到ssl-cert组" class="headerlink" title="添加用户到ssl-cert组"></a>添加用户到ssl-cert组</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG ssl-cert <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用远程桌面连接"><a href="#使用远程桌面连接" class="headerlink" title="使用远程桌面连接"></a>使用远程桌面连接</h3><h3 id="解决连接后黑屏问题"><a href="#解决连接后黑屏问题" class="headerlink" title="解决连接后黑屏问题"></a>解决连接后黑屏问题</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/xrdp/startwm.sh</span><br></pre></td></tr></table></figure>
+
+<p>添加以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">unset</span> DBUS_SESSION_BUS_ADDRESS</span><br><span class="line"><span class="built_in">unset</span> XDG_RUNTIME_DIR</span><br><span class="line"></span><br><span class="line"><span class="built_in">test</span> -x /etc/X11/Xsession &amp;&amp; <span class="built_in">exec</span> /etc/X11/Xsession</span><br><span class="line"><span class="built_in">exec</span> /bin/sh /etc/X11/Xsession</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>linux</category>
@@ -3405,347 +3735,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu配置虚拟内存</title>
-    <url>/167042be.html</url>
-    <content><![CDATA[<h1 id="创建虚拟内存配置文件"><a href="#创建虚拟内存配置文件" class="headerlink" title="创建虚拟内存配置文件"></a>创建虚拟内存配置文件</h1><ol>
-<li><p>创建一个存放swap的目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> swap</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> swap</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>创建交换文件，因为要分配硬盘空间，所以有可能比较慢，等待一会。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=swapfile count=2048 bs=1M</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>count&#x3D;2048</strong> 表示创建 2G 的虚拟内存，因为这里用到的单位是 <code>M</code>，如果要创建 6G 虚拟内存，则把2048 改成 6144 即可，因为 1024 * 6 &#x3D; 6144。</p>
-<p>可以使用 <code>ls / | grep swapfile</code> 命令查看一下，确保交换文件存在，创建成功。</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="激活swap文件"><a href="#激活swap文件" class="headerlink" title="激活swap文件"></a>激活swap文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 600 swapfile</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkswap swapfile</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>执行成功后，控制台输出：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">正在设置交换空间版本 1，大小 = 2 GiB (2147483648  个字节)</span><br><span class="line">无标签， UUID=1709a8d7-1920-4d29-9fee-cb0b0901ce5c</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h1 id="开启swap"><a href="#开启swap" class="headerlink" title="开启swap"></a>开启swap</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo swapon swapfile</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="swap开机自启"><a href="#swap开机自启" class="headerlink" title="swap开机自启"></a>swap开机自启</h1><p>使用编辑器编辑 <strong>&#x2F;etc&#x2F;fstab</strong> 文件，文件尾添加 Swap 自动开启的配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">swapfilepath none swap sw 0 0</span><br></pre></td></tr></table></figure>
-
-
-
-<p><em><strong>例如：</strong></em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/fstab</span><br></pre></td></tr></table></figure>
-
-<p>在 fstab 文件最后一行添加下面的内容：</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">/root/swap/swapfile none swap sw 0 0</span><br></pre></td></tr></table></figure>
-
-<p>然后保存，退出。</p>
-<h1 id="查看虚拟内存"><a href="#查看虚拟内存" class="headerlink" title="查看虚拟内存"></a>查看虚拟内存</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="卸载swap"><a href="#卸载swap" class="headerlink" title="卸载swap"></a>卸载swap</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo swapoff swapfile</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>远程桌面工具xrdp</title>
-    <url>/2e70d4d3.html</url>
-    <content><![CDATA[<h3 id="安装XRDP远程桌面工具"><a href="#安装XRDP远程桌面工具" class="headerlink" title="安装XRDP远程桌面工具"></a>安装XRDP远程桌面工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install xrdp</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加用户到ssl-cert组"><a href="#添加用户到ssl-cert组" class="headerlink" title="添加用户到ssl-cert组"></a>添加用户到ssl-cert组</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG ssl-cert <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="使用远程桌面连接"><a href="#使用远程桌面连接" class="headerlink" title="使用远程桌面连接"></a>使用远程桌面连接</h3><h3 id="解决连接后黑屏问题"><a href="#解决连接后黑屏问题" class="headerlink" title="解决连接后黑屏问题"></a>解决连接后黑屏问题</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/xrdp/startwm.sh</span><br></pre></td></tr></table></figure>
-
-<p>添加以下内容：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">unset</span> DBUS_SESSION_BUS_ADDRESS</span><br><span class="line"><span class="built_in">unset</span> XDG_RUNTIME_DIR</span><br><span class="line"></span><br><span class="line"><span class="built_in">test</span> -x /etc/X11/Xsession &amp;&amp; <span class="built_in">exec</span> /etc/X11/Xsession</span><br><span class="line"><span class="built_in">exec</span> /bin/sh /etc/X11/Xsession</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装kong</title>
-    <url>/ef67b3d6.html</url>
-    <content><![CDATA[<h1 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull kong</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull postgres:9.6</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="创建一个-Docker-网络"><a href="#创建一个-Docker-网络" class="headerlink" title="创建一个 Docker 网络"></a>创建一个 Docker 网络</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker network create kong-net</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="运行-PostGreSQL-容器"><a href="#运行-PostGreSQL-容器" class="headerlink" title="运行 PostGreSQL 容器"></a>运行 PostGreSQL 容器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name kong-database \</span><br><span class="line">  --network=kong-net \</span><br><span class="line">  -p 5432:5432 \</span><br><span class="line">  -e <span class="string">&quot;POSTGRES_USER=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;POSTGRES_DB=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;POSTGRES_PASSWORD=kong&quot;</span> \</span><br><span class="line">  postgres:9.6</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="准备数据库"><a href="#准备数据库" class="headerlink" title="准备数据库"></a>准备数据库</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --<span class="built_in">rm</span> \</span><br><span class="line">  --network=kong-net \</span><br><span class="line">  -e <span class="string">&quot;KONG_DATABASE=postgres&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_PG_HOST=kong-database&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_PG_USER=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_PG_PASSWORD=kong&quot;</span> \</span><br><span class="line">  -e <span class="string">&quot;KONG_CASSANDRA_CONTACT_POINTS=kong-database&quot;</span> \</span><br><span class="line">  kong:latest kong migrations bootstrap</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="启动kong"><a href="#启动kong" class="headerlink" title="启动kong"></a>启动kong</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name kong \</span><br><span class="line">     --network=kong-net \</span><br><span class="line">     -e <span class="string">&quot;KONG_DATABASE=postgres&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PG_HOST=kong-database&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PG_USER=kong&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PG_PASSWORD=kong&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_CASSANDRA_CONTACT_POINTS=kong-database&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PROXY_ACCESS_LOG=/dev/stdout&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_ADMIN_ACCESS_LOG=/dev/stdout&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_PROXY_ERROR_LOG=/dev/stderr&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_ADMIN_ERROR_LOG=/dev/stderr&quot;</span> \</span><br><span class="line">     -e <span class="string">&quot;KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl&quot;</span> \</span><br><span class="line">     -p 8000:8000 \</span><br><span class="line">     -p 8443:8443 \</span><br><span class="line">     -p 127.0.0.1:8001:8001 \</span><br><span class="line">     -p 127.0.0.1:8444:8444 \</span><br><span class="line">     kong:latest</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>导航到<code>http://localhost:8001/</code></p>
-</blockquote>
-<h2 id="Kong-默认端口"><a href="#Kong-默认端口" class="headerlink" title="Kong 默认端口"></a>Kong 默认端口</h2><p>默认情况下，Kong 监听以下端口：</p>
-<ul>
-<li><code>8000</code>：侦听<code>HTTP</code>来自您的客户端的传入流量，并将其转发到您的上游服务。</li>
-<li><code>8001</code>: <a href="https://docs.konghq.com/gateway/2.8.x/admin-api">Admin API</a>监听来自命令行的调用<code>HTTP</code>。</li>
-<li><code>8443</code>：侦听传入的 HTTPS 流量。此端口具有与 类似的行为<code>8000</code>，只是它只需要<code>HTTPS</code> 流量。可以通过配置文件禁用此端口。</li>
-<li><code>8444</code>: <a href="https://docs.konghq.com/gateway/2.8.x/admin-api">Admin API</a>监听<code>HTTPS</code>流量。</li>
-</ul>
-<h2 id="生命周期命令"><a href="#生命周期命令" class="headerlink" title="生命周期命令"></a>生命周期命令</h2><blockquote>
-<p>如果您使用的是 Docker，请<a href="https://docs.docker.com/engine/reference/commandline/exec"><code>exec</code></a>进入 Docker 容器以使用这些命令。</p>
-</blockquote>
-<p><a href="https://docs.konghq.com/gateway/2.8.x/reference/cli">使用stop</a>命令停止 Kong Gateway ：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kong stop</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a href="https://docs.konghq.com/gateway/2.8.x/reference/cli">使用reload</a>命令重新加载 Kong Gateway ：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kong reload</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a href="https://docs.konghq.com/gateway/2.8.x/reference/cli">使用start</a>命令启动 Kong Gateway ：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kong start</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="安装konga"><a href="#安装konga" class="headerlink" title="安装konga"></a>安装konga</h1><h2 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull pantsel/konga</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动konga"><a href="#启动konga" class="headerlink" title="启动konga"></a>启动konga</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">-p 1337:1337 \</span><br><span class="line">--network kong-net \</span><br><span class="line">-e <span class="string">&quot;TOKEN_SECRET=kongtoken&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;DB_ADAPTER=postgres&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;DB_HOST=kong-database&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;DB_USER=kong&quot;</span>  \</span><br><span class="line">-e <span class="string">&quot;DB_PASSWORD=kong&quot;</span> \</span><br><span class="line"> --name konga \</span><br><span class="line">pantsel/konga</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><blockquote>
-<p>访问  ip:1337</p>
-</blockquote>
-<h3 id="配置kong"><a href="#配置kong" class="headerlink" title="配置kong"></a>配置kong</h3><p>查看kong的访问地址：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker inspect --format=<span class="string">&#x27;&#123;&#123;.Name&#125;&#125; - &#123;&#123;range .NetworkSettings.Networks&#125;&#125;&#123;&#123;.IPAddress&#125;&#125;&#123;&#123;end&#125;&#125;&#x27;</span> $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<p>配置：</p>
-<blockquote>
-<p>ip:8001</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>kong</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>kong</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kong插件开发</title>
-    <url>/6e80deb5.html</url>
-    <content><![CDATA[<h1 id="插件目录结构"><a href="#插件目录结构" class="headerlink" title="插件目录结构"></a>插件目录结构</h1><h2 id="基本插件模块"><a href="#基本插件模块" class="headerlink" title="基本插件模块"></a>基本插件模块</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">simple-plugin</span><br><span class="line">├── handler.lua   # 插件的核心，包括请求/连接生命周期，提供接口来实现插件的运行逻辑；</span><br><span class="line">└── schema.lua    # 配置参数定义，定义校验规则以便用户只能输入有效的配置值</span><br></pre></td></tr></table></figure>
-
-<h2 id="高级插件模块"><a href="#高级插件模块" class="headerlink" title="高级插件模块"></a>高级插件模块</h2><p>一些插件可能需要更深入地与 Kong 集成：在数据库中拥有自己的表，在 Admin API 中公开端点等。每一个都可以通过向插件添加新模块来完成。如果插件实现了所有可选模块，那么它的结构如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">complete-plugin</span><br><span class="line">├── api.lua</span><br><span class="line">├── daos.lua</span><br><span class="line">├── handler.lua</span><br><span class="line">├── migrations</span><br><span class="line">│   ├── init.lua</span><br><span class="line">│   └── 000_base_complete_plugin.lua</span><br><span class="line">└── schema.lua</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">模块名称</th>
-<th align="left">必需</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">api.lua</td>
-<td align="left">否</td>
-<td align="left">扩展Admin API，在需要对外暴露接口时候</td>
-</tr>
-<tr>
-<td align="left">daos.lua</td>
-<td align="left">否</td>
-<td align="left">数据访问层，对插件自定义实体的抽象，并存储在数据存储区中</td>
-</tr>
-<tr>
-<td align="left">handler.lua</td>
-<td align="left">是</td>
-<td align="left">对外暴露出在请求&#x2F;连接生命周期的接口，由Kong实现逻辑并运行</td>
-</tr>
-<tr>
-<td align="left">migrations&#x2F;*.lua</td>
-<td align="left">否</td>
-<td align="left">数据库迁移（例如，创建表），仅当插件应用daos.lua进行存储时才需要进行迁移</td>
-</tr>
-<tr>
-<td align="left">schema.lua</td>
-<td align="left">是</td>
-<td align="left">保留插件配置结构，以便用户只能输入有效的配置值</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>kong</category>
-      </categories>
-      <tags>
-        <tag>kong</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>maven常用命令</title>
-    <url>/f340b1b8.html</url>
-    <content><![CDATA[<h1 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h1><p>maven 命令的格式为 mvn [plugin-name]:[goal-name]，可以接受的参数如下，</p>
-<blockquote>
-<ul>
-<li><p>-D 指定参数，如 -Dmaven.test.skip&#x3D;true 跳过单元测试；</p>
-</li>
-<li><p>-P 指定 Profile 配置，可以用于区分环境；</p>
-</li>
-<li><p>-e 显示maven运行出错的信息；</p>
-</li>
-<li><p>-o 离线执行命令,即不去远程仓库更新包；</p>
-</li>
-<li><p>-X 显示maven允许的debug信息；</p>
-</li>
-<li><p>-U 强制去远程更新snapshot的插件或依赖，默认每天只更新一次。</p>
-</li>
-</ul>
-</blockquote>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
-<li>清理项目：mvn clean</li>
-<li>运行测试：mvn test</li>
-<li>安装jar包到本地仓库中：mvn install</li>
-<li>打包：mvn package</li>
-<li>编译：mvn compile</li>
-<li>发布：mvn:deploy</li>
-<li>-DskipTests，不执行测试用例，但编译测试用例类生成相应的class文件至target&#x2F;test-classes下。</li>
-<li>-Dmaven.test.skip&#x3D;true，不执行测试用例，也不编译测试用例类。</li>
-</ul>
-<h3 id="常用组合命令"><a href="#常用组合命令" class="headerlink" title="常用组合命令"></a>常用组合命令</h3><p>打包：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn clean package -Dmaven.test.skip=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>发布：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn clean deploy -Dmaven.test.skip=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">F:\JDK\bin\java.exe -Dmaven.multiModuleProjectDirectory=H:\code\iotcore-service -Dmaven.home=F:\software\apache-maven-3.8.4 -Dclassworlds.conf=F:\software\apache-maven-3.8.4\bin\m2.conf <span class="string">&quot;-Dmaven.ext.class.path=F:\software\IDEA\IntelliJ IDEA 2021.2.1\plugins\maven\lib\maven-event-listener.jar&quot;</span> <span class="string">&quot;-javaagent:F:\software\IDEA\IntelliJ IDEA 2021.2.1\lib\idea_rt.jar=52557:F:\software\IDEA\IntelliJ IDEA 2021.2.1\bin&quot;</span> -Dfile.encoding=UTF-8 -classpath F:\software\apache-maven-3.8.4\boot\plexus-classworlds-2.6.0.jar;F:\software\apache-maven-3.8.4\boot\plexus-classworlds.license org.codehaus.classworlds.Launcher -Didea.version=2021.2.1 -s F:\software\apache-maven-3.8.4\conf\settings.xml -Dmaven.repo.local=F:\software\apache-maven-3.8.4\response -DskipTests=<span class="literal">true</span> deploy</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>maven</category>
-      </categories>
-      <tags>
-        <tag>maven</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>maven配置使用私服nexus</title>
-    <url>/5627283c.html</url>
-    <content><![CDATA[<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="基础说明"><a href="#基础说明" class="headerlink" title="基础说明"></a>基础说明</h2><h3 id="常用默认仓库说明"><a href="#常用默认仓库说明" class="headerlink" title="常用默认仓库说明"></a>常用默认仓库说明</h3><ol>
-<li><p>maven-central：maven中央库</p>
-<p>默认从<a href="https://link.zhihu.com/?target=https://repo1.maven.org/maven2/">https://repo1.maven.org/maven2/</a>拉取jar。</p>
-</li>
-<li><p>maven-releases：发行版本</p>
-<p>私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy。</p>
-</li>
-<li><p>maven-snapshots：快照版本</p>
-</li>
-<li><p>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用。</p>
-</li>
-</ol>
-<h3 id="仓库类型"><a href="#仓库类型" class="headerlink" title="仓库类型"></a>仓库类型</h3><ul>
-<li><p>Group：这是一个仓库聚合的概念，用户仓库地址选择Group的地址，即可访问Group中配置的，用于方便开发人员自己设定的仓库。</p>
-</li>
-<li><p>maven-public就是一个Group类型的仓库，内部设置了多个仓库，访问顺序取决于配置顺序，3.x默认Releases，Snapshots， Central，当然你也可以自己设置。 </p>
-</li>
-<li><p>Hosted：私有仓库，内部项目的发布仓库，专门用来存储我们自己生成的jar文件</p>
-</li>
-<li><p>Snapshots：本地项目的快照仓库</p>
-</li>
-<li><p>Releases： 本地项目发布的正式版本</p>
-</li>
-<li><p>Proxy：代理类型，从远程中央仓库中寻找数据的仓库（可以点击对应的仓库的Configuration页签下Remote Storage属性的值即被代理的远程仓库的路径），如可配置阿里云maven仓库 </p>
-</li>
-<li><p>Central：中央仓库</p>
-</li>
-</ul>
-<h2 id="增加新的代理源"><a href="#增加新的代理源" class="headerlink" title="增加新的代理源"></a>增加新的代理源</h2><h3 id="新增代理源"><a href="#新增代理源" class="headerlink" title="新增代理源"></a>新增代理源</h3><p><img src="/../../images/maven/nexus/1.png" alt="1"></p>
-<h3 id="选择maven2代理"><a href="#选择maven2代理" class="headerlink" title="选择maven2代理"></a>选择maven2代理</h3><p><img src="/../../images/maven/nexus/2.png" alt="1"></p>
-<h3 id="添加代理"><a href="#添加代理" class="headerlink" title="添加代理"></a>添加代理</h3><p><img src="/../../images/maven/nexus/3.png" alt="1"></p>
-<p><img src="/../../images/maven/nexus/4.png" alt="1"></p>
-<blockquote>
-<p>Cache可以设置为200天 288000</p>
-</blockquote>
-<h3 id="设置maven-public-将这些代理加入Group"><a href="#设置maven-public-将这些代理加入Group" class="headerlink" title="设置maven-public 将这些代理加入Group"></a>设置maven-public 将这些代理加入Group</h3><p><img src="/../../images/maven/nexus/5.png" alt="1"></p>
-<blockquote>
-<p>常用代理</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1. aliyun</span><br><span class="line">http://maven.aliyun.com/nexus/content/groups/public</span><br><span class="line">2. apache_snapshot</span><br><span class="line">https://repository.apache.org/content/repositories/snapshots/</span><br><span class="line">3. apache_release</span><br><span class="line">https://repository.apache.org/content/repositories/releases/</span><br><span class="line">4. atlassian</span><br><span class="line">https://maven.atlassian.com/content/repositories/atlassian-public/</span><br><span class="line">5. central.maven.org</span><br><span class="line">http://central.maven.org/maven2/</span><br><span class="line">6. datanucleus</span><br><span class="line">http://www.datanucleus.org/downloads/maven2</span><br><span class="line">7. maven-central （安装后自带，仅需设置Cache有效期即可）</span><br><span class="line">https://repo1.maven.org/maven2/</span><br><span class="line">8. nexus.axiomalaska.com</span><br><span class="line">http://nexus.axiomalaska.com/nexus/content/repositories/public</span><br><span class="line">9. oss.sonatype.org</span><br><span class="line">https://oss.sonatype.org/content/repositories/snapshots</span><br><span class="line">10.pentaho</span><br><span class="line">https://public.nexus.pentaho.org/content/groups/omni/</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h2 id="设置私用仓库可重复发布"><a href="#设置私用仓库可重复发布" class="headerlink" title="设置私用仓库可重复发布"></a>设置私用仓库可重复发布</h2><p>Nexus安装后自带maven-releases，maven-snapshots两个仓库，用于将生成的jar包发布在这两个仓库中，在实际开发中需要将maven-releases设置为可以重复发布。</p>
-<p><img src="/../../images/maven/nexus/6.png" alt="1"></p>
-<h1 id="maven配置"><a href="#maven配置" class="headerlink" title="maven配置"></a>maven配置</h1><h2 id="配置server"><a href="#配置server" class="headerlink" title="配置server"></a>配置server</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servers</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">servers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>id：这是server的id（注意不是用户登陆的id），该id与distributionManagement中repository元素的id相匹配。</p>
-<p>username：用户名</p>
-<p>password：密码</p>
-</blockquote>
-<h2 id="配置mirror"><a href="#配置mirror" class="headerlink" title="配置mirror"></a>配置mirror</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--该镜像的唯一标识符。id用来区分不同的mirror元素。 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-public<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--镜像名称 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>maven-public<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--*指的是访问任何仓库都使用我们的私服--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--该镜像的URL。构建系统会优先考虑使用该URL，而非使用默认的服务器URL。 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://ip:8081/repository/maven-public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="pom-xml配置"><a href="#pom-xml配置" class="headerlink" title="pom.xml配置"></a>pom.xml配置</h1><p>springboot项目配置向nexus发送jar包</p>
-<h3 id="在pom-xml中添加distributionManagement"><a href="#在pom-xml中添加distributionManagement" class="headerlink" title="在pom.xml中添加distributionManagement"></a>在pom.xml中添加distributionManagement</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://ip:8081/repository/maven-releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://ip:8081/repository/maven-snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">maven clean deploy -Dmaven.test.skip=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>maven</category>
-      </categories>
-      <tags>
-        <tag>maven</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Nginx进行TCP负载均衡</title>
-    <url>/1b102101.html</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>ngx_stream_proxy_module</code>模块 (1.9.0) 允许通过 TCP、UDP (1.9.13) 和 UNIX 域套接字代理数据流。</p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>stream与events、http同级。</p>
-</blockquote>
-<h1 id="通过include配置"><a href="#通过include配置" class="headerlink" title="通过include配置"></a>通过<code>include</code>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"> <span class="attribute">include</span> /etc/nginx/stream.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在<code>/etc/nginx/stream.d</code>下新建<code>tcp.conf</code>配置文件</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Navicat安装使用</title>
     <url>/43b3483d.html</url>
     <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>进入官网<a href="https://www.navicat.com.cn/download/navicat-premium">Navicat | 下载 Navicat Premium 14 天免费 Windows、macOS 和 Linux 的试用版</a>下载安装包，并安装。</p>
@@ -3772,40 +3761,6 @@
 <p>以上均为技术探索，请勿牟利！！！</p>
 <p>请支持正版！！！</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>canal监听MySQL同步数据</title>
-    <url>/b7f79665.html</url>
-    <content><![CDATA[<h3 id="binlog文件"><a href="#binlog文件" class="headerlink" title="binlog文件"></a>binlog文件</h3><h4 id="binlog文件的两种类型"><a href="#binlog文件的两种类型" class="headerlink" title="binlog文件的两种类型"></a>binlog文件的两种类型</h4><ul>
-<li>索引文件（文件名后缀为.index）用于记录哪些日志文件正在被使用</li>
-<li>日志文件（文件名后缀为.00000*）记录数据库所有的DDL和DML(除了数据查询语句)语句事件。</li>
-</ul>
-<ol>
-<li>索引文件大小：我们可以通过 max_binlog_size 参数设置binlog文件的大小。Binlog最大值，最大和默认值是1GB，该设置并不能严格控制Binlog的大小，尤其是Binlog比较靠近最大值而又遇到一个比较大事务时，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的所有SQL都记录进当前日志，直到事务结束</li>
-<li>索引文件删除：binlog的删除可以手工删除或自动删除。通过设置 expire_logs_days 实现自动删除</li>
-<li>手动删除需登录mysql后执行如下命令：</li>
-</ol>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>springboot</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql统计数据库所有数据量</title>
-    <url>/18a68ee.html</url>
-    <content><![CDATA[<h2 id="mysql统计一个数据库所有数据量"><a href="#mysql统计一个数据库所有数据量" class="headerlink" title="mysql统计一个数据库所有数据量"></a>mysql统计一个数据库所有数据量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	table_schema AS &#x27;数据库&#x27;,</span><br><span class="line">	table_name AS &#x27;表名&#x27;,</span><br><span class="line">	table_rows AS &#x27;记录数&#x27;,</span><br><span class="line">	TRUNCATE ( data_length / 1024 / 1024, 2 ) AS &#x27;数据容量(mb)&#x27;,</span><br><span class="line">	TRUNCATE ( index_length / 1024 / 1024, 2 ) AS &#x27;索引容量(mb)&#x27;,</span><br><span class="line">	SUM(table_rows) AS &#x27;总记录数&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( data_length / 1024 / 1024, 2 )) AS &#x27;总数据容量(mb)&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( index_length / 1024 / 1024, 2 )) AS &#x27;总索引容量(mb)&#x27; </span><br><span class="line">FROM</span><br><span class="line">	information_schema.TABLES </span><br><span class="line">WHERE</span><br><span class="line">	table_schema = &#x27;数据库名称&#x27; </span><br><span class="line">ORDER BY</span><br><span class="line">	table_rows DESC,</span><br><span class="line">	index_length DESC;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>mysql</category>
@@ -3880,6 +3835,64 @@
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>canal监听MySQL同步数据</title>
+    <url>/b7f79665.html</url>
+    <content><![CDATA[<h3 id="binlog文件"><a href="#binlog文件" class="headerlink" title="binlog文件"></a>binlog文件</h3><h4 id="binlog文件的两种类型"><a href="#binlog文件的两种类型" class="headerlink" title="binlog文件的两种类型"></a>binlog文件的两种类型</h4><ul>
+<li>索引文件（文件名后缀为.index）用于记录哪些日志文件正在被使用</li>
+<li>日志文件（文件名后缀为.00000*）记录数据库所有的DDL和DML(除了数据查询语句)语句事件。</li>
+</ul>
+<ol>
+<li>索引文件大小：我们可以通过 max_binlog_size 参数设置binlog文件的大小。Binlog最大值，最大和默认值是1GB，该设置并不能严格控制Binlog的大小，尤其是Binlog比较靠近最大值而又遇到一个比较大事务时，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的所有SQL都记录进当前日志，直到事务结束</li>
+<li>索引文件删除：binlog的删除可以手工删除或自动删除。通过设置 expire_logs_days 实现自动删除</li>
+<li>手动删除需登录mysql后执行如下命令：</li>
+</ol>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql统计数据库所有数据量</title>
+    <url>/18a68ee.html</url>
+    <content><![CDATA[<h2 id="mysql统计一个数据库所有数据量"><a href="#mysql统计一个数据库所有数据量" class="headerlink" title="mysql统计一个数据库所有数据量"></a>mysql统计一个数据库所有数据量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	table_schema AS &#x27;数据库&#x27;,</span><br><span class="line">	table_name AS &#x27;表名&#x27;,</span><br><span class="line">	table_rows AS &#x27;记录数&#x27;,</span><br><span class="line">	TRUNCATE ( data_length / 1024 / 1024, 2 ) AS &#x27;数据容量(mb)&#x27;,</span><br><span class="line">	TRUNCATE ( index_length / 1024 / 1024, 2 ) AS &#x27;索引容量(mb)&#x27;,</span><br><span class="line">	SUM(table_rows) AS &#x27;总记录数&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( data_length / 1024 / 1024, 2 )) AS &#x27;总数据容量(mb)&#x27;,</span><br><span class="line">	SUM(TRUNCATE ( index_length / 1024 / 1024, 2 )) AS &#x27;总索引容量(mb)&#x27; </span><br><span class="line">FROM</span><br><span class="line">	information_schema.TABLES </span><br><span class="line">WHERE</span><br><span class="line">	table_schema = &#x27;数据库名称&#x27; </span><br><span class="line">ORDER BY</span><br><span class="line">	table_rows DESC,</span><br><span class="line">	index_length DESC;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Nginx进行TCP负载均衡</title>
+    <url>/1b102101.html</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>ngx_stream_proxy_module</code>模块 (1.9.0) 允许通过 TCP、UDP (1.9.13) 和 UNIX 域套接字代理数据流。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">        <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>stream与events、http同级。</p>
+</blockquote>
+<h1 id="通过include配置"><a href="#通过include配置" class="headerlink" title="通过include配置"></a>通过<code>include</code>配置</h1><p>在nginx.conf文件中添加<code>stream</code>配置</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line"> <span class="attribute">include</span> /etc/nginx/stream.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/etc/nginx/stream.d</code>下新建<code>tcp.conf</code>配置文件</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">upstream</span> tcp_socket &#123;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8001</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">    <span class="attribute">server</span> localhost:<span class="number">8002</span> max_fails=<span class="number">5</span> fail_timeout=<span class="number">30s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8000</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> tcp_socket;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -4029,17 +4042,6 @@
       </tags>
   </entry>
   <entry>
-    <title>STM32新建项目工程</title>
-    <url>/d0cca158.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>stm32</category>
-      </categories>
-      <tags>
-        <tag>stm32</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>STM32之UART串口通信</title>
     <url>/63f0bb0c.html</url>
     <content><![CDATA[<h1 id="配置项目工程"><a href="#配置项目工程" class="headerlink" title="配置项目工程"></a>配置项目工程</h1><blockquote>
@@ -4143,25 +4145,14 @@
       </tags>
   </entry>
   <entry>
-    <title>vscode常用插件</title>
-    <url>/510fa095.html</url>
-    <content><![CDATA[<h1 id="shell脚本插件"><a href="#shell脚本插件" class="headerlink" title="shell脚本插件"></a>shell脚本插件</h1><ol>
-<li><p>shellman</p>
-<p>智能提示和自动补全</p>
-</li>
-<li><p>shellcheck<br>语法错误检查</p>
-</li>
-<li><p>shell-format<br>格式化<br>快捷键：Alt+Shift+F</p>
-</li>
-<li><p>Code Runner<br>调试</p>
-</li>
-</ol>
-]]></content>
+    <title>STM32新建项目工程</title>
+    <url>/d0cca158.html</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>vscode</category>
+        <category>stm32</category>
       </categories>
       <tags>
-        <tag>vscode</tag>
+        <tag>stm32</tag>
       </tags>
   </entry>
   <entry>
@@ -4239,6 +4230,28 @@
       </tags>
   </entry>
   <entry>
+    <title>vscode常用插件</title>
+    <url>/510fa095.html</url>
+    <content><![CDATA[<h1 id="shell脚本插件"><a href="#shell脚本插件" class="headerlink" title="shell脚本插件"></a>shell脚本插件</h1><ol>
+<li><p>shellman</p>
+<p>智能提示和自动补全</p>
+</li>
+<li><p>shellcheck<br>语法错误检查</p>
+</li>
+<li><p>shell-format<br>格式化<br>快捷键：Alt+Shift+F</p>
+</li>
+<li><p>Code Runner<br>调试</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>vscode</category>
+      </categories>
+      <tags>
+        <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue使用prerender-spa-plugin进行页面预渲染</title>
     <url>/15f2f45b.html</url>
     <content><![CDATA[<h1 id="为什么使用prerender-spa-plugin"><a href="#为什么使用prerender-spa-plugin" class="headerlink" title="为什么使用prerender-spa-plugin"></a>为什么使用prerender-spa-plugin</h1><p>如果你仅希望通过 SSR 来改善一些推广页面 (例如 <code>/</code>、<code>/about</code>、<code>/contact</code> 等) 的 SEO，那么<strong>预渲染</strong>也许会更合适。和使用动态编译 HTML 的 web 服务器相比，预渲染可以在构建时为指定的路由生成静态 HTML 文件。它的优势在于预渲染的设置更加简单，且允许将前端保持为一个完全静态的站点。</p>
@@ -4306,6 +4319,81 @@
       <tags>
         <tag>web</tag>
         <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信公众号开发一-接入系统</title>
+    <url>/2531afdf.html</url>
+    <content><![CDATA[<p>老规矩，官方文档：<a href="https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html">接入概述 | 微信开放文档 (qq.com)</a></p>
+<h1 id="填写服务器配置"><a href="#填写服务器配置" class="headerlink" title="填写服务器配置"></a>填写服务器配置</h1><p>进入设置与开发&gt;基本配置，填写并启用服务器配置。</p>
+<h1 id="验证微信服务器消息"><a href="#验证微信服务器消息" class="headerlink" title="验证微信服务器消息"></a>验证微信服务器消息</h1><p>开发者提交信息后，微信服务器将发送 GET 请求到填写的服务器地址 URL 上，GET请求携带参数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">signature</td>
+<td align="left">微信加密签名，signature结合了开发者填写的 token 参数和请求中的 timestamp 参数、nonce参数。</td>
+</tr>
+<tr>
+<td align="left">timestamp</td>
+<td align="left">时间戳</td>
+</tr>
+<tr>
+<td align="left">nonce</td>
+<td align="left">随机数</td>
+</tr>
+<tr>
+<td align="left">echostr</td>
+<td align="left">随机字符串</td>
+</tr>
+</tbody></table>
+<p>开发者通过检验 signature 对请求进行校验（下面有校验方式）。若确认此次 GET 请求来自微信服务器，请原样返回 echostr 参数内容，则接入生效，成为开发者成功，否则接入失败。加密&#x2F;校验流程如下：</p>
+<p>1）将token、timestamp、nonce三个参数进行字典序排序 </p>
+<p>2）将三个参数字符串拼接成一个字符串进行sha1加密 </p>
+<p>3）开发者获得加密后的字符串可与 signature 对比，标识该请求来源于微信</p>
+<p><strong>检验 signature 的Springboot示例代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Operation(summary = &quot;响应微信发送的Token验证&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/wx&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">token</span><span class="params">(String signature, String timestamp, String nonce, String echostr)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> wxService.token(signature,timestamp,nonce,echostr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">token</span><span class="params">(String signature, String timestamp, String nonce, String echostr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (StringUtils.isAnyBlank(signature, timestamp, nonce, echostr)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;请求参数非法，请核实&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (checkToken(signature, timestamp, nonce)) &#123;</span><br><span class="line">        <span class="keyword">return</span> echostr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">checkToken</span><span class="params">(String signature, String timestamp, String nonce)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> <span class="string">&quot;第一步中填写的token&quot;</span>;</span><br><span class="line">    String[] strings = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;token, timestamp, nonce&#125;;</span><br><span class="line">    <span class="comment">// 排序</span></span><br><span class="line">    Arrays.sort(strings);</span><br><span class="line">    <span class="comment">// 拼接字符串</span></span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">buffer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    <span class="keyword">for</span> (String s : strings) &#123;</span><br><span class="line">        buffer.append(s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// sha1加密</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">temp</span> <span class="operator">=</span> DigestUtil.sha1Hex(buffer.toString());</span><br><span class="line">    <span class="keyword">return</span> signature.equals(temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>weixin</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>weixin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信公众号开发三-生成带参数的二维码</title>
+    <url>/570934f5.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>weixin</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>weixin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信公众号开发二-基础消息能力开发</title>
+    <url>/1555a2f8.html</url>
+    <content><![CDATA[<p>完成服务器配置才能进行下一步，需要注意的是，所有的请求接收都是在同一个配置路径下，可以通过POST、GET区分。<a href="https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html">文本消息 | 微信开放文档 (qq.com)</a></p>
+<h1 id="接收普通消息"><a href="#接收普通消息" class="headerlink" title="接收普通消息"></a>接收普通消息</h1><h1 id="接收事件推送"><a href="#接收事件推送" class="headerlink" title="接收事件推送"></a>接收事件推送</h1><h1 id="被动回复用户消息"><a href="#被动回复用户消息" class="headerlink" title="被动回复用户消息"></a>被动回复用户消息</h1><h1 id="模板消息接口"><a href="#模板消息接口" class="headerlink" title="模板消息接口"></a>模板消息接口</h1>]]></content>
+      <categories>
+        <category>weixin</category>
+      </categories>
+      <tags>
+        <tag>springboot</tag>
+        <tag>weixin</tag>
       </tags>
   </entry>
 </search>
