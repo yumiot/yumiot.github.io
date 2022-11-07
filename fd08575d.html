@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="初识 ContainerdContainerd 与 Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="containerd简介">
+<meta property="og:url" content="http://example.com/fd08575d.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="初识 ContainerdContainerd 与 Docker">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-d3ba95e6c26d2b8f040497ef9431be02_180x120.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-c051993895ae4f430d5d7eb57c87d66c_720w.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-b5a8d416c4811396082e14e87813d2fa_720w.webp">
+<meta property="article:published_time" content="2022-11-07T02:22:42.000Z">
+<meta property="article:modified_time" content="2022-11-07T08:25:51.648Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="containerd">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic3.zhimg.com/v2-d3ba95e6c26d2b8f040497ef9431be02_180x120.jpg">
+
+
+<link rel="canonical" href="http://example.com/fd08575d.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/fd08575d.html","path":"fd08575d.html","title":"containerd简介"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>containerd简介 | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E8%AF%86-Containerd"><span class="nav-number">1.</span> <span class="nav-text">初识 Containerd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Containerd-%E4%B8%8E-Docker"><span class="nav-number">2.</span> <span class="nav-text">Containerd 与 Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Containerd-%E6%9E%B6%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">Containerd 架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/fd08575d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="containerd简介 | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          containerd简介
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-07 10:22:42 / 修改时间：16:25:51" itemprop="dateCreated datePublished" datetime="2022-11-07T10:22:42+08:00">2022-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/containerd/" itemprop="url" rel="index"><span itemprop="name">containerd</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="初识-Containerd"><a href="#初识-Containerd" class="headerlink" title="初识 Containerd"></a><strong>初识 Containerd</strong></h2><h2 id="Containerd-与-Docker"><a href="#Containerd-与-Docker" class="headerlink" title="Containerd 与 Docker"></a><strong>Containerd 与 Docker</strong></h2><p>在之前的工作中，containerd 一直都是薛定谔的存在，只闻其名但没啥用武之地，直到前一段时间 K8s 官方宣布要废弃 Docker 时，才把这家伙又拉回到大众视野里。在技术层面上，我在之前的文章中也讨论过 CRI、containerd 以及 Docker 这些容器运行时之间的关系。有兴趣的小伙伴可以去看一下这几篇文章：</p>
+<p><a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s?__biz=MzA3MDM1NjE0NA==&mid=2247483700&idx=1&sn=c1386fd30635d5561103787325465ac5&chksm=9f3f5ceba848d5fd39fed41337badf02c9d08be783f9084b666cfeb698ed28fa0c9fb34371a1%23rd">深入理解container–容器运行时mp.weixin.qq.com&#x2F;s?__biz&#x3D;MzA3MDM1NjE0NA&#x3D;&#x3D;&amp;mid&#x3D;2247483700&amp;idx&#x3D;1&amp;sn&#x3D;c1386fd30635d5561103787325465ac5&amp;chksm&#x3D;9f3f5ceba848d5fd39fed41337badf02c9d08be783f9084b666cfeb698ed28fa0c9fb34371a1#rd<img src="https://pic3.zhimg.com/v2-d3ba95e6c26d2b8f040497ef9431be02_180x120.jpg" alt="img"></a></p>
+<p><a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s?__biz=MzA3MDM1NjE0NA==&mid=2247483704&idx=1&sn=82c128cf35a94403875402f1534857ca&chksm=9f3f5ce7a848d5f1685692b42c042778cf6857d5f49f83a16e41759738508bd279e58e332a0d&token=362181753&lang=zh_CN%23rd">K8s、CRI 与 containermp.weixin.qq.com&#x2F;s?__biz&#x3D;MzA3MDM1NjE0NA&#x3D;&#x3D;&amp;mid&#x3D;2247483704&amp;idx&#x3D;1&amp;sn&#x3D;82c128cf35a94403875402f1534857ca&amp;chksm&#x3D;9f3f5ce7a848d5f1685692b42c042778cf6857d5f49f83a16e41759738508bd279e58e332a0d&amp;token&#x3D;362181753&amp;lang&#x3D;zh_CN#rd</a></p>
+<p>，现在只是单纯好奇在非技术层面上 CNCF 为啥要这么做呢，所以还是去八卦一下 Containerd 和 Docker 的前世今生以及爱恨情仇。</p>
+<p>在几年之前，Docker 公司在容器技术领域强势崛起，一家独大，Google、RedHat 这样的巨头们都产生了很大的危机感，因此他们想与 Docker 公司一起联合研发推进一个开源的容器运行时作为 Docker 技术的核心依赖。然鹅 Docker 公司很高冷的表示：我不干！巨头们听到这个反馈就很不爽啊，因此通过一些手段对 Docker 公司软硬兼施，使其将 libcontainer 捐给了开源社区，也就是现在的 runc，一个 low level 的容器运行时。此外，巨头们又成立了 CNCF 去对抗 Docker 公司的一家独大，CNCF 成立的思路很明确：在容器领域干不过 Docker，那就搞容器上层的建设——容器编排，从此 K8s 诞生了。虽然 Docker 公司也尝试使用 Swarm 去对抗 K8s，但最终也失败了。</p>
+<p>自此，K8s 慢慢成为云原生领域的标配，其生态也越做越大、越做越完善。Docker 公司为了融入生态，开源了 Docker 的核心依赖 containerd 。此外 K8s 为了对接下一层的容器，也因为其中立性搞了一个运行时接口，也就是 CRI（Container Runtime Interface），runc、containerd 等运行时都去支持此接口。由于当时确实没有啥 high level 的 runtime，oci-o 虽然支持 CRI 接口，但其功能太弱；containerd 也尚未成熟，而且其当时的定位是嵌入到系统中，并非给终端用户使用；rkt 有自己的一套体系（后来这个项目也失败了）。只能暂时为了适配 Docker 搞了个 shim，将 CRI 转换为 Docker API。K8s 和 Docker 进入了冷静期，双方都在各自优化自己，互不干扰。然而平静之下仍是暗潮汹涌，CNCF 社区一直在不断完善 containerd，其定位也发生了改变，由原来的系统嵌入组件，变成了今天的“工业标准容器运行时”，并提供给终端用户使用。直到去年，K8s 宣布废弃使用 Docker，而改用 Containerd。其实除了这些商业因素，另一方面 K8s 已经提供了标准接口对接底层容器运行时，不再想单独维护一个 类似于 Docker shim 的适配层去迎合不同的运行时，这样做也无可厚非（其实我看就是自己做大了，把锅扔给底层了<del>嘘</del>）。</p>
+<h2 id="Containerd-架构"><a href="#Containerd-架构" class="headerlink" title="Containerd 架构"></a><strong>Containerd 架构</strong></h2><p>好了，现在瓜也吃完了，回到技术层面上来看看 Containerd 的架构是什么样的。首先看 containerd 的功能：</p>
+<ul>
+<li>官网宣称自己支持 OCI 的镜像标准</li>
+<li>OCI 的容器运行时</li>
+<li>镜像的推送和拉取</li>
+<li>容器运行时生命周期管理</li>
+<li>多租户的镜像存储</li>
+<li>网络管理以及网络 namespace 管理，支持容器网络加入已有的 namespace</li>
+</ul>
+<p>我就直接好家伙，Docker 核心功能该有的都有了。再看看架构图</p>
+<p><img src="https://pic1.zhimg.com/80/v2-c051993895ae4f430d5d7eb57c87d66c_720w.webp" alt="img"></p>
+<p>Containerd 的设计是一个大的插件系统，图中每一个虚线框其实就对应一个插件。</p>
+<p>从下往上看，底层支持 arm 和 x86 架构，支持 Linux 和 windows 系统。</p>
+<p>中间 containerd 包含三层： Backend、core、API。其中 Backend 中 Runtime plugin 提供了容器运行时的具体操作，为了支持不同的容器运行时 containerd 也提供了一系列的 <code>containerd-shim</code>，如之前的文章</p>
+<p><a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s?__biz=MzA3MDM1NjE0NA==&mid=2247483724&idx=1&sn=87a1eb5dd5464145aaefa5fa34aa92f6&chksm=9f3f5c93a848d585fa1a40849eb8190e93fa5a0a88d36328dca0b280f87e92a746874c20a492%23rd">K8s &amp; kata container 原理实践mp.weixin.qq.com&#x2F;s?__biz&#x3D;MzA3MDM1NjE0NA&#x3D;&#x3D;&amp;mid&#x3D;2247483724&amp;idx&#x3D;1&amp;sn&#x3D;87a1eb5dd5464145aaefa5fa34aa92f6&amp;chksm&#x3D;9f3f5c93a848d585fa1a40849eb8190e93fa5a0a88d36328dca0b280f87e92a746874c20a492#rd</a></p>
+<p>提到的 shim 就是这个。 Core 则是核心部分，提供了各种功能的服务，其中比较常用的是 <code>Content service</code> ，提供对镜像中可寻址内容的访问，所有不可变的内容都被存储在这里；<code>Images Service</code> 提供镜像相关的操作；<code>Snapshot Plugin</code> : 用来管理容器镜像的文件系统快照。镜像中的每一个 layer 都会被解压成文件系统快照，类似于 Docker 中的 <code>graphdriver</code>。再往上则是 API 层，通过 GRPC 与客户端连接，这其中提供了给 Prometheus 使用 API 来进行监控，这里给个好评！</p>
+<p>最上层则是各种客户端，包括 K8s 的 kubelet，containerd 自己的命令行 ctr 等。</p>
+<p>简化一下上图：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-b5a8d416c4811396082e14e87813d2fa_720w.webp" alt="img"></p>
+<p>简化后，Containerd 分为三大块： Storage 管理镜像文件的存储； Metadata 管理镜像和容器的元数据；另外由 Task 触发运行时。对外提供 GRPC 方式的 API 以及 Metrics 接口。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>其实 containerd 的社区一直很活跃，这个项目的成熟离不开社区各位的贡献。这篇文章重点在于回顾一下历史，以及现在它现在的架构。作为使用者就暂时不去研究其内部设计，相信也是及其复杂且精妙的。仅在使用方面，我发现 containerd 和 Docker 还是有很多共同之处的，那么下一篇文章则着重聊一聊 containerd 的实践吧。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/containerd/" rel="tag"># containerd</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/95ce093f.html" rel="prev" title="解决proxy.golang.org无法访问处理方法">
+                  <i class="fa fa-chevron-left"></i> 解决proxy.golang.org无法访问处理方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/d3485331.html" rel="next" title="ubuntu安装containerd">
+                  ubuntu安装containerd <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">135k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:03</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
