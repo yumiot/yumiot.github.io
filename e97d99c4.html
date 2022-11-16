@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前提：读写分离采用MySQL的主从复制，配置主从复制参考：docker安装mysql8实现主从复制读写分离">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ShardingSphere-JDBC读写分离与分表">
+<meta property="og:url" content="http://example.com/e97d99c4.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="前提：读写分离采用MySQL的主从复制，配置主从复制参考：docker安装mysql8实现主从复制读写分离">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/008ba7e3619e4e6bb9e1b36076e99196~tplv-k3u1fbpfcp-zoom-crop-mark:3024:3024:3024:1702.awebp">
+<meta property="article:published_time" content="2022-11-16T06:02:35.000Z">
+<meta property="article:modified_time" content="2022-11-16T07:33:16.847Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="ShardingSphere">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/008ba7e3619e4e6bb9e1b36076e99196~tplv-k3u1fbpfcp-zoom-crop-mark:3024:3024:3024:1702.awebp">
+
+
+<link rel="canonical" href="http://example.com/e97d99c4.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/e97d99c4.html","path":"e97d99c4.html","title":"ShardingSphere-JDBC读写分离与分表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ShardingSphere-JDBC读写分离与分表 | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E4%B8%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%B5%8B%E8%AF%95%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">在主数据库中创建测试表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASpringBoot%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">2.</span> <span class="nav-text">创建SpringBoot项目并引入依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90%E4%BB%A5%E5%8F%8A%E8%AF%BB%E5%86%99%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">配置数据源以及读写库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">业务代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">4.1.</span> <span class="nav-text">config</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MybatisPlusConfig"><span class="nav-number">4.1.1.</span> <span class="nav-text">MybatisPlusConfig</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#controller%E5%B1%82"><span class="nav-number">4.2.</span> <span class="nav-text">controller层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UserInfoController"><span class="nav-number">4.2.1.</span> <span class="nav-text">UserInfoController</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserRoleController"><span class="nav-number">4.2.2.</span> <span class="nav-text">UserRoleController</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service%E5%B1%82"><span class="nav-number">4.3.</span> <span class="nav-text">service层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UserInfoService"><span class="nav-number">4.3.1.</span> <span class="nav-text">UserInfoService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserInfoServiceImpl"><span class="nav-number">4.3.2.</span> <span class="nav-text">UserInfoServiceImpl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserRoleService"><span class="nav-number">4.3.3.</span> <span class="nav-text">UserRoleService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserRoleServiceImpl"><span class="nav-number">4.3.4.</span> <span class="nav-text">UserRoleServiceImpl</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dao%E5%B1%82"><span class="nav-number">4.4.</span> <span class="nav-text">dao层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UserInfo"><span class="nav-number">4.4.1.</span> <span class="nav-text">UserInfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserRole"><span class="nav-number">4.4.2.</span> <span class="nav-text">UserRole</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mapper%E5%B1%82"><span class="nav-number">4.5.</span> <span class="nav-text">mapper层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UserInfoDao"><span class="nav-number">4.5.1.</span> <span class="nav-text">UserInfoDao</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UserRoleDao"><span class="nav-number">4.5.2.</span> <span class="nav-text">UserRoleDao</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/e97d99c4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ShardingSphere-JDBC读写分离与分表 | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ShardingSphere-JDBC读写分离与分表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-16 14:02:35 / 修改时间：15:33:16" itemprop="dateCreated datePublished" datetime="2022-11-16T14:02:35+08:00">2022-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ShardingSphere/" itemprop="url" rel="index"><span itemprop="name">ShardingSphere</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>前提：读写分离采用MySQL的主从复制，配置主从复制参考：<a target="_blank" rel="noopener" href="http://doler.net/fc52a59d.html">docker安装mysql8实现主从复制读写分离</a></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/008ba7e3619e4e6bb9e1b36076e99196~tplv-k3u1fbpfcp-zoom-crop-mark:3024:3024:3024:1702.awebp" alt="ShardingSphere-JDBC5.1.1读写分离示例"></p>
+<h1 id="在主数据库中创建测试表"><a href="#在主数据库中创建测试表" class="headerlink" title="在主数据库中创建测试表"></a>在主数据库中创建测试表</h1><p>user_info: 测试单表读写分离，user_role_0、user_role_1、user_role_2、user_role_3测试分表分片</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> NAMES utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for user_info</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `user_info`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `user_info`  (</span><br><span class="line">  `id` <span class="type">int</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">50</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `user_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_0900_ai_ci ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for user_role_0</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `user_role_0`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `user_role_0`  (</span><br><span class="line">  `id` <span class="type">varchar</span>(<span class="number">50</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `user_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `role_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_0900_ai_ci ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for user_role_1</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `user_role_1`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `user_role_1`  (</span><br><span class="line">  `id` <span class="type">varchar</span>(<span class="number">50</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `user_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `role_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_0900_ai_ci ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for user_role_2</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `user_role_2`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `user_role_2`  (</span><br><span class="line">  `id` <span class="type">varchar</span>(<span class="number">50</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `user_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `role_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_0900_ai_ci ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for user_role_3</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `user_role_3`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `user_role_3`  (</span><br><span class="line">  `id` <span class="type">varchar</span>(<span class="number">50</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `user_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `role_code` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_0900_ai_ci <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_0900_ai_ci ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建SpringBoot项目并引入依赖"><a href="#创建SpringBoot项目并引入依赖" class="headerlink" title="创建SpringBoot项目并引入依赖"></a>创建SpringBoot项目并引入依赖</h1><p>pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shardingsphere<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shardingsphere-jdbc-core-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="配置数据源以及读写库"><a href="#配置数据源以及读写库" class="headerlink" title="配置数据源以及读写库"></a>配置数据源以及读写库</h1><p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/q1359720840/p/15808406.html">springboot集成mbatisplus+sharding-jdbc</a></p>
+<p>application.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="comment"># 有几个数据就配几个，这里是名称，按照下面的格式，名称+数字的形式</span></span><br><span class="line">      <span class="attr">names:</span> <span class="string">ds_0,ds_1</span></span><br><span class="line">      <span class="comment"># 为每个数据源单独进行配置</span></span><br><span class="line">      <span class="attr">ds_0:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">        <span class="attr">driverClassName:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">jdbcUrl:</span> <span class="string">jdbc:mysql://192.168.1.96:7306/db_test?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">        <span class="attr">hikari:</span></span><br><span class="line">          <span class="attr">minimum-idle:</span> <span class="number">5</span></span><br><span class="line">          <span class="attr">idle-timeout:</span> <span class="number">600000</span></span><br><span class="line">          <span class="attr">maximum-pool-size:</span> <span class="number">10</span></span><br><span class="line">          <span class="attr">auto-commit:</span> <span class="literal">true</span></span><br><span class="line">          <span class="attr">pool-name:</span> <span class="string">MyHikariCP</span></span><br><span class="line">          <span class="attr">max-lifetime:</span> <span class="number">1800000</span></span><br><span class="line">          <span class="attr">connection-timeout:</span> <span class="number">30000</span></span><br><span class="line">          <span class="attr">connection-test-query:</span> <span class="string">SELECT</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">ds_1:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">        <span class="attr">driverClassName:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">jdbcUrl:</span> <span class="string">jdbc:mysql://192.168.1.96:7307/db_test?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">        <span class="attr">hikari:</span></span><br><span class="line">          <span class="attr">minimum-idle:</span> <span class="number">5</span></span><br><span class="line">          <span class="attr">idle-timeout:</span> <span class="number">600000</span></span><br><span class="line">          <span class="attr">maximum-pool-size:</span> <span class="number">10</span></span><br><span class="line">          <span class="attr">auto-commit:</span> <span class="literal">true</span></span><br><span class="line">          <span class="attr">pool-name:</span> <span class="string">MyHikariCP</span></span><br><span class="line">          <span class="attr">max-lifetime:</span> <span class="number">1800000</span></span><br><span class="line">          <span class="attr">connection-timeout:</span> <span class="number">30000</span></span><br><span class="line">          <span class="attr">connection-test-query:</span> <span class="string">SELECT</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">rules:</span></span><br><span class="line">      <span class="comment"># 配置读写分离</span></span><br><span class="line">      <span class="attr">readwrite-splitting:</span></span><br><span class="line">        <span class="attr">data-sources:</span></span><br><span class="line">          <span class="attr">master-slave:</span></span><br><span class="line">            <span class="attr">props:</span></span><br><span class="line">              <span class="comment"># 自动发现数据源名称（配置动态读写分离规则显示）</span></span><br><span class="line">              <span class="attr">auto-aware-data-source-name:</span> <span class="string">ds_0</span></span><br><span class="line">              <span class="comment"># 负载均衡算法名称</span></span><br><span class="line">              <span class="attr">load-balancer-name:</span> <span class="string">roundRobin</span></span><br><span class="line">              <span class="comment"># 读数据源名称列表</span></span><br><span class="line">              <span class="attr">read-data-source-names:</span> <span class="string">ds_1</span></span><br><span class="line">              <span class="comment"># 写数据源名称</span></span><br><span class="line">              <span class="attr">write-data-source-name:</span> <span class="string">ds_0</span></span><br><span class="line">            <span class="attr">type:</span> <span class="string">Static</span></span><br><span class="line">          </span><br><span class="line">          <span class="comment"># 负载均衡算法配置</span></span><br><span class="line">          <span class="attr">load-balancers:</span></span><br><span class="line">            <span class="attr">roundRobin:</span></span><br><span class="line">              <span class="comment"># RANDOM（随机）,ROUND_ROBIN（轮询）</span></span><br><span class="line">              <span class="attr">type:</span> <span class="string">ROUND_ROBIN</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">sharding:</span></span><br><span class="line">        <span class="attr">tables:</span></span><br><span class="line">          <span class="comment">#这里填写表名称，程序中对这张表的所有操作，都会采用下面的路由方案</span></span><br><span class="line">          <span class="comment">#比如我们上面Mybatis就是对 user_role 表进行操作，所以会走下面的路由方案</span></span><br><span class="line">          <span class="attr">user_role:</span></span><br><span class="line">            <span class="comment">#这里填写实际的路由节点，比如现在我们要分两个库，那么就可以把两个库都写上，以及对应的表</span></span><br><span class="line">            <span class="comment">#也可以使用表达式，比如下面的可以简写为 db$-&gt;&#123;0..1&#125;.test</span></span><br><span class="line">            <span class="attr">actualDataNodes:</span> <span class="string">ds_0.user_role_$&#123;0..3&#125;</span></span><br><span class="line">            <span class="comment">#这里是分库策略配置</span></span><br><span class="line">            <span class="attr">table-strategy:</span></span><br><span class="line">              <span class="comment">#这里选择标准策略，也可以配置复杂策略，基于多个键进行分片</span></span><br><span class="line">              <span class="attr">standard:</span></span><br><span class="line">                <span class="comment">#参与分片运算的字段，下面的算法会根据这里提供的字段进行运算</span></span><br><span class="line">                <span class="attr">sharding-column:</span> <span class="string">id</span></span><br><span class="line">                <span class="comment">#这里填写我们下面自定义的算法名称</span></span><br><span class="line">                <span class="attr">sharding-algorithm-name:</span> <span class="string">my-alg</span></span><br><span class="line">        <span class="attr">sharding-algorithms:</span></span><br><span class="line">          <span class="comment">#自定义一个新的算法，名称随意</span></span><br><span class="line">          <span class="attr">my-alg:</span></span><br><span class="line">            <span class="comment">#算法类型，官方内置了很多种，这里演示最简单的一种</span></span><br><span class="line">            <span class="attr">type:</span> <span class="string">HASH_MOD</span></span><br><span class="line">            <span class="attr">props:</span></span><br><span class="line">              <span class="comment"># 表示有 sharding-count 个分片表数量</span></span><br><span class="line">              <span class="attr">sharding-count:</span> <span class="number">4</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="comment">#开启日志，方便观察SQL</span></span><br><span class="line">      <span class="attr">sql-show:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="业务代码"><a href="#业务代码" class="headerlink" title="业务代码"></a>业务代码</h1><h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>MybatisPlus分页插件，不测试分页不可以不配置</p>
+<h3 id="MybatisPlusConfig"><a href="#MybatisPlusConfig" class="headerlink" title="MybatisPlusConfig"></a>MybatisPlusConfig</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.H2));</span><br><span class="line">        <span class="keyword">return</span> interceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="controller层"><a href="#controller层" class="headerlink" title="controller层"></a>controller层</h2><h3 id="UserInfoController"><a href="#UserInfoController" class="headerlink" title="UserInfoController"></a>UserInfoController</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;userInfo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfoController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UserInfoService userInfoService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分页查询所有数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> page     分页对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userInfo 查询实体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 所有数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;UserInfo&gt; <span class="title function_">selectAll</span><span class="params">(Page&lt;UserInfo&gt; page, UserInfo userInfo)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userInfoService.page(page, <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;(userInfo));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过主键查询单条数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 主键</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 单条数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> UserInfo <span class="title function_">selectOne</span><span class="params">(<span class="meta">@PathVariable</span> Serializable id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userInfoService.getById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userInfo 实体对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 新增结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">insert</span><span class="params">(<span class="meta">@RequestBody</span> UserInfo userInfo)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userInfoService.save(userInfo);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userInfo 实体对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 修改结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PutMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> UserInfo userInfo)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userInfoService.updateById(userInfo);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> idList 主键结合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 删除结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@DeleteMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">delete</span><span class="params">(<span class="meta">@RequestParam(&quot;idList&quot;)</span> List&lt;Long&gt; idList)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userInfoService.removeByIds(idList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="UserRoleController"><a href="#UserRoleController" class="headerlink" title="UserRoleController"></a>UserRoleController</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;userRole&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserRoleController</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 服务对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UserRoleService userRoleService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 分页查询所有数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> page     分页对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userRole 查询实体</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 所有数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> Page&lt;UserRole&gt; <span class="title function_">selectAll</span><span class="params">(Page&lt;UserRole&gt; page, UserRole userRole)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userRoleService.page(page, <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;(userRole));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过主键查询单条数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 主键</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 单条数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> UserRole <span class="title function_">selectOne</span><span class="params">(<span class="meta">@PathVariable</span> Serializable id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userRoleService.getById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userRole 实体对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 新增结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">insert</span><span class="params">(<span class="meta">@RequestBody</span> UserRole userRole)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userRoleService.save(userRole);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userRole 实体对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 修改结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PutMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> UserRole userRole)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userRoleService.updateById(userRole);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> idList 主键结合</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 删除结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@DeleteMapping</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">delete</span><span class="params">(<span class="meta">@RequestParam(&quot;idList&quot;)</span> List&lt;Long&gt; idList)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userRoleService.removeByIds(idList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="service层"><a href="#service层" class="headerlink" title="service层"></a>service层</h2><h3 id="UserInfoService"><a href="#UserInfoService" class="headerlink" title="UserInfoService"></a>UserInfoService</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserInfoService</span> <span class="keyword">extends</span> <span class="title class_">IService</span>&lt;UserInfo&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UserInfoServiceImpl"><a href="#UserInfoServiceImpl" class="headerlink" title="UserInfoServiceImpl"></a>UserInfoServiceImpl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfoServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;UserInfoDao, UserInfo&gt; <span class="keyword">implements</span> <span class="title class_">UserInfoService</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UserRoleService"><a href="#UserRoleService" class="headerlink" title="UserRoleService"></a>UserRoleService</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserRoleService</span> <span class="keyword">extends</span> <span class="title class_">IService</span>&lt;UserRole&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UserRoleServiceImpl"><a href="#UserRoleServiceImpl" class="headerlink" title="UserRoleServiceImpl"></a>UserRoleServiceImpl</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserRoleServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;UserRoleDao, UserRole&gt; <span class="keyword">implements</span> <span class="title class_">UserRoleService</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="dao层"><a href="#dao层" class="headerlink" title="dao层"></a>dao层</h2><h3 id="UserInfo"><a href="#UserInfo" class="headerlink" title="UserInfo"></a>UserInfo</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserInfo</span> &#123;</span><br><span class="line">    <span class="meta">@TableId(type = IdType.ASSIGN_UUID)</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String userCode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UserRole"><a href="#UserRole" class="headerlink" title="UserRole"></a>UserRole</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserRole</span> &#123;</span><br><span class="line">    <span class="meta">@TableId(type = IdType.ASSIGN_ID)</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String userCode;</span><br><span class="line">    <span class="keyword">private</span> String roleCode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="mapper层"><a href="#mapper层" class="headerlink" title="mapper层"></a>mapper层</h2><h3 id="UserInfoDao"><a href="#UserInfoDao" class="headerlink" title="UserInfoDao"></a>UserInfoDao</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserInfoDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;UserInfo&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UserRoleDao"><a href="#UserRoleDao" class="headerlink" title="UserRoleDao"></a>UserRoleDao</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserRoleDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;UserRole&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>添加UserInfo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#x27;http://localhost:8080/userInfo&#x27; \</span><br><span class="line">--header &#x27;Content-Type: application/json&#x27; \</span><br><span class="line">--data-raw &#x27;&#123;</span><br><span class="line">    &quot;name&quot;: &quot;张三&quot;,</span><br><span class="line">    &quot;userCode&quot;: &quot;123&quot;</span><br><span class="line">&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>查看主从库中都有了UserInfo</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/springboot/" rel="tag"># springboot</a>
+              <a href="/tags/ShardingSphere/" rel="tag"># ShardingSphere</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/fc52a59d.html" rel="prev" title="docker安装mysql8实现主从复制读写分离">
+                  <i class="fa fa-chevron-left"></i> docker安装mysql8实现主从复制读写分离
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">158k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:23</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
