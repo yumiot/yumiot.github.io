@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="环境配置：使用docker部署，MySQL版本：8.0.31">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装mysql8实现主从复制读写分离">
+<meta property="og:url" content="http://example.com/fc52a59d.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="环境配置：使用docker部署，MySQL版本：8.0.31">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-16T02:43:59.000Z">
+<meta property="article:modified_time" content="2022-11-16T03:17:21.806Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/fc52a59d.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/fc52a59d.html","path":"fc52a59d.html","title":"docker安装mysql8实现主从复制读写分离"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>docker安装mysql8实现主从复制读写分离 | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">环境配置：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2MySQL"><span class="nav-number">2.</span> <span class="nav-text">部署MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">配置主数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">进入容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5MySQL"><span class="nav-number">3.2.</span> <span class="nav-text">连接MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-root-%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">修改 root 可以通过任何客户端连接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-MySQL-%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3%EF%BC%8C%E5%9C%A8-mysqld-%E6%AE%B5%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">3.4.</span> <span class="nav-text">修改 MySQL 配置文档，在 [mysqld] 段添加以下配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEmysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E8%B4%A6%E6%88%B7%EF%BC%88%E5%8F%AF%E4%BB%A5%E8%B7%B3%E8%BF%87%E8%AF%A5%E6%AD%A5%E9%AA%A4%EF%BC%8C%E4%BD%BF%E7%94%A8root%E8%B4%A6%E6%88%B7%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">设置mysql主从复制账户（可以跳过该步骤，使用root账户）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.6.</span> <span class="nav-text">重启数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bmaster%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">3.7.</span> <span class="nav-text">查看master数据库状态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.</span> <span class="nav-text">配置从数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8-1"><span class="nav-number">4.1.</span> <span class="nav-text">进入容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5MySQL-1"><span class="nav-number">4.2.</span> <span class="nav-text">连接MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-root-%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E4%BB%BB%E4%BD%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A-1"><span class="nav-number">4.3.</span> <span class="nav-text">修改 root 可以通过任何客户端连接：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-MySQL-%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3%EF%BC%8C%E5%9C%A8-mysqld-%E6%AE%B5%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E9%85%8D%E7%BD%AE%EF%BC%9A-1"><span class="nav-number">4.4.</span> <span class="nav-text">修改 MySQL 配置文档，在 [mysqld] 段添加以下配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E6%95%B0%E6%8D%AE%E5%BA%93-1"><span class="nav-number">4.5.</span> <span class="nav-text">重启数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="nav-number">4.6.</span> <span class="nav-text">配置 MySQL 主从复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD"><span class="nav-number">4.7.</span> <span class="nav-text">启动从服务器复制功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E4%B8%BB%E4%BB%8E%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81"><span class="nav-number">4.8.</span> <span class="nav-text">检查主从连接状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD"><span class="nav-number">4.9.</span> <span class="nav-text">重置从数据库复制功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%BB%E4%BB%8E"><span class="nav-number">5.</span> <span class="nav-text">测试主从</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/fc52a59d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="docker安装mysql8实现主从复制读写分离 | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          docker安装mysql8实现主从复制读写分离
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-16 10:43:59 / 修改时间：11:17:21" itemprop="dateCreated datePublished" datetime="2022-11-16T10:43:59+08:00">2022-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="环境配置："><a href="#环境配置：" class="headerlink" title="环境配置："></a>环境配置：</h1><p>使用docker部署，MySQL版本：8.0.31</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql-master: 192.168.1.96:3306</span><br><span class="line">mysql-node1: 192.168.1.96:3307</span><br></pre></td></tr></table></figure>
+
+<h1 id="部署MySQL"><a href="#部署MySQL" class="headerlink" title="部署MySQL"></a>部署MySQL</h1><p>主数据库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql-master -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:8.0.31</span><br></pre></td></tr></table></figure>
+
+<p>从数据库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql-node1 -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:8.0.31</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置主数据库"><a href="#配置主数据库" class="headerlink" title="配置主数据库"></a>配置主数据库</h1><h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql-master /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-root-可以通过任何客户端连接："><a href="#修改-root-可以通过任何客户端连接：" class="headerlink" title="修改 root 可以通过任何客户端连接："></a>修改 root 可以通过任何客户端连接：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-MySQL-配置文档，在-mysqld-段添加以下配置："><a href="#修改-MySQL-配置文档，在-mysqld-段添加以下配置：" class="headerlink" title="修改 MySQL 配置文档，在 [mysqld] 段添加以下配置："></a>修改 MySQL 配置文档，在 [mysqld] 段添加以下配置：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mysql/conf.d/docker.cnf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[必须]启用二进制日志</span></span><br><span class="line">log-bin=mysql-bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[必须]服务器标识ID，每台服务器唯一</span></span><br><span class="line">server-id=1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>my.cnf 可用配置如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bin-log二进制日志设置</span></span><br><span class="line">log-bin=/usr/local/mysql/log/mysqlbin/mysql-bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">logging format: mixed|statement|row</span></span><br><span class="line">binlog_format=statement</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主从配置master</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">required unique <span class="built_in">id</span> between 1 and 2^32 - 1 defaults to 1 <span class="keyword">if</span> master-host is not <span class="built_in">set</span></span></span><br><span class="line">server-id = 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">是否只读,1 代表只读, 0 代表读写</span></span><br><span class="line">read-only=0</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">忽略的数据, 指不需要同步的数据库</span></span><br><span class="line">binlog-ignore-db=mysql</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">指定同步的数据库</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">binlog-do-db=db01</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="设置mysql主从复制账户（可以跳过该步骤，使用root账户）"><a href="#设置mysql主从复制账户（可以跳过该步骤，使用root账户）" class="headerlink" title="设置mysql主从复制账户（可以跳过该步骤，使用root账户）"></a>设置mysql主从复制账户（可以跳过该步骤，使用root账户）</h2><p>设置当前master授予slave的账户（用于从库复制），注意：这里的ip为slave的ip地址。意思是允许此ip通过账户slave1来访问master数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;slave1&#x27;@&#x27;192.168.1.96&#x27; identified by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>授予slave权限并刷新权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant replication slave on *.* to &#x27;slave1&#x27;@&#x27;192.168.1.96&#x27;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启数据库"><a href="#重启数据库" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql-master</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看master数据库状态"><a href="#查看master数据库状态" class="headerlink" title="查看master数据库状态"></a><strong>查看master数据库状态</strong></h2><p>记录 File 的值和 Position 的值，配置 slave 服务器的时候要用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show master status;</span><br><span class="line"></span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| mysql-bin.000001 |      156 |              |                  |                   |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>字段含义： </p>
+<p>File : 从哪个日志文件开始推送日志文件 </p>
+<p>Position ： 从哪个位置开始推送日志 </p>
+<p>Binlog_Ignore_DB : 指定不需要同步的数据库</p>
+</blockquote>
+<h1 id="配置从数据库"><a href="#配置从数据库" class="headerlink" title="配置从数据库"></a>配置从数据库</h1><h2 id="进入容器-1"><a href="#进入容器-1" class="headerlink" title="进入容器"></a>进入容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql-node1 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接MySQL-1"><a href="#连接MySQL-1" class="headerlink" title="连接MySQL"></a>连接MySQL</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p123456</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-root-可以通过任何客户端连接：-1"><a href="#修改-root-可以通过任何客户端连接：-1" class="headerlink" title="修改 root 可以通过任何客户端连接："></a>修改 root 可以通过任何客户端连接：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-MySQL-配置文档，在-mysqld-段添加以下配置：-1"><a href="#修改-MySQL-配置文档，在-mysqld-段添加以下配置：-1" class="headerlink" title="修改 MySQL 配置文档，在 [mysqld] 段添加以下配置："></a>修改 MySQL 配置文档，在 [mysqld] 段添加以下配置：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mysql/conf.d/docker.cnf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[必须]启用二进制日志</span></span><br><span class="line">log-bin=mysql-bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[必须]服务器标识ID，每台服务器唯一</span></span><br><span class="line">server-id=2</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启数据库-1"><a href="#重启数据库-1" class="headerlink" title="重启数据库"></a>重启数据库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql-master</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-MySQL-主从复制"><a href="#配置-MySQL-主从复制" class="headerlink" title="配置 MySQL 主从复制"></a>配置 MySQL 主从复制</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">change master to</span><br><span class="line">master_host=&#x27;192.168.1.96&#x27;,</span><br><span class="line">master_user=&#x27;root&#x27;,</span><br><span class="line">master_log_file=&#x27;mysql-bin.000001&#x27;,</span><br><span class="line">master_log_pos=156,</span><br><span class="line">master_port=3306</span><br><span class="line">master_password=&#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>master_host&#x3D;’x.x.x.x’ 							   &#x2F;&#x2F; 这里填 master 主机 ip </p>
+<p>master_log_file&#x3D;’mysql-bin.000003’,   &#x2F;&#x2F; 这里填写 File 的值 </p>
+<p>master_log_pos&#x3D;154,								&#x2F;&#x2F; 这里填写 Position 的值。</p>
+</blockquote>
+<h2 id="启动从服务器复制功能"><a href="#启动从服务器复制功能" class="headerlink" title="启动从服务器复制功能"></a>启动从服务器复制功能</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start slave</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查主从连接状态"><a href="#检查主从连接状态" class="headerlink" title="检查主从连接状态"></a>检查主从连接状态</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show slave status</span><br></pre></td></tr></table></figure>
+
+<p>这两个必须是Yes 为No 或者connect说明没有连接上：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Slave_IO_Running: Yes</span><br><span class="line">Slave_SQL_Running: Yes</span><br></pre></td></tr></table></figure>
+
+<p>显示内容：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> slave status\G</span><br><span class="line"><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span> <span class="number">1.</span> <span class="type">row</span> <span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span></span><br><span class="line">               Slave_IO_State: Waiting <span class="keyword">for</span> master <span class="keyword">to</span> send event</span><br><span class="line">                  Master_Host: x.x.x.x</span><br><span class="line">                  Master_User: root</span><br><span class="line">                  Master_Port: <span class="number">32768</span></span><br><span class="line">                Connect_Retry: <span class="number">60</span></span><br><span class="line">              Master_Log_File: mysql<span class="operator">-</span>bin<span class="number">.000001</span></span><br><span class="line">          Read_Master_Log_Pos: <span class="number">1338</span></span><br><span class="line">               Relay_Log_File: <span class="number">8</span>d1e3b87d499<span class="operator">-</span>relay<span class="operator">-</span>bin<span class="number">.000002</span></span><br><span class="line">                Relay_Log_Pos: <span class="number">1221</span></span><br><span class="line">        Relay_Master_Log_File: mysql<span class="operator">-</span>bin<span class="number">.000001</span></span><br><span class="line">             Slave_IO_Running: Yes</span><br><span class="line">            Slave_SQL_Running: Yes</span><br><span class="line">              Replicate_Do_DB: </span><br><span class="line">          Replicate_Ignore_DB: </span><br><span class="line">           Replicate_Do_Table: </span><br><span class="line">       Replicate_Ignore_Table: </span><br><span class="line">      Replicate_Wild_Do_Table: </span><br><span class="line">  Replicate_Wild_Ignore_Table: </span><br><span class="line">                   Last_Errno: <span class="number">0</span></span><br><span class="line">                   Last_Error: </span><br><span class="line">                 Skip_Counter: <span class="number">0</span></span><br><span class="line">          Exec_Master_Log_Pos: <span class="number">1338</span></span><br><span class="line">              Relay_Log_Space: <span class="number">1435</span></span><br><span class="line">              Until_Condition: <span class="keyword">None</span></span><br><span class="line">               Until_Log_File: </span><br><span class="line">                Until_Log_Pos: <span class="number">0</span></span><br><span class="line">           Master_SSL_Allowed: <span class="keyword">No</span></span><br><span class="line">           Master_SSL_CA_File: </span><br><span class="line">           Master_SSL_CA_Path: </span><br><span class="line">              Master_SSL_Cert: </span><br><span class="line">            Master_SSL_Cipher: </span><br><span class="line">               Master_SSL_Key: </span><br><span class="line">        Seconds_Behind_Master: <span class="number">0</span></span><br><span class="line">Master_SSL_Verify_Server_Cert: <span class="keyword">No</span></span><br><span class="line">                Last_IO_Errno: <span class="number">0</span></span><br><span class="line">                Last_IO_Error: </span><br><span class="line">               Last_SQL_Errno: <span class="number">0</span></span><br><span class="line">               Last_SQL_Error: </span><br><span class="line">  Replicate_Ignore_Server_Ids: </span><br><span class="line">             Master_Server_Id: <span class="number">1</span></span><br><span class="line">                  Master_UUID: cd327a00<span class="number">-5e18</span><span class="number">-11e7</span><span class="number">-98</span>f7<span class="number">-0242</span>ac110006</span><br><span class="line">             Master_Info_File: <span class="operator">/</span>var<span class="operator">/</span>lib<span class="operator">/</span>mysql<span class="operator">/</span>master.info</span><br><span class="line">                    SQL_Delay: <span class="number">0</span></span><br><span class="line">          SQL_Remaining_Delay: <span class="keyword">NULL</span></span><br><span class="line">      Slave_SQL_Running_State: Slave has read <span class="keyword">all</span> relay log; waiting <span class="keyword">for</span> more updates</span><br><span class="line">           Master_Retry_Count: <span class="number">86400</span></span><br><span class="line">                  Master_Bind: </span><br><span class="line">      Last_IO_Error_Timestamp: </span><br><span class="line">     Last_SQL_Error_Timestamp: </span><br><span class="line">               Master_SSL_Crl: </span><br><span class="line">           Master_SSL_Crlpath: </span><br><span class="line">           Retrieved_Gtid_Set: </span><br><span class="line">            Executed_Gtid_Set: </span><br><span class="line">                Auto_Position: <span class="number">0</span></span><br><span class="line">         Replicate_Rewrite_DB: </span><br><span class="line">                 Channel_Name: </span><br><span class="line">           Master_TLS_Version: </span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="重置从数据库复制功能"><a href="#重置从数据库复制功能" class="headerlink" title="重置从数据库复制功能"></a>重置从数据库复制功能</h2><p>先停止，再重新执行<strong>4.6配置 MySQL 主从复制</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop slave</span><br></pre></td></tr></table></figure>
+
+<h1 id="测试主从"><a href="#测试主从" class="headerlink" title="测试主从"></a>测试主从</h1><p>注意设置主从后，操作只能在master终端上，slave上的操作不会同步到master上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在master中创建数据库并新增一张测试表</span></span><br><span class="line">CREATE DATABASE `master_test`</span><br><span class="line">DROP TABLE IF EXISTS `test1`;</span><br><span class="line">CREATE TABLE `test1` (</span><br><span class="line">  `<span class="built_in">id</span>` int unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`<span class="built_in">id</span>`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT=<span class="string">&#x27;这是一张测试master-slave的表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考文档：</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1918462#:~:text=%E5%88%A9%E7%94%A8docker%E5%AE%9E%E7%8E%B0mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%8C%E9%99%84%E8%B5%A0docker%E6%90%AD%E5%BB%BAmycat%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%20-%20%E8%85%BE%E8%AE%AF%E4%BA%91%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA-%E8%85%BE%E8%AE%AF%E4%BA%91%20%E4%BF%AE%E6%94%B9,MySQL%20%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3%20%3D%3D%2Fetc%2Fmysql%2Fmysql.conf.d%2Fmysqld.cnf%3D%3D%EF%BC%8C%E5%9C%A8%20%5Bmysqld%5D%20%E6%AE%B5%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E9%85%8D%E7%BD%AE%EF%BC%9A">https://cloud.tencent.com/developer/article/1918462#:~:text=%E5%88%A9%E7%94%A8docker%E5%AE%9E%E7%8E%B0mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%EF%BC%8C%E9%99%84%E8%B5%A0docker%E6%90%AD%E5%BB%BAmycat%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%20-%20%E8%85%BE%E8%AE%AF%E4%BA%91%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA-%E8%85%BE%E8%AE%AF%E4%BA%91%20%E4%BF%AE%E6%94%B9,MySQL%20%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3%20%3D%3D%2Fetc%2Fmysql%2Fmysql.conf.d%2Fmysqld.cnf%3D%3D%EF%BC%8C%E5%9C%A8%20%5Bmysqld%5D%20%E6%AE%B5%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E9%85%8D%E7%BD%AE%EF%BC%9A</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7069990251325816862">https://juejin.cn/post/7069990251325816862</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/9904ed7.html" rel="prev" title="docker安装neo4j">
+                  <i class="fa fa-chevron-left"></i> docker安装neo4j
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">148k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

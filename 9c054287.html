@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前期准备安装要求">
+    <meta name="description" content="安装要求在开始之前，部署Kubernetes集群机器需要满足以下几个条件：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="containerd搭建k8s集群">
 <meta property="og:url" content="http://example.com/9c054287.html">
 <meta property="og:site_name" content="Jack">
-<meta property="og:description" content="前期准备安装要求">
+<meta property="og:description" content="安装要求在开始之前，部署Kubernetes集群机器需要满足以下几个条件：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-07T09:44:50.000Z">
-<meta property="article:modified_time" content="2022-11-07T09:51:20.436Z">
+<meta property="article:modified_time" content="2022-11-09T01:42:34.513Z">
 <meta property="article:author" content="Jack">
 <meta property="article:tag" content="containerd">
 <meta property="article:tag" content="k8s">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%A6%81%E6%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">安装要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">准备环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">1.2.1.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%ADselinux"><span class="nav-number">1.2.2.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%ADswap"><span class="nav-number">1.2.3.</span> <span class="nav-text">关闭swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">1.2.4.</span> <span class="nav-text">设置主机名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4"><span class="nav-number">1.2.5.</span> <span class="nav-text">同步时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8master%E4%B8%AD%E6%B7%BB%E5%8A%A0hosts"><span class="nav-number">1.2.6.</span> <span class="nav-text">在master中添加hosts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E6%A1%A5%E6%8E%A5%E7%9A%84IPV4%E6%B5%81%E9%87%8F%E4%BC%A0%E9%80%92%E5%88%B0iptables%E7%9A%84%E9%93%BE%EF%BC%88Ubuntu%E9%BB%98%E8%AE%A4%E5%85%A8%E5%BC%80%E6%94%BE%EF%BC%89"><span class="nav-number">1.2.7.</span> <span class="nav-text">将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E4%B8%8A%E5%AE%89%E8%A3%85containerd"><span class="nav-number">2.</span> <span class="nav-text">在所有节点上安装containerd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85kubeadm%EF%BC%8Ckubelet%E5%92%8Ckubectl"><span class="nav-number">3.</span> <span class="nav-text">在所有节点安装kubeadm，kubelet和kubectl</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%A6%81%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">安装要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">准备环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.1.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%ADselinux"><span class="nav-number">2.2.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%ADswap"><span class="nav-number">2.3.</span> <span class="nav-text">关闭swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">2.4.</span> <span class="nav-text">设置主机名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%97%B6%E9%97%B4"><span class="nav-number">2.5.</span> <span class="nav-text">同步时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8master%E4%B8%AD%E6%B7%BB%E5%8A%A0hosts"><span class="nav-number">2.6.</span> <span class="nav-text">在master中添加hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E6%A1%A5%E6%8E%A5%E7%9A%84IPV4%E6%B5%81%E9%87%8F%E4%BC%A0%E9%80%92%E5%88%B0iptables%E7%9A%84%E9%93%BE%EF%BC%88Ubuntu%E9%BB%98%E8%AE%A4%E5%85%A8%E5%BC%80%E6%94%BE%EF%BC%89"><span class="nav-number">2.7.</span> <span class="nav-text">将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E4%B8%8A%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEcontainerd"><span class="nav-number">3.</span> <span class="nav-text">在所有节点上安装配置containerd</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85containerd"><span class="nav-number">3.1.</span> <span class="nav-text">安装containerd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">生成默认配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.</span> <span class="nav-text">修改默认配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF"><span class="nav-number">3.4.</span> <span class="nav-text">重启</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85kubeadm%EF%BC%8Ckubelet%E5%92%8Ckubectl"><span class="nav-number">4.</span> <span class="nav-text">在所有节点安装kubeadm，kubelet和kubectl</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,18 +156,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">113</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -235,9 +235,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-11-07 17:44:50 / 修改时间：17:51:20" itemprop="dateCreated datePublished" datetime="2022-11-07T17:44:50+08:00">2022-11-07</time>
+      <time title="创建时间：2022-11-07 17:44:50" itemprop="dateCreated datePublished" datetime="2022-11-07T17:44:50+08:00">2022-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-09 09:42:34" itemprop="dateModified" datetime="2022-11-09T09:42:34+08:00">2022-11-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -256,14 +262,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -274,14 +280,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><h2 id="安装要求"><a href="#安装要求" class="headerlink" title="安装要求"></a>安装要求</h2><p>在开始之前，部署Kubernetes集群机器需要满足以下几个条件：</p>
+        <h1 id="安装要求"><a href="#安装要求" class="headerlink" title="安装要求"></a>安装要求</h1><p>在开始之前，部署Kubernetes集群机器需要满足以下几个条件：</p>
 <ul>
-<li>一台或多台机器，操作系统 CentOS7.x-86_x64</li>
+<li>一台或多台机器，操作系统 Ubuntu20.04</li>
 <li>硬件配置：2GB或更多RAM，2个CPU或更多CPU，硬盘30GB或更多</li>
 <li>可以访问外网，需要拉取镜像，如果服务器不能上网，需要提前下载镜像并导入节点</li>
 <li>禁止swap分区</li>
 </ul>
-<h2 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h2><table>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/root0/p/16838234.html">https://www.cnblogs.com/root0/p/16838234.html</a></p>
+<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><table>
 <thead>
 <tr>
 <th>角色</th>
@@ -302,19 +309,19 @@
 </tr>
 </tbody></table>
 <p><strong>以下操作需要管理员权限</strong></p>
-<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw <span class="built_in">disable</span></span><br></pre></td></tr></table></figure>
+<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw <span class="built_in">disable</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu没有安装，不需要操作</span><br></pre></td></tr></table></figure>
+<h2 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu没有安装，不需要操作</span><br></pre></td></tr></table></figure>
 
-<h3 id="关闭swap"><a href="#关闭swap" class="headerlink" title="关闭swap"></a>关闭swap</h3><p>临时修改：</p>
+<h2 id="关闭swap"><a href="#关闭swap" class="headerlink" title="关闭swap"></a>关闭swap</h2><p>临时修改：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a</span><br></pre></td></tr></table></figure>
 
 <p>永久修改：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -ri <span class="string">&#x27;s/.*swap.*/#&amp;/&#x27;</span> /etc/fstab</span><br></pre></td></tr></table></figure>
 
-<h3 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname &lt;hostname&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname &lt;hostname&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ntpdate</span><br></pre></td></tr></table></figure>
+<h2 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ntpdate</span><br></pre></td></tr></table></figure>
 
 <p>将系统时间与网络同步：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ntpdate cn.pool.ntp.org</span><br></pre></td></tr></table></figure>
@@ -324,31 +331,51 @@
 
 
 
-<h3 id="在master中添加hosts"><a href="#在master中添加hosts" class="headerlink" title="在master中添加hosts"></a>在<strong>master</strong>中添加hosts</h3><blockquote>
+<h2 id="在master中添加hosts"><a href="#在master中添加hosts" class="headerlink" title="在master中添加hosts"></a>在<strong>master</strong>中添加hosts</h2><blockquote>
 <p>格式： 192.168.153.150  <hostname></p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt;&gt; /etc/hosts &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">192.168.153.150 k8smaster</span></span><br><span class="line"><span class="string">192.168.153.151 k8snode1</span></span><br><span class="line"><span class="string">192.168.153.152 k8snode2</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）"><a href="#将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）" class="headerlink" title="将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）"></a>将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /etc/sysctl.d/k8s.conf &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<h2 id="将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）"><a href="#将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）" class="headerlink" title="将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）"></a>将桥接的IPV4流量传递到iptables的链（Ubuntu默认全开放）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">modprobe overlay</span><br><span class="line">modprobe br_netfilter </span><br></pre></td></tr></table></figure>
 
-<p> 生效：</p>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /etc/sysctl.d/k8s.conf &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables  = 1</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward                 = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>生效：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl --system </span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="在所有节点上安装containerd"><a href="#在所有节点上安装containerd" class="headerlink" title="在所有节点上安装containerd"></a>在所有节点上安装containerd</h1><h1 id="在所有节点安装kubeadm，kubelet和kubectl"><a href="#在所有节点安装kubeadm，kubelet和kubectl" class="headerlink" title="在所有节点安装kubeadm，kubelet和kubectl"></a>在所有节点安装kubeadm，kubelet和kubectl</h1><ol>
+<h1 id="在所有节点上安装配置containerd"><a href="#在所有节点上安装配置containerd" class="headerlink" title="在所有节点上安装配置containerd"></a>在所有节点上安装配置containerd</h1><h2 id="安装containerd"><a href="#安装containerd" class="headerlink" title="安装containerd"></a>安装containerd</h2><p>参考：<a target="_blank" rel="noopener" href="http://doler.net/d3485331.html#more">http://doler.net/d3485331.html#more</a></p>
+<h2 id="生成默认配置"><a href="#生成默认配置" class="headerlink" title="生成默认配置"></a>生成默认配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">containerd  config default &gt; /etc/containerd/config.toml</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改默认配置"><a href="#修改默认配置" class="headerlink" title="修改默认配置"></a>修改默认配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/containerd/config.toml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sandbox_image = &quot;registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.8&quot;   # 修改为阿里云镜像地址</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SystemdCgroup = true                                                     # 使用systemd cgroup</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable --now containerd</span><br><span class="line">systemctl restart  containerd</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="在所有节点安装kubeadm，kubelet和kubectl"><a href="#在所有节点安装kubeadm，kubelet和kubectl" class="headerlink" title="在所有节点安装kubeadm，kubelet和kubectl"></a>在所有节点安装kubeadm，kubelet和kubectl</h1><ol>
 <li><p>更新 <code>apt</code> 包索引并安装使用 Kubernetes <code>apt</code> 仓库所需要的包：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install -y apt-transport-https ca-certificates curl</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install -y apt-transport-https</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>下载 Google Cloud 公开签名秘钥：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - </span><br></pre></td></tr></table></figure>
 </li>
 <li><p>添加 Kubernetes <code>apt</code> 仓库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main&quot; | tee /etc/apt/sources.list.d/kubernetes.list</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>更新 <code>apt</code> 包索引，安装 kubelet、kubeadm 和 kubectl，并锁定其版本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install -y kubelet kubeadm kubectl</span><br><span class="line">apt-mark hold kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure></li>
 </ol>
+<p><strong>全部命令：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install -y apt-transport-https</span><br><span class="line">curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - </span><br><span class="line">cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install -y kubelet kubeadm kubectl</span><br><span class="line">apt-mark hold kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -371,6 +398,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/9904ed7.html" rel="next" title="docker安装neo4j">
+                  docker安装neo4j <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -402,13 +432,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">135k</span>
+    <span title="站点总字数">148k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:03</span>
+    <span title="站点阅读时长">2:15</span>
   </span>
 </div>
 

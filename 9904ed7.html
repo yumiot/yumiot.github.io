@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/./images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/./images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/./images/favicon-16.png">
+  <link rel="mask-icon" href="/./images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="图数据库neo4j简介官网：Introduction - Operations Manual (neo4j.com)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装neo4j">
+<meta property="og:url" content="http://example.com/9904ed7.html">
+<meta property="og:site_name" content="Jack">
+<meta property="og:description" content="图数据库neo4j简介官网：Introduction - Operations Manual (neo4j.com)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-09T01:43:25.000Z">
+<meta property="article:modified_time" content="2022-11-09T01:59:36.888Z">
+<meta property="article:author" content="Jack">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="neo4j">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/9904ed7.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/9904ed7.html","path":"9904ed7.html","title":"docker安装neo4j"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>docker安装neo4j | Jack</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jack</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93neo4j%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">图数据库neo4j简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E5%AE%89%E8%A3%85neo4j"><span class="nav-number">2.</span> <span class="nav-text">docker安装neo4j</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E8%AE%BE%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81NEO4J-AUTH"><span class="nav-number">2.1.</span> <span class="nav-text">用于设置初始密码NEO4J_AUTH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8D%B7%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.</span> <span class="nav-text">使用卷持久化数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E9%9D%9E-root-%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E8%BF%90%E8%A1%8C-Neo4j"><span class="nav-number">2.3.</span> <span class="nav-text">以非 root 用户身份运行 Neo4j</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E6%9C%89%E7%94%A8%E7%9A%84-Docker-%E8%BF%90%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="nav-number">2.4.</span> <span class="nav-text">更多有用的 Docker 运行选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85-Neo4j-Docker-%E9%95%9C%E5%83%8F"><span class="nav-number">2.5.</span> <span class="nav-text">离线安装 Neo4j Docker 镜像</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jack</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/9904ed7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jack">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jack">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="docker安装neo4j | Jack">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          docker安装neo4j
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-11-09 09:43:25 / 修改时间：09:59:36" itemprop="dateCreated datePublished" datetime="2022-11-09T09:43:25+08:00">2022-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/neo4j/" itemprop="url" rel="index"><span itemprop="name">neo4j</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="图数据库neo4j简介"><a href="#图数据库neo4j简介" class="headerlink" title="图数据库neo4j简介"></a>图数据库neo4j简介</h1><p>官网：<a target="_blank" rel="noopener" href="https://neo4j.com/docs/operations-manual/4.4/docker/introduction/">Introduction - Operations Manual (neo4j.com)</a></p>
+<p>Neo4j是世界领先的图形数据库。 该体系结构旨在优化节点和关系的管理、存储和遍历。 图形数据库采用属性图方法，这对遍历性能和操作运行时都有好处。 Neo4j提供专用的内存管理和内存高效操作。</p>
+<p>Neo4j是可扩展的，可以作为独立服务器部署，也可以部署在生产环境中的容错集群中的多台机器上。 生产应用程序的其他功能包括热备份和广泛的监视。</p>
+<p>Neo4j有两个版本可供选择，<a target="_blank" rel="noopener" href="https://neo4j.com/docs/operations-manual/current/introduction/#community-edition"><em>社区</em></a>版和<a target="_blank" rel="noopener" href="https://neo4j.com/docs/operations-manual/current/introduction/#enterprise-edition"><em>企业版</em></a>。 企业版包括社区版提供的所有功能，以及额外的企业要求，如备份、集群和故障转移功能。</p>
+<h1 id="docker安装neo4j"><a href="#docker安装neo4j" class="headerlink" title="docker安装neo4j"></a>docker安装neo4j</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name neo4j --restart always --publish=7474:7474 --publish=7687:7687 -d neo4j:4.4.9</span><br></pre></td></tr></table></figure>
+
+<p>您可以通过打开来试用您的 Neo4j 容器*<a target="_blank" rel="noopener" href="http://localhost:7474/*%EF%BC%88Neo4j%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E7%95%8C%E9%9D%A2%EF%BC%89%E5%9C%A8%E7%BD%91%E7%BB%9C%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E3%80%82">http://localhost:7474/*（Neo4j的浏览器界面）在网络浏览器中。</a> 默认情况下，Neo4j需要身份验证，并在第一次连接时提示您使用用户名&#x2F;密码登录。 然后，系统会提示您设置新密码。<code>neo4j/neo4j</code></p>
+<p>以下部分提供了有关如何设置初始密码、将 Neo4j 配置为在重新启动之间保留数据以及使用 Neo4j Docker 映像的更多信息。</p>
+<h2 id="用于设置初始密码NEO4J-AUTH"><a href="#用于设置初始密码NEO4J-AUTH" class="headerlink" title="用于设置初始密码NEO4J_AUTH"></a>用于设置初始密码<code>NEO4J_AUTH</code></h2><p>在 Docker 容器中使用 Neo4j 时，您可以通过在 run 指令中指定来直接设置容器的初始密码：<code>NEO4J_AUTH</code></p>
+<p>壳</p>
+<p>复制到剪贴板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --restart always \</span><br><span class="line">    --publish=7474:7474 --publish=7687:7687 \</span><br><span class="line">    --env NEO4J_AUTH=neo4j/your_password \</span><br><span class="line">    neo4j:4.4.9</span><br></pre></td></tr></table></figure>
+
+<p>或者，您可以通过指定以下内容来禁用身份验证：<code>NEO4J_AUTH``none</code></p>
+<p>壳</p>
+<p>复制到剪贴板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--env NEO4J_AUTH=none</span><br></pre></td></tr></table></figure>
+
+<p>请注意，目前无法更改初始用户名。<code>neo4j</code></p>
+<h2 id="使用卷持久化数据"><a href="#使用卷持久化数据" class="headerlink" title="使用卷持久化数据"></a>使用卷持久化数据</h2><p>该选项将本地文件夹映射到容器，您可以在重新启动之间保留数据。<code>--volume</code></p>
+<p>壳</p>
+<p>复制到剪贴板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --restart always \</span><br><span class="line">    --publish=7474:7474 --publish=7687:7687 \</span><br><span class="line">    --env NEO4J_AUTH=neo4j/your_password \</span><br><span class="line">    --volume /path/to/your/data:/data \</span><br><span class="line">    --volume= /path/to/your/logs:/logs \</span><br><span class="line">    neo4j:4.4.9</span><br></pre></td></tr></table></figure>
+
+<p>在启动 Docker 之前，您要挂载的文件夹必须存在，否则 Neo4j 将因权限错误而无法启动。</p>
+<p>如果已装入包含现有数据库的*&#x2F;数据*卷，则设置将不起作用。 Neo4j Docker 服务将启动，但您需要一个已经与数据库关联的用户名和密码才能登录。<code>NEO4J_AUTH</code></p>
+<h2 id="以非-root-用户身份运行-Neo4j"><a href="#以非-root-用户身份运行-Neo4j" class="headerlink" title="以非 root 用户身份运行 Neo4j"></a>以非 root 用户身份运行 Neo4j</h2><p>出于安全原因，Neo4j在容器内以用户身份运行。 您可以通过使用参数调用 docker 来指定要运行的用户。 例如，以下内容以当前用户身份运行 Neo4j：<code>neo4j``--user</code></p>
+<p>壳</p>
+<p>复制到剪贴板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --publish=7474:7474 --publish=7687:7687 \</span><br><span class="line">    --user=&quot;$(id -u):$(id -g)&quot; \</span><br><span class="line">    neo4j:4.4.9</span><br></pre></td></tr></table></figure>
+
+<h2 id="更多有用的-Docker-运行选项"><a href="#更多有用的-Docker-运行选项" class="headerlink" title="更多有用的 Docker 运行选项"></a>更多有用的 Docker 运行选项</h2><p>下表列出了一些可用的选项：</p>
+<table>
+<thead>
+<tr>
+<th align="left">选择</th>
+<th align="left">描述: __________</th>
+<th align="left">例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>--name</code></td>
+<td align="left">命名容器以避免通用 ID</td>
+<td align="left"><code>docker run --name myneo4j neo4j</code></td>
+</tr>
+<tr>
+<td align="left"><code>-p</code></td>
+<td align="left">指定要公开的容器端口</td>
+<td align="left"><code>docker run -p7687:7687 neo4j</code></td>
+</tr>
+<tr>
+<td align="left"><code>-d</code></td>
+<td align="left">分离容器以在后台运行</td>
+<td align="left"><code>docker run -d neo4j</code></td>
+</tr>
+<tr>
+<td align="left"><code>-v</code></td>
+<td align="left">绑定装载卷</td>
+<td align="left"><code>docker run -v $HOME/neo4j/data:/data neo4j</code></td>
+</tr>
+<tr>
+<td align="left"><code>--env</code></td>
+<td align="left">将配置设置为 Neo4j 数据库的环境变量</td>
+<td align="left"><code>docker run --env NEO4J_AUTH=neo4j/test</code></td>
+</tr>
+<tr>
+<td align="left"><code>--restart</code></td>
+<td align="left">控制 Neo4j 容器是在退出时自动启动，还是在 Docker 重新启动时自动启动。</td>
+<td align="left"><code>docker run --restart always</code></td>
+</tr>
+<tr>
+<td align="left"><code>--help</code></td>
+<td align="left">输出完整的选项列表<code>docker run</code></td>
+<td align="left"><code>docker run --help</code></td>
+</tr>
+</tbody></table>
+<p>该选项将 Neo4j 容器（和 Neo4j）设置为在 Docker 守护程序重新启动时自动重新启动。<code>--restart always</code>如果不再希望在计算机启动时自动启动容器，可以使用以下标志禁用此设置：<code>no</code>壳复制到剪贴板<code>docker update --restart=no &lt;containerID&gt;</code>有关 Docker 重启策略的更多信息，请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/config/containers/start-containers-automatically">官方 Docker 文档</a>.</p>
+<h2 id="离线安装-Neo4j-Docker-镜像"><a href="#离线安装-Neo4j-Docker-镜像" class="headerlink" title="离线安装 Neo4j Docker 镜像"></a>离线安装 Neo4j Docker 镜像</h2><p>Docker 提供了将映像下载到包中的命令，以便可以离线使用，或传输到无法访问互联网的计算机。<code>docker save``.tar</code></p>
+<p>这是将图像保存到文件的示例命令：<code>neo4j:4.4.9``.tar</code></p>
+<p>壳</p>
+<p>复制到剪贴板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o neo4j-4.4.9.tar neo4j:4.4.9</span><br></pre></td></tr></table></figure>
+
+<p>要从创建者创建的文件加载 docker 映像，请使用命令。 例如：<code>.tar``docker save``docker load</code></p>
+<p>壳</p>
+<p>复制到剪贴板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load --input neo4j-4.4.9.tar</span><br></pre></td></tr></table></figure>
+
+<p>有关使用和命令的完整说明，请参阅：<code>docker save``docker load</code></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/save/">官方文档<code>docker save</code></a>.</li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/load/">官方文档<code>docker load</code></a>.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/neo4j/" rel="tag"># neo4j</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/9c054287.html" rel="prev" title="containerd搭建k8s集群">
+                  <i class="fa fa-chevron-left"></i> containerd搭建k8s集群
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/fc52a59d.html" rel="next" title="docker安装mysql8实现主从复制读写分离">
+                  docker安装mysql8实现主从复制读写分离 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">148k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
